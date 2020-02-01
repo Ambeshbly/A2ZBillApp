@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
+    <item
+        android:id="@+id/nav_debt_customer"
+        android:icon="@drawable/person_icon"
+        android:title="debt customer"/>
+
+    <item
+        android:id="@+id/nav_all_customer"
+        android:icon="@drawable/all_customers"
+        android:title="All customer"/>
+
+</menu>

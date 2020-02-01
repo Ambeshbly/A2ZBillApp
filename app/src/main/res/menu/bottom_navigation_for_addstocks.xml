@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_addstocks"
+        android:icon="@drawable/addstocks"
+        android:title="add stocks"/>
+
+    <item
+        android:id="@+id/nav_availablestocks"
+        android:icon="@drawable/availablestocks"
+        android:title="available stocks"/>
+
+    <item
+        android:id="@+id/nav_futhurescope"
+        android:icon="@drawable/futuretask"
+        android:title="futherscope"/>
+
+</menu>

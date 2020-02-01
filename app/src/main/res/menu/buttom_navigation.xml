@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_counter"
+        android:icon="@drawable/counter"
+        android:title="Counter"/>
+
+    <item
+        android:id="@+id/nav_deshboad"
+        android:icon="@drawable/desboard_icon"
+        android:title="Dashboad"/>
+
+    <item
+        android:id="@+id/nav_me"
+        android:icon="@drawable/person_icon"
+        android:title="You"/>
+
+</menu>
