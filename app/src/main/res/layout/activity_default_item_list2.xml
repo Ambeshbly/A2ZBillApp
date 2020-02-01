@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DefaultItemList">
+    tools:context=".stock.DefaultItemList">
 
     <FrameLayout
         android:id="@+id/fragment_conterner_for_defaultItems"

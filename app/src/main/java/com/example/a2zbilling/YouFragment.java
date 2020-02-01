@@ -9,12 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class AvailableStocksFragment extends Fragment {
+public class YouFragment extends Fragment {
 
     //override method onCreateView
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_for_availablestocks,container,false);
+        return inflater.inflate(R.layout.fragment_me,container,false);
     }
 }

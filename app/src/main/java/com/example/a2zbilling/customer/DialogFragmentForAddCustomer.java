@@ -1,4 +1,4 @@
-package com.example.a2zbilling;
+package com.example.a2zbilling.customer;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -12,6 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.cardview.widget.CardView;
 
+import com.example.a2zbilling.R;
+import com.example.a2zbilling.customer.Customer;
+
 public class DialogFragmentForAddCustomer extends AppCompatDialogFragment {
     CardView cardviewCancel;
     @NonNull
@@ -24,7 +27,7 @@ public class DialogFragmentForAddCustomer extends AppCompatDialogFragment {
         cardviewCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(),Customer.class);
+                Intent intent=new Intent(getContext(), Customer.class);
                 startActivity(intent);
             }
         });

@@ -1,4 +1,4 @@
-package com.example.a2zbilling;
+package com.example.a2zbilling.stock;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.a2zbilling.YouFragment;
+import com.example.a2zbilling.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DefaultItemList extends AppCompatActivity {
@@ -32,7 +34,7 @@ public class DefaultItemList extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener nav_listener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            Fragment selectedFragment = new MeFragment();
+            Fragment selectedFragment = new YouFragment();
             switch (menuItem.getItemId()) {
                 case R.id.nav_defaultaddnewitems:
                     selectedFragment = new DefaultNewItemsFragments();

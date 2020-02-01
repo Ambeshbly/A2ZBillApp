@@ -1,17 +1,15 @@
-package com.example.a2zbilling;
+package com.example.a2zbilling.customer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
+import com.example.a2zbilling.YouFragment;
+import com.example.a2zbilling.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -60,7 +58,7 @@ public class Customer extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener nav_listener=new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            Fragment selectedFragment=new MeFragment();
+            Fragment selectedFragment=new YouFragment();
             switch (menuItem.getItemId()){
                 case R.id.nav_debt_customer:
                     selectedFragment=new DeptCustomerFragment();

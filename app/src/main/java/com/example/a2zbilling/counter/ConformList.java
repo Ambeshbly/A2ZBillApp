@@ -1,8 +1,10 @@
-package com.example.a2zbilling;
+package com.example.a2zbilling.counter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.a2zbilling.R;
 
 public class ConformList extends AppCompatActivity {
 

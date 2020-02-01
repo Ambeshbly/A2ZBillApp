@@ -1,9 +1,11 @@
-package com.example.a2zbilling;
+package com.example.a2zbilling.stock;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.Menu;
+
+import com.example.a2zbilling.R;
 
 public class AddToCard extends AppCompatActivity {
 

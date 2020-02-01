@@ -12,21 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ConformList"
+        <activity android:name=".counter.ConformList"
             android:theme="@style/AppTheme.ActionBar"></activity>
-        <activity android:name=".WaitList"
+        <activity android:name=".counter.WaitList"
             android:theme="@style/AppTheme.ActionBar"/>
         <activity
-            android:name=".AddToCard"
+            android:name=".stock.AddToCard"
             android:theme="@style/AppTheme.ActionBar"
             android:parentActivityName=".MainActivity"/>
-        <activity android:name=".DefaultItemList" />
-        <activity android:name=".AddItemFloatingButton" />
+        <activity android:name=".stock.DefaultItemList" />
+        <activity android:name=".stock.AddItemFloatingButton" />
         <activity
-            android:name=".AddItem"
+            android:name=".stock.AddItem"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.ActionBar" />
-        <activity android:name=".Customer" />
+        <activity android:name=".customer.Customer" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

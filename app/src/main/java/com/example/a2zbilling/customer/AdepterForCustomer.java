@@ -1,4 +1,4 @@
-package com.example.a2zbilling;
+package com.example.a2zbilling.customer;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.a2zbilling.R;
 
 public class AdepterForCustomer extends RecyclerView.Adapter<AdepterForCustomer.DeptHolder> {
 

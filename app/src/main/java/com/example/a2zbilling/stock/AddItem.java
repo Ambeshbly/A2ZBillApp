@@ -1,4 +1,4 @@
-package com.example.a2zbilling;
+package com.example.a2zbilling.stock;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.a2zbilling.YouFragment;
+import com.example.a2zbilling.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -39,7 +41,7 @@ public class AddItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "floating click", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(getBaseContext(),AddItemFloatingButton.class);
+                Intent intent=new Intent(getBaseContext(), AddItemFloatingButton.class);
                 startActivity(intent);
             }
         });
@@ -56,7 +58,7 @@ public class AddItem extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener nav_listener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            Fragment selectedFragment = new MeFragment();
+            Fragment selectedFragment = new YouFragment();
             switch (menuItem.getItemId()) {
                 case R.id.nav_addstocks:
                     selectedFragment = new AddstocksFragment();

@@ -1,4 +1,4 @@
-package com.example.a2zbilling;
+package com.example.a2zbilling.stock;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,6 +9,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import com.example.a2zbilling.R;
 
 public class dialogFragementforunit extends AppCompatDialogFragment {
     @NonNull

@@ -11,6 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.example.a2zbilling.customer.Customer;
+import com.example.a2zbilling.stock.AddItem;
+
 public class Dashboard extends Fragment  {
 
     //override method onCreateView
@@ -35,7 +38,7 @@ public class Dashboard extends Fragment  {
         stocksCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(),AddItem.class);
+                Intent intent=new Intent(getContext(), AddItem.class);
                 startActivity(intent);
             }
         });
@@ -45,7 +48,7 @@ public class Dashboard extends Fragment  {
         customerCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(),Customer.class);
+                Intent intent=new Intent(getContext(), Customer.class);
                 startActivity(intent);
             }
         });

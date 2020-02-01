@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddToCard">
+    tools:context=".stock.AddToCard">
 
     <SearchView
         android:layout_width="250dp"

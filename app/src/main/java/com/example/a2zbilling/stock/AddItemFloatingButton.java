@@ -1,4 +1,4 @@
-package com.example.a2zbilling;
+package com.example.a2zbilling.stock;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a2zbilling.R;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class AddItemFloatingButton extends AppCompatActivity {
@@ -85,7 +86,7 @@ public class AddItemFloatingButton extends AppCompatActivity {
         defualtitemListCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getBaseContext(),DefaultItemList.class);
+                Intent intent=new Intent(getBaseContext(), DefaultItemList.class);
                 startActivity(intent);
             }
         });
@@ -221,7 +222,7 @@ public class AddItemFloatingButton extends AppCompatActivity {
 
     //method of cancel button which go back to add item activity
     public void goback(View view) {
-       Intent intent=new Intent(getBaseContext(),AddItem.class);
+       Intent intent=new Intent(getBaseContext(), AddItem.class);
        startActivity(intent);
     }
 

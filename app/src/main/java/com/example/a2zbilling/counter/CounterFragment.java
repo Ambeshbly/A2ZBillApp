@@ -1,4 +1,4 @@
-package com.example.a2zbilling;
+package com.example.a2zbilling.counter;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.example.a2zbilling.R;
+import com.example.a2zbilling.stock.AddToCard;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CounterFragment extends Fragment {
@@ -46,7 +48,7 @@ public class CounterFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(),AddToCard.class);
+                Intent intent=new Intent(getContext(), AddToCard.class);
                 startActivity(intent);
             }
         });
@@ -55,7 +57,7 @@ public class CounterFragment extends Fragment {
         cardView_waitList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(),WaitList.class);
+                Intent intent=new Intent(getContext(), WaitList.class);
                 startActivity(intent);
             }
         });
@@ -64,7 +66,7 @@ public class CounterFragment extends Fragment {
         cardView_conformList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(),ConformList.class);
+                Intent intent=new Intent(getContext(), ConformList.class);
                 startActivity(intent);
             }
         });

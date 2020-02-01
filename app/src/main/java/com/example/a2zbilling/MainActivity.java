@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.a2zbilling.counter.CounterFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity  {
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity  {
     private BottomNavigationView.OnNavigationItemSelectedListener nav_listener=new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            Fragment selectedFragment=new MeFragment();
+            Fragment selectedFragment=new YouFragment();
             switch (menuItem.getItemId()){
                 case R.id.nav_counter:
                 selectedFragment=new CounterFragment();
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity  {
                     selectedFragment=new Dashboard();
                     break;
                 case R.id.nav_me:
-                    selectedFragment=new MeFragment();
+                    selectedFragment=new YouFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner,selectedFragment).commit();
