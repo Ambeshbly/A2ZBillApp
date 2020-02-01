@@ -12,15 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class AdepterForCustomer extends RecyclerView.Adapter<AdepterForCustomer.DeptHolder> {
 
-<<<<<<< HEAD
     String data1[]={"rahul","satendra","Ambesh", "Nishi","monu"};
     String data2[]={"102","103","104", "105","106"};
     String data3[]={"+11","-50","0", "-10","+5"};
-=======
-    String data1[]={"rahul","satendra","Ambesh"};
-    String data2[]={"102","103","104"};
-    String data3[]={"+11","-50","0"};
->>>>>>> parent of 47a53a7... Customer Nishi Added
     @NonNull
     @Override
     public DeptHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
