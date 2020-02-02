@@ -27,19 +27,22 @@ public class AvailableStocksFragment extends Fragment {
     RecyclerView recyclerView;
     AdepterForAvailableItems adepter;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+
+    }
+
     //override method onCreateView
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_for_availablestocks,container,false);
-    }
+        View view = inflater.inflate(R.layout.fragment_for_availablestocks,container,false);
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        recyclerView=getView().findViewById(R.id.recycler_view);
+        recyclerView=view.findViewById(R.id.recycler_view1);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
@@ -48,13 +51,15 @@ public class AvailableStocksFragment extends Fragment {
         recyclerView.setAdapter(adepter);
 
         itemsViewModel= ViewModelProviders.of(this).get(ItemsViewModel.class);
-       itemsViewModel.getAllItems().observe(this, new Observer<List<Items>>() {
-           @Override
-           public void onChanged(List<Items> items) {
-               Toast.makeText(getContext(),"chandes",Toast.LENGTH_SHORT).show();
-              adepter.setItems(items);
-           }
-       });
-
+        itemsViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<Items>>() {
+            @Override
+            public void onChanged(List<Items> items) {
+                Toast.makeText(getContext(),"chandes",Toast.LENGTH_SHORT).show();
+                adepter.setItems(items);
+            }
+        });
+        return view;
     }
+
+
 }

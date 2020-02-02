@@ -31,8 +31,8 @@ public class AdepterForAvailableItems extends RecyclerView.Adapter<AdepterForAva
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         Items currentItem=items.get(position);
         holder.textViewForItemName.setText(currentItem.getItemName());
-        holder.textViewForItemId.setText(currentItem.getItemId());
-        holder.textViewForSalePrice.setText(currentItem.getItemSalePerUnit());
+        holder.textViewForItemId.setText(""+currentItem.getItemId());
+        holder.textViewForSalePrice.setText(""+currentItem.getItemSalePerUnit());
 
     }
 
