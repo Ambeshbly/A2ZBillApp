@@ -3,6 +3,7 @@ package com.example.a2zbilling.stock;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.Manifest;
 import android.content.ContentValues;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.tables.Items;
+import com.example.a2zbilling.tables.ItemsViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class AddItemFloatingButton extends AppCompatActivity {
@@ -46,6 +49,8 @@ public class AddItemFloatingButton extends AppCompatActivity {
 
     //image path uri
     Uri image_uri;
+
+    ItemsViewModel itemsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +95,8 @@ public class AddItemFloatingButton extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        itemsViewModel= ViewModelProviders.of(this).get(ItemsViewModel.class);
 
         //add action listener in the image view for  open camra and take image and set image in the imageview
         imageViewForItem.setOnClickListener(new View.OnClickListener() {
@@ -217,7 +224,27 @@ public class AddItemFloatingButton extends AppCompatActivity {
         if(!validateItemName()  | !validateItemPurchasePrice()| !validateItemQuntity() | !validateItemUnit()){
             return;
         }
-        Toast.makeText(getBaseContext(),"data should be store",Toast.LENGTH_SHORT).show();
+
+        String itemname=textinputitemname.getEditText().getText().toString().trim();
+        String itemQuantity=textinputitemquantiity.getEditText().getText().toString().trim();
+        String itempurchaseparunit=textinputitempurchaseperunit.getEditText().getText().toString().trim();
+        String itempuchasetotal=textinputitempurchasetotal.getEditText().getText().toString().trim();
+        String itemsaleunit=textinputitemsaleunit.getEditText().getText().toString().trim();
+        String itemsaletotalprice=textinputitemsaletotal.getEditText().getText().toString().trim();
+
+       Items items=new Items(itemname,Integer.parseInt(itemQuantity),
+               Integer.parseInt(itempurchaseparunit),Integer.parseInt(itempuchasetotal),Integer.parseInt(itemsaleunit),Integer.parseInt(itemsaletotalprice));
+
+
+       itemsViewModel.insert(items);
+
+
+       Toast.makeText(getBaseContext(),"data save",Toast.LENGTH_SHORT).show();
+       finish();
+
+
+
+
     }
 
     //method of cancel button which go back to add item activity
