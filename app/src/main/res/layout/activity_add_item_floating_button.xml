@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="items"
+            type="com.example.a2zbilling.tables.Items" />
+    </data>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
@@ -50,6 +57,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimary"
             android:layout_marginTop="10dp"
+
             android:layout_weight="38"
             app:errorEnabled="true">
 
@@ -59,6 +67,7 @@
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:layout_weight="38"
+                android:text="@={items.itemName}"
                 android:hint="Item Name"
                 android:inputType="text" />
              </com.google.android.material.textfield.TextInputLayout>
@@ -117,6 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Item Quantity"
+            android:text="@={items.itemQuentity}"
             android:layout_weight="18"
             android:inputType="number"
             android:backgroundTint="@color/colorPrimary" />
@@ -153,6 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="@={items.itemPurchasePerUnit}"
                 android:hint="Purchase/Unit"
                 android:backgroundTint="@color/colorPrimary"
                 android:inputType="number" />
@@ -168,9 +179,11 @@
             android:backgroundTint="@color/colorPrimary">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_totalpuchase"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="@={items.itemPuchaseTotal}"
                 android:hint="Purchase Total"
                 android:inputType="number"
                 android:backgroundTint="@color/colorPrimary"/>
@@ -198,6 +211,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="Sale/Unit"
+                android:text="@={items.itemSalePerUnit}"
                 android:backgroundTint="@color/colorPrimary"
                 android:inputType="number" />
 
@@ -216,6 +230,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="Sale Total"
+                android:text="@={items.itemSaleTotal}"
                 android:backgroundTint="@color/colorPrimary"
                 android:inputType="number" />
 
@@ -255,3 +270,4 @@
 
 </LinearLayout>
 
+</layout>

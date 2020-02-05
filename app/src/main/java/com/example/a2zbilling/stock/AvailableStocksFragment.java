@@ -46,18 +46,19 @@ public class AvailableStocksFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
-
         adepter=new AdepterForAvailableItems();
         recyclerView.setAdapter(adepter);
 
         itemsViewModel= ViewModelProviders.of(this).get(ItemsViewModel.class);
         itemsViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<Items>>() {
+
             @Override
             public void onChanged(List<Items> items) {
                 Toast.makeText(getContext(),"chandes",Toast.LENGTH_SHORT).show();
                 adepter.setItems(items);
             }
         });
+
         return view;
     }
 

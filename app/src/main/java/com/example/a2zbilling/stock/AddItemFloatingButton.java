@@ -3,9 +3,11 @@ package com.example.a2zbilling.stock;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.databinding.ActivityAddItemFloatingButtonBinding;
 import com.example.a2zbilling.tables.Items;
 import com.example.a2zbilling.tables.ItemsViewModel;
 import com.google.android.material.textfield.TextInputLayout;
@@ -51,6 +54,11 @@ public class AddItemFloatingButton extends AppCompatActivity {
     Uri image_uri;
 
     ItemsViewModel itemsViewModel;
+
+
+   private ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +103,16 @@ public class AddItemFloatingButton extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+
+
+
+        Items items=new Items();
+        activityAddItemFloatingButtonBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_item_floating_button);
+        activityAddItemFloatingButtonBinding.setItems(items);
+
 
         itemsViewModel= ViewModelProviders.of(this).get(ItemsViewModel.class);
 
@@ -169,8 +187,8 @@ public class AddItemFloatingButton extends AppCompatActivity {
 
 
     //method for validation on name edit text
-    private  boolean validateItemName(){
-        String itemname=textinputitemname.getEditText().getText().toString().trim();
+    private  boolean validateItemName(Items items){
+        String itemname=items.getItemName();
         if(itemname.isEmpty()){
             textinputitemname.setError("Item Name can't be empty");
             return false;
@@ -181,8 +199,8 @@ public class AddItemFloatingButton extends AppCompatActivity {
     }
 
     //method for validation quentity edit text
-    private  boolean validateItemQuntity(){
-        String itemQuantity=textinputitemquantiity.getEditText().getText().toString().trim();
+    private  boolean validateItemQuntity(Items items){
+        String itemQuantity= items.getItemQuentity();
         if(itemQuantity.isEmpty()){
             textinputitemquantiity.setError("Item Quantity can't be empty");
             return false;
@@ -193,9 +211,9 @@ public class AddItemFloatingButton extends AppCompatActivity {
     }
 
     //method for validation for puchase unit and purchase total edit text
-    private  boolean validateItemPurchasePrice(){
-        String itempurchaseparunit=textinputitempurchaseperunit.getEditText().getText().toString().trim();
-        String itempuchasetotal=textinputitempurchasetotal.getEditText().getText().toString().trim();
+    private  boolean validateItemPurchasePrice(Items item){
+        String itempurchaseparunit = item.getItemPurchasePerUnit();
+        String itempuchasetotal=item.getItemPuchaseTotal();
         if(itempurchaseparunit.isEmpty()&&itempuchasetotal.isEmpty()){
             textinputitempurchaseperunit.setError("Item purchase or purchase total can't be empty");
             return false;
@@ -206,9 +224,9 @@ public class AddItemFloatingButton extends AppCompatActivity {
     }
 
     //method for validation sale unit and sale toale edit text
-    private  boolean validateItemUnit(){
-        String itemunit=textinputitemsaleunit.getEditText().getText().toString().trim();
-        String itemtotalprice=textinputitemsaletotal.getEditText().getText().toString().trim();
+    private  boolean validateItemUnit(Items items){
+        String itemunit=items.getItemSalePerUnit();
+        String itemtotalprice=items.getItemSaleTotal();
         if(itemunit.isEmpty()&& itemtotalprice.isEmpty()){
             textinputitemsaleunit.setError("unit and total please fill one in both");
             return false;
@@ -221,29 +239,15 @@ public class AddItemFloatingButton extends AppCompatActivity {
 
     //method of save button which use to cheack all the edit text the fill then save the delait in the table
     public void addStocksInRecyclerrView(View view) {
-        if(!validateItemName()  | !validateItemPurchasePrice()| !validateItemQuntity() | !validateItemUnit()){
+        Items items = activityAddItemFloatingButtonBinding.getItems();
+        if(!validateItemName(items)  | !validateItemPurchasePrice(items)| !validateItemQuntity(items) | !validateItemUnit(items)){
             return;
         }
-
-        String itemname=textinputitemname.getEditText().getText().toString().trim();
-        String itemQuantity=textinputitemquantiity.getEditText().getText().toString().trim();
-        String itempurchaseparunit=textinputitempurchaseperunit.getEditText().getText().toString().trim();
-        String itempuchasetotal=textinputitempurchasetotal.getEditText().getText().toString().trim();
-        String itemsaleunit=textinputitemsaleunit.getEditText().getText().toString().trim();
-        String itemsaletotalprice=textinputitemsaletotal.getEditText().getText().toString().trim();
-
-       Items items=new Items(itemname,Integer.parseInt(itemQuantity),
-               Integer.parseInt(itempurchaseparunit),Integer.parseInt(itempuchasetotal),Integer.parseInt(itemsaleunit),Integer.parseInt(itemsaletotalprice));
-
-
-       itemsViewModel.insert(items);
+        itemsViewModel.insert(items);
 
 
        Toast.makeText(getBaseContext(),"data save",Toast.LENGTH_SHORT).show();
        finish();
-
-
-
 
     }
 
@@ -260,4 +264,8 @@ public class AddItemFloatingButton extends AppCompatActivity {
         dialogFragementforunit ialogFragementforunit=new dialogFragementforunit();
         ialogFragementforunit.show(getSupportFragmentManager(),"exampledialog");
     }
+
+
+
+
 }

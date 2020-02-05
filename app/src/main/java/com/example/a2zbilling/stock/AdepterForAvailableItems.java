@@ -15,7 +15,7 @@ import com.example.a2zbilling.tables.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdepterForAvailableItems extends RecyclerView.Adapter<AdepterForAvailableItems.ItemHolder> {
+public class  AdepterForAvailableItems extends RecyclerView.Adapter<AdepterForAvailableItems.ItemHolder> {
     private List<Items> items=new ArrayList<>();
 
 
@@ -32,7 +32,7 @@ public class AdepterForAvailableItems extends RecyclerView.Adapter<AdepterForAva
         Items currentItem=items.get(position);
         holder.textViewForItemName.setText(currentItem.getItemName());
         holder.textViewForItemId.setText(""+currentItem.getItemId());
-        holder.textViewForSalePrice.setText(""+currentItem.getItemSalePerUnit());
+        holder.textViewForSalePrice.setText(currentItem.getItemSalePerUnit());
 
     }
 
