@@ -1,10 +1,12 @@
 package com.example.a2zbilling.stock;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,14 +28,9 @@ public class AvailableStocksFragment extends Fragment {
     private ItemsViewModel itemsViewModel;
     RecyclerView recyclerView;
     AdepterForAvailableItems adepter;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    SearchView searchView;
 
 
-
-    }
 
     //override method onCreateView
     @Nullable
@@ -49,13 +46,28 @@ public class AvailableStocksFragment extends Fragment {
         adepter=new AdepterForAvailableItems();
         recyclerView.setAdapter(adepter);
 
+
         itemsViewModel= ViewModelProviders.of(this).get(ItemsViewModel.class);
         itemsViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<Items>>() {
 
             @Override
             public void onChanged(List<Items> items) {
-                Toast.makeText(getContext(),"chandes",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"items",Toast.LENGTH_SHORT).show();
                 adepter.setItems(items);
+            }
+        });
+
+        searchView=view.findViewById(R.id.search_view_By_name1);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adepter.getFilter().filter(newText);
+                return false;
             }
         });
 

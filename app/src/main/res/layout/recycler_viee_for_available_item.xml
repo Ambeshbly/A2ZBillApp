@@ -42,7 +42,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
         <TextView
-            android:id="@+id/text_view_sale_price"
+            android:id="@+id/text_view_quentity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="50 "
@@ -54,9 +54,9 @@
             android:id="@+id/text_view_sale_price_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="sale price : "
+            android:text="Stock : "
             android:layout_below="@+id/text_view_show_id"
-            android:layout_toLeftOf="@+id/text_view_sale_price"
+            android:layout_toLeftOf="@+id/text_view_quentity"
             android:layout_marginTop="3dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
