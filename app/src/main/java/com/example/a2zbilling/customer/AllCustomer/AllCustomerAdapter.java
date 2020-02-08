@@ -1,4 +1,4 @@
-package com.example.a2zbilling.customer;
+package com.example.a2zbilling.customer.AllCustomer;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
 
-public class AdepterForCustomer extends RecyclerView.Adapter<AdepterForCustomer.DeptHolder> {
+public class AllCustomerAdapter extends RecyclerView.Adapter<AllCustomerAdapter.DeptHolder> {
 
     String data1[]={"rahul","satendra","Ambesh", "Nishi"};
     String data2[]={"102","103","104", "105"};

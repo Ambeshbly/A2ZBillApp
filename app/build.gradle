@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-    dataBinding{
-        enabled=true
+    dataBinding {
+        enabled = true
     }
     buildToolsVersion "29.0.2"
     defaultConfig {
@@ -34,7 +34,6 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-
 
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])

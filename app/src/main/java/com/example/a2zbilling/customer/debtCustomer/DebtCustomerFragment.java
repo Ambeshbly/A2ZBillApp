@@ -1,4 +1,4 @@
-package com.example.a2zbilling.customer;
+package com.example.a2zbilling.customer.debtCustomer;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.a2zbilling.R;
 
-public class DeptCustomerFragment extends Fragment {
+public class DebtCustomerFragment extends Fragment {
 
     //override method onCreateView
     @Nullable

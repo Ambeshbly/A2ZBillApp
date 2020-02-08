@@ -11,15 +11,14 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.a2zbilling.R;
-import com.example.a2zbilling.stock.AddToCard;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CounterFragment extends Fragment {
 
-    //Floatin action button declaration which used to change activity from mainActicity to AddToCard activity
+    //Floatin action button declaration which used to change activity from mainActicity to SellingStocksActivity activity
     FloatingActionButton floatingActionButton;
 
-    //cardView declarations both waitList and ConformList
+    //cardView declarations both waitList and BillHistoryActivity
     CardView cardView_waitList,cardView_conformList;
 
     //onCreateView Override method
@@ -48,7 +47,7 @@ public class CounterFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), AddToCard.class);
+                Intent intent=new Intent(getContext(), SellingStocksActivity.class);
                 startActivity(intent);
             }
         });
@@ -57,7 +56,7 @@ public class CounterFragment extends Fragment {
         cardView_waitList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), WaitList.class);
+                Intent intent=new Intent(getContext(), SuspendedTransactionListActivity.class);
                 startActivity(intent);
             }
         });
@@ -66,7 +65,7 @@ public class CounterFragment extends Fragment {
         cardView_conformList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), ConformList.class);
+                Intent intent=new Intent(getContext(), BillHistoryActivity.class);
                 startActivity(intent);
             }
         });

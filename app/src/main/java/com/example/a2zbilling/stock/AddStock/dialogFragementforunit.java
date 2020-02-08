@@ -1,4 +1,4 @@
-package com.example.a2zbilling.stock;
+package com.example.a2zbilling.stock.AddStock;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

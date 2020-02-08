@@ -1,4 +1,4 @@
-package com.example.a2zbilling.stock;
+package com.example.a2zbilling.counter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.view.Menu;
 
 import com.example.a2zbilling.R;
 
-public class AddToCard extends AppCompatActivity {
+public class SellingStocksActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

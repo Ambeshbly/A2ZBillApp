@@ -10,10 +10,12 @@ import android.view.View;
 
 import com.example.a2zbilling.YouFragment;
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.customer.AllCustomer.AllCustomerFragment;
+import com.example.a2zbilling.customer.debtCustomer.DebtCustomerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class Customer extends AppCompatActivity {
+public class CustomerActivity extends AppCompatActivity {
     //declartion of floatin action button
     FloatingActionButton floatingActionButton;
 
@@ -45,12 +47,12 @@ public class Customer extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(nav_listener);
 
         //which fragment is show whenever app is open
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner,new DeptCustomerFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner,new DebtCustomerFragment()).commit();
 
 
     }
     public void openDialog(){
-        DialogFragmentForAddCustomer ialogFragementforunit=new DialogFragmentForAddCustomer();
+        AddUpdateCustomerFragment ialogFragementforunit=new AddUpdateCustomerFragment();
         ialogFragementforunit.show(getSupportFragmentManager(),"exampledialog");
     }
 
@@ -61,7 +63,7 @@ public class Customer extends AppCompatActivity {
             Fragment selectedFragment=new YouFragment();
             switch (menuItem.getItemId()){
                 case R.id.nav_debt_customer:
-                    selectedFragment=new DeptCustomerFragment();
+                    selectedFragment=new DebtCustomerFragment();
                     break;
                 case R.id.nav_all_customer:
                     selectedFragment=new AllCustomerFragment();

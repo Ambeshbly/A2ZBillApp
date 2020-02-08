@@ -6,6 +6,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="default new items"
+        android:text="default new stock"
         android:textSize="30sp" />
 </RelativeLayout>

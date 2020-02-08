@@ -62,7 +62,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginLeft="56dp"
         android:layout_marginTop="70dp"
-        android:text="items"
+        android:text="stock"
         android:textSize="15sp"
         android:textStyle="bold" />
 

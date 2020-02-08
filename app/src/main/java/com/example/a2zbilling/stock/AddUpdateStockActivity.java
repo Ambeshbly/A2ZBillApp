@@ -22,11 +22,12 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.databinding.ActivityAddItemFloatingButtonBinding;
-import com.example.a2zbilling.tables.Items;
-import com.example.a2zbilling.tables.ItemsViewModel;
+import com.example.a2zbilling.db.entities.Stock;
+import com.example.a2zbilling.stock.AddStock.dialogFragementforunit;
+import com.example.a2zbilling.stock.DefaultItemList.DefaultItemListActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class AddItemFloatingButton extends AppCompatActivity {
+public class AddUpdateStockActivity extends AppCompatActivity {
 
     //final permisssion code variable declartion which is used to take permission of the camra to the user
     private static final int PERMISSION_CODE = 1000;
@@ -34,7 +35,7 @@ public class AddItemFloatingButton extends AppCompatActivity {
     private static final int IMAGE_CAPTURE_CODE = 1001;
     //image path uri
     Uri image_uri;
-    ItemsViewModel itemsViewModel;
+    AddUpdateStockActivityViewModel addUpdateStockActivityViewModel;
     //EditText declaration
     private TextInputLayout textinputitemname, textinputitemquantiity, textinputitempurchaseperunit, textinputitempurchasetotal, textinputitemsaleunit, textinputitemsaletotal;
     //image View delcartion
@@ -84,14 +85,14 @@ public class AddItemFloatingButton extends AppCompatActivity {
         defualtitemListCardView = findViewById(R.id.cardview_defaultList);
 
 
-        Items items = new Items();
+        Stock stock = new Stock();
         activityAddItemFloatingButtonBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_item_floating_button);
-        activityAddItemFloatingButtonBinding.setItems(items);
+        activityAddItemFloatingButtonBinding.setStock(stock);
         AddItemClickHandler addItemClickHandler = new AddItemClickHandler();
         activityAddItemFloatingButtonBinding.setAdditemclickHandler(addItemClickHandler);
 
 
-        itemsViewModel = ViewModelProviders.of(this).get(ItemsViewModel.class);
+        addUpdateStockActivityViewModel = ViewModelProviders.of(this).get(AddUpdateStockActivityViewModel.class);
 
 
     }
@@ -135,7 +136,7 @@ public class AddItemFloatingButton extends AppCompatActivity {
         //call image was capture from camra
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            
+
             //set the image capture to the our imageview
             imageViewForItem.setImageURI(image_uri);
         }
@@ -143,8 +144,8 @@ public class AddItemFloatingButton extends AppCompatActivity {
 
 
     //method for validation on name edit text
-    private boolean validateItemName(Items items) {
-        String itemname = items.getItemName();
+    private boolean validateItemName(Stock stock) {
+        String itemname = stock.getItemName();
         if (itemname.isEmpty()) {
             textinputitemname.setError("Item Name can't be empty");
             return false;
@@ -155,8 +156,8 @@ public class AddItemFloatingButton extends AppCompatActivity {
     }
 
     //method for validation quentity edit text
-    private boolean validateItemQuntity(Items items) {
-        String itemQuantity = items.getItemQuentity();
+    private boolean validateItemQuntity(Stock stock) {
+        String itemQuantity = stock.getItemQuentity();
         if (itemQuantity.isEmpty()) {
             textinputitemquantiity.setError("Item Quantity can't be empty");
             return false;
@@ -167,7 +168,7 @@ public class AddItemFloatingButton extends AppCompatActivity {
     }
 
     //method for validation for puchase unit and purchase total edit text
-    private boolean validateItemPurchasePrice(Items item) {
+    private boolean validateItemPurchasePrice(Stock item) {
         String itempurchaseparunit = item.getItemPurchasePerUnit();
         String itempuchasetotal = item.getItemPuchaseTotal();
         if (itempurchaseparunit.isEmpty() && itempuchasetotal.isEmpty()) {
@@ -180,9 +181,9 @@ public class AddItemFloatingButton extends AppCompatActivity {
     }
 
     //method for validation sale unit and sale toale edit text
-    private boolean validateItemUnit(Items items) {
-        String itemunit = items.getItemSalePerUnit();
-        String itemtotalprice = items.getItemSaleTotal();
+    private boolean validateItemUnit(Stock stock) {
+        String itemunit = stock.getItemSalePerUnit();
+        String itemtotalprice = stock.getItemSaleTotal();
         if (itemunit.isEmpty() && itemtotalprice.isEmpty()) {
             textinputitemsaleunit.setError("unit and total please fill one in both");
             return false;
@@ -197,11 +198,11 @@ public class AddItemFloatingButton extends AppCompatActivity {
 
         //method of save button which use to cheack all the edit text the fill then save the delait in the table
         public void onSaveClick(View view) {
-            Items items = activityAddItemFloatingButtonBinding.getItems();
-            if (!validateItemName(items) | !validateItemPurchasePrice(items) | !validateItemQuntity(items) | !validateItemUnit(items)) {
+            Stock stock = activityAddItemFloatingButtonBinding.getStock();
+            if (!validateItemName(stock) | !validateItemPurchasePrice(stock) | !validateItemQuntity(stock) | !validateItemUnit(stock)) {
                 return;
             }
-            itemsViewModel.insert(items);
+            addUpdateStockActivityViewModel.insert(stock);
             Toast.makeText(getBaseContext(), "data save", Toast.LENGTH_SHORT).show();
             finish();
 
@@ -209,7 +210,7 @@ public class AddItemFloatingButton extends AppCompatActivity {
 
         //method of cancel button which go back to add item activity
         public void onCancelClick(View view) {
-            Intent intent = new Intent(getBaseContext(), AddItem.class);
+            Intent intent = new Intent(getBaseContext(), StockActivity.class);
             startActivity(intent);
         }
 
@@ -239,7 +240,7 @@ public class AddItemFloatingButton extends AppCompatActivity {
 
         //add the action listener to the cardview for sending the user to the default items activity
         public void showDefaultItems(View view) {
-            Intent intent = new Intent(getBaseContext(), DefaultItemList.class);
+            Intent intent = new Intent(getBaseContext(), DefaultItemListActivity.class);
             startActivity(intent);
 
         }
