@@ -7,8 +7,8 @@
             name="items"
             type="com.example.a2zbilling.tables.Items" />
         <variable
-            name="clickHandler"
-            type="com.example.a2zbilling.stock.AddItemFloatingButton.ClickListener" />
+            name="additemclickHandler"
+            type="com.example.a2zbilling.stock.AddItemFloatingButton.AddItemClickHandler" />
     </data>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
@@ -28,7 +28,7 @@
         android:layout_height="200dp"
         android:background="@color/colorPrimary"
         android:src="@drawable/ic_launcher_foreground"
-        android:onClick="@{clickHandler::setImage}"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +85,7 @@
             android:layout_margin="8dp"
             app:cardCornerRadius="12dp"
             android:backgroundTint="@color/colorPrimary"
-            android:onClick="@{clickHandler::showDefaultItems}"
+            android:onClick="@{additemclickHandler::showDefaultItems}"
             android:layout_weight="1"
             app:cardElevation="6dp">
 
@@ -143,7 +143,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:onClick="@{clickHandler::unitdothis}"
+        android:onClick="@{additemclickHandler::selectUnit}"
         android:layout_weight="1"
         android:text="Unit"/>
 
@@ -257,7 +257,7 @@
             android:layout_marginRight="3dp"
             android:layout_weight="1"
             android:background="@drawable/custom_button"
-            android:onClick="@{clickHandler::onCancelClick}"
+            android:onClick="@{additemclickHandler::onCancelClick}"
             android:text="Cancel"
             android:textColor="#ffff" />
 
@@ -267,7 +267,7 @@
             android:layout_marginLeft="3dp"
             android:layout_weight="1"
             android:background="@drawable/custom_button"
-            android:onClick="@{clickHandler::onSaveClick}"
+            android:onClick="@{additemclickHandler::onSaveClick}"
             android:text="save"
             android:textColor="#ffff" />
 

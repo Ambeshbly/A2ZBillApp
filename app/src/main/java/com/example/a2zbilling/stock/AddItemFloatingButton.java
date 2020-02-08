@@ -1,11 +1,9 @@
 package com.example.a2zbilling.stock;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
-
 import android.Manifest;
 import android.app.ActivityManager;
 import android.content.ContentValues;
@@ -20,7 +18,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.databinding.ActivityAddItemFloatingButtonBinding;
 import com.example.a2zbilling.tables.Items;
@@ -95,51 +92,19 @@ public class AddItemFloatingButton extends AppCompatActivity {
         //finding the cardview for sent the user to default item activity in the xml file
         defualtitemListCardView=findViewById(R.id.cardview_defaultList);
 
-        //add the action listener to the cardview for sending the user to the default items activity
-        defualtitemListCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getBaseContext(), DefaultItemList.class);
-                startActivity(intent);
-            }
-        });
-
-
-
 
 
 
         Items items=new Items();
         activityAddItemFloatingButtonBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_item_floating_button);
         activityAddItemFloatingButtonBinding.setItems(items);
+        AddItemClickHandler addItemClickHandler=new AddItemClickHandler();
+        activityAddItemFloatingButtonBinding.setAdditemclickHandler(addItemClickHandler);
 
 
         itemsViewModel= ViewModelProviders.of(this).get(ItemsViewModel.class);
 
-        //add action listener in the image view for  open camra and take image and set image in the imageview
-        imageViewForItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //if system os is >=marshmallow,request runtime permission
-                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-                    if(checkSelfPermission(Manifest.permission.CAMERA)== PackageManager.PERMISSION_DENIED ||checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_DENIED){
-                        //permission not enable request it
-                        String[] permission={Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                        //show pop up to show request permission
-                        requestPermissions(permission,PERMISSION_CODE);
-                    }
-                    else {
-                        //permission alrady granted
-                        openCamra();
-                    }
-                }
-                else {
-                    //system os<marsmellow
-                    openCamra();
-                }
 
-           }
-        });
     }
 
     //open carmra function
@@ -237,35 +202,59 @@ public class AddItemFloatingButton extends AppCompatActivity {
     }
 
 
-    //method of save button which use to cheack all the edit text the fill then save the delait in the table
-    public void addStocksInRecyclerrView(View view) {
+public class AddItemClickHandler{
+
+        //method of save button which use to cheack all the edit text the fill then save the delait in the table
+    public void onSaveClick(View view) {
         Items items = activityAddItemFloatingButtonBinding.getItems();
         if(!validateItemName(items)  | !validateItemPurchasePrice(items)| !validateItemQuntity(items) | !validateItemUnit(items)){
             return;
         }
         itemsViewModel.insert(items);
-
-
-       Toast.makeText(getBaseContext(),"data save",Toast.LENGTH_SHORT).show();
-       finish();
+        Toast.makeText(getBaseContext(),"data save",Toast.LENGTH_SHORT).show();
+        finish();
 
     }
 
     //method of cancel button which go back to add item activity
-    public void goback(View view) {
-       Intent intent=new Intent(getBaseContext(), AddItem.class);
-       startActivity(intent);
+    public void onCancelClick(View view) {
+        Intent intent=new Intent(getBaseContext(), AddItem.class);
+        startActivity(intent);
     }
 
-    public void unitdothis(View view) {
-        openDialog();
-    }
-    public void openDialog(){
+    public void selectUnit(View view) {
         dialogFragementforunit ialogFragementforunit=new dialogFragementforunit();
         ialogFragementforunit.show(getSupportFragmentManager(),"exampledialog");
     }
+        public void setImage(View view){
+         //if system os is >=marshmallow,request runtime permission
+         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+             if(checkSelfPermission(Manifest.permission.CAMERA)== PackageManager.PERMISSION_DENIED ||checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_DENIED){
+                 //permission not enable request it
+                 String[] permission={Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                 //show pop up to show request permission
+                 requestPermissions(permission,PERMISSION_CODE);
+             }
+             else {
+                 //permission alrady granted
+                 openCamra();
+             }
+         }
+         else {
+             //system os<marsmellow>
+             openCamra();
+         }
+     }
 
 
+    //add the action listener to the cardview for sending the user to the default items activity
+     public void showDefaultItems(View view){
+         Intent intent=new Intent(getBaseContext(), DefaultItemList.class);
+         startActivity(intent);
+
+     }
+
+    }
 
 
 }
