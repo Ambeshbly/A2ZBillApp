@@ -6,6 +6,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.example.a2zbilling.BR;
+
 @Entity(tableName = "stock_table")
 public class Stock extends BaseObservable {
 
@@ -14,15 +16,15 @@ public class Stock extends BaseObservable {
     private int itemImage;
     private String itemName;
     private String itemQuentity;
-    private int itemUnit;
+    private String itemUnit;
     private String itemPurchasePerUnit;
     private String itemPuchaseTotal;
     private String itemSalePerUnit;
     private String itemSaleTotal;
 
 
-    @Ignore
-    public Stock(String itemName, String itemQuentity, String itemPurchasePerUnit, String itemPuchaseTotal, String itemSalePerUnit, String itemSaleTotal) {
+
+    public Stock(String itemName, String itemQuentity,String itemUnit, String itemPurchasePerUnit, String itemPuchaseTotal, String itemSalePerUnit, String itemSaleTotal) {
         this.itemImage = itemImage;
         this.itemName = itemName;
         this.itemQuentity = itemQuentity;
@@ -73,12 +75,14 @@ public class Stock extends BaseObservable {
         notifyPropertyChanged(com.example.a2zbilling.BR.itemQuentity);
     }
 
-    public int getItemUnit() {
+
+    public String getItemUnit() {
         return itemUnit;
     }
 
-    public void setItemUnit(int itemUnit) {
+    public void setItemUnit(String itemUnit) {
         this.itemUnit = itemUnit;
+
     }
 
     @Bindable

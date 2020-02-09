@@ -15,7 +15,7 @@ public abstract class SqlLiteDatabase extends RoomDatabase {
 
     public static synchronized SqlLiteDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(), SqlLiteDatabase.class, "a2zBillDataBase").fallbackToDestructiveMigration().build();
+            instance = Room.databaseBuilder(context.getApplicationContext(), SqlLiteDatabase.class, "a2zBillDataBase2").fallbackToDestructiveMigration().build();
         }
         return instance;
     }

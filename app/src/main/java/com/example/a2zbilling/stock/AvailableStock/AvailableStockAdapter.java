@@ -5,10 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.PrimaryKey;
 
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.db.entities.Stock;
@@ -62,7 +64,7 @@ public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAd
         Stock currentItem = items.get(position);
         holder.textViewForItemName.setText(currentItem.getItemName());
         holder.textViewForItemId.setText("" + currentItem.getItemId());
-        holder.textViewForQuentity.setText(currentItem.getItemQuentity());
+        holder.textViewForQuentity.setText(""+currentItem.getItemQuentity());
 
     }
 
@@ -92,6 +94,7 @@ public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAd
         private TextView textViewForShowIdText;
         private TextView textViewForShowSaleText;
         private TextView textViewForQuentity;
+        private ImageView imageViewForItemImage;
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,6 +104,7 @@ public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAd
             textViewForShowIdText = itemView.findViewById(R.id.text_view_show_id_text);
             textViewForShowSaleText = itemView.findViewById(R.id.text_view_sale_price_text);
             textViewForQuentity = itemView.findViewById(R.id.text_view_quentity);
+            imageViewForItemImage=itemView.findViewById(R.id.imageview_for_item);
         }
     }
 

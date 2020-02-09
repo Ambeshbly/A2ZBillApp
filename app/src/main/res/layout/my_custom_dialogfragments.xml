@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+
+
+<LinearLayout
+
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +18,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/customer_cardview"
+            android:id="@+id/cardView_kg"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
@@ -35,7 +42,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_m"
+            android:id="@+id/cardview_Mtr"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
@@ -60,7 +67,7 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/my_cardview"
+            android:id="@+id/cardview_ltr"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
@@ -84,7 +91,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardvew4"
+            android:id="@+id/cardview_Dz"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
@@ -108,7 +115,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview5"
+            android:id="@+id/cardview_pc"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
@@ -139,7 +146,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_g"
+            android:id="@+id/cardview_Gm"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
@@ -163,7 +170,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_cm"
+            android:id="@+id/cardview_Cm"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
@@ -187,7 +194,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_ml"
+            android:id="@+id/cardview_Ml"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
@@ -211,7 +218,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardvew_hd"
+            android:id="@+id/cardview_Hdz"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
@@ -266,7 +273,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_mg"
+            android:id="@+id/cardview_Mg"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
@@ -290,7 +297,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_mm"
+            android:id="@+id/cardview_Mm"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"

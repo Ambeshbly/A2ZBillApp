@@ -13,17 +13,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.databinding.ActivityAddItemFloatingButtonBinding;
 import com.example.a2zbilling.db.entities.Stock;
-import com.example.a2zbilling.stock.AddStock.dialogFragementforunit;
 import com.example.a2zbilling.stock.DefaultItemList.DefaultItemListActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -47,6 +44,7 @@ public class AddUpdateStockActivity extends AppCompatActivity {
     //declation of cardview which is used to send the default items activity
     private CardView defualtitemListCardView;
     private ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding;
+
 
 
     @Override
@@ -94,7 +92,6 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
         addUpdateStockActivityViewModel = ViewModelProviders.of(this).get(AddUpdateStockActivityViewModel.class);
 
-
     }
 
     //open carmra function
@@ -114,7 +111,6 @@ public class AddUpdateStockActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         //this method is called when use allow or deny fron premission request code
-
 
         switch (requestCode) {
             case PERMISSION_CODE:
@@ -198,13 +194,14 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
         //method of save button which use to cheack all the edit text the fill then save the delait in the table
         public void onSaveClick(View view) {
-            Stock stock = activityAddItemFloatingButtonBinding.getStock();
-            if (!validateItemName(stock) | !validateItemPurchasePrice(stock) | !validateItemQuntity(stock) | !validateItemUnit(stock)) {
-                return;
-            }
-            addUpdateStockActivityViewModel.insert(stock);
-            Toast.makeText(getBaseContext(), "data save", Toast.LENGTH_SHORT).show();
-            finish();
+           Stock stock = activityAddItemFloatingButtonBinding.getStock();
+           if (!validateItemName(stock) | !validateItemPurchasePrice(stock) | !validateItemQuntity(stock) | !validateItemUnit(stock)) {
+               return;
+           }
+
+           addUpdateStockActivityViewModel.insert(stock);
+           Toast.makeText(getBaseContext(), "data save", Toast.LENGTH_SHORT).show();
+           finish();
 
         }
 
@@ -215,7 +212,7 @@ public class AddUpdateStockActivity extends AppCompatActivity {
         }
 
         public void selectUnit(View view) {
-            dialogFragementforunit ialogFragementforunit = new dialogFragementforunit();
+            dialogFragementforunit ialogFragementforunit = new dialogFragementforunit(activityAddItemFloatingButtonBinding);
             ialogFragementforunit.show(getSupportFragmentManager(), "exampledialog");
         }
 
