@@ -2,6 +2,9 @@ package com.example.a2zbilling.stock.AddStock;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
@@ -39,7 +42,6 @@ public class AddStockFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_for_addstocks, container, false);
 
-
         recyclerView = view.findViewById(R.id.recycler_view_for_addStock);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
@@ -52,8 +54,34 @@ public class AddStockFragment extends Fragment {
                 adepter.setItems(stocks);
             }
         });
-
-
         return view;
     }
+
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setHasOptionsMenu(true);
+//    }
+//
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.save_data_menu, menu);
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//
+//            case R.id.save:
+//
+//
+//
+//                return false;
+//                default:
+//                break;
+//        }
+//        return false;
+//    }
+
+
 }

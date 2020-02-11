@@ -6,63 +6,61 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/imageView_for_shop"
         android:layout_width="70dp"
         android:layout_height="65dp"
         android:src="@drawable/shopimage2" />
 
 
     <TextView
+        android:id="@+id/TextView_for_shopName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imageView_for_shop"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="113dp"
-        android:layout_marginRight="113dp"
         android:text="Shop Name"
         android:textSize="12sp" />
 
     <TextView
+        android:id="@+id/Text_VIew_for_your_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/TextView_for_shopName"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/imageView_for_shop"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="115dp"
-        android:layout_marginRight="115dp"
         android:text="Your Name"
         android:textSize="12sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/Text_VIew_for_your_name"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/imageView_for_shop"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="90dp"
-        android:layout_marginRight="90dp"
         android:text="Email@gmail.com"
         android:textSize="13sp" />
 
     <View
+        android:id="@+id/view1"
         android:layout_width="wrap_content"
         android:layout_height="2dp"
-        android:layout_marginTop="68dp"
+       android:layout_below="@+id/imageView_for_shop"
         android:background="@color/colorPrimary"/>
 
     <TextView
+        android:id="@+id/TextView_stock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
-        android:layout_marginTop="70dp"
+        android:layout_below="@+id/view1"
         android:text="stock"
+        android:layout_marginStart="10dp"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -70,38 +68,33 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="194dp"
-        android:layout_marginLeft="194dp"
-        android:layout_marginTop="71dp"
+        android:layout_below="@+id/view1"
+        android:layout_toLeftOf="@+id/TextView_values"
+        android:layout_marginRight="30dp"
         android:text="Qty"
         android:textSize="15sp"
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/Textview_for_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="249dp"
-        android:layout_marginLeft="249dp"
-        android:layout_marginTop="70dp"
+        android:layout_below="@+id/view1"
+        android:layout_toRightOf="@+id/TextView_stock"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
         android:text="Price"
         android:textSize="15sp"
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/TextView_values"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="312dp"
-        android:layout_marginLeft="312dp"
-        android:layout_marginTop="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/view1"
+        android:layout_marginRight="5dp"
         android:text="Values"
         android:textSize="15sp"
         android:textStyle="bold" />
@@ -109,28 +102,32 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="2dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/view1"
         android:background="@color/colorPrimary" />
 
+
     <View
+        android:id="@+id/view3"
+        android:layout_marginBottom="55dp"
         android:layout_width="wrap_content"
         android:layout_height="2dp"
-        android:layout_marginTop="507dp"
+        android:layout_above="@+id/view4"
         android:background="@color/colorPrimary" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/waitlistcardview"
         android:layout_width="65dp"
-        android:layout_height="57dp"
+        android:layout_height="55dp"
         android:layout_rowWeight="1"
         android:layout_columnWeight="1"
-        android:layout_marginTop="510dp"
-        android:layout_marginLeft="1dp"
-        app:cardCornerRadius="1dp"
+        android:layout_above="@+id/view4"
+        android:padding="5dp"
+
         android:layout_weight="1">
 
         <LinearLayout
-            android:layout_width="74dp"
+            android:layout_width="65dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
@@ -146,17 +143,17 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_defaultList"
         android:layout_width="65dp"
-        android:layout_height="57dp"
+        android:layout_height="55dp"
+        android:layout_toRightOf="@+id/waitlistcardview"
         android:layout_rowWeight="1"
         android:layout_columnWeight="1"
-        android:layout_marginTop="510dp"
-        android:layout_marginLeft="70dp"
-        app:cardCornerRadius="1dp"
+        android:layout_above="@+id/view4"
+        android:padding="5dp"
         android:layout_weight="1">
 
 
         <LinearLayout
-            android:layout_width="74dp"
+            android:layout_width="65dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
@@ -172,31 +169,28 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/bt_float"
         android:layout_width="wrap_content"
-        android:layout_height="57dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="154dp"
-        android:layout_marginLeft="158dp"
-        android:layout_marginTop="510dp"
-        android:layout_marginRight="179dp"
+        android:layout_height="55dp"
+        android:foregroundGravity="center"
+        android:layout_centerInParent="true"
+
+        android:layout_above="@+id/view4"
+
         android:backgroundTint="@color/colorPrimary"
         android:src="@drawable/floatinbuttonicon" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_RightButton"
         android:layout_width="65dp"
-        android:layout_height="57dp"
+        android:layout_height="55dp"
         android:layout_rowWeight="1"
         android:layout_columnWeight="1"
-        android:layout_marginTop="510dp"
-        android:layout_marginLeft="225dp"
-        app:cardCornerRadius="1dp"
+        android:layout_toLeftOf="@+id/conformListcardview"
+        android:layout_above="@+id/view4"
+        android:padding="5dp"
         android:layout_weight="1">
 
         <LinearLayout
-            android:layout_width="74dp"
+            android:layout_width="65dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
@@ -211,16 +205,16 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/conformListcardview"
         android:layout_width="65dp"
-        android:layout_height="57dp"
+        android:layout_height="55dp"
         android:layout_rowWeight="1"
         android:layout_columnWeight="1"
-        android:layout_marginTop="510dp"
-        android:layout_marginLeft="294dp"
-        app:cardCornerRadius="1dp"
+        android:layout_above="@+id/view4"
+        android:layout_alignParentEnd="true"
+        android:padding="5dp"
         android:layout_weight="1">
 
         <LinearLayout
-            android:layout_width="74dp"
+            android:layout_width="65dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
@@ -234,20 +228,19 @@
 
 
     <View
+        android:id="@+id/view4"
         android:layout_width="wrap_content"
         android:layout_height="2dp"
-        android:layout_marginTop="567dp"
+        android:layout_above="@+id/view5"
+        android:layout_marginBottom="20dp"
         android:background="@color/colorPrimary" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="570dp"
+        android:layout_above="@+id/view5"
+        android:paddingStart="10dp"
         android:text="Total : "
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -255,20 +248,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="311dp"
-        android:layout_marginLeft="311dp"
-        android:layout_marginTop="568dp"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/view5"
+         android:paddingEnd="10dp"
         android:text="0.00"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <View
+        android:id="@+id/view5"
         android:layout_width="wrap_content"
         android:layout_height="2dp"
-        android:layout_marginTop="596dp"
+        android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary" />
 
 </RelativeLayout>

@@ -19,9 +19,7 @@ public class StockActivityViewModel extends AndroidViewModel {
     private Repository repository;
     private LiveData<List<Stock>> allItems;
     private ArrayList<Stock> newlyAddedStockList = new ArrayList<Stock>();
-    ;
     private MutableLiveData<ArrayList<Stock>> newlyAddedStocks = new MutableLiveData<ArrayList<Stock>>();
-    ;
 
     public StockActivityViewModel(@NonNull Application application) {
         super(application);

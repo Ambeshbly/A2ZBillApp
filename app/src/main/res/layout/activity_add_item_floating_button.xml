@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="stock"
             type="com.example.a2zbilling.db.entities.Stock" />
@@ -13,8 +12,7 @@
             type="com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity.AddItemClickHandler" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
@@ -23,19 +21,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/liner5"
+            android:layout_alignParentTop="true">
 
             <ImageView
                 android:id="@+id/imageview_for_item"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
                 android:onClick="@{additemclickHandler::setImage}"
-                android:src="@drawable/ic_launcher_foreground"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:src="@drawable/ic_launcher_foreground" />
 
             <TextView
                 android:id="@+id/textview_for_id"
@@ -55,7 +51,10 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
+            android:id="@+id/liner5"
+            android:layout_above="@+id/liner4"
             android:layout_width="match_parent"
+            android:padding="10dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -118,9 +117,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/liner4"
+            android:layout_above="@+id/liner3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:padding="10dp"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -155,9 +156,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/liner3"
             android:layout_width="match_parent"
+            android:padding="10dp"
+            android:layout_above="@+id/Liner2"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:backgroundTint="@color/colorPrimary"
             android:orientation="horizontal">
 
@@ -204,9 +207,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/Liner2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_above="@+id/Linner1"
+            android:padding="10dp"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -252,9 +257,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/Linner1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">>
 
@@ -282,6 +288,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </layout>
