@@ -55,4 +55,8 @@ public class StockActivityViewModel extends AndroidViewModel {
     public LiveData<List<Stock>> getAllItems() {
         return allItems;
     }
+
+    public  ArrayList<Stock> getTemproryItemList(){
+        return newlyAddedStockList;
+    }
 }

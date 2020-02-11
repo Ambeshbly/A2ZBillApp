@@ -1,5 +1,7 @@
 package com.example.a2zbilling.stock;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.a2zbilling.R;
@@ -19,8 +23,11 @@ import com.example.a2zbilling.stock.AddStock.AddStockFragment;
 import com.example.a2zbilling.stock.AvailableStock.AvailableStockFragment;
 import com.example.a2zbilling.stock.RFU.RFUStockFragment;
 import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
+import com.example.a2zbilling.stock.addUpdate.dialogFragementforunit;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 public class StockActivity extends AppCompatActivity {
 
@@ -56,6 +63,7 @@ public class StockActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+
         //finding bottom navigation in xml file
         bottomNavigationView = findViewById(R.id.bottom_navigation_for_addstocks);
 
@@ -95,4 +103,32 @@ public class StockActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public void onBackPressed() {
+        ArrayList<Stock> stockList= stockActivityViewModel.getTemproryItemList();
+        if(!stockList.isEmpty()) {
+            new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Save Stock").setMessage("Are you want to save stock?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(getBaseContext(), "save", Toast.LENGTH_SHORT).show();
+
+                    ArrayList<Stock> stockList = stockActivityViewModel.getTemproryItemList();
+
+                    for (int i = 0; i < stockList.size(); i++) {
+                        Stock stock = stockList.get(i);
+                        stockActivityViewModel.insert(stock);
+                    }
+
+                    finish();
+                }
+
+            }).setNegativeButton("No", null).show();
+        }else {
+            finish();
+        }
+    }
+
+
+
 }

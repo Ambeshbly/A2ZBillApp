@@ -3,6 +3,9 @@ package com.example.a2zbilling.stock.AvailableStock;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
@@ -17,20 +20,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.db.entities.Stock;
+import com.example.a2zbilling.stock.StockActivity;
 import com.example.a2zbilling.stock.StockActivityViewModel;
 import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AvailableStockFragment extends Fragment {
 
     RecyclerView recyclerView;
     AvailableStockAdapter adepter;
-    SearchView searchView;
+    SearchView searchView1;
     private StockActivityViewModel stockActivityViewModel;
 
     public AvailableStockFragment(StockActivityViewModel stockActivityViewModel) {
         this.stockActivityViewModel = stockActivityViewModel;
+    }
+
+    public AvailableStockFragment() {
     }
 
     //override method onCreateView
@@ -47,6 +55,8 @@ public class AvailableStockFragment extends Fragment {
         adepter = new AvailableStockAdapter();
         recyclerView.setAdapter(adepter);
 
+        setHasOptionsMenu(true);
+
 
         stockActivityViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<Stock>>() {
 
@@ -57,19 +67,19 @@ public class AvailableStockFragment extends Fragment {
             }
         });
 
-        searchView = view.findViewById(R.id.search_view_By_name1);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adepter.getFilter().filter(newText);
-                return false;
-            }
-        });
+//        searchView1 = view.findViewById(R.id.search_view_By_name1);
+//        searchView1.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                adepter.getFilter().filter(newText);
+//                return false;
+//            }
+//        });
 
         adepter.setOnItemRecyclerViewlistener(new AvailableStockAdapter.OnItemRecyclerViewListener() {
             @Override
@@ -89,6 +99,58 @@ public class AvailableStockFragment extends Fragment {
 
         return view;
     }
+
+
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.toolbar_search_menu, menu);
+        MenuItem menuItem=menu.findItem(R.id.search_view_By);
+        SearchView searchView=(SearchView)menuItem.getActionView();
+        searchView.setQueryHint("search Item");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adepter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    //    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.toolbar_search_menu, menu);
+//        MenuItem menuItem=menu.findItem(R.id.search_view_By);
+//        SearchView searchView=(SearchView)menuItem.getActionView();
+//        searchView.setQueryHint("search Item");
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                adepter.getFilter().filter(newText);
+//                return false;
+//            }
+//        });
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
 
 
 }
