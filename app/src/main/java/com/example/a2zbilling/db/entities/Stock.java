@@ -3,13 +3,12 @@ package com.example.a2zbilling.db.entities;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.example.a2zbilling.BR;
+import java.io.Serializable;
 
 @Entity(tableName = "stock_table")
-public class Stock extends BaseObservable {
+public class Stock extends BaseObservable implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int itemId;
@@ -23,8 +22,7 @@ public class Stock extends BaseObservable {
     private String itemSaleTotal;
 
 
-
-    public Stock(String itemName, String itemQuentity,String itemUnit, String itemPurchasePerUnit, String itemPuchaseTotal, String itemSalePerUnit, String itemSaleTotal) {
+    public Stock(String itemName, String itemQuentity, String itemPurchasePerUnit, String itemPuchaseTotal, String itemSalePerUnit, String itemSaleTotal) {
         this.itemImage = itemImage;
         this.itemName = itemName;
         this.itemQuentity = itemQuentity;

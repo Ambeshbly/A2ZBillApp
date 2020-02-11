@@ -1,4 +1,4 @@
-package com.example.a2zbilling.stock;
+package com.example.a2zbilling.stock.addUpdate;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -21,7 +21,7 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
     ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding;
     private CardView cardViewKg, cardViewGm, cardViewMg, cardViewMtr, cardViewCm, cardViewMm, cardViewLtr, cardViewml, cardViewDz, cardViewHdz, cardViewPc;
 
-    dialogFragementforunit(ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding) {
+    public dialogFragementforunit(ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding) {
         this.activityAddItemFloatingButtonBinding = activityAddItemFloatingButtonBinding;
     }
 

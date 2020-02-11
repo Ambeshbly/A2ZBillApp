@@ -7,21 +7,28 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.YouFragment;
+import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.AddStock.AddStockFragment;
 import com.example.a2zbilling.stock.AvailableStock.AvailableStockFragment;
 import com.example.a2zbilling.stock.RFU.RFUStockFragment;
+import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class StockActivity extends AppCompatActivity {
 
+    public static final int ADD_NEW_STOCK_REQ_CODE = 1;
+
     //declration of floating button for add item
     FloatingActionButton floatingActionButton;
+    StockActivityViewModel stockActivityViewModel;
     //declartion of Bottom navigation
     private BottomNavigationView bottomNavigationView;
     //selection on bottom navigation by switch
@@ -31,10 +38,10 @@ public class StockActivity extends AppCompatActivity {
             Fragment selectedFragment = new YouFragment();
             switch (menuItem.getItemId()) {
                 case R.id.nav_addstocks:
-                    selectedFragment = new AddStockFragment();
+                    selectedFragment = new AddStockFragment(stockActivityViewModel);
                     break;
                 case R.id.nav_availablestocks:
-                    selectedFragment = new AvailableStockFragment();
+                    selectedFragment = new AvailableStockFragment(stockActivityViewModel);
                     break;
                 case R.id.nav_futhurescope:
                     selectedFragment = new RFUStockFragment();
@@ -55,6 +62,8 @@ public class StockActivity extends AppCompatActivity {
         //finding floating button in Xml file
         floatingActionButton = findViewById(R.id.bt_float);
 
+        stockActivityViewModel = ViewModelProviders.of(this).get(StockActivityViewModel.class);
+
         //set tittle in the action bar
         getSupportActionBar().setTitle("Your Stocks");
 
@@ -64,7 +73,7 @@ public class StockActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "floating click", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getBaseContext(), AddUpdateStockActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, ADD_NEW_STOCK_REQ_CODE);
             }
         });
 
@@ -72,6 +81,18 @@ public class StockActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(nav_listener);
 
         //set which fragment is show whenever user com in additem activity
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner_for_addstocks, new AddStockFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner_for_addstocks, new AddStockFragment(stockActivityViewModel)).commit();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ADD_NEW_STOCK_REQ_CODE) {
+            Stock stock = (Stock) data.getSerializableExtra("stock");
+            String itemName = stock.getItemName();
+            stockActivityViewModel.addNewlyAddedStock(stock);
+        }
+
     }
 }

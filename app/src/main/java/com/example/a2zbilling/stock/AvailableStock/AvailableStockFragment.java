@@ -1,5 +1,6 @@
 package com.example.a2zbilling.stock.AvailableStock;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.db.entities.Stock;
-import com.example.a2zbilling.stock.AddUpdateStockActivityViewModel;
+import com.example.a2zbilling.stock.StockActivityViewModel;
+import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
 
 import java.util.List;
 
@@ -26,7 +27,11 @@ public class AvailableStockFragment extends Fragment {
     RecyclerView recyclerView;
     AvailableStockAdapter adepter;
     SearchView searchView;
-    private AddUpdateStockActivityViewModel addUpdateStockActivityViewModel;
+    private StockActivityViewModel stockActivityViewModel;
+
+    public AvailableStockFragment(StockActivityViewModel stockActivityViewModel) {
+        this.stockActivityViewModel = stockActivityViewModel;
+    }
 
     //override method onCreateView
     @Nullable
@@ -43,8 +48,7 @@ public class AvailableStockFragment extends Fragment {
         recyclerView.setAdapter(adepter);
 
 
-        addUpdateStockActivityViewModel = ViewModelProviders.of(this).get(AddUpdateStockActivityViewModel.class);
-        addUpdateStockActivityViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<Stock>>() {
+        stockActivityViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<Stock>>() {
 
             @Override
             public void onChanged(List<Stock> items) {
@@ -64,6 +68,22 @@ public class AvailableStockFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 adepter.getFilter().filter(newText);
                 return false;
+            }
+        });
+
+        adepter.setOnItemRecyclerViewlistener(new AvailableStockAdapter.OnItemRecyclerViewListener() {
+            @Override
+            public void onItemClick(Stock stock) {
+                Intent intent = new Intent(getContext(), AddUpdateStockActivity.class);
+                intent.putExtra("Item_id", stock.getItemId());
+                intent.putExtra("Item_name", stock.getItemName());
+                intent.putExtra("Item_quentity", stock.getItemQuentity());
+                // intent.putExtra("Item_unit",stock.getItemUnit());
+                intent.putExtra("Item_purchasePrice", stock.getItemPurchasePerUnit());
+                intent.putExtra("Item_purchaseTotal", stock.getItemPuchaseTotal());
+                intent.putExtra("Item_salePrice", stock.getItemSalePerUnit());
+                intent.putExtra("Item_saleTotal", stock.getItemSaleTotal());
+                startActivity(intent);
             }
         });
 

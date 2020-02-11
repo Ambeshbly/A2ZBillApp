@@ -1,4 +1,4 @@
-package com.example.a2zbilling.stock.AvailableStock;
+package com.example.a2zbilling.stock.AddStock;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +17,10 @@ import com.example.a2zbilling.db.entities.Stock;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAdapter.ItemHolder> implements Filterable {
+public class AddStockAdapter extends RecyclerView.Adapter<AddStockAdapter.ItemHolder> implements Filterable {
     private List<Stock> items = new ArrayList<>();
     private List<Stock> stockList;
     private OnItemRecyclerViewListener listener;
-
     private Filter exampleFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -56,6 +55,7 @@ public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAd
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_viee_for_available_item, parent, false);
         ItemHolder itemHolder = new ItemHolder(itemView);
+
         return itemHolder;
     }
 
