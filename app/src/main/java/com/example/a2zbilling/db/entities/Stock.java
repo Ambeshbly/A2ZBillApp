@@ -99,6 +99,24 @@ public class Stock extends BaseObservable implements Serializable {
         notifyPropertyChanged(com.example.a2zbilling.BR.itemPurchasePerUnit);
     }
 
+
+
+
+
+
+    public void setItemPurchase(String itemPurchase){
+        this.itemPurchasePerUnit=itemPurchase;
+    }
+
+     public void setItemSale(String itemsale){
+        this.itemSalePerUnit=itemsale;
+
+     }
+
+
+
+
+
     @Bindable
     public String getItemPuchaseTotal() {
         return itemPuchaseTotal;

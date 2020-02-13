@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginTop="8dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/textView_for_counter_itemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="item name"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textView_for_counter_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="price"
+            android:layout_marginLeft="200dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textView_counter_qnty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="282dp"
+            android:text="Qty"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView android:id="@+id/TextView_values"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="5dp"
+            android:text="Values"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
