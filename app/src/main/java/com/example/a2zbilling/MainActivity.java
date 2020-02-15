@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.a2zbilling.counter.MainActivityViewModel;
 import com.example.a2zbilling.counter.CounterFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

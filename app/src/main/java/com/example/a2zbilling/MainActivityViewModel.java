@@ -1,4 +1,4 @@
-package com.example.a2zbilling.counter;
+package com.example.a2zbilling;
 
 import android.app.Application;
 
@@ -8,6 +8,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.a2zbilling.db.Repository;
+import com.example.a2zbilling.db.entities.SaleDeatial;
+import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
 
 import java.util.ArrayList;
@@ -18,7 +20,15 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     private Repository repository;
     private LiveData<List<Stock>> allItems;
-    private Stock stock;
+
+
+    private Sales sales;
+    private LiveData<List<Sales>> allSales;
+
+    private SaleDeatial saleDeatial;
+    private LiveData<List<SaleDeatial>> allSaledetail;
+
+
     private ArrayList<Stock> newlyAddedStockList = new ArrayList<Stock>();
     private MutableLiveData<ArrayList<Stock>> newlyAddedStocks = new MutableLiveData<ArrayList<Stock>>();
 
@@ -27,21 +37,43 @@ public class MainActivityViewModel extends AndroidViewModel {
         super(application);
         repository = new Repository(application);
         allItems = repository.getAllItems();
+
+
+        allSales = repository.getAllSales();
+
+
         this.newlyAddedStocks.setValue(newlyAddedStockList);
 
     }
 
     public LiveData<ArrayList<Stock>> getNewlyAddedStocks() {
-
         return newlyAddedStocks;
     }
 
     public void addNewlyAddedStock(Stock newlyAddedStock) {
-
-
         this.newlyAddedStocks.getValue().add(newlyAddedStock);
 
     }
+
+
+    public void insertsales(Sales sales) {
+        repository.insertSales(sales);
+    }
+
+    public LiveData<List<Sales>> getAllSales() {
+        return allSales;
+    }
+
+
+    public void insertSaleDetail(SaleDeatial saleDeatial) {
+        repository.insertSaleDeatail(saleDeatial);
+    }
+
+    public LiveData<List<SaleDeatial>> getAllSaledetail(int salesId) {
+        allSaledetail = repository.getSalesDeatil(salesId);
+        return allSaledetail;
+    }
+
 
     public void insert(Stock stock) {
         repository.insert(stock);
@@ -59,17 +91,7 @@ public class MainActivityViewModel extends AndroidViewModel {
         return allItems;
     }
 
-    public  ArrayList<Stock> getTemproryItemList(){
+    public ArrayList<Stock> getTemproryItemList() {
         return newlyAddedStockList;
     }
-
-    public void setStock(Stock stock){
-        this.stock=stock;
-    }
-
-    public Stock getStock(){
-        return stock;
-    }
-
-
 }

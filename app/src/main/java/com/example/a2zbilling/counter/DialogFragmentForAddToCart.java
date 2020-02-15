@@ -14,9 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.cardview.widget.CardView;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.example.a2zbilling.MainActivity;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.db.entities.Stock;
 
@@ -24,36 +22,36 @@ import static android.app.Activity.RESULT_OK;
 
 public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
 
-    private MainActivityViewModel addToCartActivityViewModel;
-    private TextView textViewId,textViewName,textViewAvailablestock;
-    private EditText editTextsalePrice,editTextQuntity;
+    private SellingActivityViewModel sellingActivityViewModel;
+    private TextView textViewId, textViewName, textViewAvailablestock;
+    private EditText editTextsalePrice, editTextQuntity;
     private Stock stock;
     private Stock tempstock;
-    private CardView cardViewAddToCart,cardViewSave;
+    private CardView cardViewAddToCart, cardViewSave;
 
-    public DialogFragmentForAddToCart(Stock stock) {
-        this.stock = stock;
-
+    public DialogFragmentForAddToCart(SellingActivityViewModel sellingActivityViewModel) {
+        this.sellingActivityViewModel = sellingActivityViewModel;
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater=getActivity().getLayoutInflater();
-        View view=inflater.inflate(R.layout.dailog_fragment_for_add_to_cart,null);
 
-        textViewId=view.findViewById(R.id.Dialog_id);
-        textViewName=view.findViewById(R.id.Dialog_item_name);
-        textViewAvailablestock=view.findViewById(R.id.Dialod_available_stock);
-        editTextsalePrice=view.findViewById(R.id.Dialog_editText_sale_price);
-        editTextQuntity=view.findViewById(R.id.Dialog_editext_qunity);
-        cardViewAddToCart=view.findViewById(R.id.Dialog_cardView_add_to_cart);
-        cardViewSave=view.findViewById(R.id.cardview_save);
 
-        addToCartActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.dailog_fragment_for_add_to_cart, null);
+        stock = sellingActivityViewModel.getStock();
 
-        textViewId.setText(""+stock.getItemId());
+        textViewId = view.findViewById(R.id.Dialog_id);
+        textViewName = view.findViewById(R.id.Dialog_item_name);
+        textViewAvailablestock = view.findViewById(R.id.Dialod_available_stock);
+        editTextsalePrice = view.findViewById(R.id.Dialog_editText_sale_price);
+        editTextQuntity = view.findViewById(R.id.Dialog_editext_qunity);
+        cardViewAddToCart = view.findViewById(R.id.Dialog_cardView_add_to_cart);
+        cardViewSave = view.findViewById(R.id.cardview_save);
+
+        textViewId.setText("" + stock.getItemId());
         textViewName.setText(stock.getItemName());
         textViewAvailablestock.setText(stock.getItemQuentity());
         editTextsalePrice.setText(stock.getItemSalePerUnit());
@@ -64,16 +62,16 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
         cardViewAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                  Toast.makeText(getContext(),"malo",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "malo", Toast.LENGTH_SHORT).show();
 
 
-                String quntity=editTextQuntity.getText().toString().trim();
-                int itemquntity=Integer.parseInt( stock.getItemQuentity())-Integer.parseInt(quntity);
-                String qnty=Integer.toString(itemquntity);
+                String quntity = editTextQuntity.getText().toString().trim();
+                int itemquntity = Integer.parseInt(stock.getItemQuentity()) - Integer.parseInt(quntity);
+                String qnty = Integer.toString(itemquntity);
                 stock.setItemQuentity(qnty);
 
 
-                tempstock=new Stock();
+                tempstock = new Stock();
                 tempstock.setItemId(stock.getItemId());
                 tempstock.setItemImage(stock.getItemImage());
                 tempstock.setItemName(stock.getItemName());
@@ -84,11 +82,11 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                 tempstock.setItemUnit(stock.getItemUnit());
                 tempstock.setItemSaleTotal(stock.getItemSaleTotal());
 
-            //Stock stock1=stock;
-               Intent intent = new Intent().putExtra("stock", tempstock);
-               getActivity().setResult(RESULT_OK,intent);
-               dismissAllowingStateLoss();
-       
+                //Stock stock1=stock;
+                Intent intent = new Intent().putExtra("stock", tempstock);
+                getActivity().setResult(RESULT_OK, intent);
+                dismissAllowingStateLoss();
+
 
             }
         });
@@ -99,14 +97,13 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
             public void onClick(View v) {
 
 
-
-                String quntity=editTextQuntity.getText().toString().trim();
-                int itemquntity=Integer.parseInt( stock.getItemQuentity())-Integer.parseInt(quntity);
-                String qnty=Integer.toString(itemquntity);
+                String quntity = editTextQuntity.getText().toString().trim();
+                int itemquntity = Integer.parseInt(stock.getItemQuentity()) - Integer.parseInt(quntity);
+                String qnty = Integer.toString(itemquntity);
                 stock.setItemQuentity(qnty);
 
 
-                tempstock=new Stock();
+                tempstock = new Stock();
                 tempstock.setItemId(stock.getItemId());
                 tempstock.setItemImage(stock.getItemImage());
                 tempstock.setItemName(stock.getItemName());
@@ -119,7 +116,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
 
 
                 Intent intent = new Intent().putExtra("stock", tempstock);
-                getActivity().setResult(RESULT_OK,intent);
+                getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
 
             }

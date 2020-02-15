@@ -1,15 +1,15 @@
 package com.example.a2zbilling.counter;
 
+import android.os.Bundle;
+import android.view.Menu;
+import android.widget.SearchView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.view.Menu;
-import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.db.entities.Stock;
@@ -21,9 +21,8 @@ public class SellingStocksActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     AddToCartAdapter adepter;
-    private MainActivityViewModel addToCartActivityViewModel;
     SearchView searchView1;
-
+    private SellingActivityViewModel sellingActivityViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,30 +37,30 @@ public class SellingStocksActivity extends AppCompatActivity {
         recyclerView.setAdapter(adepter);
 
 
-        addToCartActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        sellingActivityViewModel = ViewModelProviders.of(this).get(SellingActivityViewModel.class);
 
-        addToCartActivityViewModel.getAllItems().observe(this, new Observer<List<Stock>>() {
+        sellingActivityViewModel.getAllItems().observe(this, new Observer<List<Stock>>() {
             @Override
             public void onChanged(List<Stock> stocks) {
-                Toast.makeText(getBaseContext(), "ovaerver",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "ovaerver", Toast.LENGTH_SHORT).show();
                 adepter.setItems(stocks);
             }
         });
 
 
-              searchView1 = findViewById(R.id.search_view_of_addtocart);
-               searchView1.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        return false;
-                    }
+        searchView1 = findViewById(R.id.search_view_of_addtocart);
+        searchView1.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        adepter.getFilter().filter(newText);
-                        return false;
-                    }
-                });
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adepter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         //set tittle bar for add to card activity
         getSupportActionBar().setTitle("Billing Counter");
@@ -72,14 +71,15 @@ public class SellingStocksActivity extends AppCompatActivity {
             public void onItemClick(Stock stock) {
 
 
-                String name=stock.getItemName();
-                Toast.makeText(getBaseContext(), name,Toast.LENGTH_SHORT).show();
+                String name = stock.getItemName();
+                Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show();
+                sellingActivityViewModel.setStock(stock);
 
-               // addToCartActivityViewModel.setStock(stock);
+                // addToCartActivityViewModel.setStock(stock);
 
 
-                DialogFragmentForAddToCart ialogFragementforunit=new DialogFragmentForAddToCart(stock);
-                ialogFragementforunit.show(getSupportFragmentManager(),"exampledialog");
+                DialogFragmentForAddToCart ialogFragementforunit = new DialogFragmentForAddToCart(sellingActivityViewModel);
+                ialogFragementforunit.show(getSupportFragmentManager(), "exampledialog");
 
             }
         });
@@ -88,7 +88,7 @@ public class SellingStocksActivity extends AppCompatActivity {
     //override method for cart icon
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.cart,menu);
+        getMenuInflater().inflate(R.menu.cart, menu);
         return true;
     }
 
