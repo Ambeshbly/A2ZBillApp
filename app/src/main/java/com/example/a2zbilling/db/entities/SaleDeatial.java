@@ -5,13 +5,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(foreignKeys = {
-        @ForeignKey(entity = Sales.class,
-                parentColumns = "saleId",
-                childColumns = "saledetailsaleid"),
-        @ForeignKey(entity = Stock.class,
-                parentColumns = "itemId",
-                childColumns = "saleDetailitemId")
+@Entity(foreignKeys = {@ForeignKey(entity = Sales.class, parentColumns = "saleId", childColumns = "saledetailsaleid", onDelete = ForeignKey.CASCADE)
 
 })
 public class SaleDeatial {
@@ -23,7 +17,7 @@ public class SaleDeatial {
     private String quntity;
     private String salingPrice;
 
-    public SaleDeatial(int saledetailsaleid , int saleDetailitemId, String quntity, String salingPrice) {
+    public SaleDeatial(int saledetailsaleid, int saleDetailitemId, String quntity, String salingPrice) {
         this.saledetailsaleid = saledetailsaleid;
         this.saleDetailitemId = saleDetailitemId;
         this.quntity = quntity;

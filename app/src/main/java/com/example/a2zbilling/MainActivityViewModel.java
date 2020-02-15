@@ -27,11 +27,9 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     private SaleDeatial saleDeatial;
     private LiveData<List<SaleDeatial>> allSaledetail;
-
-
+    private int saleTotal;
     private ArrayList<Stock> newlyAddedStockList = new ArrayList<Stock>();
     private MutableLiveData<ArrayList<Stock>> newlyAddedStocks = new MutableLiveData<ArrayList<Stock>>();
-
 
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
@@ -44,6 +42,18 @@ public class MainActivityViewModel extends AndroidViewModel {
 
         this.newlyAddedStocks.setValue(newlyAddedStockList);
 
+    }
+
+    public ArrayList<Stock> getNewlyAddedStockList() {
+        return newlyAddedStockList;
+    }
+
+    public int getSaleTotal() {
+        return saleTotal;
+    }
+
+    public void setSaleTotal(int saleTotal) {
+        this.saleTotal = saleTotal;
     }
 
     public LiveData<ArrayList<Stock>> getNewlyAddedStocks() {
@@ -91,7 +101,4 @@ public class MainActivityViewModel extends AndroidViewModel {
         return allItems;
     }
 
-    public ArrayList<Stock> getTemproryItemList() {
-        return newlyAddedStockList;
-    }
 }

@@ -36,10 +36,11 @@ public class CounterFragment extends Fragment {
     CounterAdapter adepter;
     private TextView textViewTotal;
 
-    private MainActivityViewModel addToCartActivityViewModel;
+    private MainActivityViewModel mainActivityViewModel;
 
-    public CounterFragment(MainActivityViewModel addToCartActivityViewModel) {
-        this.addToCartActivityViewModel = addToCartActivityViewModel;
+
+    public CounterFragment(MainActivityViewModel mainActivityViewModel) {
+        this.mainActivityViewModel = mainActivityViewModel;
     }
 
     //onCreateView Override method
@@ -58,7 +59,7 @@ public class CounterFragment extends Fragment {
         adepter = new CounterAdapter();
         recyclerView.setAdapter(adepter);
 
-        addToCartActivityViewModel.getNewlyAddedStocks().observe(getViewLifecycleOwner(), new Observer<ArrayList<Stock>>() {
+        mainActivityViewModel.getNewlyAddedStocks().observe(getViewLifecycleOwner(), new Observer<ArrayList<Stock>>() {
             @Override
             public void onChanged(ArrayList<Stock> stocks) {
                 adepter.setItems(stocks);
@@ -76,10 +77,10 @@ public class CounterFragment extends Fragment {
         if (requestCode == ADD_NEW_STOCK_REQ_CODE) {
             Stock stock = (Stock) data.getSerializableExtra("stock");
             //   String itemName = stock.getItemName();
-            addToCartActivityViewModel.addNewlyAddedStock(stock);
+            mainActivityViewModel.addNewlyAddedStock(stock);
 
 
-            ArrayList<Stock> stockList = addToCartActivityViewModel.getTemproryItemList();
+            ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStockList();
             int total = 0;
 
             for (int i = 0; i < stockList.size(); i++) {
@@ -89,6 +90,7 @@ public class CounterFragment extends Fragment {
                 total = total + value;
 
             }
+            mainActivityViewModel.setSaleTotal(total);
             String totalString = Integer.toString(total);
             textViewTotal.setText(totalString);
 
@@ -115,21 +117,15 @@ public class CounterFragment extends Fragment {
                 Toast.makeText(getContext(), "proceed", Toast.LENGTH_SHORT).show();
 
 
-                ArrayList<Stock> stockList = addToCartActivityViewModel.getTemproryItemList();
+                ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStockList();
 
-                int total = 0;
+                int total = mainActivityViewModel.getSaleTotal();
 
-                for (int i = 0; i < stockList.size(); i++) {
-                    Stock stock2 = stockList.get(i);
-                    int value = 0;
-                    value = Integer.parseInt(stock2.getItemQuentity()) * Integer.parseInt(stock2.getItemSalePerUnit());
-                    total = total + value;
-                }
 
                 Sales sales = new Sales();
                 String totalString = Integer.toString(total);
                 sales.setTotalBillAmt(totalString);
-                addToCartActivityViewModel.insertsales(sales);
+                mainActivityViewModel.insertsales(sales);
 
 
                 for (int i = 0; i < stockList.size(); i++) {
@@ -143,13 +139,16 @@ public class CounterFragment extends Fragment {
                     saleDeatial.setSaleDetailitemId(itemId);
                     saleDeatial.setQuntity(quntity);
                     saleDeatial.setSalingPrice(sellingPrice);
-                    addToCartActivityViewModel.insertSaleDetail(saleDeatial);
+                    mainActivityViewModel.insertSaleDetail(saleDeatial);
                 }
+
+                // TODO: Remove all the items from newly added items so that new items can be added for new transaction.
+                //mainActivityViewModel.getNewlyAddedStockList().clear();
 
 
                 //                Sales sales=new Sales();
                 //
-                //                ArrayList<Stock> stockList= addToCartActivityViewModel.getTemproryItemList();
+                //                ArrayList<Stock> stockList= mainActivityViewModel.getTemproryItemList();
                 //                int total=0;
                 //
                 //                for(int i = 0; i <stockList.size(); i++)
@@ -163,7 +162,7 @@ public class CounterFragment extends Fragment {
                 //                String totalString=Integer.toString(total);
                 //                sales.setTotalBillAmt(totalString);
                 //
-                //                addToCartActivityViewModel.insertsales(sales);
+                //                mainActivityViewModel.insertsales(sales);
                 //
                 //                SaleDeatial saleDeatial=new SaleDeatial();
                 //
@@ -175,12 +174,12 @@ public class CounterFragment extends Fragment {
                 //                int itemId=stock.getItemId();
                 //                saleDeatial.setSaleDetailitemId(itemId);
                 //
-                //                List<Sales>  sales1= (List<Sales>) addToCartActivityViewModel.getAllSales();
+                //                List<Sales>  sales1= (List<Sales>) mainActivityViewModel.getAllSales();
                 //                Sales sales2=sales1.get(0);
                 //                int salesId=sales2.getSaleId();
                 //                saleDeatial.setSaledetailsaleid(salesId);
                 //
-                //                addToCartActivityViewModel.insertSaleDetail(saleDeatial);
+                //                mainActivityViewModel.insertSaleDetail(saleDeatial);
                 //
 
 

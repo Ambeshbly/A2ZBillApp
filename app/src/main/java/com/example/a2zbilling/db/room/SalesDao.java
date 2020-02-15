@@ -6,13 +6,11 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.a2zbilling.db.entities.Sales;
-import com.example.a2zbilling.db.entities.Stock;
 
 import java.util.List;
 
 @Dao
 public interface SalesDao {
-
 
     @Insert
     long insert(Sales sales);

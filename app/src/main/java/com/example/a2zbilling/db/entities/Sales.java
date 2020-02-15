@@ -1,19 +1,16 @@
 package com.example.a2zbilling.db.entities;
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import static androidx.room.ForeignKey.CASCADE;
-
-@Entity(foreignKeys = @ForeignKey(entity = Customer.class, parentColumns = "custId", childColumns = "salescustId", onDelete = CASCADE))
+@Entity
 public class Sales {
 
     @PrimaryKey(autoGenerate = true)
     private int saleId;
     private String totalBillAmt;
     private int salescustId;
-   // private Date date;
+    // private Date date;
 
     public int getSaleId() {
         return saleId;
