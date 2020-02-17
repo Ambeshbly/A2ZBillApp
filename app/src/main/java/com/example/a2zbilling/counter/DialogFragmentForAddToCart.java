@@ -305,8 +305,6 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                     stock.setItemQuentity(Double.toString(qnt));
                 }
 
-
-
                 tempstock = new Stock();
                 tempstock.setItemId(stock.getItemId());
                 tempstock.setItemImage(stock.getItemImage());
@@ -316,15 +314,18 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                 tempstock.setItemPuchaseTotal(stock.getItemPuchaseTotal());
                 tempstock.setItemSale(stock.getItemSalePerUnit());
                 tempstock.setItemUnit(stock.getItemUnit());
-               // tempstock.setPc("12");
                 tempstock.setItemSaleTotal(stock.getItemSaleTotal());
 
+                //sellingActivityViewModel.setStock(stock);
+
+
                 //Stock stock1=stock;
-                Intent intent = new Intent().putExtra("stock", tempstock);
+                //Intent intent = new Intent().putExtra("stock", tempstock);
+                Intent intent=new Intent();
+                intent.putExtra("stock",tempstock);
+                intent.putExtra("update",stock);
                 getActivity().setResult(RESULT_OK, intent);
                 dismissAllowingStateLoss();
-
-
             }
         });
 
@@ -427,6 +428,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                 tempstock.setPc(stock.getPc());
                 tempstock.setItemUnit(stock.getItemUnit());
                 tempstock.setItemSaleTotal(stock.getItemSaleTotal());
+            //    sellingActivityViewModel.update(stock);
 
 
                 Intent intent = new Intent().putExtra("stock", tempstock);

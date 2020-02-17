@@ -35,6 +35,8 @@ public class CounterFragment extends Fragment {
     RecyclerView recyclerView;
     CounterAdapter adepter;
     private TextView textViewTotal;
+    Stock updateStock;
+
 
     private MainActivityViewModel mainActivityViewModel;
 
@@ -75,7 +77,13 @@ public class CounterFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_NEW_STOCK_REQ_CODE) {
+
+            //this is first object
             Stock stock = (Stock) data.getSerializableExtra("stock");
+
+            //this id second object which is need to update when proceed button is click
+            updateStock=(Stock)data.getSerializableExtra("update");
+
             //   String itemName = stock.getItemName();
             mainActivityViewModel.addNewlyAddedStock(stock);
 
@@ -115,6 +123,11 @@ public class CounterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "proceed", Toast.LENGTH_SHORT).show();
+
+
+
+                //todo: this update is not working it crash the whole app please fixed it bhaiya
+                mainActivityViewModel.update(updateStock);
 
 
                 ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStockList();

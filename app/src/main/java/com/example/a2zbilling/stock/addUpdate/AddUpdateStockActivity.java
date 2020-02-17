@@ -326,7 +326,7 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
 
                 //
-                //
+                //getItemSaleTotal
                 //  int Itemid=stock.getItemId();
                 //                        String Name= editTextName.getText().toString().trim();
                 //                        String Quentity= editTextQuntity.getText().toString().trim();
