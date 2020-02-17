@@ -17,6 +17,9 @@ public interface SaleDeatailDao {
     void insert (SaleDeatial saleDeatial);
 
 
-    @Query("select * from SaleDeatial where saleDetailId=:saleId")
+    @Query("select * from SaleDeatial where saledetailsaleid=:saleId")
     LiveData<List<SaleDeatial>> getSaleDetail(int saleId);
+
+    @Query("select * from SaleDeatial where saledetailsaleid=:saleId")
+    List<SaleDeatial> getAllDetailList(int saleId);
 }

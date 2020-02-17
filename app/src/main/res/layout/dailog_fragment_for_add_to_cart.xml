@@ -113,7 +113,8 @@
         android:textStyle="bold" />
 
     <Spinner
-        android:layout_width="81dp"
+        android:id="@+id/Add_to_cart_spinner"
+        android:layout_width="100dp"
         android:layout_height="43dp"
         android:layout_marginTop="307dp"
         android:layout_marginStart="200dp" />

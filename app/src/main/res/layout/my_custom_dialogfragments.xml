@@ -91,7 +91,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_Dz"
+            android:id="@+id/cardview_Box"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
@@ -109,13 +109,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="DZ"
+                    android:text="Bx"
                     android:textSize="22sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_pc"
+            android:id="@+id/cardview_b"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
@@ -133,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Pc"
+                    android:text=""
                     android:textSize="22sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -187,7 +187,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
                     android:text="cm"
                     android:textSize="22sp" />
             </LinearLayout>
@@ -218,7 +217,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_Hdz"
+            android:id="@+id/cardview_Pc"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
@@ -236,7 +235,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="hz"
+                    android:text="pc"
                     android:textSize="22sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

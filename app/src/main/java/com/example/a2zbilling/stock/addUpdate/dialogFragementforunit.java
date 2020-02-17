@@ -15,11 +15,12 @@ import androidx.cardview.widget.CardView;
 
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.databinding.ActivityAddItemFloatingButtonBinding;
+import com.example.a2zbilling.db.entities.Stock;
 
 public class dialogFragementforunit extends AppCompatDialogFragment {
 
     ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding;
-    private CardView cardViewKg, cardViewGm, cardViewMg, cardViewMtr, cardViewCm, cardViewMm, cardViewLtr, cardViewml, cardViewDz, cardViewHdz, cardViewPc;
+    private CardView cardViewKg, cardViewGm, cardViewMg, cardViewMtr, cardViewCm, cardViewMm, cardViewLtr, cardViewml, cardViewBox,  cardViewPc;
 
     public dialogFragementforunit(ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding) {
         this.activityAddItemFloatingButtonBinding = activityAddItemFloatingButtonBinding;
@@ -41,16 +42,17 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
         cardViewMm = view.findViewById(R.id.cardview_Mm);
         cardViewLtr = view.findViewById(R.id.cardview_ltr);
         cardViewml = view.findViewById(R.id.cardview_Ml);
-        cardViewDz = view.findViewById(R.id.cardview_Dz);
-        cardViewHdz = view.findViewById(R.id.cardview_Hdz);
-        cardViewPc = view.findViewById(R.id.cardview_pc);
+        cardViewBox = view.findViewById(R.id.cardview_Box);
+        cardViewPc = view.findViewById(R.id.cardview_Pc);
 
         cardViewKg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "kg clicked", Toast.LENGTH_SHORT).show();
                 activityAddItemFloatingButtonBinding.getStock().setItemUnit("1000");
+                activityAddItemFloatingButtonBinding.getStock().setPc("1");
                 cardViewKg.setCardBackgroundColor(Color.GREEN);
+                dismiss();
 
             }
         });
@@ -60,7 +62,9 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Gm clicked", Toast.LENGTH_SHORT).show();
                 activityAddItemFloatingButtonBinding.getStock().setItemUnit("1");
+                activityAddItemFloatingButtonBinding.getStock().setPc("1");
                 cardViewGm.setCardBackgroundColor(Color.GREEN);
+                dismiss();
 
             }
         });
@@ -70,10 +74,99 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
             public void onClick(View v) {
                 Toast.makeText(getContext(), "mg clicked", Toast.LENGTH_SHORT).show();
                 activityAddItemFloatingButtonBinding.getStock().setItemUnit(".001");
+                activityAddItemFloatingButtonBinding.getStock().setPc("1");
                 cardViewMg.setCardBackgroundColor(Color.GREEN);
+                dismiss();
 
             }
         });
+
+
+        cardViewMtr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Mtr clicked", Toast.LENGTH_SHORT).show();
+                activityAddItemFloatingButtonBinding.getStock().setItemUnit("3");
+                activityAddItemFloatingButtonBinding.getStock().setPc("1");
+                cardViewKg.setCardBackgroundColor(Color.GREEN);
+                dismiss();
+
+            }
+        });
+
+        cardViewCm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Cm clicked", Toast.LENGTH_SHORT).show();
+                activityAddItemFloatingButtonBinding.getStock().setItemUnit("4");
+                activityAddItemFloatingButtonBinding.getStock().setPc("1");
+                cardViewCm.setCardBackgroundColor(Color.GREEN);
+                dismiss();
+
+            }
+        });
+
+        cardViewMm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Mm clicked", Toast.LENGTH_SHORT).show();
+                activityAddItemFloatingButtonBinding.getStock().setItemUnit("5");
+                activityAddItemFloatingButtonBinding.getStock().setPc("1");
+                cardViewMm.setCardBackgroundColor(Color.GREEN);
+                dismiss();
+
+            }
+        });
+
+
+        cardViewLtr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Ltr clicked", Toast.LENGTH_SHORT).show();
+                activityAddItemFloatingButtonBinding.getStock().setItemUnit("6");
+                activityAddItemFloatingButtonBinding.getStock().setPc("1");
+                cardViewLtr.setCardBackgroundColor(Color.GREEN);
+                dismiss();
+
+            }
+        });
+
+        cardViewml.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "ml clicked", Toast.LENGTH_SHORT).show();
+                activityAddItemFloatingButtonBinding.getStock().setItemUnit("7");
+                activityAddItemFloatingButtonBinding.getStock().setPc("1");
+                cardViewml.setCardBackgroundColor(Color.GREEN);
+                dismiss();
+
+            }
+        });
+
+
+
+        cardViewBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Box clicked", Toast.LENGTH_SHORT).show();
+                cardViewBox.setCardBackgroundColor(Color.GREEN);
+                BoxDialogFragment ialogFragement = new BoxDialogFragment(activityAddItemFloatingButtonBinding);
+                ialogFragement.show(getChildFragmentManager(), "exampledialog");
+
+            }
+        });
+
+        cardViewPc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Pc clicked", Toast.LENGTH_SHORT).show();
+                activityAddItemFloatingButtonBinding.getStock().setItemUnit("9");
+                activityAddItemFloatingButtonBinding.getStock().setPc("1");
+                cardViewPc.setCardBackgroundColor(Color.GREEN);
+                dismiss();
+            }
+        });
+
 
         return builder.create();
     }

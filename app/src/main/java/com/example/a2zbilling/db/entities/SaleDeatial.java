@@ -14,6 +14,7 @@ public class SaleDeatial {
     private int saleDetailId;
     private int saledetailsaleid;
     private int saleDetailitemId;
+    private String saleDetailItemName;
     private String quntity;
     private String salingPrice;
 
@@ -25,6 +26,14 @@ public class SaleDeatial {
     }
 
     public SaleDeatial() {
+    }
+
+    public String getSaleDetailItemName() {
+        return saleDetailItemName;
+    }
+
+    public void setSaleDetailItemName(String saleDetailItemName) {
+        this.saleDetailItemName = saleDetailItemName;
     }
 
     public int getSaleDetailId() {

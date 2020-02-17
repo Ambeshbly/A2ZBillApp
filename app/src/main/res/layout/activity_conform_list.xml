@@ -5,6 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/tt"
     tools:context=".counter.BillHistoryActivity">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_billHistory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <FrameLayout
+        android:id="@+id/fragment_conterner1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

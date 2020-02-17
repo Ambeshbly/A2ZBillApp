@@ -126,6 +126,11 @@ public class CounterFragment extends Fragment {
                 String totalString = Integer.toString(total);
                 sales.setTotalBillAmt(totalString);
                 mainActivityViewModel.insertsales(sales);
+            try {
+                    Thread.sleep(100);
+               } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
 
                 for (int i = 0; i < stockList.size(); i++) {
@@ -133,55 +138,23 @@ public class CounterFragment extends Fragment {
                     int itemId = stock2.getItemId();
                     String quntity = stock2.getItemQuentity();
                     String sellingPrice = stock2.getItemSalePerUnit();
+                    String itemName=stock2.getItemName();
 
                     SaleDeatial saleDeatial = new SaleDeatial();
                     saleDeatial.setSaledetailsaleid(sales.getSaleId());
                     saleDeatial.setSaleDetailitemId(itemId);
                     saleDeatial.setQuntity(quntity);
                     saleDeatial.setSalingPrice(sellingPrice);
+                    saleDeatial.setSaleDetailItemName(itemName);
                     mainActivityViewModel.insertSaleDetail(saleDeatial);
                 }
 
-                // TODO: Remove all the items from newly added items so that new items can be added for new transaction.
+                Toast.makeText(getContext(), "completed", Toast.LENGTH_SHORT).show();
+
+
                 //mainActivityViewModel.getNewlyAddedStockList().clear();
 
-
-                //                Sales sales=new Sales();
-                //
-                //                ArrayList<Stock> stockList= mainActivityViewModel.getTemproryItemList();
-                //                int total=0;
-                //
-                //                for(int i = 0; i <stockList.size(); i++)
-                //                {
-                //                    Stock stock2=stockList.get(i);
-                //                    int value=0;
-                //                    value=  Integer.parseInt(stock2.getItemQuentity())* Integer.parseInt(stock2.getItemSalePerUnit());
-                //                    total=total+value;
-                //
-                //                }
-                //                String totalString=Integer.toString(total);
-                //                sales.setTotalBillAmt(totalString);
-                //
-                //                mainActivityViewModel.insertsales(sales);
-                //
-                //                SaleDeatial saleDeatial=new SaleDeatial();
-                //
-                //                Stock stock=stockList.get(0);
-                //                String quntity=stock.getItemQuentity();
-                //                saleDeatial.setQuntity(quntity);
-                //                String sellingPrice=stock.getItemSalePerUnit();
-                //                saleDeatial.setSalingPrice(sellingPrice);
-                //                int itemId=stock.getItemId();
-                //                saleDeatial.setSaleDetailitemId(itemId);
-                //
-                //                List<Sales>  sales1= (List<Sales>) mainActivityViewModel.getAllSales();
-                //                Sales sales2=sales1.get(0);
-                //                int salesId=sales2.getSaleId();
-                //                saleDeatial.setSaledetailsaleid(salesId);
-                //
-                //                mainActivityViewModel.insertSaleDetail(saleDeatial);
-                //
-
+                //getActivity().getViewModelStore().clear();
 
             }
         });

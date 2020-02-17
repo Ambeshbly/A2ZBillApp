@@ -20,6 +20,7 @@ public class Stock extends BaseObservable implements Serializable {
     private String itemPuchaseTotal;
     private String itemSalePerUnit;
     private String itemSaleTotal;
+    private String pc;
 
 
     public Stock(String itemName, String itemQuentity, String itemPurchasePerUnit, String itemPuchaseTotal, String itemSalePerUnit, String itemSaleTotal) {
@@ -81,6 +82,14 @@ public class Stock extends BaseObservable implements Serializable {
     public void setItemUnit(String itemUnit) {
         this.itemUnit = itemUnit;
 
+    }
+
+    public String getPc() {
+        return pc;
+    }
+
+    public void setPc(String pc) {
+        this.pc = pc;
     }
 
     @Bindable

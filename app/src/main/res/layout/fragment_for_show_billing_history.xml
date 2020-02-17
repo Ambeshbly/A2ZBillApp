@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <View android:id="@+id/view1" android:layout_width="wrap_content" android:layout_height="2dp"
+        android:layout_below="@+id/imageView_for_shop" android:background="@color/colorPrimary" />
+
+    <TextView android:id="@+id/TextView_stock" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_below="@+id/view1" android:layout_marginStart="10dp"
+        android:text="stock Id" android:textSize="15sp" android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view1"
+        android:layout_marginRight="30dp"
+        android:layout_toLeftOf="@+id/TextView_values"
+        android:text="Qty"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView android:id="@+id/Textview_for_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view1"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/TextView_stock"
+        android:gravity="center"
+        android:text="Price"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView android:id="@+id/TextView_values"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="5dp"
+        android:text="Values"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/view2" android:layout_width="wrap_content" android:layout_height="2dp"
+        android:layout_below="@+id/view1" android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_for_salesDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view2"/>
+
+    <View android:id="@+id/view3"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:layout_below="@+id/recyclerView_for_salesDetail"
+        android:background="@color/colorPrimary" />
+
+    <TextView android:id="@+id/TextView_grandTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view3"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:text="Total"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
+
+
+    <TextView android:id="@+id/TextView_grandTotal_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view3"
+        android:text="Grand Total : "
+        android:layout_marginTop="5dp"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
+
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:layout_below="@+id/view3"
+        android:layout_marginTop="35dp"
+        android:background="@color/colorPrimary" />
+
+
+</RelativeLayout>

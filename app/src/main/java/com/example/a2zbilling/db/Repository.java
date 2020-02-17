@@ -23,6 +23,7 @@ public class Repository {
     private LiveData<List<Sales>> allSales;
 
     private LiveData<List<SaleDeatial>> alldetail;
+    private List<SaleDeatial> saleDeatialList;
     private SaleDeatailDao saleDeatailDao;
 
 
@@ -34,9 +35,9 @@ public class Repository {
         salesDao = database.salesDao();
         allSales = salesDao.getAllSales();
 
-
         saleDeatailDao = database.saleDeatailDao();
         //alldetail=saleDeatailDao.getSaleDetail(salesId);
+
 
     }
 
@@ -74,6 +75,11 @@ public class Repository {
     public LiveData<List<SaleDeatial>> getSalesDeatil(int salesId) {
         alldetail = saleDeatailDao.getSaleDetail(salesId);
         return alldetail;
+    }
+
+    public List<SaleDeatial> getSaleDeatialList(int saleId){
+        saleDeatialList=saleDeatailDao.getAllDetailList(saleId);
+        return saleDeatialList;
     }
 
 
