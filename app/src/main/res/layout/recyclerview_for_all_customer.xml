@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dept."
+            android:layout_marginTop="40dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
           android:layout_alignParentEnd="true"/>
 
@@ -43,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_view_customer_name"
             android:text="Customer Id"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
            android:layout_toRightOf="@id/text_id"
           />
         <TextView
@@ -52,58 +54,18 @@
             android:text="Id: "
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_below="@+id/text_view_customer_name"/>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_detail"
-            android:layout_width="50dp"
+        <TextView
+            android:id="@+id/menu_in_recyclerview"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/text_view_customer_debt">
-            <LinearLayout
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/image_view_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_details"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Detail"
-                    android:layout_gravity="center"
-                    android:layout_below="@+id/image_view_detail"/>
-            </LinearLayout>
+            android:text="&#8942;"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:padding="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_update"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-           android:layout_toLeftOf="@+id/card_view_detail"
-            android:layout_below="@+id/text_view_customer_debt">
-            <LinearLayout
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/image_view_update"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_update"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Update"
-                    android:layout_gravity="center"
-                    android:layout_below="@+id/image_view_update"/>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 

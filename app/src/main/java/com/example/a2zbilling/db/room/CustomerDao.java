@@ -25,5 +25,5 @@ public interface CustomerDao {
     void delete(Customer customer);
 
     @Query("SELECT * FROM customer")
-    LiveData<List<Customer>> getAllItems();
+    LiveData<List<Customer>> getAllCustomer();
 }

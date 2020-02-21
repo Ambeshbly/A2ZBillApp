@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/text_cust_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cust. Id: "
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/text_cust_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cust. Name: "
+        android:layout_below="@+id/text_cust_id"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/text_cust_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cust. Phone No: "
+        android:layout_below="@+id/text_cust_name"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/text_cust_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cust. Add. : "
+        android:layout_below="@+id/text_cust_phone"
+        android:textSize="20dp"
+        android:layout_marginBottom="50dp"
+        android:textStyle="bold"/>
+
+
+    <TextView
+        android:id="@+id/text_cust_id1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cust. Id: "
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="170dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/text_cust_name1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cust. Name: "
+        android:textColor="@color/colorPrimary"
+        android:layout_marginStart="170dp"
+        android:layout_below="@+id/text_cust_id1"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/text_cust_phone1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cust. Phone No: "
+        android:textColor="@color/colorPrimary"
+        android:layout_marginStart="170dp"
+        android:layout_below="@+id/text_cust_name1"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/text_cust_add1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cust. Add. : "
+        android:textColor="@color/colorPrimary"
+        android:layout_marginStart="170dp"
+        android:layout_below="@+id/text_cust_phone1"
+        android:textSize="20dp"
+        android:layout_marginBottom="50dp"
+        android:textStyle="bold"/>
+
+
+</RelativeLayout>

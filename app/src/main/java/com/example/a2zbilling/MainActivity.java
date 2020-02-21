@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -14,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity  {
     //bottom navigation declaration
     private BottomNavigationView bottomNavigationView;
+    MediaPlayer mediaPlayer;
 
     private MainActivityViewModel addToCartActivityViewModel;
     @Override
@@ -23,12 +25,14 @@ public class MainActivity extends AppCompatActivity  {
 
         //bottom navigation finding in XML file
         bottomNavigationView=findViewById(R.id.bottom_navigation);
+         mediaPlayer=MediaPlayer.create(getBaseContext(),R.raw.simple);
 
         //bottom navigation selection listener
         bottomNavigationView.setOnNavigationItemSelectedListener(nav_listener);
 
-
         addToCartActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+
+
 
         //which fragment is show whenever app is open
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner,new CounterFragment(addToCartActivityViewModel)).commit();
@@ -42,12 +46,17 @@ public class MainActivity extends AppCompatActivity  {
             Fragment selectedFragment=new YouFragment();
             switch (menuItem.getItemId()){
                 case R.id.nav_counter:
+
+                    mediaPlayer.start();
                 selectedFragment=new CounterFragment(addToCartActivityViewModel);
                 break;
                 case R.id.nav_deshboad:
+
+                    mediaPlayer.start();
                     selectedFragment=new Dashboard();
                     break;
                 case R.id.nav_me:
+                    mediaPlayer.start();
                     selectedFragment=new YouFragment();
                     break;
             }

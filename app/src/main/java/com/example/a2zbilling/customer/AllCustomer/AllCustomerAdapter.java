@@ -1,22 +1,43 @@
 package com.example.a2zbilling.customer.AllCustomer;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.customer.AddUpdateCustomerFragment;
+import com.example.a2zbilling.customer.CustomerActivity;
+import com.example.a2zbilling.customer.CustomerActivityViewModel;
+import com.example.a2zbilling.customer.ShowCustomerDetailDialogFragment;
+import com.example.a2zbilling.db.entities.Customer;
+import com.example.a2zbilling.db.entities.Stock;
+import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AllCustomerAdapter extends RecyclerView.Adapter<AllCustomerAdapter.DeptHolder> {
+    private List<Customer> customers = new ArrayList<>();
+    Context context;
+    private CustomerActivityViewModel customerActivityViewModel;
 
-    String data1[]={"rahul","satendra","Ambesh", "Nishi"};
-    String data2[]={"102","103","104", "105"};
-    String data3[]={"+11","-50","0", "-10"};
+    public AllCustomerAdapter(Context context, CustomerActivityViewModel customerActivityViewModel) {
+        this.context = context;
+        this.customerActivityViewModel = customerActivityViewModel;
+    }
+
     @NonNull
     @Override
     public DeptHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -26,26 +47,52 @@ public class AllCustomerAdapter extends RecyclerView.Adapter<AllCustomerAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DeptHolder holder, int position) {
-
-        holder.textViewForCustomerName.setText(data1[position]);
-        holder.textViewForCoustomerId.setText(data2[position]);
-        if(Integer.parseInt(data3[position])<0){
-            holder.textViewForCustomerdebt.setTextColor(Color.parseColor("#FF0000"));
-            holder.textViewForCustomerdebt.setText(data3[position]);
-        }
-        else{
-            holder.textViewForCustomerdebt.setTextColor(Color.parseColor("#32CD32"));
-            holder.textViewForCustomerdebt.setText(data3[position]);
-        }
+    public void onBindViewHolder(@NonNull final DeptHolder holder, int position) {
+        final Customer currentcustomer = customers.get(position);
+        holder.textViewForCustomerName.setText(currentcustomer.getCustomerName());
+        holder.textViewForCoustomerId.setText(""+currentcustomer.getCustId());
+        holder.textViewForCustomerdebt.setText("50");
         holder.text_id.setText("Id : ");
         holder.text_debt.setText("Debt.");
+        holder.option_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu=new PopupMenu(context,holder.option_menu);
+                popupMenu.inflate(R.menu.menu_for_all_customer_recyclerview);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.delete:
+                                Toast.makeText(context,"detail",Toast.LENGTH_SHORT).show();
+                                customerActivityViewModel.setCustomer(currentcustomer);
+                                ShowCustomerDetailDialogFragment dialogFragementforunit=new ShowCustomerDetailDialogFragment(customerActivityViewModel);
+                                dialogFragementforunit.show(((CustomerActivity)context).getSupportFragmentManager(),"exampledialog");
+                                break;
+                            case R.id.update:
+                                Toast.makeText(context,"update",Toast.LENGTH_SHORT).show();
+                                customerActivityViewModel.setCustomer(currentcustomer);
+                                AddUpdateCustomerFragment ialogFragementforunit=new AddUpdateCustomerFragment(customerActivityViewModel,currentcustomer.getCustId());
+                                ialogFragementforunit.show(((CustomerActivity)context).getSupportFragmentManager(),"exampledialog");
+                                break;
+
+                        }
+                        return false;
+                    }
+
+                });
+                popupMenu.show();
+            }
+        });
 
     }
-
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
-        return data1.length;
+        return customers.size();
     }
 
     class DeptHolder extends RecyclerView.ViewHolder{
@@ -54,8 +101,7 @@ public class AllCustomerAdapter extends RecyclerView.Adapter<AllCustomerAdapter.
         private TextView textViewForCustomerdebt;
         private TextView text_id;
         private TextView text_debt;
-        private CardView cardview_update;
-        private CardView cardView_detail;
+        private TextView option_menu;
 
         public DeptHolder(@NonNull View itemView) {
             super(itemView);
@@ -64,8 +110,7 @@ public class AllCustomerAdapter extends RecyclerView.Adapter<AllCustomerAdapter.
             textViewForCustomerdebt=itemView.findViewById(R.id.text_view_customer_debt);
             text_id=itemView.findViewById(R.id.text_id);
             text_debt=itemView.findViewById(R.id.text_debt);
-            cardview_update=itemView.findViewById(R.id.card_view_update);
-            cardView_detail=itemView.findViewById(R.id.card_view_detail);
+            option_menu=itemView.findViewById(R.id.menu_in_recyclerview);
 
         }
     }

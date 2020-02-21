@@ -62,6 +62,10 @@ public class AddUpdateStockActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item_floating_button);
 
+
+
+
+
         //finding the item name edit text in the Xml file
 
         textinputitemname = findViewById(R.id.text_input_itemname);
@@ -89,6 +93,7 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
         //finding the unit button for show all unit in form of dialog fragment in the xml file
         unit_Button = findViewById(R.id.unit_button);
+
 
         //finding the cardview for sent the user to default item activity in the xml file
         defualtitemListCardView = findViewById(R.id.cardview_defaultList);
@@ -389,8 +394,12 @@ public class AddUpdateStockActivity extends AppCompatActivity {
         }
 
         public void selectUnit(View view) {
-            dialogFragementforunit ialogFragementforunit = new dialogFragementforunit(activityAddItemFloatingButtonBinding);
+            unit_Button.setBackgroundColor(Color.GREEN);
+            dialogFragementforunit ialogFragementforunit = new dialogFragementforunit(activityAddItemFloatingButtonBinding,addUpdateStockActivityViewModel);
             ialogFragementforunit.show(getSupportFragmentManager(), "exampledialog");
+
+
+
         }
 
         public void setImage(View view) {

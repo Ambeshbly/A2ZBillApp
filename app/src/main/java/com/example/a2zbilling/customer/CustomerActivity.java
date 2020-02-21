@@ -3,11 +3,13 @@ package com.example.a2zbilling.customer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.a2zbilling.MainActivityViewModel;
 import com.example.a2zbilling.YouFragment;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.customer.AllCustomer.AllCustomerFragment;
@@ -21,6 +23,7 @@ public class CustomerActivity extends AppCompatActivity {
 
     //bottom navigation declaration
     private BottomNavigationView bottomNavigationView;
+    private CustomerActivityViewModel customerActivityViewModel;
 
 
     @Override
@@ -46,13 +49,15 @@ public class CustomerActivity extends AppCompatActivity {
         //bottom navigation selection listener
         bottomNavigationView.setOnNavigationItemSelectedListener(nav_listener);
 
+        customerActivityViewModel = ViewModelProviders.of(this).get(CustomerActivityViewModel.class);
+
         //which fragment is show whenever app is open
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner,new DebtCustomerFragment()).commit();
 
 
     }
     public void openDialog(){
-        AddUpdateCustomerFragment ialogFragementforunit=new AddUpdateCustomerFragment();
+        AddUpdateCustomerFragment ialogFragementforunit=new AddUpdateCustomerFragment(customerActivityViewModel,0);
         ialogFragementforunit.show(getSupportFragmentManager(),"exampledialog");
     }
 
@@ -66,7 +71,7 @@ public class CustomerActivity extends AppCompatActivity {
                     selectedFragment=new DebtCustomerFragment();
                     break;
                 case R.id.nav_all_customer:
-                    selectedFragment=new AllCustomerFragment();
+                    selectedFragment=new AllCustomerFragment(customerActivityViewModel);
                     break;
 
             }

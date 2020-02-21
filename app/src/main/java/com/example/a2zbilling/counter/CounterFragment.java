@@ -1,6 +1,7 @@
 package com.example.a2zbilling.counter;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ public class CounterFragment extends Fragment {
     CounterAdapter adepter;
     private TextView textViewTotal;
     Stock updateStock;
+    MediaPlayer mediaPlayer;
 
 
     private MainActivityViewModel mainActivityViewModel;
@@ -50,6 +52,8 @@ public class CounterFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_counter, container, false);
+
+        mediaPlayer= MediaPlayer.create(getContext(),R.raw.simple);
 
         textViewTotal = view.findViewById(R.id.textView_counter_total);
 
@@ -122,6 +126,7 @@ public class CounterFragment extends Fragment {
         cardView_Proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 Toast.makeText(getContext(), "proceed", Toast.LENGTH_SHORT).show();
 
 
@@ -182,6 +187,7 @@ public class CounterFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 Intent intent = new Intent(getContext(), SellingStocksActivity.class);
                 startActivityForResult(intent, ADD_NEW_STOCK_REQ_CODE);
                 // startActivity(intent);
@@ -192,6 +198,7 @@ public class CounterFragment extends Fragment {
         cardView_waitList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 Intent intent = new Intent(getContext(), SuspendedTransactionListActivity.class);
                 startActivity(intent);
             }
@@ -201,6 +208,7 @@ public class CounterFragment extends Fragment {
         cardView_conformList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 Intent intent = new Intent(getContext(), BillHistoryActivity.class);
                 startActivity(intent);
             }

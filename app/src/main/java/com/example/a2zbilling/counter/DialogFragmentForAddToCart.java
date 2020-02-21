@@ -58,7 +58,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
         spinner=view.findViewById(R.id.Add_to_cart_spinner);
         double unit=Double.parseDouble(stock.getItemUnit());
 
-        if (unit==1000 | unit==1 | unit==0.001){
+        if (unit==10 || unit==11 || unit==12){
             list= new ArrayList<String>();
             list.add("  kg  ");
             list.add("  gm  ");
@@ -72,15 +72,15 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                     spinner.setSelection(position);
                     int p=position;
                     if (p==0){
-                        kg=0;
+                        kg=1;
                         quntty=stock.getItemQuentity();
                     }
                     if (p==1){
-                        gm=1;
+                        gm=2;
                         quntty=(Integer.toString(Integer.parseInt(stock.getItemQuentity())*1000));
                     }
                     if (p==2){
-                        mg=2;
+                        mg=3;
                         quntty=(Integer.toString(Integer.parseInt(stock.getItemQuentity())*1000*1000));
                     }
                 }
@@ -105,15 +105,15 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                     spinner.setSelection(position);
                     int p=position;
                     if (p==0){
-                        mtr=0;
+                        mtr=4;
                         quntty=stock.getItemQuentity();
                     }
                     if (p==1){
-                        cm=1;
+                        cm=5;
                         quntty=(Integer.toString(Integer.parseInt(stock.getItemQuentity())*100));
                     }
                     if (p==2){
-                        mm=2;
+                        mm=6;
                         quntty=(Integer.toString(Integer.parseInt(stock.getItemQuentity())*1000*10));
                     }
                 }
@@ -137,11 +137,11 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                     spinner.setSelection(position);
                     int p=position;
                     if (p==0){
-                        ltr=0;
+                        ltr=7;
                         quntty=stock.getItemQuentity();
                     }
                     if (p==1){
-                        ml=1;
+                        ml=8;
                         quntty=(Integer.toString(Integer.parseInt(stock.getItemQuentity())*1000));
                     }
 
@@ -166,12 +166,12 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                     spinner.setSelection(position);
                     int p=position;
                     if (p==0){
-                        box=0;
+                        box=9;
                         quntty=stock.getItemQuentity();
 
                     }
                     if (p==1){
-                        pc=1;
+                        pc=10;
                         quntty=(Integer.toString(Integer.parseInt(stock.getItemQuentity())*1000));
                     }
 
@@ -195,7 +195,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                     spinner.setSelection(position);
                     int p=position;
                     if (p==0){
-                        pc=2;
+                        pc=11;
                         quntty=stock.getItemQuentity();
                     }
 
@@ -229,80 +229,80 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                 Toast.makeText(getContext(), "malo", Toast.LENGTH_SHORT).show();
                 String quntity = editTextQuntity.getText().toString().trim();
 
-                if(kg==0){
+                if(kg==1){
 
-                  double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                  stock.setItemQuentity(Double.toString(qnt));
+                  int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                  stock.setItemQuentity(Integer.toString(qnt));
                 }
 
-                if(gm==1){
+                if(gm==2){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    double qnt1=qnt/1000;
-                    stock.setItemQuentity(Double.toString(qnt1));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    int qnt1=qnt/1000;
+                    stock.setItemQuentity(Integer.toString(qnt1));
                 }
 
-                if(mg==2){
+                if(mg==3){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    double qnt1=qnt/1000;
-                    double qnt2=qnt1/1000;
-                    stock.setItemQuentity(Double.toString(qnt2));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    int qnt1=qnt/1000;
+                    int qnt2=qnt1/1000;
+                    stock.setItemQuentity(Integer.toString(qnt2));
                 }
 
-                if(mtr==0){
+                if(mtr==4){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    stock.setItemQuentity(Double.toString(qnt));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    stock.setItemQuentity(Integer.toString(qnt));
                 }
 
-                if(cm==1){
+                if(cm==5){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    double qnt1=qnt/100;
-                    stock.setItemQuentity(Double.toString(qnt1));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    int qnt1=qnt/100;
+                    stock.setItemQuentity(Integer.toString(qnt1));
                 }
 
-                if(mm==2){
+                if(mm==6){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    double qnt1=qnt/100;
-                    double qnt2=qnt1/10;
-                    stock.setItemQuentity(Double.toString(qnt2));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    int qnt1=qnt/100;
+                    int qnt2=qnt1/10;
+                    stock.setItemQuentity(Integer.toString(qnt2));
                 }
 
-                if(ltr==0){
+                if(ltr==7){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    stock.setItemQuentity(Double.toString(qnt));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    stock.setItemQuentity(Integer.toString(qnt));
                 }
 
-                if(ml==1){
+                if(ml==8){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    double qnt1=qnt/1000;
-                    stock.setItemQuentity(Double.toString(qnt1));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    int qnt1=qnt/1000;
+                    stock.setItemQuentity(Integer.toString(qnt1));
                 }
 
-                if( box==0){
-                    double pic=Double.parseDouble(stock.getPc());
-                    double qnty=Double.parseDouble(quntty);
-                    double caluclation=qnty/pic;
-                    double qnt=caluclation-Double.parseDouble(quntity);
-                    stock.setItemQuentity(Double.toString(qnt));
+                if( box==9){
+                    int pic=Integer.parseInt(stock.getPc());
+                    int qnty=Integer.parseInt(quntty);
+                    int caluclation=qnty/pic;
+                    int qnt=caluclation-Integer.parseInt(quntity);
+                    stock.setItemQuentity(Integer.toString(qnt));
+                }else
+
+
+                if(pc==10){
+                    int pic=Integer.parseInt(stock.getPc());
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    int qnt1=qnt/pic;
+                    stock.setItemQuentity(Integer.toString(qnt1));
                 }
 
-
-                if(pc==1){
-                    double pic=Double.parseDouble(stock.getPc());
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    double qnt1=qnt/pic;
-                    stock.setItemQuentity(Double.toString(qnt1));
-                }
-
-                if(pc==2){
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    stock.setItemQuentity(Double.toString(qnt));
+                if(pc==11){
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    stock.setItemQuentity(Integer.toString(qnt));
                 }
 
                 tempstock = new Stock();
@@ -339,80 +339,81 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
 
 
 
-                if(kg==0){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    stock.setItemQuentity(Double.toString(qnt));
+                if(kg==1){
+
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    stock.setItemQuentity(Integer.toString(qnt));
                 }
 
-                if(gm==1){
+                if(gm==2){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    double qnt1=qnt/1000;
-                    stock.setItemQuentity(Double.toString(qnt1));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    int qnt1=qnt/1000;
+                    stock.setItemQuentity(Integer.toString(qnt1));
                 }
 
-                if(mg==2){
+                if(mg==3){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    double qnt1=qnt/1000;
-                    double qnt2=qnt1/1000;
-                    stock.setItemQuentity(Double.toString(qnt2));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    int qnt1=qnt/1000;
+                    int qnt2=qnt1/1000;
+                    stock.setItemQuentity(Integer.toString(qnt2));
                 }
 
-                if(mtr==0){
+                if(mtr==4){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    stock.setItemQuentity(Double.toString(qnt));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    stock.setItemQuentity(Integer.toString(qnt));
                 }
 
-                if(cm==1){
+                if(cm==5){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    double qnt1=qnt/100;
-                    stock.setItemQuentity(Double.toString(qnt1));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    int qnt1=qnt/100;
+                    stock.setItemQuentity(Integer.toString(qnt1));
                 }
 
-                if(mm==2){
+                if(mm==6){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    double qnt1=qnt/100;
-                    double qnt2=qnt1/10;
-                    stock.setItemQuentity(Double.toString(qnt2));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    int qnt1=qnt/100;
+                    int qnt2=qnt1/10;
+                    stock.setItemQuentity(Integer.toString(qnt2));
                 }
 
-                if(ltr==0){
+                if(ltr==7){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    stock.setItemQuentity(Double.toString(qnt));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    stock.setItemQuentity(Integer.toString(qnt));
                 }
 
-                if(ml==1){
+                if(ml==8){
 
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    double qnt1=qnt/1000;
-                    stock.setItemQuentity(Double.toString(qnt1));
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    int qnt1=qnt/1000;
+                    stock.setItemQuentity(Integer.toString(qnt1));
                 }
 
-                if( box==0){
-                    double pic=Double.parseDouble(stock.getPc());
-                    double qnty=Double.parseDouble(quntty);
-                    double caluclation=qnty/pic;
-                    double qnt=caluclation-Double.parseDouble(quntity);
-                    stock.setItemQuentity(Double.toString(qnt));
+                if( box==9){
+                    int pic=Integer.parseInt(stock.getPc());
+                    int qnty=Integer.parseInt(quntty);
+                    int caluclation=qnty/pic;
+                    int qnt=caluclation-Integer.parseInt(quntity);
+                    stock.setItemQuentity(Integer.toString(qnt));
+                }else
+
+
+                if(pc==10){
+                    int pic=Integer.parseInt(stock.getPc());
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    int qnt1=qnt/pic;
+                    stock.setItemQuentity(Integer.toString(qnt1));
                 }
 
-
-                if(pc==1){
-                    double pic=Double.parseDouble(stock.getPc());
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    double qnt1=qnt/pic;
-                    stock.setItemQuentity(Double.toString(qnt1));
-                }
-
-                if(pc==2){
-                    double qnt=Double.parseDouble(quntty)-Double.parseDouble(quntity);
-                    stock.setItemQuentity(Double.toString(qnt));
+                if(pc==11){
+                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
+                    stock.setItemQuentity(Integer.toString(qnt));
                 }
 
 
@@ -431,7 +432,9 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
             //    sellingActivityViewModel.update(stock);
 
 
-                Intent intent = new Intent().putExtra("stock", tempstock);
+                Intent intent=new Intent();
+                intent.putExtra("stock",tempstock);
+                intent.putExtra("update",stock);
                 getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
 

@@ -20,10 +20,12 @@ import com.example.a2zbilling.db.entities.Stock;
 public class dialogFragementforunit extends AppCompatDialogFragment {
 
     ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding;
+    AddUpdateStockActivityViewModel addUpdateStockActivityViewModel;
     private CardView cardViewKg, cardViewGm, cardViewMg, cardViewMtr, cardViewCm, cardViewMm, cardViewLtr, cardViewml, cardViewBox,  cardViewPc;
 
-    public dialogFragementforunit(ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding) {
+    public dialogFragementforunit(ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding,AddUpdateStockActivityViewModel addUpdateStockActivityViewModel) {
         this.activityAddItemFloatingButtonBinding = activityAddItemFloatingButtonBinding;
+        this.addUpdateStockActivityViewModel=addUpdateStockActivityViewModel;
     }
 
     @NonNull
@@ -49,7 +51,8 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "kg clicked", Toast.LENGTH_SHORT).show();
-                activityAddItemFloatingButtonBinding.getStock().setItemUnit("1000");
+                addUpdateStockActivityViewModel.setButtonText("kg");
+                activityAddItemFloatingButtonBinding.getStock().setItemUnit("10");
                 activityAddItemFloatingButtonBinding.getStock().setPc("1");
                 cardViewKg.setCardBackgroundColor(Color.GREEN);
                 dismiss();
@@ -61,7 +64,8 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Gm clicked", Toast.LENGTH_SHORT).show();
-                activityAddItemFloatingButtonBinding.getStock().setItemUnit("1");
+                addUpdateStockActivityViewModel.setButtonText("Gm");
+                activityAddItemFloatingButtonBinding.getStock().setItemUnit("11");
                 activityAddItemFloatingButtonBinding.getStock().setPc("1");
                 cardViewGm.setCardBackgroundColor(Color.GREEN);
                 dismiss();
@@ -73,7 +77,8 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "mg clicked", Toast.LENGTH_SHORT).show();
-                activityAddItemFloatingButtonBinding.getStock().setItemUnit(".001");
+                addUpdateStockActivityViewModel.setButtonText("Mg");
+                activityAddItemFloatingButtonBinding.getStock().setItemUnit("12");
                 activityAddItemFloatingButtonBinding.getStock().setPc("1");
                 cardViewMg.setCardBackgroundColor(Color.GREEN);
                 dismiss();
@@ -86,6 +91,7 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Mtr clicked", Toast.LENGTH_SHORT).show();
+                addUpdateStockActivityViewModel.setButtonText("Mtr");
                 activityAddItemFloatingButtonBinding.getStock().setItemUnit("3");
                 activityAddItemFloatingButtonBinding.getStock().setPc("1");
                 cardViewKg.setCardBackgroundColor(Color.GREEN);
@@ -98,6 +104,7 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Cm clicked", Toast.LENGTH_SHORT).show();
+                addUpdateStockActivityViewModel.setButtonText("Cm");
                 activityAddItemFloatingButtonBinding.getStock().setItemUnit("4");
                 activityAddItemFloatingButtonBinding.getStock().setPc("1");
                 cardViewCm.setCardBackgroundColor(Color.GREEN);
@@ -110,6 +117,7 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Mm clicked", Toast.LENGTH_SHORT).show();
+                addUpdateStockActivityViewModel.setButtonText("Mm");
                 activityAddItemFloatingButtonBinding.getStock().setItemUnit("5");
                 activityAddItemFloatingButtonBinding.getStock().setPc("1");
                 cardViewMm.setCardBackgroundColor(Color.GREEN);
@@ -123,6 +131,7 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Ltr clicked", Toast.LENGTH_SHORT).show();
+                addUpdateStockActivityViewModel.setButtonText("Ltr");
                 activityAddItemFloatingButtonBinding.getStock().setItemUnit("6");
                 activityAddItemFloatingButtonBinding.getStock().setPc("1");
                 cardViewLtr.setCardBackgroundColor(Color.GREEN);
@@ -135,6 +144,7 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "ml clicked", Toast.LENGTH_SHORT).show();
+                addUpdateStockActivityViewModel.setButtonText("ml");
                 activityAddItemFloatingButtonBinding.getStock().setItemUnit("7");
                 activityAddItemFloatingButtonBinding.getStock().setPc("1");
                 cardViewml.setCardBackgroundColor(Color.GREEN);
@@ -149,6 +159,7 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Box clicked", Toast.LENGTH_SHORT).show();
+                addUpdateStockActivityViewModel.setButtonText("Box");
                 cardViewBox.setCardBackgroundColor(Color.GREEN);
                 BoxDialogFragment ialogFragement = new BoxDialogFragment(activityAddItemFloatingButtonBinding);
                 ialogFragement.show(getChildFragmentManager(), "exampledialog");
@@ -160,6 +171,7 @@ public class dialogFragementforunit extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Pc clicked", Toast.LENGTH_SHORT).show();
+                addUpdateStockActivityViewModel.setButtonText("Pc");
                 activityAddItemFloatingButtonBinding.getStock().setItemUnit("9");
                 activityAddItemFloatingButtonBinding.getStock().setPc("1");
                 cardViewPc.setCardBackgroundColor(Color.GREEN);

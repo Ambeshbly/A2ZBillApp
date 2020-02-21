@@ -3,6 +3,7 @@ package com.example.a2zbilling.stock;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +33,9 @@ import java.util.ArrayList;
 public class StockActivity extends AppCompatActivity {
 
     public static final int ADD_NEW_STOCK_REQ_CODE = 1;
+    MediaPlayer mediaPlayer;
+
+
 
     //declration of floating button for add item
     FloatingActionButton floatingActionButton;
@@ -45,12 +49,15 @@ public class StockActivity extends AppCompatActivity {
             Fragment selectedFragment = new YouFragment();
             switch (menuItem.getItemId()) {
                 case R.id.nav_addstocks:
+                    mediaPlayer.start();
                     selectedFragment = new AddStockFragment(stockActivityViewModel);
                     break;
                 case R.id.nav_availablestocks:
+                    mediaPlayer.start();
                     selectedFragment = new AvailableStockFragment(stockActivityViewModel);
                     break;
                 case R.id.nav_futhurescope:
+                    mediaPlayer.start();
                     selectedFragment = new RFUStockFragment();
                     break;
             }
@@ -71,6 +78,7 @@ public class StockActivity extends AppCompatActivity {
         floatingActionButton = findViewById(R.id.bt_float);
 
         stockActivityViewModel = ViewModelProviders.of(this).get(StockActivityViewModel.class);
+        mediaPlayer= MediaPlayer.create(getBaseContext(),R.raw.simple);
 
         //set tittle in the action bar
         getSupportActionBar().setTitle("Your Stocks");
@@ -79,6 +87,7 @@ public class StockActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 Toast.makeText(getBaseContext(), "floating click", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getBaseContext(), AddUpdateStockActivity.class);
                 startActivityForResult(intent, ADD_NEW_STOCK_REQ_CODE);

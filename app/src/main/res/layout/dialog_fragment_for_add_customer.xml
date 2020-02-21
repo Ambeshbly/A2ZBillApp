@@ -7,6 +7,7 @@
 
 
     <EditText
+        android:id="@+id/edit_customer_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name"
@@ -15,6 +16,7 @@
 
 
     <EditText
+        android:id="@+id/edit_customer_phone_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Phone No."
@@ -22,6 +24,7 @@
 
 
     <EditText
+        android:id="@+id/edit_customer_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="address"
@@ -93,6 +96,7 @@
                     android:src="@drawable/save" />
 
                 <TextView
+                    android:id="@+id/saveText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"

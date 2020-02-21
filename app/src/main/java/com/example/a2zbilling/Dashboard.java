@@ -1,6 +1,7 @@
 package com.example.a2zbilling;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.example.a2zbilling.stock.StockActivity;
 
 public class Dashboard extends Fragment  {
 
+    MediaPlayer mediaPlayer;
+
     //override method onCreateView
     @Nullable
     @Override
@@ -28,6 +31,9 @@ public class Dashboard extends Fragment  {
     public void onStart() {
         super.onStart();
 
+        mediaPlayer= MediaPlayer.create(getContext(),R.raw.simple);
+
+
         //finding stock cardView in the Xml file
         CardView stocksCardView=(CardView)getView().findViewById(R.id.stocks_cardview);
 
@@ -38,6 +44,7 @@ public class Dashboard extends Fragment  {
         stocksCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 Intent intent=new Intent(getContext(), StockActivity.class);
                 startActivity(intent);
             }
@@ -48,6 +55,7 @@ public class Dashboard extends Fragment  {
         customerCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 Intent intent=new Intent(getContext(), CustomerActivity.class);
                 startActivity(intent);
             }

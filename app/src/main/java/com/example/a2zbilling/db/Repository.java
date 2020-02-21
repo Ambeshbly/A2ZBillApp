@@ -5,9 +5,11 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
+import com.example.a2zbilling.db.room.CustomerDao;
 import com.example.a2zbilling.db.room.SaleDeatailDao;
 import com.example.a2zbilling.db.room.SalesDao;
 import com.example.a2zbilling.db.room.SqlLiteDatabase;
@@ -22,6 +24,9 @@ public class Repository {
     private SalesDao salesDao;
     private LiveData<List<Sales>> allSales;
 
+    private CustomerDao customerDao;
+    private LiveData<List<Customer>> allCustomer;
+
     private LiveData<List<SaleDeatial>> alldetail;
     private List<SaleDeatial> saleDeatialList;
     private SaleDeatailDao saleDeatailDao;
@@ -34,6 +39,9 @@ public class Repository {
 
         salesDao = database.salesDao();
         allSales = salesDao.getAllSales();
+
+        customerDao=database.customerDao();
+        allCustomer=customerDao.getAllCustomer();
 
         saleDeatailDao = database.saleDeatailDao();
         //alldetail=saleDeatailDao.getSaleDetail(salesId);
@@ -81,6 +89,49 @@ public class Repository {
         saleDeatialList=saleDeatailDao.getAllDetailList(saleId);
         return saleDeatialList;
     }
+
+    public void insertCustomer(Customer customer) {
+        new InsertCustomersAsynckTask(customerDao).execute(customer);
+    }
+    public void updateCustomer(Customer customer) {
+        new UpdateCustomerAsynckTask(customerDao).execute(customer);
+    }
+
+    private static class UpdateCustomerAsynckTask extends AsyncTask<Customer, Void, Void> {
+        private CustomerDao customerDao;
+
+        public UpdateCustomerAsynckTask(CustomerDao customerDao) {
+            this.customerDao = customerDao;
+        }
+
+        @Override
+        protected Void doInBackground(Customer... customers) {
+            customerDao.update(customers[0]);
+            return null;
+        }
+    }
+
+
+    public LiveData<List<Customer>> getAllCustomer() {
+        return allCustomer;
+    }
+
+    private static class InsertCustomersAsynckTask extends AsyncTask<Customer, Void, Void> {
+        private CustomerDao customerDao;
+
+        public InsertCustomersAsynckTask(CustomerDao customerDao) {
+            this.customerDao = customerDao;
+        }
+
+        @Override
+        protected Void doInBackground(Customer... customers) {
+            customerDao.insert(customers[0]);
+            return null;
+        }
+    }
+
+
+
 
 
     private static class InsertSalesDeatilAsynckTask extends AsyncTask<SaleDeatial, Void, Void> {
