@@ -16,8 +16,6 @@ import com.example.a2zbilling.db.entities.Stock;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Maybe;
-
 public class MainActivityViewModel extends AndroidViewModel {
 
 
@@ -27,7 +25,8 @@ public class MainActivityViewModel extends AndroidViewModel {
     private LiveData<List<Sales>> allSales;
 
     private int saleTotal;
-    private Maybe<Customer> customer;
+
+    private LiveData<List<Customer>> allcustomer;
 
     private MutableLiveData<ArrayList<Stock>> newlyAddedStocks = new MutableLiveData<ArrayList<Stock>>();
 
@@ -36,6 +35,7 @@ public class MainActivityViewModel extends AndroidViewModel {
         repository = new Repository(application);
 
         allSales = repository.getAllSales();
+        allcustomer = repository.getAllCustomer();
 
         ArrayList<Stock> newlyAddedStockList = new ArrayList<Stock>();
         this.newlyAddedStocks.setValue(newlyAddedStockList);
@@ -73,6 +73,10 @@ public class MainActivityViewModel extends AndroidViewModel {
         return allSales;
     }
 
+    public LiveData<List<Customer>> getAllCustomer() {
+        return allcustomer;
+    }
+
 
     public void insertSaleDetail(SaleDeatial saleDeatial) {
         repository.insertSaleDeatail(saleDeatial);
@@ -104,8 +108,5 @@ public class MainActivityViewModel extends AndroidViewModel {
         this.sales = sales;
     }
 
-    public Customer getCustList(int custId) {
-        customer = repository.getCustomer(custId);
-        return customer.blockingGet();
-    }
+
 }

@@ -22,9 +22,6 @@ import com.example.a2zbilling.R;
 import com.example.a2zbilling.counter.BillList.BillHistoryActivity;
 import com.example.a2zbilling.counter.Selling.SellingStocksActivity;
 import com.example.a2zbilling.counter.SuspendedBills.SuspendedTransactionListActivity;
-import com.example.a2zbilling.customer.AddUpdateCustomerFragment;
-import com.example.a2zbilling.db.entities.SaleDeatial;
-import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -41,6 +38,7 @@ public class CounterFragment extends Fragment {
     CounterAdapter adepter;
     Stock updateStock;
     MediaPlayer mediaPlayer;
+    PaymentDialogFragment ialogFragementforunit;
     private TextView textViewTotal;
     private MainActivityViewModel mainActivityViewModel;
 
@@ -129,8 +127,8 @@ public class CounterFragment extends Fragment {
                     Toast.makeText(getContext(), "please add the item first", Toast.LENGTH_SHORT).show();
                 } else {
                     int total = mainActivityViewModel.getSaleTotal();
-                    PaymentDialogFragment ialogFragementforunit=new PaymentDialogFragment(total,mainActivityViewModel,adepter);
-                    ialogFragementforunit.show(getChildFragmentManager(),"exampledialog");
+                    ialogFragementforunit = new PaymentDialogFragment(total, mainActivityViewModel, adepter);
+                    ialogFragementforunit.show(getChildFragmentManager(), "exampledialog");
                     mainActivityViewModel.update(updateStock);
                 }
             }

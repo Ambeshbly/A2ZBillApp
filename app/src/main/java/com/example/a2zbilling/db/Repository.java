@@ -85,7 +85,7 @@ public class Repository {
         return customerDao.getAllCustomer();
     }
 
-    public Maybe<Customer> getCustomer(int custId) {
+    public LiveData<Customer> getCustomer(int custId) {
         return customerDao.getCustomer(custId);
     }
 

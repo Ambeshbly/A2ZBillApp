@@ -11,8 +11,6 @@ import com.example.a2zbilling.db.entities.Customer;
 
 import java.util.List;
 
-import io.reactivex.Maybe;
-
 @Dao
 public interface CustomerDao {
 
@@ -29,5 +27,5 @@ public interface CustomerDao {
     LiveData<List<Customer>> getAllCustomer();
 
     @Query("select * from customer where custId==:custID")
-    Maybe<Customer> getCustomer(int custID);
+    LiveData<Customer> getCustomer(int custID);
 }
