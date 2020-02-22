@@ -1,18 +1,15 @@
-package com.example.a2zbilling.counter;
+package com.example.a2zbilling.counter.BillList;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.a2zbilling.db.Repository;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
-import com.example.a2zbilling.db.entities.Stock;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BillHistoryActivityViewModel extends AndroidViewModel {
@@ -53,8 +50,9 @@ public class BillHistoryActivityViewModel extends AndroidViewModel {
         allSaleDetail=repository.getSalesDeatil(saleId);
         return allSaleDetail;
     }
-    public List<SaleDeatial> getSaleDeatialList(int saleId){
-        saleDeatialList=repository.getSaleDeatialList(saleId);
+
+    public List<SaleDeatial> getSaleDeatialList(int saleId) {
+        saleDeatialList = repository.getSaleDeatialList(saleId);
         return saleDeatialList;
     }
 

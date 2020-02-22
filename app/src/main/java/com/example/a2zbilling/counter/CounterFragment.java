@@ -19,6 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.MainActivityViewModel;
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.counter.BillList.BillHistoryActivity;
+import com.example.a2zbilling.counter.Selling.SellingStocksActivity;
+import com.example.a2zbilling.counter.SuspendedBills.SuspendedTransactionListActivity;
+import com.example.a2zbilling.customer.AddUpdateCustomerFragment;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
@@ -35,11 +39,9 @@ public class CounterFragment extends Fragment {
     CardView cardView_waitList, cardView_conformList, cardView_Proceed;
     RecyclerView recyclerView;
     CounterAdapter adepter;
-    private TextView textViewTotal;
     Stock updateStock;
     MediaPlayer mediaPlayer;
-
-
+    private TextView textViewTotal;
     private MainActivityViewModel mainActivityViewModel;
 
 
@@ -53,7 +55,7 @@ public class CounterFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_counter, container, false);
 
-        mediaPlayer= MediaPlayer.create(getContext(),R.raw.simple);
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.simple);
 
         textViewTotal = view.findViewById(R.id.textView_counter_total);
 
@@ -86,13 +88,13 @@ public class CounterFragment extends Fragment {
             Stock stock = (Stock) data.getSerializableExtra("stock");
 
             //this id second object which is need to update when proceed button is click
-            updateStock=(Stock)data.getSerializableExtra("update");
+            updateStock = (Stock) data.getSerializableExtra("update");
 
             //   String itemName = stock.getItemName();
             mainActivityViewModel.addNewlyAddedStock(stock);
 
 
-            ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStockList();
+            ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
             int total = 0;
 
             for (int i = 0; i < stockList.size(); i++) {
@@ -113,67 +115,24 @@ public class CounterFragment extends Fragment {
     //onStart override method which is used to add action listener in flotating button or both CardView
     @Override
     public void onStart() {
-
         //finding Cardview waitList in Xml file
         cardView_waitList = getView().findViewById(R.id.waitlistcardview);
-
         //finding Cardview conformList in Xml file
         cardView_conformList = getView().findViewById(R.id.conformListcardview);
-
-
         cardView_Proceed = getView().findViewById(R.id.cardview_proceed);
-
         cardView_Proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mediaPlayer.start();
-                Toast.makeText(getContext(), "proceed", Toast.LENGTH_SHORT).show();
-
-
-
-                //todo: this update is not working it crash the whole app please fixed it bhaiya
-                mainActivityViewModel.update(updateStock);
-
-
-                ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStockList();
-
-                int total = mainActivityViewModel.getSaleTotal();
-
-
-                Sales sales = new Sales();
-                String totalString = Integer.toString(total);
-                sales.setTotalBillAmt(totalString);
-                mainActivityViewModel.insertsales(sales);
-            try {
-                    Thread.sleep(100);
-               } catch (InterruptedException e) {
-                    e.printStackTrace();
+                ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
+                if (stockList.isEmpty()) {
+                    Toast.makeText(getContext(), "please add the item first", Toast.LENGTH_SHORT).show();
+                } else {
+                    int total = mainActivityViewModel.getSaleTotal();
+                    PaymentDialogFragment ialogFragementforunit=new PaymentDialogFragment(total,mainActivityViewModel,adepter);
+                    ialogFragementforunit.show(getChildFragmentManager(),"exampledialog");
+                    mainActivityViewModel.update(updateStock);
                 }
-
-
-                for (int i = 0; i < stockList.size(); i++) {
-                    Stock stock2 = stockList.get(i);
-                    int itemId = stock2.getItemId();
-                    String quntity = stock2.getItemQuentity();
-                    String sellingPrice = stock2.getItemSalePerUnit();
-                    String itemName=stock2.getItemName();
-
-                    SaleDeatial saleDeatial = new SaleDeatial();
-                    saleDeatial.setSaledetailsaleid(sales.getSaleId());
-                    saleDeatial.setSaleDetailitemId(itemId);
-                    saleDeatial.setQuntity(quntity);
-                    saleDeatial.setSalingPrice(sellingPrice);
-                    saleDeatial.setSaleDetailItemName(itemName);
-                    mainActivityViewModel.insertSaleDetail(saleDeatial);
-                }
-
-                Toast.makeText(getContext(), "completed", Toast.LENGTH_SHORT).show();
-
-
-                //mainActivityViewModel.getNewlyAddedStockList().clear();
-
-                //getActivity().getViewModelStore().clear();
-
             }
         });
 

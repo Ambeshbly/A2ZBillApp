@@ -1,4 +1,4 @@
-package com.example.a2zbilling.counter;
+package com.example.a2zbilling.counter.BillList;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.db.entities.SaleDeatial;
-import com.example.a2zbilling.db.entities.Sales;
 
 import java.util.ArrayList;
 import java.util.List;

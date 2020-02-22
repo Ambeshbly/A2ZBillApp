@@ -1,16 +1,10 @@
-package com.example.a2zbilling.counter;
+package com.example.a2zbilling.counter.BillList;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,14 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.counter.BillList.BillHistoryActivityViewModel;
+import com.example.a2zbilling.counter.BillList.ShowBillingHistoryFragmentAdapter;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
-import com.example.a2zbilling.db.entities.Stock;
-import com.example.a2zbilling.stock.AvailableStock.AvailableStockAdapter;
-import com.example.a2zbilling.stock.StockActivity;
-import com.example.a2zbilling.stock.StockActivityViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

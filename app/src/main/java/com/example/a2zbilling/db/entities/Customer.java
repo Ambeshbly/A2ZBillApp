@@ -11,14 +11,24 @@ public class Customer {
     private String customerName;
     private String customerAddress;
     private String customerPhoneNo;
+    private String debt;
 
-    public Customer(String customerName, String customerAddress, String customerPhoneNo) {
+    public Customer(String customerName, String customerAddress, String customerPhoneNo,String debt) {
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerPhoneNo = customerPhoneNo;
+        this.debt=debt;
     }
 
     public Customer() {
+    }
+
+    public String getDebt() {
+        return debt;
+    }
+
+    public void setDebt(String debt) {
+        this.debt = debt;
     }
 
     public int getCustId() {

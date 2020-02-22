@@ -86,7 +86,7 @@ public class AddUpdateCustomerFragment extends AppCompatDialogFragment {
             String name = editTextCustomerName.getText().toString().trim();
             String phoneNo = editTextCustomerPhoneNo.getText().toString().trim();
             String address = editTextCustomerAddress.getText().toString().trim();
-            Customer customer = new Customer(name, phoneNo, address);
+            Customer customer = new Customer(name, phoneNo, address,"no debt");
             customerActivityViewModel.insertCustomer(customer);
             Toast.makeText(getContext(), name + " inserted", Toast.LENGTH_SHORT).show();
         }

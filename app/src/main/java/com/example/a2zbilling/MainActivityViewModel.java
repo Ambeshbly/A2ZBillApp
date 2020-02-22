@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.a2zbilling.db.Repository;
+import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
@@ -15,38 +16,32 @@ import com.example.a2zbilling.db.entities.Stock;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Maybe;
+
 public class MainActivityViewModel extends AndroidViewModel {
 
 
     private Repository repository;
-    private LiveData<List<Stock>> allItems;
-
 
     private Sales sales;
     private LiveData<List<Sales>> allSales;
 
-    private SaleDeatial saleDeatial;
-    private LiveData<List<SaleDeatial>> allSaledetail;
     private int saleTotal;
-    private ArrayList<Stock> newlyAddedStockList = new ArrayList<Stock>();
+    private Maybe<Customer> customer;
+
     private MutableLiveData<ArrayList<Stock>> newlyAddedStocks = new MutableLiveData<ArrayList<Stock>>();
 
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
-        allItems = repository.getAllItems();
-
 
         allSales = repository.getAllSales();
 
-
+        ArrayList<Stock> newlyAddedStockList = new ArrayList<Stock>();
         this.newlyAddedStocks.setValue(newlyAddedStockList);
 
     }
 
-    public ArrayList<Stock> getNewlyAddedStockList() {
-        return newlyAddedStockList;
-    }
 
     public int getSaleTotal() {
         return saleTotal;
@@ -70,6 +65,10 @@ public class MainActivityViewModel extends AndroidViewModel {
         repository.insertSales(sales);
     }
 
+    public void insertCustomer(Customer customer) {
+        repository.insertCustomer(customer);
+    }
+
     public LiveData<List<Sales>> getAllSales() {
         return allSales;
     }
@@ -77,11 +76,6 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public void insertSaleDetail(SaleDeatial saleDeatial) {
         repository.insertSaleDeatail(saleDeatial);
-    }
-
-    public LiveData<List<SaleDeatial>> getAllSaledetail(int salesId) {
-        allSaledetail = repository.getSalesDeatil(salesId);
-        return allSaledetail;
     }
 
 
@@ -97,8 +91,21 @@ public class MainActivityViewModel extends AndroidViewModel {
         repository.update(stock);
     }
 
-    public LiveData<List<Stock>> getAllItems() {
-        return allItems;
+
+    public void updateCustomer(Customer customer) {
+        repository.updateCustomer(customer);
     }
 
+    public Sales getSales() {
+        return sales;
+    }
+
+    public void setSales(Sales sales) {
+        this.sales = sales;
+    }
+
+    public Customer getCustList(int custId) {
+        customer = repository.getCustomer(custId);
+        return customer.blockingGet();
+    }
 }

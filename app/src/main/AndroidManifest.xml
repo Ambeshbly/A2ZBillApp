@@ -13,13 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".counter.BillHistoryActivity"
+            android:name=".counter.BillList.BillHistoryActivity"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
-            android:name=".counter.SuspendedTransactionListActivity"
+            android:name=".counter.SuspendedBills.SuspendedTransactionListActivity"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
-            android:name=".counter.SellingStocksActivity"
+            android:name=".counter.Selling.SellingStocksActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.ActionBar" />
         <activity android:name=".stock.DefaultItemList.DefaultItemListActivity" />

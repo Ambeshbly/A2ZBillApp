@@ -38,5 +38,4 @@ public class ShowCustomerDetailDialogFragment extends AppCompatDialogFragment {
         builder.setView(view);
         return builder.create();
     }
-
 }

@@ -17,36 +17,21 @@ import com.example.a2zbilling.db.room.StockDao;
 
 import java.util.List;
 
+import io.reactivex.Maybe;
+
 public class Repository {
     private StockDao stockDao;
-    private LiveData<List<Stock>> allItems;
-
     private SalesDao salesDao;
-    private LiveData<List<Sales>> allSales;
-
     private CustomerDao customerDao;
-    private LiveData<List<Customer>> allCustomer;
-
-    private LiveData<List<SaleDeatial>> alldetail;
-    private List<SaleDeatial> saleDeatialList;
     private SaleDeatailDao saleDeatailDao;
 
 
     public Repository(Application application) {
         SqlLiteDatabase database = SqlLiteDatabase.getInstance(application);
         stockDao = database.itemsDao();
-        allItems = stockDao.getAllItems();
-
         salesDao = database.salesDao();
-        allSales = salesDao.getAllSales();
-
-        customerDao=database.customerDao();
-        allCustomer=customerDao.getAllCustomer();
-
+        customerDao = database.customerDao();
         saleDeatailDao = database.saleDeatailDao();
-        //alldetail=saleDeatailDao.getSaleDetail(salesId);
-
-
     }
 
 
@@ -63,7 +48,7 @@ public class Repository {
     }
 
     public LiveData<List<Stock>> getAllItems() {
-        return allItems;
+        return stockDao.getAllItems();
     }
 
 
@@ -72,7 +57,7 @@ public class Repository {
     }
 
     public LiveData<List<Sales>> getAllSales() {
-        return allSales;
+        return salesDao.getAllSales();
     }
 
 
@@ -81,20 +66,27 @@ public class Repository {
     }
 
     public LiveData<List<SaleDeatial>> getSalesDeatil(int salesId) {
-        alldetail = saleDeatailDao.getSaleDetail(salesId);
-        return alldetail;
+        return saleDeatailDao.getSaleDetail(salesId);
     }
 
-    public List<SaleDeatial> getSaleDeatialList(int saleId){
-        saleDeatialList=saleDeatailDao.getAllDetailList(saleId);
-        return saleDeatialList;
+    public List<SaleDeatial> getSaleDeatialList(int saleId) {
+        return saleDeatailDao.getAllDetailList(saleId);
     }
 
     public void insertCustomer(Customer customer) {
         new InsertCustomersAsynckTask(customerDao).execute(customer);
     }
+
     public void updateCustomer(Customer customer) {
         new UpdateCustomerAsynckTask(customerDao).execute(customer);
+    }
+
+    public LiveData<List<Customer>> getAllCustomer() {
+        return customerDao.getAllCustomer();
+    }
+
+    public Maybe<Customer> getCustomer(int custId) {
+        return customerDao.getCustomer(custId);
     }
 
     private static class UpdateCustomerAsynckTask extends AsyncTask<Customer, Void, Void> {
@@ -111,11 +103,6 @@ public class Repository {
         }
     }
 
-
-    public LiveData<List<Customer>> getAllCustomer() {
-        return allCustomer;
-    }
-
     private static class InsertCustomersAsynckTask extends AsyncTask<Customer, Void, Void> {
         private CustomerDao customerDao;
 
@@ -125,13 +112,10 @@ public class Repository {
 
         @Override
         protected Void doInBackground(Customer... customers) {
-            customerDao.insert(customers[0]);
+            customers[0].setCustId((int) customerDao.insert(customers[0]));
             return null;
         }
     }
-
-
-
 
 
     private static class InsertSalesDeatilAsynckTask extends AsyncTask<SaleDeatial, Void, Void> {

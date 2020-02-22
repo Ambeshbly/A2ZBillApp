@@ -1,11 +1,8 @@
-package com.example.a2zbilling.counter;
+package com.example.a2zbilling.counter.BillList;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.db.entities.Sales;
-import com.example.a2zbilling.db.entities.Stock;
-import com.example.a2zbilling.stock.AvailableStock.AvailableStockAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +33,7 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
         holder.textView_for_saleId.setText(""+currentsales.getSaleId());
         holder.textViewForTotalAmtText.setText("Total Amt:  ");
         holder.textViewForTotal.setText(currentsales.getTotalBillAmt());
+        holder.textViewpaymentMode.setText(currentsales.getSalePode());
 
     }
 
@@ -65,6 +61,7 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
         private TextView textView_for_saleId;
         private TextView textViewForTotalAmtText;
         private TextView textViewForTotal;
+        private TextView textViewpaymentMode;
 
 
         public ItemHolder(@NonNull View itemView) {
@@ -73,6 +70,7 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
             textView_for_saleId = itemView.findViewById(R.id.text_view_sale_id);
             textViewForTotalAmtText = itemView.findViewById(R.id.text_view_Total_amt_text);
             textViewForTotal = itemView.findViewById(R.id.text_view_total);
+            textViewpaymentMode = itemView.findViewById(R.id.paymenttext);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -51,7 +51,7 @@ public class AllCustomerAdapter extends RecyclerView.Adapter<AllCustomerAdapter.
         final Customer currentcustomer = customers.get(position);
         holder.textViewForCustomerName.setText(currentcustomer.getCustomerName());
         holder.textViewForCoustomerId.setText(""+currentcustomer.getCustId());
-        holder.textViewForCustomerdebt.setText("50");
+        holder.textViewForCustomerdebt.setText("-"+currentcustomer.getDebt());
         holder.text_id.setText("Id : ");
         holder.text_debt.setText("Debt.");
         holder.option_menu.setOnClickListener(new View.OnClickListener() {

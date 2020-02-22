@@ -1,4 +1,4 @@
-package com.example.a2zbilling.counter;
+package com.example.a2zbilling.counter.Selling;
 
 import android.os.Bundle;
 import android.view.Menu;

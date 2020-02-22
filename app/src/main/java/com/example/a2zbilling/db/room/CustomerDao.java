@@ -8,15 +8,16 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.a2zbilling.db.entities.Customer;
-import com.example.a2zbilling.db.entities.Stock;
 
 import java.util.List;
+
+import io.reactivex.Maybe;
 
 @Dao
 public interface CustomerDao {
 
     @Insert
-    void insert(Customer customer);
+    long insert(Customer customer);
 
     @Update
     void update(Customer customer);
@@ -26,4 +27,7 @@ public interface CustomerDao {
 
     @Query("SELECT * FROM customer")
     LiveData<List<Customer>> getAllCustomer();
+
+    @Query("select * from customer where custId==:custID")
+    Maybe<Customer> getCustomer(int custID);
 }

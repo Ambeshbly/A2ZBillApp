@@ -10,7 +10,17 @@ public class Sales {
     private int saleId;
     private String totalBillAmt;
     private int salescustId;
+    private String salePode;
     // private Date date;
+
+
+    public String getSalePode() {
+        return salePode;
+    }
+
+    public void setSalePode(String salePode) {
+        this.salePode = salePode;
+    }
 
     public int getSaleId() {
         return saleId;

@@ -1,4 +1,4 @@
-package com.example.a2zbilling.counter;
+package com.example.a2zbilling.counter.SuspendedBills;
 
 import android.os.Bundle;
 
