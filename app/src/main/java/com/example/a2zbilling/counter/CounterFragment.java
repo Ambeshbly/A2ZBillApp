@@ -93,17 +93,17 @@ public class CounterFragment extends Fragment {
 
 
             ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
-            int total = 0;
+            double total = 0;
 
             for (int i = 0; i < stockList.size(); i++) {
                 Stock stock2 = stockList.get(i);
-                int value = 0;
-                value = Integer.parseInt(stock2.getItemQuentity()) * Integer.parseInt(stock2.getItemSalePerUnit());
+                double value = 0;
+                value = stock2.getItemQuentity() * Integer.parseInt(stock2.getItemSalePerUnit());
                 total = total + value;
 
             }
             mainActivityViewModel.setSaleTotal(total);
-            String totalString = Integer.toString(total);
+            String totalString = Double.toString(total);
             textViewTotal.setText(totalString);
 
         }
@@ -126,7 +126,7 @@ public class CounterFragment extends Fragment {
                 if (stockList.isEmpty()) {
                     Toast.makeText(getContext(), "please add the item first", Toast.LENGTH_SHORT).show();
                 } else {
-                    int total = mainActivityViewModel.getSaleTotal();
+                    double total = mainActivityViewModel.getSaleTotal();
                     ialogFragementforunit = new PaymentDialogFragment(total, mainActivityViewModel, adepter);
                     ialogFragementforunit.show(getChildFragmentManager(), "exampledialog");
                     mainActivityViewModel.update(updateStock);

@@ -15,10 +15,10 @@ public class SaleDeatial {
     private int saledetailsaleid;
     private int saleDetailitemId;
     private String saleDetailItemName;
-    private String quntity;
+    private double quntity;
     private String salingPrice;
 
-    public SaleDeatial(int saledetailsaleid, int saleDetailitemId, String quntity, String salingPrice) {
+    public SaleDeatial(int saledetailsaleid, int saleDetailitemId, double quntity, String salingPrice) {
         this.saledetailsaleid = saledetailsaleid;
         this.saleDetailitemId = saleDetailitemId;
         this.quntity = quntity;
@@ -60,11 +60,11 @@ public class SaleDeatial {
         this.saleDetailitemId = saleDetailitemId;
     }
 
-    public String getQuntity() {
+    public double getQuntity() {
         return quntity;
     }
 
-    public void setQuntity(String quntity) {
+    public void setQuntity(double quntity) {
         this.quntity = quntity;
     }
 

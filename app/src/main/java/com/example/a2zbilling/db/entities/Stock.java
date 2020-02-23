@@ -1,7 +1,11 @@
 package com.example.a2zbilling.db.entities;
 
+import android.widget.TextView;
+
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.InverseBindingAdapter;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -14,7 +18,7 @@ public class Stock extends BaseObservable implements Serializable {
     private int itemId;
     private int itemImage;
     private String itemName;
-    private String itemQuentity;
+    private double itemQuentity;
     private String itemUnit;
     private String itemPurchasePerUnit;
     private String itemPuchaseTotal;
@@ -23,7 +27,7 @@ public class Stock extends BaseObservable implements Serializable {
     private String pc;
 
 
-    public Stock(String itemName, String itemQuentity, String itemPurchasePerUnit, String itemPuchaseTotal, String itemSalePerUnit, String itemSaleTotal) {
+    public Stock(String itemName, double itemQuentity, String itemPurchasePerUnit, String itemPuchaseTotal, String itemSalePerUnit, String itemSaleTotal) {
         this.itemImage = itemImage;
         this.itemName = itemName;
         this.itemQuentity = itemQuentity;
@@ -36,6 +40,22 @@ public class Stock extends BaseObservable implements Serializable {
 
 
     public Stock() {
+    }
+
+    @BindingAdapter("android:text")
+    public static void setText(TextView view, double value) {
+
+        if (view.getText().toString().isEmpty() == false) {
+            double tvValue = Double.parseDouble(view.getText().toString());
+            if (tvValue != value) {
+                view.setText(Double.toString(value));
+            }
+        }
+    }
+
+    @InverseBindingAdapter(attribute = "android:text")
+    public static double getText(TextView view) {
+        return Double.parseDouble(view.getText().toString());
     }
 
     public int getItemId() {
@@ -65,11 +85,11 @@ public class Stock extends BaseObservable implements Serializable {
     }
 
     @Bindable
-    public String getItemQuentity() {
+    public double getItemQuentity() {
         return itemQuentity;
     }
 
-    public void setItemQuentity(String itemQuentity) {
+    public void setItemQuentity(double itemQuentity) {
         this.itemQuentity = itemQuentity;
         notifyPropertyChanged(com.example.a2zbilling.BR.itemQuentity);
     }
@@ -99,31 +119,24 @@ public class Stock extends BaseObservable implements Serializable {
 
     public void setItemPurchasePerUnit(String itemPurchasePerUnit) {
         this.itemPurchasePerUnit = itemPurchasePerUnit;
-        if (itemPurchasePerUnit.isEmpty() || itemQuentity.isEmpty()) {
+        if (itemPurchasePerUnit.isEmpty() || itemQuentity == 0) {
             itemPuchaseTotal = Integer.toString(0);
         } else {
-            itemPuchaseTotal = Integer.toString(Integer.parseInt(itemPurchasePerUnit) * Integer.parseInt(itemQuentity));
+            itemPuchaseTotal = Double.toString(Integer.parseInt(itemPurchasePerUnit) * itemQuentity);
         }
         notifyPropertyChanged(com.example.a2zbilling.BR.itemPuchaseTotal);
         notifyPropertyChanged(com.example.a2zbilling.BR.itemPurchasePerUnit);
     }
 
 
-
-
-
-
-    public void setItemPurchase(String itemPurchase){
-        this.itemPurchasePerUnit=itemPurchase;
+    public void setItemPurchase(String itemPurchase) {
+        this.itemPurchasePerUnit = itemPurchase;
     }
 
-     public void setItemSale(String itemsale){
-        this.itemSalePerUnit=itemsale;
+    public void setItemSale(String itemsale) {
+        this.itemSalePerUnit = itemsale;
 
-     }
-
-
-
+    }
 
 
     @Bindable
@@ -143,10 +156,10 @@ public class Stock extends BaseObservable implements Serializable {
 
     public void setItemSalePerUnit(String itemSalePerUnit) {
         this.itemSalePerUnit = itemSalePerUnit;
-        if (itemSalePerUnit.isEmpty() || itemQuentity.isEmpty()) {
+        if (itemSalePerUnit.isEmpty() || itemQuentity == 0) {
             itemSaleTotal = Integer.toString(0);
         } else {
-            itemSaleTotal = Integer.toString(Integer.parseInt(itemSalePerUnit) * Integer.parseInt(itemQuentity));
+            itemSaleTotal = Double.toString(Integer.parseInt(itemSalePerUnit) * itemQuentity);
         }
         notifyPropertyChanged(com.example.a2zbilling.BR.itemSaleTotal);
         notifyPropertyChanged(com.example.a2zbilling.BR.itemSalePerUnit);

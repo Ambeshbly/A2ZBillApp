@@ -139,7 +139,7 @@
                     android:layout_weight="18"
                     android:backgroundTint="@color/colorPrimary"
                     android:hint="Item Quantity"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:text="@={stock.itemQuentity}" />
 
             </com.google.android.material.textfield.TextInputLayout>

@@ -28,18 +28,15 @@ import static android.app.Activity.RESULT_OK;
 
 public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
 
+    List<String> list;
+    double quntty;
+    int kg, gm, mg, mtr, cm, mm, ltr, ml, box, pc;
     private SellingActivityViewModel sellingActivityViewModel;
     private TextView textViewId, textViewName, textViewAvailablestock;
     private EditText editTextsalePrice, editTextQuntity;
     private Stock stock;
     private Stock tempstock;
     private CardView cardViewAddToCart, cardViewSave;
-    List<String> list;
-    String quntty;
-    int kg,gm,mg,mtr,cm,mm,ltr,ml,box,pc;
-
-
-
     private Spinner spinner;
 
     public DialogFragmentForAddToCart(SellingActivityViewModel sellingActivityViewModel) {
@@ -55,33 +52,33 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dailog_fragment_for_add_to_cart, null);
         stock = sellingActivityViewModel.getStock();
-        spinner=view.findViewById(R.id.Add_to_cart_spinner);
-        double unit=Double.parseDouble(stock.getItemUnit());
+        spinner = view.findViewById(R.id.Add_to_cart_spinner);
+        double unit = Double.parseDouble(stock.getItemUnit());
 
-        if (unit==10 || unit==11 || unit==12){
-            list= new ArrayList<String>();
+        if (unit == 10 || unit == 11 || unit == 12) {
+            list = new ArrayList<String>();
             list.add("  kg  ");
             list.add("  gm  ");
             list.add("  mg  ");
-            ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,list);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(arrayAdapter);
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     spinner.setSelection(position);
-                    int p=position;
-                    if (p==0){
-                        kg=1;
-                        quntty=stock.getItemQuentity();
+                    int p = position;
+                    if (p == 0) {
+                        kg = 1;
+                        quntty = stock.getItemQuentity();
                     }
-                    if (p==1){
-                        gm=2;
-                        quntty=(Integer.toString(Integer.parseInt(stock.getItemQuentity())*1000));
+                    if (p == 1) {
+                        gm = 2;
+                        quntty = stock.getItemQuentity() * 1000;
                     }
-                    if (p==2){
-                        mg=3;
-                        quntty=(Integer.toString(Integer.parseInt(stock.getItemQuentity())*1000*1000));
+                    if (p == 2) {
+                        mg = 3;
+                        quntty = stock.getItemQuentity() * 1000 * 1000;
                     }
                 }
 
@@ -91,30 +88,30 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
             });
         }
 
-        if (unit==3 | unit==4 | unit==5){
-            list= new ArrayList<String>();
+        if (unit == 3 | unit == 4 | unit == 5) {
+            list = new ArrayList<String>();
             list.add("  Mtr  ");
             list.add("  Cm   ");
             list.add("  Mm   ");
-            ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,list);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(arrayAdapter);
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     spinner.setSelection(position);
-                    int p=position;
-                    if (p==0){
-                        mtr=4;
-                        quntty=stock.getItemQuentity();
+                    int p = position;
+                    if (p == 0) {
+                        mtr = 4;
+                        quntty = stock.getItemQuentity();
                     }
-                    if (p==1){
-                        cm=5;
-                        quntty=(Integer.toString(Integer.parseInt(stock.getItemQuentity())*100));
+                    if (p == 1) {
+                        cm = 5;
+                        quntty = stock.getItemQuentity() * 100;
                     }
-                    if (p==2){
-                        mm=6;
-                        quntty=(Integer.toString(Integer.parseInt(stock.getItemQuentity())*1000*10));
+                    if (p == 2) {
+                        mm = 6;
+                        quntty = stock.getItemQuentity() * 1000 * 10;
                     }
                 }
 
@@ -124,25 +121,25 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
             });
         }
 
-        if (unit==6 | unit==7 ){
-            list= new ArrayList<String>();
+        if (unit == 6 | unit == 7) {
+            list = new ArrayList<String>();
             list.add("  Ltr  ");
             list.add("  ml  ");
-            ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,list);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(arrayAdapter);
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     spinner.setSelection(position);
-                    int p=position;
-                    if (p==0){
-                        ltr=7;
-                        quntty=stock.getItemQuentity();
+                    int p = position;
+                    if (p == 0) {
+                        ltr = 7;
+                        quntty = stock.getItemQuentity();
                     }
-                    if (p==1){
-                        ml=8;
-                        quntty=(Integer.toString(Integer.parseInt(stock.getItemQuentity())*1000));
+                    if (p == 1) {
+                        ml = 8;
+                        quntty = stock.getItemQuentity() * 1000;
                     }
 
                 }
@@ -153,26 +150,26 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
             });
         }
 
-        if (unit==8 ){
-            list= new ArrayList<String>();
+        if (unit == 8) {
+            list = new ArrayList<String>();
             list.add("  Box  ");
             list.add("  pc  ");
-            ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,list);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(arrayAdapter);
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     spinner.setSelection(position);
-                    int p=position;
-                    if (p==0){
-                        box=9;
-                        quntty=stock.getItemQuentity();
+                    int p = position;
+                    if (p == 0) {
+                        box = 9;
+                        quntty = stock.getItemQuentity();
 
                     }
-                    if (p==1){
-                        pc=10;
-                        quntty=(Integer.toString(Integer.parseInt(stock.getItemQuentity())*1000));
+                    if (p == 1) {
+                        pc = 10;
+                        quntty = stock.getItemQuentity() * 1000;
                     }
 
                 }
@@ -183,20 +180,20 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
             });
         }
 
-        if (unit==9 ){
-            list= new ArrayList<String>();
+        if (unit == 9) {
+            list = new ArrayList<String>();
             list.add("  pc  ");
-            ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,list);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(arrayAdapter);
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     spinner.setSelection(position);
-                    int p=position;
-                    if (p==0){
-                        pc=11;
-                        quntty=stock.getItemQuentity();
+                    int p = position;
+                    if (p == 0) {
+                        pc = 11;
+                        quntty = stock.getItemQuentity();
                     }
 
                 }
@@ -217,7 +214,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
 
         textViewId.setText("" + stock.getItemId());
         textViewName.setText(stock.getItemName());
-        textViewAvailablestock.setText(stock.getItemQuentity());
+        textViewAvailablestock.setText(Double.toString(stock.getItemQuentity()));
         editTextsalePrice.setText(stock.getItemSalePerUnit());
 
         //   Toast.makeText(getContext(),"malo",Toast.LENGTH_SHORT).show();
@@ -227,82 +224,79 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "malo", Toast.LENGTH_SHORT).show();
-                String quntity = editTextQuntity.getText().toString().trim();
+                double quntity = Double.parseDouble(editTextQuntity.getText().toString().trim());
 
-                if(kg==1){
+                if (kg == 1) {
 
-                  int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                  stock.setItemQuentity(Integer.toString(qnt));
+                    double qnt = quntty - quntity;
+                    stock.setItemQuentity(qnt);
                 }
 
-                if(gm==2){
+                if (gm == 2) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    int qnt1=qnt/1000;
-                    stock.setItemQuentity(Integer.toString(qnt1));
+                    double qnt = quntty - quntity;
+                    double qnt1 = qnt / 1000;
+                    stock.setItemQuentity(qnt1);
                 }
 
-                if(mg==3){
+                if (mg == 3) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    int qnt1=qnt/1000;
-                    int qnt2=qnt1/1000;
-                    stock.setItemQuentity(Integer.toString(qnt2));
+                    double qnt = quntty - quntity;
+                    double qnt1 = qnt / 1000;
+                    double qnt2 = qnt1 / 1000;
+                    stock.setItemQuentity(qnt2);
                 }
 
-                if(mtr==4){
+                if (mtr == 4) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    stock.setItemQuentity(Integer.toString(qnt));
+                    double qnt = quntty - quntity;
+                    stock.setItemQuentity(qnt);
                 }
 
-                if(cm==5){
+                if (cm == 5) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    int qnt1=qnt/100;
-                    stock.setItemQuentity(Integer.toString(qnt1));
+                    double qnt = quntty - quntity;
+                    double qnt1 = qnt / 100;
+                    stock.setItemQuentity(qnt1);
                 }
 
-                if(mm==6){
+                if (mm == 6) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    int qnt1=qnt/100;
-                    int qnt2=qnt1/10;
-                    stock.setItemQuentity(Integer.toString(qnt2));
+                    double qnt = quntty - quntity;
+                    double qnt1 = qnt / 100;
+                    double qnt2 = qnt1 / 10;
+                    stock.setItemQuentity(qnt2);
                 }
 
-                if(ltr==7){
+                if (ltr == 7) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    stock.setItemQuentity(Integer.toString(qnt));
+                    double qnt = quntty - quntity;
+                    stock.setItemQuentity(qnt);
                 }
 
-                if(ml==8){
+                if (ml == 8) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    int qnt1=qnt/1000;
-                    stock.setItemQuentity(Integer.toString(qnt1));
+                    double qnt = quntty - quntity;
+                    double qnt1 = qnt / 1000;
+                    stock.setItemQuentity(qnt1);
                 }
 
-                if( box==9){
-                    int pic=Integer.parseInt(stock.getPc());
-                    int qnty=Integer.parseInt(quntty);
-                    int caluclation=qnty/pic;
-                    int qnt=caluclation-Integer.parseInt(quntity);
-                    stock.setItemQuentity(Integer.toString(qnt));
-                }else
-
-
-                if(pc==10){
-                    int pic=Integer.parseInt(stock.getPc());
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    int qnt1=qnt/pic;
-                    stock.setItemQuentity(Integer.toString(qnt1));
+                if (box == 9) {
+                    int pic = Integer.parseInt(stock.getPc());
+                    double qnty = quntty;
+                    double caluclation = qnty / pic;
+                    double qnt = caluclation - quntity;
+                    stock.setItemQuentity(qnt);
+                } else if (pc == 10) {
+                    int pic = Integer.parseInt(stock.getPc());
+                    double qnt = quntty - quntity;
+                    double qnt1 = qnt / pic;
+                    stock.setItemQuentity(qnt1);
                 }
 
-                if(pc==11){
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    stock.setItemQuentity(Integer.toString(qnt));
+                if (pc == 11) {
+                    double qnt = quntty - quntity;
+                    stock.setItemQuentity(qnt);
                 }
 
                 tempstock = new Stock();
@@ -321,9 +315,9 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
 
                 //Stock stock1=stock;
                 //Intent intent = new Intent().putExtra("stock", tempstock);
-                Intent intent=new Intent();
-                intent.putExtra("stock",tempstock);
-                intent.putExtra("update",stock);
+                Intent intent = new Intent();
+                intent.putExtra("stock", tempstock);
+                intent.putExtra("update", stock);
                 getActivity().setResult(RESULT_OK, intent);
                 dismissAllowingStateLoss();
             }
@@ -334,88 +328,80 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
 
+                double quntity = Double.parseDouble(editTextQuntity.getText().toString().trim());
 
-                String quntity = editTextQuntity.getText().toString().trim();
+                if (kg == 1) {
 
-
-
-
-                if(kg==1){
-
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    stock.setItemQuentity(Integer.toString(qnt));
+                    double qnt = quntty - quntity;
+                    stock.setItemQuentity(qnt);
                 }
 
-                if(gm==2){
+                if (gm == 2) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    int qnt1=qnt/1000;
-                    stock.setItemQuentity(Integer.toString(qnt1));
+                    double qnt = quntty - quntity;
+                    double qnt1 = qnt / 1000;
+                    stock.setItemQuentity(qnt1);
                 }
 
-                if(mg==3){
+                if (mg == 3) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    int qnt1=qnt/1000;
-                    int qnt2=qnt1/1000;
-                    stock.setItemQuentity(Integer.toString(qnt2));
+                    double qnt = quntty - quntity;
+                    double qnt1 = qnt / 1000;
+                    double qnt2 = qnt1 / 1000;
+                    stock.setItemQuentity(qnt2);
                 }
 
-                if(mtr==4){
+                if (mtr == 4) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    stock.setItemQuentity(Integer.toString(qnt));
+                    double qnt = quntty - quntity;
+                    stock.setItemQuentity(qnt);
                 }
 
-                if(cm==5){
+                if (cm == 5) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    int qnt1=qnt/100;
-                    stock.setItemQuentity(Integer.toString(qnt1));
+                    double qnt = quntty - quntity;
+                    double qnt1 = qnt / 100;
+                    stock.setItemQuentity(qnt1);
                 }
 
-                if(mm==6){
+                if (mm == 6) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    int qnt1=qnt/100;
-                    int qnt2=qnt1/10;
-                    stock.setItemQuentity(Integer.toString(qnt2));
+                    double qnt = quntty - quntity;
+                    double qnt1 = qnt / 100;
+                    double qnt2 = qnt1 / 10;
+                    stock.setItemQuentity(qnt2);
                 }
 
-                if(ltr==7){
+                if (ltr == 7) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    stock.setItemQuentity(Integer.toString(qnt));
+                    double qnt = quntty - quntity;
+                    stock.setItemQuentity(qnt);
                 }
 
-                if(ml==8){
+                if (ml == 8) {
 
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    int qnt1=qnt/1000;
-                    stock.setItemQuentity(Integer.toString(qnt1));
+                    double qnt = quntty - quntity;
+                    double qnt1 = qnt / 1000;
+                    stock.setItemQuentity(qnt1);
                 }
 
-                if( box==9){
-                    int pic=Integer.parseInt(stock.getPc());
-                    int qnty=Integer.parseInt(quntty);
-                    int caluclation=qnty/pic;
-                    int qnt=caluclation-Integer.parseInt(quntity);
-                    stock.setItemQuentity(Integer.toString(qnt));
-                }else
-
-
-                if(pc==10){
-                    int pic=Integer.parseInt(stock.getPc());
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    int qnt1=qnt/pic;
-                    stock.setItemQuentity(Integer.toString(qnt1));
+                if (box == 9) {
+                    int pic = Integer.parseInt(stock.getPc());
+                    double qnty = quntty;
+                    double caluclation = qnty / pic;
+                    double qnt = caluclation - quntity;
+                    stock.setItemQuentity(qnt);
+                } else if (pc == 10) {
+                    int pic = Integer.parseInt(stock.getPc());
+                    double qnt = quntty - quntity;
+                    double qnt1 = qnt / pic;
+                    stock.setItemQuentity(qnt1);
                 }
 
-                if(pc==11){
-                    int qnt=Integer.parseInt(quntty)-Integer.parseInt(quntity);
-                    stock.setItemQuentity(Integer.toString(qnt));
+                if (pc == 11) {
+                    double qnt = quntty - quntity;
+                    stock.setItemQuentity(qnt);
                 }
-
 
 
                 tempstock = new Stock();
@@ -429,12 +415,12 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                 tempstock.setPc(stock.getPc());
                 tempstock.setItemUnit(stock.getItemUnit());
                 tempstock.setItemSaleTotal(stock.getItemSaleTotal());
-            //    sellingActivityViewModel.update(stock);
+                //    sellingActivityViewModel.update(stock);
 
 
-                Intent intent=new Intent();
-                intent.putExtra("stock",tempstock);
-                intent.putExtra("update",stock);
+                Intent intent = new Intent();
+                intent.putExtra("stock", tempstock);
+                intent.putExtra("update", stock);
                 getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
 

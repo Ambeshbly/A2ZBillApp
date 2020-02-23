@@ -11,14 +11,14 @@ import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
 
-@Database(entities = {Stock.class, Customer.class, SaleDeatial.class, Sales.class}, version = 42, exportSchema = false)
+@Database(entities = {Stock.class, Customer.class, SaleDeatial.class, Sales.class}, version = 43, exportSchema = false)
 public abstract class SqlLiteDatabase extends RoomDatabase {
 
     private static SqlLiteDatabase instance;
 
     public static synchronized SqlLiteDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(), SqlLiteDatabase.class, "a2zBillDataBase42").fallbackToDestructiveMigration().build();
+            instance = Room.databaseBuilder(context.getApplicationContext(), SqlLiteDatabase.class, "a2zBillDataBase43").fallbackToDestructiveMigration().build();
         }
         return instance;
     }

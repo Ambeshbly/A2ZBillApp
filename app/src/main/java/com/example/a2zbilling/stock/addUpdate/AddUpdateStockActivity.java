@@ -52,7 +52,13 @@ public class AddUpdateStockActivity extends AppCompatActivity {
     private ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding;
 
 
-    private String itemName, ItemQuentity, ItemPurchasePrice, ItenPurchasetotal, ItemsalePrice, ItemSaleTotal;
+    private String itemName;
+    private double ItemQuentity;
+    private String ItemPurchasePrice;
+    private String ItenPurchasetotal;
+    private String ItemsalePrice;
+    private String ItemSaleTotal;
+    private Stock selectedStock;
 
     //    FragmentTransaction t;
 
@@ -61,9 +67,6 @@ public class AddUpdateStockActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item_floating_button);
-
-
-
 
 
         //finding the item name edit text in the Xml file
@@ -99,12 +102,6 @@ public class AddUpdateStockActivity extends AppCompatActivity {
         defualtitemListCardView = findViewById(R.id.cardview_defaultList);
 
 
-        Stock stock = new Stock();
-        activityAddItemFloatingButtonBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_item_floating_button);
-        activityAddItemFloatingButtonBinding.setStock(stock);
-        AddItemClickHandler addItemClickHandler = new AddItemClickHandler();
-        activityAddItemFloatingButtonBinding.setAdditemclickHandler(addItemClickHandler);
-
         addUpdateStockActivityViewModel = ViewModelProviders.of(this).get(AddUpdateStockActivityViewModel.class);
 
         editTextName = findViewById(R.id.editName);
@@ -114,39 +111,25 @@ public class AddUpdateStockActivity extends AppCompatActivity {
         editTextSalePrice = findViewById(R.id.editSalePrice);
         editTextSaleTotal = findViewById(R.id.editSaleTotal);
 
+        activityAddItemFloatingButtonBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_item_floating_button);
+
+        AddItemClickHandler addItemClickHandler = new AddItemClickHandler();
+        activityAddItemFloatingButtonBinding.setAdditemclickHandler(addItemClickHandler);
+
         saveButton = findViewById(R.id.buttonSave);
 
 
         Intent intent = getIntent();
-        if (intent.hasExtra("Item_id")) {
-            itemName = intent.getStringExtra("Item_name");
-            ItemQuentity = intent.getStringExtra("Item_quentity");
-            ItemPurchasePrice = intent.getStringExtra("Item_purchasePrice");
-            ItenPurchasetotal = intent.getStringExtra("Item_purchaseTotal");
-            ItemsalePrice = intent.getStringExtra("Item_salePrice");
-            ItemSaleTotal = intent.getStringExtra("Item_saleTotal");
+        selectedStock = (Stock) intent.getSerializableExtra("stock_object");
 
+        if (selectedStock != null) {
+            activityAddItemFloatingButtonBinding.setStock(selectedStock);
             saveButton.setText("update");
 
-            editTextName.setHint(itemName);
-            editTextName.setHintTextColor(Color.BLUE);
-            editTextQuntity.setHint(ItemQuentity);
-            editTextQuntity.setHintTextColor(Color.BLUE);
-            editTextPruchasePrice.setHint(ItemPurchasePrice);
-            editTextPruchasePrice.setHintTextColor(Color.BLUE);
-            editTextPurchaseTotal.setHint(ItenPurchasetotal);
-            editTextPurchaseTotal.setHintTextColor(Color.BLUE);
-            editTextSalePrice.setHint(ItemsalePrice);
-            editTextSalePrice.setHintTextColor(Color.BLUE);
-            editTextSaleTotal.setHint(ItemSaleTotal);
-            editTextSaleTotal.setHintTextColor(Color.BLUE);
+        } else {
+
+            activityAddItemFloatingButtonBinding.setStock(new Stock());
         }
-
-
-        //        FragmentManager manager=getSupportFragmentManager();
-        //        t=manager.beginTransaction();
-
-
     }
 
     //open carmra function
@@ -208,8 +191,8 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
     //method for validation quentity edit text
     private boolean validateItemQuntity(Stock stock) {
-        String itemQuantity = stock.getItemQuentity();
-        if (itemQuantity.isEmpty()) {
+        double itemQuantity = stock.getItemQuentity();
+        if (itemQuantity == 0) {
             textinputitemquantiity.setError("Item Quantity can't be empty");
             return false;
         } else {
@@ -250,66 +233,10 @@ public class AddUpdateStockActivity extends AppCompatActivity {
         //method of save button which use to cheack all the edit text the fill then save the delait in the table
         public void onSaveClick(View view) {
 
-            int id = getIntent().getIntExtra("Item_id", -1);
-            if (id != -1) {
+            if (selectedStock != null) {
 
                 Stock stock = activityAddItemFloatingButtonBinding.getStock();
 
-                String Name = editTextName.getText().toString().trim();
-                if (Name.isEmpty()) {
-                    editTextName.setText(itemName);
-                    stock.setItemName(itemName);
-                } else {
-                    editTextName.setText(Name);
-                    stock.setItemName(Name);
-                }
-
-                String Quentity = editTextQuntity.getText().toString().trim();
-                if (Quentity.isEmpty()) {
-                    editTextQuntity.setText(ItemQuentity);
-                    stock.setItemQuentity(ItemQuentity);
-                } else {
-                    editTextQuntity.setText(Quentity);
-                    stock.setItemQuentity(Quentity);
-                }
-
-                String Purchaseprice = editTextPruchasePrice.getText().toString().trim();
-                if (Purchaseprice.isEmpty()) {
-                    editTextPruchasePrice.setText(ItemPurchasePrice);
-                    stock.setItemPurchasePerUnit(ItemPurchasePrice);
-                } else {
-                    editTextPruchasePrice.setText(Purchaseprice);
-                    stock.setItemPurchasePerUnit(Purchaseprice);
-                }
-
-                String Purchasetotal = editTextPurchaseTotal.getText().toString().trim();
-                if (Purchasetotal.isEmpty()) {
-                    editTextPurchaseTotal.setText(ItenPurchasetotal);
-                    stock.setItemPuchaseTotal(ItenPurchasetotal);
-                } else {
-                    editTextPurchaseTotal.setText(Purchasetotal);
-                    stock.setItemPuchaseTotal(Purchasetotal);
-                }
-
-                String salePrice = editTextSalePrice.getText().toString().trim();
-                if (salePrice.isEmpty()) {
-                    editTextSalePrice.setText(ItemsalePrice);
-                    stock.setItemSalePerUnit(ItemsalePrice);
-                } else {
-                    editTextSalePrice.setText(salePrice);
-                    stock.setItemSalePerUnit(salePrice);
-                }
-
-                String Saletotal = editTextSaleTotal.getText().toString().trim();
-                if (Saletotal.isEmpty()) {
-                    editTextSaleTotal.setText(ItemSaleTotal);
-                    stock.setItemSaleTotal(ItemSaleTotal);
-                } else {
-                    editTextSaleTotal.setText(Saletotal);
-                    stock.setItemSaleTotal(Saletotal);
-                }
-
-                stock.setItemId(id);
                 addUpdateStockActivityViewModel.update(stock);
                 Toast.makeText(getBaseContext(), "data updated", Toast.LENGTH_SHORT).show();
                 finish();
@@ -324,62 +251,6 @@ public class AddUpdateStockActivity extends AppCompatActivity {
                 Intent intent = new Intent().putExtra("stock", stock);
                 setResult(RESULT_OK, intent);
 
-                // stock is new stock which need to be passed to AddStockFragment.
-
-
-                //addUpdateStockActivityViewModel.insert(stock);
-
-
-                //
-                //getItemSaleTotal
-                //  int Itemid=stock.getItemId();
-                //                        String Name= editTextName.getText().toString().trim();
-                //                        String Quentity= editTextQuntity.getText().toString().trim();
-                //                        String unit=stock.getItemUnit();
-                //                        String Purchaseprice= editTextPruchasePrice.getText().toString().trim();
-                //                        String Purchasetotal= editTextPurchaseTotal.getText().toString().trim();
-                //                        String salePrice= editTextSalePrice.getText().toString().trim();
-                //                        String Saletotal= editTextSaleTotal.getText().toString().trim();
-
-                //
-                //                        activityAddItemFloatingButtonBinding.getStock().setItemName(Name);
-                //                         activityAddItemFloatingButtonBinding.getStock().setItemQuentity(Quentity);
-                //                         activityAddItemFloatingButtonBinding.getStock().setItemUnit(unit);
-                //                         activityAddItemFloatingButtonBinding.getStock().setItemPurchasePerUnit(Purchaseprice);
-                //                         activityAddItemFloatingButtonBinding.getStock().setItemPuchaseTotal(Purchasetotal);
-                //                         activityAddItemFloatingButtonBinding.getStock().setItemSalePerUnit(salePrice);
-                //                         activityAddItemFloatingButtonBinding.getStock().setItemSaleTotal(Saletotal);
-
-                //
-                //                        AddStockFragment addStockFragment=new AddStockFragment(stock);
-
-
-                //                         Intent intent=new Intent(AddUpdateStockActivity.this, AddStockFragment.class);
-                //
-                //                         startActivity(intent);
-
-                //                        intent.putExtra("Item_ID",1);
-                //                        intent.putExtra("Item_NAME",Name);
-                //                        intent.putExtra("Item_QUNTITY",Quentity);
-                //                        intent.putExtra("Item_UNIT",unit);
-                //                        intent.putExtra("Item_PURCHASEPRICE",Purchaseprice);
-                //                        intent.putExtra("Item_PURCHASETOTAL",Purchasetotal);
-                //                        intent.putExtra("Item_SALEPRICE",salePrice);
-                //                        intent.putExtra("Item_SALETOTAL",Saletotal);
-                //
-                //                        startActivity(intent);
-
-
-                //                        Bundle bundle = new Bundle();
-                //                        bundle.putString("edttext", "From Activity");
-                //                        // set Fragmentclass Arguments
-                //                        AddStockFragment fragobj = new AddStockFragment();
-                //                        fragobj.setArguments(bundle);
-                //                        t.commit();
-                //
-
-
-                //AddStockFragment.stockdata(stock);
                 Toast.makeText(getBaseContext(), "data save", Toast.LENGTH_SHORT).show();
                 finish();
 
@@ -395,9 +266,8 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
         public void selectUnit(View view) {
             unit_Button.setBackgroundColor(Color.GREEN);
-            dialogFragementforunit ialogFragementforunit = new dialogFragementforunit(activityAddItemFloatingButtonBinding,addUpdateStockActivityViewModel);
+            dialogFragementforunit ialogFragementforunit = new dialogFragementforunit(activityAddItemFloatingButtonBinding, addUpdateStockActivityViewModel);
             ialogFragementforunit.show(getSupportFragmentManager(), "exampledialog");
-
 
 
         }

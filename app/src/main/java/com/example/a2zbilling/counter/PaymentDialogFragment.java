@@ -30,7 +30,7 @@ import java.util.List;
 
 public class PaymentDialogFragment extends AppCompatDialogFragment {
     private TextView textViewTotal;
-    private int total;
+    private double total;
     private List<String> list;
     private Spinner spinner;
     private String stringTotal;
@@ -39,8 +39,9 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
     private CounterAdapter adepter;
     private EditText editId, editName, editAdd, editPhone;
     private MainActivityViewModel mainActivityViewModel;
+    private List<Customer> customerList;
 
-    public PaymentDialogFragment(int total, MainActivityViewModel mainActivityViewModel, CounterAdapter adepter) {
+    public PaymentDialogFragment(double total, MainActivityViewModel mainActivityViewModel, CounterAdapter adepter) {
         this.total = total;
         this.mainActivityViewModel = mainActivityViewModel;
         this.adepter = adepter;
@@ -58,7 +59,7 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
         editPhone = view.findViewById(R.id.edit_CustPhoneNo);
         editAdd = view.findViewById(R.id.edit_custAdd);
         spinner = view.findViewById(R.id.paymeny_spinner);
-        stringTotal = Integer.toString(total);
+        stringTotal = Double.toString(total);
         editId.setVisibility(View.INVISIBLE);
         editName.setVisibility(View.INVISIBLE);
         editPhone.setVisibility(View.INVISIBLE);
@@ -70,6 +71,7 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
             @Override
             public void onChanged(List<Customer> customers) {
                 Toast.makeText(getContext(), "customers bbbb", Toast.LENGTH_SHORT).show();
+                customerList = customers;
             }
         });
 
@@ -155,7 +157,7 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                 for (int i = 0; i < stockList.size(); i++) {
                     Stock stock2 = stockList.get(i);
                     int itemId = stock2.getItemId();
-                    String quntity = stock2.getItemQuentity();
+                    double quntity = stock2.getItemQuentity();
                     String sellingPrice = stock2.getItemSalePerUnit();
                     String itemName = stock2.getItemName();
                     SaleDeatial saleDeatial = new SaleDeatial();

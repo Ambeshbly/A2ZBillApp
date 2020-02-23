@@ -3,9 +3,6 @@ package com.example.a2zbilling.counter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +14,7 @@ import com.example.a2zbilling.db.entities.Stock;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CounterAdapter extends RecyclerView.Adapter<CounterAdapter.ItemHolder>  {
+public class CounterAdapter extends RecyclerView.Adapter<CounterAdapter.ItemHolder> {
     private List<Stock> items = new ArrayList<>();
 
 
@@ -36,7 +33,7 @@ public class CounterAdapter extends RecyclerView.Adapter<CounterAdapter.ItemHold
         holder.textViewForSalePrice.setText("" + currentItem.getItemSalePerUnit());
         holder.textViewForQnty.setText("" + currentItem.getItemQuentity());
 
-        String values=Integer.toString(Integer.parseInt(currentItem.getItemSalePerUnit())*Integer.parseInt(currentItem.getItemQuentity()));
+        String values = Double.toString(Integer.parseInt(currentItem.getItemSalePerUnit()) * currentItem.getItemQuentity());
         holder.textViewForValues.setText(values);
 
     }
@@ -54,7 +51,7 @@ public class CounterAdapter extends RecyclerView.Adapter<CounterAdapter.ItemHold
 
     class ItemHolder extends RecyclerView.ViewHolder {
 
-       private TextView textViewForItemName,textViewForSalePrice,textViewForQnty,textViewForValues;
+        private TextView textViewForItemName, textViewForSalePrice, textViewForQnty, textViewForValues;
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);

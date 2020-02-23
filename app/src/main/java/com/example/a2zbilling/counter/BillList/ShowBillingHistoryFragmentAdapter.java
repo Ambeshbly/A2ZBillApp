@@ -14,7 +14,7 @@ import com.example.a2zbilling.db.entities.SaleDeatial;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowBillingHistoryFragmentAdapter extends RecyclerView.Adapter<ShowBillingHistoryFragmentAdapter.ItemHolder>  {
+public class ShowBillingHistoryFragmentAdapter extends RecyclerView.Adapter<ShowBillingHistoryFragmentAdapter.ItemHolder> {
     private List<SaleDeatial> saleDeatials = new ArrayList<>();
 
 
@@ -30,12 +30,12 @@ public class ShowBillingHistoryFragmentAdapter extends RecyclerView.Adapter<Show
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         SaleDeatial currentsalesDetail = saleDeatials.get(position);
-        int i=1;
-        holder.textView_for_saleDetail_id.setText(""+currentsalesDetail.getSaleDetailId());
+        int i = 1;
+        holder.textView_for_saleDetail_id.setText("" + currentsalesDetail.getSaleDetailId());
         holder.textView_for_saleDetail_name.setText(currentsalesDetail.getSaleDetailItemName());
         holder.textView_for_saleDetail_price.setText(currentsalesDetail.getSalingPrice());
-        holder.textView_for_saleDetail_qty.setText(currentsalesDetail.getQuntity());
-        String values=Integer.toString(Integer.parseInt(currentsalesDetail.getSalingPrice())*Integer.parseInt(currentsalesDetail.getQuntity()));
+        holder.textView_for_saleDetail_qty.setText(Double.toString(currentsalesDetail.getQuntity()));
+        String values = Double.toString(Integer.parseInt(currentsalesDetail.getSalingPrice()) * currentsalesDetail.getQuntity());
         holder.textView_for_saleDetail_value.setText(values);
 
 
@@ -45,7 +45,6 @@ public class ShowBillingHistoryFragmentAdapter extends RecyclerView.Adapter<Show
     public int getItemCount() {
         return saleDeatials.size();
     }
-
 
 
     public void setSaleDeatials(List<SaleDeatial> saleDeatials) {
@@ -63,7 +62,6 @@ public class ShowBillingHistoryFragmentAdapter extends RecyclerView.Adapter<Show
         private TextView textView_for_saleDetail_value;
 
 
-
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -72,7 +70,6 @@ public class ShowBillingHistoryFragmentAdapter extends RecyclerView.Adapter<Show
             textView_for_saleDetail_price = itemView.findViewById(R.id.text_view_sale_detail_price);
             textView_for_saleDetail_qty = itemView.findViewById(R.id.text_view_sale_detail_qty);
             textView_for_saleDetail_value = itemView.findViewById(R.id.text_view_sale_detail_value);
-
 
 
         }

@@ -67,32 +67,19 @@ public class AvailableStockFragment extends Fragment {
             }
         });
 
-//        searchView1 = view.findViewById(R.id.search_view_By_name1);
-//        searchView1.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                adepter.getFilter().filter(newText);
-//                return false;
-//            }
-//        });
-
         adepter.setOnItemRecyclerViewlistener(new AvailableStockAdapter.OnItemRecyclerViewListener() {
             @Override
             public void onItemClick(Stock stock) {
-                Intent intent = new Intent(getContext(), AddUpdateStockActivity.class);
-                intent.putExtra("Item_id", stock.getItemId());
-                intent.putExtra("Item_name", stock.getItemName());
-                intent.putExtra("Item_quentity", stock.getItemQuentity());
-                // intent.putExtra("Item_unit",stock.getItemUnit());
-                intent.putExtra("Item_purchasePrice", stock.getItemPurchasePerUnit());
-                intent.putExtra("Item_purchaseTotal", stock.getItemPuchaseTotal());
-                intent.putExtra("Item_salePrice", stock.getItemSalePerUnit());
-                intent.putExtra("Item_saleTotal", stock.getItemSaleTotal());
+               Intent intent = new Intent(getContext(), AddUpdateStockActivity.class);
+//                intent.putExtra("Item_id", stock.getItemId());
+//                intent.putExtra("Item_name", stock.getItemName());
+//                intent.putExtra("Item_quentity", stock.getItemQuentity());
+//                // intent.putExtra("Item_unit",stock.getItemUnit());
+//                intent.putExtra("Item_purchasePrice", stock.getItemPurchasePerUnit());
+//                intent.putExtra("Item_purchaseTotal", stock.getItemPuchaseTotal());
+//                intent.putExtra("Item_salePrice", stock.getItemSalePerUnit());
+//                intent.putExtra("Item_saleTotal", stock.getItemSaleTotal());\
+                intent.putExtra("stock_object",stock);
                 startActivity(intent);
             }
         });
