@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,10 +17,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.cardview.widget.CardView;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 
 import com.example.a2zbilling.MainActivityViewModel;
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.databinding.DialogFragmentForPaymentBinding;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
@@ -37,9 +40,12 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
     private CardView cardViewproceed;
     private ArrayList<Stock> stockList;
     private CounterAdapter adepter;
-    private EditText editId, editName, editAdd, editPhone;
+    private EditText   editAdd, editPhone;
+    private AutoCompleteTextView autoCompleteTextViewId,autoCompleteTextViewName;
     private MainActivityViewModel mainActivityViewModel;
     private List<Customer> customerList;
+    private   ArrayList<String> custNameList;
+    private DialogFragmentForPaymentBinding dialogFragmentForPaymentBinding;
 
     public PaymentDialogFragment(double total, MainActivityViewModel mainActivityViewModel, CounterAdapter adepter) {
         this.total = total;
@@ -54,24 +60,34 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_fragment_for_payment, null);
         textViewTotal = view.findViewById(R.id.totalPayment_text);
-        editId = view.findViewById(R.id.edit_custId);
-        editName = view.findViewById(R.id.edit_custName);
+        autoCompleteTextViewId = view.findViewById(R.id.edit_custId);
+        autoCompleteTextViewName = view.findViewById(R.id.edit_custName);
         editPhone = view.findViewById(R.id.edit_CustPhoneNo);
         editAdd = view.findViewById(R.id.edit_custAdd);
         spinner = view.findViewById(R.id.paymeny_spinner);
         stringTotal = Double.toString(total);
-        editId.setVisibility(View.INVISIBLE);
-        editName.setVisibility(View.INVISIBLE);
+        autoCompleteTextViewId.setVisibility(View.INVISIBLE);
+        autoCompleteTextViewName.setVisibility(View.INVISIBLE);
         editPhone.setVisibility(View.INVISIBLE);
         editAdd.setVisibility(View.INVISIBLE);
         textViewTotal.setText(stringTotal);
+        dialogFragmentForPaymentBinding= DataBindingUtil.setContentView(getActivity(),R.layout.dialog_fragment_for_payment);
+        dialogFragmentForPaymentBinding.setCustomer(new Customer());
+
 
 
         mainActivityViewModel.getAllCustomer().observe(this.getActivity(), new Observer<List<Customer>>() {
             @Override
             public void onChanged(List<Customer> customers) {
+                customerList=customers;
                 Toast.makeText(getContext(), "customers bbbb", Toast.LENGTH_SHORT).show();
-                customerList = customers;
+                custNameList =new ArrayList<String>();
+                for (int i = 0; i < customers.size(); i++) {
+                    Customer customer = customers.get(i);
+                    double value = 0;
+                    String name = customer.getCustomerName();
+                    custNameList.add(name);
+                }
             }
         });
 
@@ -118,14 +134,15 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                         mainActivityViewModel.setSales(sales3);
                         break;
                     case 4:
-                        editId.setVisibility(View.VISIBLE);
-                        editName.setVisibility(View.VISIBLE);
+                        autoCompleteTextViewId.setVisibility(View.VISIBLE);
+                        autoCompleteTextViewName.setVisibility(View.VISIBLE);
                         editPhone.setVisibility(View.VISIBLE);
                         editAdd.setVisibility(View.VISIBLE);
+                        ArrayAdapter<String> arrayAdapterForCustomerList=new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, custNameList);
+                        autoCompleteTextViewName.setAdapter(arrayAdapterForCustomerList);
 
 
-                        break;
-                    case 5:
+               case 5:
                         Sales sales5 = new Sales();
                         sales5.setTotalBillAmt(stringTotal);
                         sales5.setSalePode("other");

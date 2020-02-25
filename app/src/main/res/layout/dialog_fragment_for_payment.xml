@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="customer"
+            type="com.example.a2zbilling.db.entities.Customer" />
+    </data>
+<RelativeLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -78,25 +86,30 @@
                 android:textSize="12sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-    <EditText
+
+    <AutoCompleteTextView
         android:id="@+id/edit_custId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/select_textview"
+        android:layout_below="@+id/paymeny_spinner"
+        android:completionThreshold="1"
         android:hint="cust Id"
-        android:backgroundTint="@color/colorPrimary"
         android:padding="8dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/colorPrimary" />
 
-    <EditText
+
+    <AutoCompleteTextView
         android:id="@+id/edit_custName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edit_custId"
-        android:hint="cust Name"
-        android:backgroundTint="@color/colorPrimary"
+        android:completionThreshold="1"
+        android:text="@={customer.customerName}"
+        android:hint="cust name"
         android:padding="8dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/colorPrimary" />
 
     <EditText
         android:id="@+id/edit_CustPhoneNo"
@@ -105,6 +118,7 @@
         android:backgroundTint="@color/colorPrimary"
         android:layout_below="@+id/edit_custName"
         android:hint="cust Phone"
+        android:text="@={customer.customerPhoneNo}"
         android:padding="8dp"
         android:layout_marginTop="30dp"/>
 
@@ -116,7 +130,10 @@
         android:hint="cust Address"
         android:backgroundTint="@color/colorPrimary"
         android:padding="8dp"
+        android:text="@={customer.customerAddress}"
         android:layout_marginTop="30dp"/>
 
 
 </RelativeLayout>
+
+</layout>
