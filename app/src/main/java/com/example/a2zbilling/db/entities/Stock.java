@@ -174,5 +174,8 @@ public class Stock extends BaseObservable implements Serializable {
         this.itemSaleTotal = itemSaleTotal;
     }
 
-
+    @Override
+    public String toString() {
+        return itemId+"    "+itemName;
+    }
 }

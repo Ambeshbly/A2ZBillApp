@@ -128,7 +128,7 @@ public class CounterFragment extends Fragment {
                 } else {
                     double total = mainActivityViewModel.getSaleTotal();
                     ialogFragementforunit = new PaymentDialogFragment(total, mainActivityViewModel, adepter);
-                    ialogFragementforunit.show(getChildFragmentManager(), "exampledialog");
+                    ialogFragementforunit.show(getActivity().getSupportFragmentManager(), "exampledialog");
                     mainActivityViewModel.update(updateStock);
                 }
             }

@@ -22,4 +22,9 @@ public interface SaleDeatailDao {
 
     @Query("select * from SaleDeatial where saledetailsaleid=:saleId")
     List<SaleDeatial> getAllDetailList(int saleId);
+
+    @Query("select * from SaleDeatial ")
+    LiveData<List<SaleDeatial>> getSaleDetailBaseOnItem1();
+
+
 }

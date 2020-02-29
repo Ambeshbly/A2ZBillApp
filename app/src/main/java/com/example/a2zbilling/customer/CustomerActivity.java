@@ -30,6 +30,7 @@ public class CustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
+        setTitle("Customers");
 
         //finding floatin button in xml file
         floatingActionButton=findViewById(R.id.bt_float);
@@ -52,7 +53,7 @@ public class CustomerActivity extends AppCompatActivity {
         customerActivityViewModel = ViewModelProviders.of(this).get(CustomerActivityViewModel.class);
 
         //which fragment is show whenever app is open
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner,new DebtCustomerFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner,new DebtCustomerFragment(customerActivityViewModel)).commit();
 
 
     }
@@ -68,7 +69,7 @@ public class CustomerActivity extends AppCompatActivity {
             Fragment selectedFragment=new YouFragment();
             switch (menuItem.getItemId()){
                 case R.id.nav_debt_customer:
-                    selectedFragment=new DebtCustomerFragment();
+                    selectedFragment=new DebtCustomerFragment(customerActivityViewModel);
                     break;
                 case R.id.nav_all_customer:
                     selectedFragment=new AllCustomerFragment(customerActivityViewModel);

@@ -175,14 +175,14 @@
                android:layout_width="match_parent"
                android:layout_height="match_parent">
                <ImageView
-                   android:src="@drawable/billingcounter"
+                   android:src="@drawable/profitandloss"
                    android:layout_width="80dp"
                    android:layout_height="80dp"/>
                <TextView
                    android:layout_marginTop="12dp"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="billing counter"
+                   android:text="profit/loss"
                    android:textSize="18sp"/>
            </LinearLayout>
        </androidx.cardview.widget.CardView>

@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="customer"
-            type="com.example.a2zbilling.db.entities.Customer" />
-    </data>
 <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/totalPayment_textview"
@@ -87,6 +81,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+
     <AutoCompleteTextView
         android:id="@+id/edit_custId"
         android:layout_width="match_parent"
@@ -95,8 +90,7 @@
         android:completionThreshold="1"
         android:hint="cust Id"
         android:padding="8dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/colorPrimary" />
+        android:layout_marginTop="30dp" />
 
 
     <AutoCompleteTextView
@@ -105,35 +99,30 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/edit_custId"
         android:completionThreshold="1"
-        android:text="@={customer.customerName}"
         android:hint="cust name"
         android:padding="8dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/colorPrimary" />
+        android:layout_marginTop="30dp" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/edit_CustPhoneNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
         android:layout_below="@+id/edit_custName"
         android:hint="cust Phone"
-        android:text="@={customer.customerPhoneNo}"
+        android:completionThreshold="1"
         android:padding="8dp"
         android:layout_marginTop="30dp"/>
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/edit_custAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:completionThreshold="1"
         android:layout_below="@+id/edit_CustPhoneNo"
         android:hint="cust Address"
-        android:backgroundTint="@color/colorPrimary"
         android:padding="8dp"
-        android:text="@={customer.customerAddress}"
         android:layout_marginTop="30dp"/>
 
 
 </RelativeLayout>
 
-</layout>

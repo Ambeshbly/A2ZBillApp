@@ -59,20 +59,20 @@ public class MainActivityViewModel extends AndroidViewModel {
         this.newlyAddedStocks.getValue().add(newlyAddedStock);
 
     }
-
-
     public void insertsales(Sales sales) {
         repository.insertSales(sales);
     }
-
     public void insertCustomer(Customer customer) {
         repository.insertCustomer(customer);
     }
+    public void updateCustomer(Customer customer) {
+        repository.updateCustomer(customer);
+    }
+
 
     public LiveData<List<Sales>> getAllSales() {
         return allSales;
     }
-
     public LiveData<List<Customer>> getAllCustomer() {
         return allcustomer;
     }
@@ -82,28 +82,18 @@ public class MainActivityViewModel extends AndroidViewModel {
         repository.insertSaleDeatail(saleDeatial);
     }
 
-
     public void insert(Stock stock) {
         repository.insert(stock);
     }
-
     public void delete(Stock stock) {
         repository.delete(stock);
     }
-
     public void update(Stock stock) {
         repository.update(stock);
     }
-
-
-    public void updateCustomer(Customer customer) {
-        repository.updateCustomer(customer);
-    }
-
     public Sales getSales() {
         return sales;
     }
-
     public void setSales(Sales sales) {
         this.sales = sales;
     }

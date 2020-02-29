@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         addToCartActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
 
+
         //which fragment is show whenever app is open
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner, new CounterFragment(addToCartActivityViewModel)).commit();
 

@@ -6,10 +6,14 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.example.a2zbilling.db.entities.Customer;
+import com.example.a2zbilling.db.entities.Expenses;
+import com.example.a2zbilling.db.entities.ExpensesCategory;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.db.room.CustomerDao;
+import com.example.a2zbilling.db.room.ExpensesCategoryDao;
+import com.example.a2zbilling.db.room.ExpensesDao;
 import com.example.a2zbilling.db.room.SaleDeatailDao;
 import com.example.a2zbilling.db.room.SalesDao;
 import com.example.a2zbilling.db.room.SqlLiteDatabase;
@@ -17,13 +21,13 @@ import com.example.a2zbilling.db.room.StockDao;
 
 import java.util.List;
 
-import io.reactivex.Maybe;
-
 public class Repository {
     private StockDao stockDao;
     private SalesDao salesDao;
     private CustomerDao customerDao;
     private SaleDeatailDao saleDeatailDao;
+    private ExpensesDao expensesDao;
+    private ExpensesCategoryDao expensesCategoryDao;
 
 
     public Repository(Application application) {
@@ -32,6 +36,8 @@ public class Repository {
         salesDao = database.salesDao();
         customerDao = database.customerDao();
         saleDeatailDao = database.saleDeatailDao();
+        expensesDao=database.expensesDao();
+        expensesCategoryDao=database.expensesCategoryDao();
     }
 
 
@@ -50,11 +56,56 @@ public class Repository {
     public LiveData<List<Stock>> getAllItems() {
         return stockDao.getAllItems();
     }
-
-
+    public LiveData<List<Expenses>> getAllExpenses() {
+        return expensesDao.getAllExpenses();
+    }
+    public LiveData<List<ExpensesCategory>> getAllExpenseCategoryBaseOnExpenseId(int expenseId) {
+        return expensesCategoryDao.getAllExpensesCategory(expenseId);
+    }
     public void insertSales(Sales sales) {
         new InsertSalesAsynckTask(salesDao).execute(sales);
     }
+
+
+    public void insertExpensesCategory(ExpensesCategory expensesCategory) {
+        new InsertExpensesCategoryAsynckTask(expensesCategoryDao).execute(expensesCategory);
+    }
+    private static class InsertExpensesCategoryAsynckTask extends AsyncTask<ExpensesCategory, Void, Void> {
+        private ExpensesCategoryDao expensesCategoryDao;
+
+        public InsertExpensesCategoryAsynckTask(ExpensesCategoryDao expensesCategoryDao) {
+            this.expensesCategoryDao = expensesCategoryDao;
+        }
+
+        @Override
+        protected Void doInBackground(ExpensesCategory... expensesCategories) {
+            expensesCategoryDao.insert(expensesCategories[0]);
+            return null;
+        }
+    }
+
+
+
+
+    public void insertExpenses(Expenses expenses) {
+        new InsertExpensesAsynckTask(expensesDao).execute(expenses);
+    }
+
+
+    private static class InsertExpensesAsynckTask extends AsyncTask<Expenses, Void, Void> {
+        private ExpensesDao expensesDao;
+
+        public InsertExpensesAsynckTask(ExpensesDao expensesDao) {
+            this.expensesDao = expensesDao;
+        }
+
+        @Override
+        protected Void doInBackground(Expenses... expenses) {
+            expensesDao.insert(expenses[0]);
+            return null;
+        }
+    }
+
 
     public LiveData<List<Sales>> getAllSales() {
         return salesDao.getAllSales();
@@ -67,6 +118,11 @@ public class Repository {
 
     public LiveData<List<SaleDeatial>> getSalesDeatil(int salesId) {
         return saleDeatailDao.getSaleDetail(salesId);
+    }
+
+
+    public LiveData<List<SaleDeatial>> getSalesDeatilBaseOnItemId1() {
+        return saleDeatailDao.getSaleDetailBaseOnItem1();
     }
 
     public List<SaleDeatial> getSaleDeatialList(int saleId) {

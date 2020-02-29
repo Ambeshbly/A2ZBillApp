@@ -59,8 +59,7 @@ public class AddUpdateCustomerFragment extends AppCompatDialogFragment {
         cardviewCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), CustomerActivity.class);
-                startActivity(intent);
+               dismiss();
             }
         });
         cardViewSave.setOnClickListener(new View.OnClickListener() {

@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.a2zbilling.customer.CustomerActivity;
 import com.example.a2zbilling.stock.StockActivity;
+import com.example.a2zbilling.support.SupportActivity;
 
 public class Dashboard extends Fragment  {
 
@@ -26,6 +27,7 @@ public class Dashboard extends Fragment  {
         return inflater.inflate(R.layout.fragment_dashboard, container, false);
     }
 
+    //billingcounter_cardview
     //override method onStart because add action listener in the Add item cardview
     @Override
     public void onStart() {
@@ -39,6 +41,16 @@ public class Dashboard extends Fragment  {
 
         //finding customer cardview in the xml file
         CardView customerCardView=(CardView)getView().findViewById(R.id.customer_cardview);
+
+        //finding customer cardview in the xml file
+        CardView supportCardView=(CardView)getView().findViewById(R.id.support_cardview);
+
+        //finding customer cardview in the xml file
+        CardView profiteAndlossCardView=(CardView)getView().findViewById(R.id.billingcounter_cardview);
+
+        //finding customer cardview in the xml file
+        CardView expensesCardView=(CardView)getView().findViewById(R.id.expenses_cardview);
+
 
         //add action listener in the stock cardview
         stocksCardView.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +69,32 @@ public class Dashboard extends Fragment  {
             public void onClick(View v) {
                 mediaPlayer.start();
                 Intent intent=new Intent(getContext(), CustomerActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        supportCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             Intent intent=new Intent(getContext(),SupportActivity.class);
+             startActivity(intent);
+            }
+        });
+
+
+        profiteAndlossCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(),ProfitAndLossActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        expensesCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(),ExpensesActivity.class);
                 startActivity(intent);
             }
         });
