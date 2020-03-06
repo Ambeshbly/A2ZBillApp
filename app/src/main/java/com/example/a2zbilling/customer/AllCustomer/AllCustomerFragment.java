@@ -1,5 +1,6 @@
 package com.example.a2zbilling.customer.AllCustomer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.customer.CustomerActivityViewModel;
+import com.example.a2zbilling.customer.ShowCustomerTransactionDetailActivity;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.Stock;
+import com.example.a2zbilling.stock.AvailableStock.AvailableStockAdapter;
+import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
 
 import java.util.List;
 
@@ -33,13 +37,8 @@ public class AllCustomerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.all_customer,container,false);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        recyclerView=getView().findViewById(R.id.recycler_view);
+       View view= inflater.inflate(R.layout.all_customer,container,false);
+        recyclerView=view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         adepter=new AllCustomerAdapter(getContext(),customerActivityViewModel);
@@ -51,5 +50,15 @@ public class AllCustomerFragment extends Fragment {
                 adepter.setCustomers(customers);
             }
         });
+
+        adepter.setOnItemRecyclerViewlistener(new AllCustomerAdapter.OnItemRecyclerViewListener() {
+            @Override
+            public void onItemClick(Customer customer) {
+                Intent intent = new Intent(getContext(), ShowCustomerTransactionDetailActivity.class);
+                intent.putExtra("customer_transaction",customer);
+                startActivity(intent);
+            }
+        });
+        return view;
     }
 }

@@ -44,6 +44,16 @@
                     android:layout_alignParentStart="true" />
 
                 <TextView
+                    android:id="@+id/text_date2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Expenses"
+                    android:layout_below="@+id/text_expeses_category"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:layout_alignParentStart="true" />
+
+
+                <TextView
                     android:id="@+id/text_expeses1_payment_mode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

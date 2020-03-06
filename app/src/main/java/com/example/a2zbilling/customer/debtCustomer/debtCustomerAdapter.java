@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.customer.AddUpdateCustomerFragment;
+import com.example.a2zbilling.customer.AllCustomer.AllCustomerAdapter;
 import com.example.a2zbilling.customer.CustomerActivity;
 import com.example.a2zbilling.customer.CustomerActivityViewModel;
 import com.example.a2zbilling.customer.ShowCustomerDetailDialogFragment;
@@ -26,6 +27,7 @@ public class debtCustomerAdapter extends RecyclerView.Adapter<debtCustomerAdapte
     private List<Customer> customers = new ArrayList<>();
     Context context;
     private CustomerActivityViewModel customerActivityViewModel;
+    private debtCustomerAdapter.OnItemRecyclerViewListener listener;
 
     public debtCustomerAdapter(Context context, CustomerActivityViewModel customerActivityViewModel) {
         this.context = context;
@@ -45,7 +47,7 @@ public class debtCustomerAdapter extends RecyclerView.Adapter<debtCustomerAdapte
         final Customer currentcustomer = customers.get(position);
         holder.textViewForCustomerName.setText(currentcustomer.getCustomerName());
         holder.textViewForCoustomerId.setText(""+currentcustomer.getCustId());
-        holder.textViewForCustomerdebt.setText("-"+currentcustomer.getDebt());
+        holder.textViewForCustomerdebt.setText("-"+currentcustomer.getDebt()+" \u20B9");
         holder.text_id.setText("Id : ");
         holder.text_debt.setText("Debt.");
         holder.option_menu.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +86,17 @@ public class debtCustomerAdapter extends RecyclerView.Adapter<debtCustomerAdapte
         this.customers = customers;
         notifyDataSetChanged();
     }
+
+    public void setOnItemRecyclerViewlistener(debtCustomerAdapter.OnItemRecyclerViewListener listener) {
+        this.listener = listener;
+
+    }
+
+    public interface OnItemRecyclerViewListener {
+        public void onItemClick(Customer customer);
+    }
+
+
     @Override
     public int getItemCount() {
         return customers.size();
@@ -105,6 +118,16 @@ public class debtCustomerAdapter extends RecyclerView.Adapter<debtCustomerAdapte
             text_id=itemView.findViewById(R.id.text_id);
             text_debt=itemView.findViewById(R.id.text_debt);
             option_menu=itemView.findViewById(R.id.menu_in_recyclerview);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(customers.get(position));
+                    }
+                }
+            });
 
         }
     }

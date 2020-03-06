@@ -15,16 +15,26 @@ public class ExpensesCategory extends BaseObservable implements Serializable {
     private String expenseCategoryTotal;
     private String expenseCategoryPaymentMode;
     private String expenseCategoryDescription;
+    private String date;
 
-    public ExpensesCategory(int expenseId, String expenseCategoryTotal, String expenseCategoryPaymentMode, String expenseCategoryDescription,String expensesName) {
+    public ExpensesCategory(int expenseId, String expenseCategoryTotal, String expenseCategoryPaymentMode, String expenseCategoryDescription,String expensesName,String date) {
         this.expenseId = expenseId;
         this.expenseCategoryTotal = expenseCategoryTotal;
         this.expenseCategoryPaymentMode = expenseCategoryPaymentMode;
         this.expenseCategoryDescription = expenseCategoryDescription;
         this.expenseName=expensesName;
+        this.date=date;
     }
 
     public ExpensesCategory() {
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public int getExpenseCategoryid() {

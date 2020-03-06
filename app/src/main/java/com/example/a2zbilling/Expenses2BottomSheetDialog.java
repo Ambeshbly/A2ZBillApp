@@ -19,7 +19,9 @@ import com.example.a2zbilling.db.entities.Expenses;
 import com.example.a2zbilling.db.entities.ExpensesCategory;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Expenses2BottomSheetDialog extends BottomSheetDialogFragment {
@@ -93,7 +95,9 @@ public class Expenses2BottomSheetDialog extends BottomSheetDialogFragment {
             public void onClick(View v) {
                 String total=editTextTotal.getText().toString();
                 String description=editTextDescription.getText().toString();
-                ExpensesCategory expensesCategory=new ExpensesCategory(expenseId,total,paymentMode,description,expensescategory);
+                Calendar calendar=Calendar.getInstance();
+                String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
+                ExpensesCategory expensesCategory=new ExpensesCategory(expenseId,total,paymentMode,description,expensescategory,selecteddate);
                 expensesActivity2ViewModel.insertExpensesCategory(expensesCategory);
                 Toast.makeText(getContext(),"sucessful",Toast.LENGTH_SHORT).show();
                 dismiss();

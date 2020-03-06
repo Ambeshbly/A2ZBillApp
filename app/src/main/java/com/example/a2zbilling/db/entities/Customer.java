@@ -10,11 +10,12 @@ import androidx.room.PrimaryKey;
 
 import com.example.a2zbilling.BR;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "customer")
-public class Customer extends BaseObservable {
+public class Customer extends BaseObservable implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int custId;

@@ -12,8 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ExpensesActivity2"
-            android:parentActivityName=".ExpensesActivity"></activity>
+        <activity android:name=".customer.CustomerPaymentHistoryActivity"></activity>
+        <activity android:name=".customer.ShowCustomerTransactionDetailActivity" />
+        <activity
+            android:name=".ExpensesActivity2"
+            android:parentActivityName=".ExpensesActivity" />
         <activity
             android:name=".ExpensesActivity"
             android:theme="@style/AppTheme.ActionBar" />
@@ -35,9 +38,10 @@
             android:name=".stock.StockActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.ActionBar" />
-        <activity android:name=".customer.CustomerActivity"
-            android:theme="@style/AppTheme.ActionBar"
-            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".customer.CustomerActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.ActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

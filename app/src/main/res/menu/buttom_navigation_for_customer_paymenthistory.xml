@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
+    <item
+        android:id="@+id/nav_debt_history"
+        android:icon="@drawable/payment"
+        android:title="debt history"/>
+
+    <item
+        android:id="@+id/nav_payment_history"
+        android:icon="@drawable/payment1"
+        android:title="payment history"/>
+
+</menu>

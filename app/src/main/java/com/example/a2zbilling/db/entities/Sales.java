@@ -11,8 +11,18 @@ public class Sales {
     private String totalBillAmt;
     private int salescustId;
     private String salePode;
+    private String date;
+
     // private Date date;
 
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getSalePode() {
         return salePode;

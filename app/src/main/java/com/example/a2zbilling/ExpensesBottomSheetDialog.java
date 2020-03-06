@@ -17,7 +17,9 @@ import androidx.cardview.widget.CardView;
 import com.example.a2zbilling.db.entities.Expenses;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ExpensesBottomSheetDialog extends BottomSheetDialogFragment {
@@ -90,7 +92,9 @@ public class ExpensesBottomSheetDialog extends BottomSheetDialogFragment {
                 String expensescategory=editTextExpenseCategory.getText().toString();
                 String expensestotal=editTextTotal.getText().toString();
                 String expensesDescription=editTextDescription.getText().toString();
-                Expenses expenses=new Expenses(expensescategory,expensestotal,paymentMode,expensesDescription);
+                Calendar calendar=Calendar.getInstance();
+                String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
+                Expenses expenses=new Expenses(expensescategory,expensestotal,paymentMode,expensesDescription,selecteddate);
                 expensesActivityViewModel.insertExpenses(expenses);
                 Toast.makeText(getContext(),"expneses added",Toast.LENGTH_SHORT).show();
                 dismiss();

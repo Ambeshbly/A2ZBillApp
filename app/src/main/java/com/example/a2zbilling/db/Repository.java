@@ -111,6 +111,11 @@ public class Repository {
         return salesDao.getAllSales();
     }
 
+    public LiveData<List<Sales>> getAllSalesForcustomer(int custId) {
+        return salesDao.getSalesOfCustomer(custId);
+    }
+
+
 
     public void insertSaleDeatail(SaleDeatial saleDeatial) {
         new InsertSalesDeatilAsynckTask(saleDeatailDao).execute(saleDeatial);

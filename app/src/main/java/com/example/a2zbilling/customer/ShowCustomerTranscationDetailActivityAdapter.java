@@ -1,4 +1,4 @@
-package com.example.a2zbilling.counter.BillList;
+package com.example.a2zbilling.customer;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +14,10 @@ import com.example.a2zbilling.db.entities.Sales;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistoryActivityAdapter.ItemHolder>  {
+public class ShowCustomerTranscationDetailActivityAdapter extends RecyclerView.Adapter<ShowCustomerTranscationDetailActivityAdapter.ItemHolder>  {
     private List<Sales> sales = new ArrayList<>();
 
-    private BillHistoryActivityAdapter.OnItemRecyclerViewListener listener;
+    private ShowCustomerTranscationDetailActivityAdapter.OnItemRecyclerViewListener listener;
 
     @NonNull
     @Override
@@ -32,7 +32,7 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
         Sales currentsales = sales.get(position);
         holder.textView_for_saleId.setText(""+currentsales.getSaleId());
         holder.textViewForTotalAmtText.setText("Total Amt:  ");
-        holder.textViewForTotal.setText(currentsales.getTotalBillAmt());
+        holder.textViewForTotal.setText(currentsales.getTotalBillAmt()+" \u20B9");
         holder.textViewpaymentMode.setText(currentsales.getSalePode());
         holder.textViewdate.setText("Date : "+currentsales.getDate());
 
@@ -48,14 +48,14 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
         notifyDataSetChanged();
     }
 
-    public void setOnItemRecyclerViewlistener(BillHistoryActivityAdapter.OnItemRecyclerViewListener listener) {
+    public void setOnItemRecyclerViewlistener(ShowCustomerTranscationDetailActivityAdapter.OnItemRecyclerViewListener listener) {
         this.listener = listener;
 
-    }
+   }
 
     public interface OnItemRecyclerViewListener {
         public void onItemClick(Sales sales);
-    }
+   }
 
     class ItemHolder extends RecyclerView.ViewHolder {
 
@@ -76,7 +76,6 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
             textViewpaymentMode = itemView.findViewById(R.id.paymenttext);
             textViewdate=itemView.findViewById(R.id.paymentdate);
 
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -85,7 +84,7 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
                         listener.onItemClick(sales.get(position));
                     }
                 }
-            });
+          });
 
         }
     }

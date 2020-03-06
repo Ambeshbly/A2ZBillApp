@@ -34,6 +34,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ItemHo
         holder.textViewForExpensesCategory.setText(currentExpenses.getExpenseCategory());
         holder.textViewForTotal.setText(currentExpenses.getExpenseTotal()+"\u20B9");
         holder.textViewForPaymentMode.setText("payment Mode: "+ currentExpenses.getPaymentMode());
+        holder.textDate.setText("Date : "+currentExpenses.getDate());
     }
 
     @Override
@@ -55,12 +56,13 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ItemHo
     }
 
     class ItemHolder extends RecyclerView.ViewHolder {
-        private TextView textViewForExpensesCategory, textViewForTotal, textViewForPaymentMode;
+        private TextView textViewForExpensesCategory, textViewForTotal, textViewForPaymentMode,textDate;
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
             textViewForExpensesCategory = itemView.findViewById(R.id.text_expeses_category);
             textViewForTotal = itemView.findViewById(R.id.text_expenses_total);
             textViewForPaymentMode = itemView.findViewById(R.id.text_expeses_payment_mode);
+            textDate = itemView.findViewById(R.id.text_date);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

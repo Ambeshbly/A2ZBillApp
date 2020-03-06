@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.counter.BillList.BillHistoryActivityViewModel;
 import com.example.a2zbilling.counter.BillList.ShowBillingHistoryFragmentAdapter;
+import com.example.a2zbilling.customer.ShowCustomerTransactionDetailActivityViewModel;
+import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 
@@ -28,9 +30,18 @@ public class ShowBillingHistoryFragments extends Fragment {
     ShowBillingHistoryFragmentAdapter adepter;
     private BillHistoryActivityViewModel billHistoryActivityViewModel;
     TextView textViewTotal;
+    private int cheak;
+    private double grandTotal;
+
+    private ShowCustomerTransactionDetailActivityViewModel showCustomerTransactionDetailActivityViewModel;
 
     public ShowBillingHistoryFragments(BillHistoryActivityViewModel billHistoryActivityViewModel) {
         this.billHistoryActivityViewModel=billHistoryActivityViewModel;
+    }
+
+    public ShowBillingHistoryFragments(ShowCustomerTransactionDetailActivityViewModel showCustomerTransactionDetailActivityViewModel,int cheak) {
+        this.showCustomerTransactionDetailActivityViewModel = showCustomerTransactionDetailActivityViewModel;
+        this.cheak=cheak;
     }
 
     //override method onCreateView
@@ -47,34 +58,37 @@ public class ShowBillingHistoryFragments extends Fragment {
 
         adepter = new ShowBillingHistoryFragmentAdapter();
         recyclerView.setAdapter(adepter);
+        if (cheak==1){
 
-        Sales sales=billHistoryActivityViewModel.getSales();
-        int salesId=sales.getSaleId();
+            Sales sales=showCustomerTransactionDetailActivityViewModel.getSales();
+            int salesId=sales.getSaleId();
+            showCustomerTransactionDetailActivityViewModel.getAllSaleDetail(salesId).observe(getViewLifecycleOwner(), new Observer<List<SaleDeatial>>() {
+                @Override
+                public void onChanged(List<SaleDeatial> saleDeatials) {
+                    adepter.setSaleDeatials(saleDeatials);
+                    for (int i = 0; i < saleDeatials.size(); i++) {
+                        SaleDeatial saleDeatial = saleDeatials.get(i);
+                        grandTotal=grandTotal+Double.parseDouble(saleDeatial.getSalingPrice());
+                        textViewTotal.setText(""+grandTotal+" \u20B9");
+                    }
+                }
+            });
+        }else{
 
-
-
-      billHistoryActivityViewModel.getAllSaleDetail(salesId).observe(getViewLifecycleOwner(), new Observer<List<SaleDeatial>>() {
-          @Override
-          public void onChanged(List<SaleDeatial> saleDeatials) {
-              adepter.setSaleDeatials(saleDeatials);
-          }
-      });
-
-
-
-//        List<SaleDeatial> saleDeatialList=billHistoryActivityViewModel.getSaleDeatialList(salesId);
-//
-//
-//        int total = 0;
-//
-//        for (int i = 0; i < saleDeatialList.size(); i++) {
-//           SaleDeatial saleDeatial = saleDeatialList.get(i);
-//            int value = 0;
-//            value = Integer.parseInt(saleDeatial.getQuntity()) * Integer.parseInt(saleDeatial.getSalingPrice());
-//           total = total + value;
-//        }
-//        String totalString = Integer.toString(total);
-        textViewTotal.setText("100");
+            Sales sales=billHistoryActivityViewModel.getSales();
+            int salesId=sales.getSaleId();
+            billHistoryActivityViewModel.getAllSaleDetail(salesId).observe(getViewLifecycleOwner(), new Observer<List<SaleDeatial>>() {
+                @Override
+                public void onChanged(List<SaleDeatial> saleDeatials) {
+                    adepter.setSaleDeatials(saleDeatials);
+                    for (int i = 0; i < saleDeatials.size(); i++) {
+                        SaleDeatial saleDeatial = saleDeatials.get(i);
+                        grandTotal=grandTotal+Double.parseDouble(saleDeatial.getSalingPrice());
+                        textViewTotal.setText(""+grandTotal+" \u20B9");
+                    }
+                }
+            });
+        }
 
         return view;
     }

@@ -31,6 +31,7 @@ public class ExpensesActivity2 extends AppCompatActivity {
     private  int total=0;
     private TextView textViewTotal,textViewPaymentMode;
     private CardView cardViewEye;
+    private TextView textViewDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,7 @@ public class ExpensesActivity2 extends AppCompatActivity {
         textViewTotal=findViewById(R.id.text_expenses1_total);
         textViewPaymentMode=findViewById(R.id.text_expeses1_payment_mode);
         toolbar=findViewById(R.id.myToolbar);
+        textViewDate=findViewById(R.id.text_date1);
         textViewToolbarTotal=findViewById(R.id.toolbar_total);
         cardViewEye=findViewById(R.id.cardView_eye);
         setSupportActionBar(toolbar);
@@ -56,6 +58,7 @@ public class ExpensesActivity2 extends AppCompatActivity {
 
         Intent intent = getIntent();
         final Expenses expenses = (Expenses) intent.getSerializableExtra("expenses");
+        textViewDate.setText("Date : "+expenses.getDate());
         textViewTotal.setText(expenses.getExpenseTotal()+"\u20B9");
         textViewPaymentMode.setText("payment mode : "+expenses.getPaymentMode());
         textViewtitle.setText(expenses.getExpenseCategory());

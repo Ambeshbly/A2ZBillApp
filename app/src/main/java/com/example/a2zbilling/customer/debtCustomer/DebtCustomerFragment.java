@@ -1,5 +1,6 @@
 package com.example.a2zbilling.customer.debtCustomer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.customer.AllCustomer.AllCustomerAdapter;
 import com.example.a2zbilling.customer.CustomerActivityViewModel;
+import com.example.a2zbilling.customer.ShowCustomerTransactionDetailActivity;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.Stock;
 
@@ -55,6 +57,14 @@ public class DebtCustomerFragment extends Fragment {
 
                 }
                 adepter.setCustomers(customerList);
+            }
+        });
+        adepter.setOnItemRecyclerViewlistener(new debtCustomerAdapter.OnItemRecyclerViewListener() {
+            @Override
+            public void onItemClick(Customer customer) {
+                Intent intent = new Intent(getContext(), ShowCustomerTransactionDetailActivity.class);
+                intent.putExtra("customer_transaction",customer);
+                startActivity(intent);
             }
         });
       return view;
