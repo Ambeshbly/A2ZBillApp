@@ -6,12 +6,14 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.databinding.ActivityAddToCardBinding;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.AvailableStock.AvailableStockAdapter;
 
@@ -19,24 +21,19 @@ import java.util.List;
 
 public class SellingStocksActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
     AddToCartAdapter adepter;
-    SearchView searchView1;
     private SellingActivityViewModel sellingActivityViewModel;
+    private ActivityAddToCardBinding activityAddToCardBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_to_card);
-
-        recyclerView = findViewById(R.id.recycler_view4);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-
+        activityAddToCardBinding= DataBindingUtil.setContentView(this,R.layout.activity_add_to_card);
+        activityAddToCardBinding.recyclerView4.setLayoutManager(new LinearLayoutManager(this));
+        activityAddToCardBinding.recyclerView4.setHasFixedSize(true);
         adepter = new AddToCartAdapter();
-        recyclerView.setAdapter(adepter);
-
-
+        activityAddToCardBinding.recyclerView4.setAdapter(adepter);
         sellingActivityViewModel = ViewModelProviders.of(this).get(SellingActivityViewModel.class);
 
         sellingActivityViewModel.getAllItems().observe(this, new Observer<List<Stock>>() {
@@ -46,10 +43,7 @@ public class SellingStocksActivity extends AppCompatActivity {
                 adepter.setItems(stocks);
             }
         });
-
-
-        searchView1 = findViewById(R.id.search_view_of_addtocart);
-        searchView1.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        activityAddToCardBinding.searchViewOfAddtocart.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -64,20 +58,12 @@ public class SellingStocksActivity extends AppCompatActivity {
 
         //set tittle bar for add to card activity
         getSupportActionBar().setTitle("Billing Counter");
-
-
         adepter.setOnItemRecyclerViewlistener(new AvailableStockAdapter.OnItemRecyclerViewListener() {
             @Override
             public void onItemClick(Stock stock) {
-
-
                 String name = stock.getItemName();
                 Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show();
                 sellingActivityViewModel.setStock(stock);
-
-                // addToCartActivityViewModel.setStock(stock);
-
-
                 DialogFragmentForAddToCart ialogFragementforunit = new DialogFragmentForAddToCart(sellingActivityViewModel);
                 ialogFragementforunit.show(getSupportFragmentManager(), "exampledialog");
 

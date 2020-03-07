@@ -37,37 +37,47 @@ public class Customer extends BaseObservable implements Serializable {
    public String toString() {
        return custId+"    "+customerName;
     }
+    @Bindable
     public String getDebt() {
         return debt;
     }
     public void setDebt(String debt) {
         this.debt = debt;
+        notifyPropertyChanged(BR.debt);
     }
     public void setCustId(int custId) {
         this.custId = custId;
+        notifyPropertyChanged(BR.custId);
     }
+    @Bindable
     public int getCustId() {
         return custId;
     }
 
+    @Bindable
     public String getCustomerName() {
         return customerName;
     }
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+        notifyPropertyChanged(BR.customerName);
     }
+    @Bindable
     public String getCustomerAddress() {
         return customerAddress;
     }
 
     public void setCustomerAddress(String customerAddress) {
         this.customerAddress = customerAddress;
+        notifyPropertyChanged(BR.customerAddress);
     }
+    @Bindable
     public String getCustomerPhoneNo() {
         return customerPhoneNo;
     }
     public void setCustomerPhoneNo(String customerPhoneNo) {
         this.customerPhoneNo = customerPhoneNo;
+        notifyPropertyChanged(BR.customerPhoneNo);
     }
 
 }

@@ -19,15 +19,16 @@ public class Expenses extends BaseObservable implements Serializable {
     private String description;
     private String date;
 
-    public Expenses(String expenseCategory, String expenseTotal, String paymentMode,String description,String date) {
+  /*  public Expenses(String expenseCategory, String expenseTotal, String paymentMode,String description,String date) {
         this.expenseCategory = expenseCategory;
         this.expenseTotal = expenseTotal;
         this.paymentMode = paymentMode;
         this.description=description;
         this.date=date;
+    }*/
+
+    public Expenses() {
     }
-
-
 
     @Bindable
     public String getDate() {

@@ -6,6 +6,9 @@
         <variable
             name="expenses"
             type="com.example.a2zbilling.db.entities.Expenses" />
+        <variable
+            name="clickListener"
+            type="com.example.a2zbilling.ExpensesBottomSheetDialog.OnClickListener" />
     </data>
 <LinearLayout
     android:layout_width="match_parent"
@@ -139,6 +142,7 @@
         android:layout_below="@+id/edit_stock_Name"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
+        android:onClick="@{clickListener::insertExpenses}"
         android:layout_gravity="center"
         android:backgroundTint="@color/colorPrimary"
         app:cardElevation="6dp">

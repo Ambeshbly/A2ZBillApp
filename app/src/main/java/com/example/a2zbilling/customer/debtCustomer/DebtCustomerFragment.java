@@ -6,27 +6,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.a2zbilling.R;
-import com.example.a2zbilling.customer.AllCustomer.AllCustomerAdapter;
 import com.example.a2zbilling.customer.CustomerActivityViewModel;
 import com.example.a2zbilling.customer.ShowCustomerTransactionDetailActivity;
+import com.example.a2zbilling.databinding.DebtCustomerBinding;
 import com.example.a2zbilling.db.entities.Customer;
-import com.example.a2zbilling.db.entities.Stock;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class DebtCustomerFragment extends Fragment {
-    RecyclerView recyclerView;
+
     debtCustomerAdapter adepter;
+    private DebtCustomerBinding debtCustomerBinding;
     private CustomerActivityViewModel customerActivityViewModel;
 
     public DebtCustomerFragment(CustomerActivityViewModel customerActivityViewModel) {
@@ -37,12 +34,11 @@ public class DebtCustomerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-      View view=inflater.inflate(R.layout.debt_customer,container,false);
-        recyclerView=view.findViewById(R.id.recycler_view_for_debt_customer);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
+        debtCustomerBinding = DataBindingUtil.inflate(inflater, R.layout.debt_customer, container, false);
+        debtCustomerBinding.recyclerViewForDebtCustomer.setLayoutManager(new LinearLayoutManager(getContext()));
+        debtCustomerBinding.recyclerViewForDebtCustomer.setHasFixedSize(true);
         adepter=new debtCustomerAdapter(getContext(),customerActivityViewModel);
-        recyclerView.setAdapter(adepter);
+        debtCustomerBinding.recyclerViewForDebtCustomer.setAdapter(adepter);
         customerActivityViewModel.getAllCustomer().observe(getViewLifecycleOwner(), new Observer<List<Customer>>() {
             @Override
             public void onChanged(List<Customer> customers) {
@@ -67,6 +63,6 @@ public class DebtCustomerFragment extends Fragment {
                 startActivity(intent);
             }
         });
-      return view;
+      return debtCustomerBinding.getRoot();
     }
 }

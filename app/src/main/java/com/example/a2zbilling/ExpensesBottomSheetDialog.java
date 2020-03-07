@@ -13,7 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.databinding.DataBindingUtil;
 
+import com.example.a2zbilling.databinding.ExpensesBottonSheetDialogBinding;
 import com.example.a2zbilling.db.entities.Expenses;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -25,26 +27,23 @@ import java.util.List;
 public class ExpensesBottomSheetDialog extends BottomSheetDialogFragment {
 
     private ExpensesActivityViewModel expensesActivityViewModel;
-    private EditText editTextExpenseCategory,editTextTotal,editTextDescription;
-    private Spinner spinner;
     private String paymentMode;
+    private ExpensesBottonSheetDialogBinding expensesBottonSheetDialogBinding;
 
     public ExpensesBottomSheetDialog(ExpensesActivityViewModel expensesActivityViewModel) {
         this.expensesActivityViewModel = expensesActivityViewModel;
     }
-
     public ExpensesBottomSheetDialog() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.expenses_botton_sheet_dialog, container, false);
-        editTextExpenseCategory=v.findViewById(R.id.edit_expenses_category);
-        editTextTotal=v.findViewById(R.id.edit_expenses_total);
-        editTextDescription=v.findViewById(R.id.expenses_description);
-        CardView cardViewSaveExpenses=v.findViewById(R.id.save_expenses);
-        spinner=v.findViewById(R.id.payment_spinner);
+        expensesBottonSheetDialogBinding = DataBindingUtil.inflate(inflater, R.layout.expenses_botton_sheet_dialog, container, false);
+        OnClickListener listener=new OnClickListener();
+        expensesBottonSheetDialogBinding.setClickListener(listener);
+        Expenses expenses=new Expenses();
+        expensesBottonSheetDialogBinding.setExpenses(expenses);
         List<String> list = new ArrayList<String>();
         list.add("Cash");
         list.add("chaque");
@@ -54,9 +53,8 @@ public class ExpensesBottomSheetDialog extends BottomSheetDialogFragment {
         list.add("other");
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(arrayAdapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        expensesBottonSheetDialogBinding.paymentSpinner.setAdapter(arrayAdapter);
+        expensesBottonSheetDialogBinding.paymentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
@@ -86,20 +84,19 @@ public class ExpensesBottomSheetDialog extends BottomSheetDialogFragment {
             }
         });
 
-        cardViewSaveExpenses.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String expensescategory=editTextExpenseCategory.getText().toString();
-                String expensestotal=editTextTotal.getText().toString();
-                String expensesDescription=editTextDescription.getText().toString();
-                Calendar calendar=Calendar.getInstance();
-                String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
-                Expenses expenses=new Expenses(expensescategory,expensestotal,paymentMode,expensesDescription,selecteddate);
-                expensesActivityViewModel.insertExpenses(expenses);
-                Toast.makeText(getContext(),"expneses added",Toast.LENGTH_SHORT).show();
-                dismiss();
-            }
-        });
-        return v;
+        return expensesBottonSheetDialogBinding.getRoot();
+    }
+
+    public class OnClickListener{
+        public void insertExpenses(View view){
+            Calendar calendar=Calendar.getInstance();
+            String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
+            expensesBottonSheetDialogBinding.getExpenses().setPaymentMode(paymentMode);
+            expensesBottonSheetDialogBinding.getExpenses().setDate(selecteddate);
+            Expenses expenses1=expensesBottonSheetDialogBinding.getExpenses();
+            expensesActivityViewModel.insertExpenses(expenses1);
+            Toast.makeText(getContext(),"expneses added",Toast.LENGTH_SHORT).show();
+            dismiss();
+        }
     }
 }

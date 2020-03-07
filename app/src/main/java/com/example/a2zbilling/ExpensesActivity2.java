@@ -21,16 +21,12 @@ public class ExpensesActivity2 extends AppCompatActivity {
     Expenses2Adapter adepter;
     Toolbar toolbar;
     private Expenses expenses;
-    private TextView textViewtitle,textViewToolbarTotal;
     private  int total=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses2);
-        toolbar=findViewById(R.id.myToolbar);
-        textViewtitle=findViewById(R.id.title_bar);
-        textViewToolbarTotal=findViewById(R.id.toolbar_total);
         activityExpenses2Binding= DataBindingUtil.setContentView(this,R.layout.activity_expenses2);
         expensesActivity2ViewModel = ViewModelProviders.of(this).get(ExpensesActivity2ViewModel.class);
         setSupportActionBar(toolbar);
@@ -43,7 +39,7 @@ public class ExpensesActivity2 extends AppCompatActivity {
         Intent intent = getIntent();
         expenses = (Expenses) intent.getSerializableExtra("expenses");
         activityExpenses2Binding.setExpenses(expenses);
-        textViewtitle.setText(expenses.getExpenseCategory());
+        activityExpenses2Binding.toolbar.titleBar.setText(expenses.getExpenseCategory());
 
         expensesActivity2ViewModel.getAllExpensesCategory(expenses.getExpenseId()).observe(this, new Observer<List<ExpensesCategory>>() {
             @Override
@@ -53,13 +49,9 @@ public class ExpensesActivity2 extends AppCompatActivity {
                     ExpensesCategory expensesCategory = expensesCategories.get(i);
                     total=total+Integer.parseInt(expensesCategory.getExpenseCategoryTotal());
                 }
-                textViewToolbarTotal.setText("Total Expenses : "+Integer.toString(Integer.parseInt(expenses.getExpenseTotal()) + total)+"\u20B9");
+                activityExpenses2Binding.toolbar.toolbarTotal.setText("Total Expenses : "+Integer.toString(Integer.parseInt(expenses.getExpenseTotal()) + total)+"\u20B9");
             }
         });
-
-
-
-
     }
     public class OnClickListener{
         public void openExpensesDetail(View view){
