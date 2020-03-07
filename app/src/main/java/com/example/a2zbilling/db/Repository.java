@@ -8,12 +8,14 @@ import androidx.lifecycle.LiveData;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.Expenses;
 import com.example.a2zbilling.db.entities.ExpensesCategory;
+import com.example.a2zbilling.db.entities.Payment;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.db.room.CustomerDao;
 import com.example.a2zbilling.db.room.ExpensesCategoryDao;
 import com.example.a2zbilling.db.room.ExpensesDao;
+import com.example.a2zbilling.db.room.PaymentDao;
 import com.example.a2zbilling.db.room.SaleDeatailDao;
 import com.example.a2zbilling.db.room.SalesDao;
 import com.example.a2zbilling.db.room.SqlLiteDatabase;
@@ -28,6 +30,7 @@ public class Repository {
     private SaleDeatailDao saleDeatailDao;
     private ExpensesDao expensesDao;
     private ExpensesCategoryDao expensesCategoryDao;
+    private PaymentDao paymentDao;
 
 
     public Repository(Application application) {
@@ -38,6 +41,7 @@ public class Repository {
         saleDeatailDao = database.saleDeatailDao();
         expensesDao=database.expensesDao();
         expensesCategoryDao=database.expensesCategoryDao();
+        paymentDao=database.paymentDao();
     }
 
 
@@ -83,6 +87,33 @@ public class Repository {
             return null;
         }
     }
+
+
+
+
+    public void insertPayment(Payment payment) {
+        new InsertPaymentAsynckTask(paymentDao).execute(payment);
+    }
+
+    private static class InsertPaymentAsynckTask extends AsyncTask<Payment, Void, Void> {
+        private PaymentDao paymentDao;
+
+        public InsertPaymentAsynckTask(PaymentDao paymentDao) {
+            this.paymentDao = paymentDao;
+        }
+
+        @Override
+        protected Void doInBackground(Payment... payments) {
+            paymentDao.insert(payments[0]);
+            return null;
+        }
+    }
+
+    public LiveData<List<Payment>> getAllPayment() {
+        return paymentDao.getAllPayment();
+    }
+
+
 
 
 

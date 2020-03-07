@@ -21,4 +21,10 @@
         android:backgroundTint="@color/colorPrimary"
         android:src="@drawable/floating_button" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_viewPayment"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </RelativeLayout>

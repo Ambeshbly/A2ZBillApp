@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="clickListener"
+            type="com.example.a2zbilling.ExpensesActivity.OnClickListener" />
+    </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ExpensesActivity">
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_viewExpenses"
         android:layout_width="match_parent"
@@ -15,19 +20,18 @@
         android:id="@+id/cardview_open_bottom_sheet"
         android:layout_width="150dp"
         android:layout_height="50dp"
+        android:onClick="@{clickListener::openExpensesBottomSheetDialog}"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
         app:cardCornerRadius="20dp"
         android:backgroundTint="@color/limeGreen"
         app:cardElevation="3dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center"
             android:orientation="horizontal">
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +44,5 @@
                 android:textSize="15sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
-
 </RelativeLayout>
+</layout>

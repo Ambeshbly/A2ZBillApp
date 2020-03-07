@@ -2,65 +2,47 @@ package com.example.a2zbilling;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
-
+import com.example.a2zbilling.databinding.ActivityExpenses2Binding;
 import com.example.a2zbilling.db.entities.Expenses;
 import com.example.a2zbilling.db.entities.ExpensesCategory;
-import com.example.a2zbilling.db.entities.Stock;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.List;
 
 public class ExpensesActivity2 extends AppCompatActivity {
     private ExpensesActivity2ViewModel expensesActivity2ViewModel;
-    RecyclerView recyclerView;
+    private ActivityExpenses2Binding activityExpenses2Binding;
     Expenses2Adapter adepter;
     Toolbar toolbar;
+    private Expenses expenses;
     private TextView textViewtitle,textViewToolbarTotal;
     private  int total=0;
-    private TextView textViewTotal,textViewPaymentMode;
-    private CardView cardViewEye;
-    private TextView textViewDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses2);
-        textViewTotal=findViewById(R.id.text_expenses1_total);
-        textViewPaymentMode=findViewById(R.id.text_expeses1_payment_mode);
         toolbar=findViewById(R.id.myToolbar);
-        textViewDate=findViewById(R.id.text_date1);
-        textViewToolbarTotal=findViewById(R.id.toolbar_total);
-        cardViewEye=findViewById(R.id.cardView_eye);
-        setSupportActionBar(toolbar);
         textViewtitle=findViewById(R.id.title_bar);
-        FloatingActionButton floatingActionButton=findViewById(R.id.bt_float1);
-
+        textViewToolbarTotal=findViewById(R.id.toolbar_total);
+        activityExpenses2Binding= DataBindingUtil.setContentView(this,R.layout.activity_expenses2);
         expensesActivity2ViewModel = ViewModelProviders.of(this).get(ExpensesActivity2ViewModel.class);
-
-        recyclerView = findViewById(R.id.recycler_viewExpenses1);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-        recyclerView.setHasFixedSize(true);
-
+        setSupportActionBar(toolbar);
+        OnClickListener listener=new OnClickListener();
+        activityExpenses2Binding.setClickListener(listener);
+        activityExpenses2Binding.recyclerViewExpenses1.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+        activityExpenses2Binding.recyclerViewExpenses1.setHasFixedSize(true);
         adepter = new Expenses2Adapter(this,expensesActivity2ViewModel);
-        recyclerView.setAdapter(adepter);
-
-
+        activityExpenses2Binding.recyclerViewExpenses1.setAdapter(adepter);
         Intent intent = getIntent();
-        final Expenses expenses = (Expenses) intent.getSerializableExtra("expenses");
-        textViewDate.setText("Date : "+expenses.getDate());
-        textViewTotal.setText(expenses.getExpenseTotal()+"\u20B9");
-        textViewPaymentMode.setText("payment mode : "+expenses.getPaymentMode());
+        expenses = (Expenses) intent.getSerializableExtra("expenses");
+        activityExpenses2Binding.setExpenses(expenses);
         textViewtitle.setText(expenses.getExpenseCategory());
 
         expensesActivity2ViewModel.getAllExpensesCategory(expenses.getExpenseId()).observe(this, new Observer<List<ExpensesCategory>>() {
@@ -76,21 +58,17 @@ public class ExpensesActivity2 extends AppCompatActivity {
         });
 
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Expenses2BottomSheetDialog expensesBottomSheetDialog=new Expenses2BottomSheetDialog(expenses.getExpenseCategory(),expenses.getExpenseId(),expensesActivity2ViewModel);
-                expensesBottomSheetDialog.show(getSupportFragmentManager(),"Expenses Buttom Sheet");
-            }
-        });
 
 
-        cardViewEye.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowExpensesDialogFragment dialogFragementforunit=new ShowExpensesDialogFragment(expenses);
-                dialogFragementforunit.show(getSupportFragmentManager(),"exampledialog");
-            }
-        });
+    }
+    public class OnClickListener{
+        public void openExpensesDetail(View view){
+            ShowExpensesDialogFragment dialogFragementforunit=new ShowExpensesDialogFragment(expenses);
+            dialogFragementforunit.show(getSupportFragmentManager(),"exampledialog");
+        }
+        public void openBottomSheetDialog(View view){
+            Expenses2BottomSheetDialog expensesBottomSheetDialog=new Expenses2BottomSheetDialog(expenses.getExpenseCategory(),expenses.getExpenseId(),expensesActivity2ViewModel);
+            expensesBottomSheetDialog.show(getSupportFragmentManager(),"Expenses Buttom Sheet");
+        }
     }
 }

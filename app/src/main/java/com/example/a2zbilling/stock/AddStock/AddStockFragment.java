@@ -8,33 +8,27 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.databinding.FragmentForAddstocksBinding;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.StockActivity;
 import com.example.a2zbilling.stock.StockActivityViewModel;
-
 import java.util.ArrayList;
 
 
 public class AddStockFragment extends Fragment {
 
-    private static Stock stock1;
-    RecyclerView recyclerView;
     AddStockAdapter adepter;
+    private FragmentForAddstocksBinding fragmentForAddstocksBinding;
 
-    SearchView searchView;
     private StockActivityViewModel stockActivityViewModel;
-
     public AddStockFragment(StockActivityViewModel stockActivityViewModel) {
         this.stockActivityViewModel = stockActivityViewModel;
     }
@@ -43,36 +37,30 @@ public class AddStockFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_for_addstocks, container, false);
 
-        recyclerView = view.findViewById(R.id.recycler_view_for_addStock);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
-
+        fragmentForAddstocksBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_for_addstocks, container, false);
+        fragmentForAddstocksBinding.recyclerViewForAddStock.setLayoutManager(new LinearLayoutManager(getContext()));
+        fragmentForAddstocksBinding.recyclerViewForAddStock.setHasFixedSize(true);
         adepter = new AddStockAdapter();
-        recyclerView.setAdapter(adepter);
+        fragmentForAddstocksBinding.recyclerViewForAddStock.setAdapter(adepter);
         stockActivityViewModel.getNewlyAddedStocks().observe(getViewLifecycleOwner(), new Observer<ArrayList<Stock>>() {
             @Override
             public void onChanged(ArrayList<Stock> stocks) {
                 adepter.setItems(stocks);
             }
         });
-        return view;
+        return fragmentForAddstocksBinding.getRoot();
     }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
-
-
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.save_data_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
        switch (item.getItemId()) {

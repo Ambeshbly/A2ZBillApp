@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="expenses"
+            type="com.example.a2zbilling.db.entities.Expenses" />
+        <variable
+            name="clickListener"
+            type="com.example.a2zbilling.ExpensesActivity2.OnClickListener" />
+    </data>
+<RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,7 +50,7 @@
                 android:id="@+id/text_expenses1_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dept."
+                android:text="@={expenses.expenseTotal}"
                 android:textColor="@color/colorAccent"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:layout_alignParentEnd="true"/>
@@ -58,7 +68,7 @@
                 android:id="@+id/text_date1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Expenses"
+                android:text="@={expenses.date}"
                 android:layout_below="@+id/text_expeses_category"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:layout_alignParentStart="true" />
@@ -67,7 +77,7 @@
                 android:id="@+id/text_expeses1_payment_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="payment"
+                android:text="@={expenses.paymentMode}"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/text_expenses1_total"
@@ -105,6 +115,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"
+                android:onClick="@{clickListener::openExpensesDetail}"
                 android:layout_toLeftOf="@+id/cardviewPrint"
                 android:layout_marginTop="8dp"
                 app:cardCornerRadius="8dp"
@@ -127,6 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottom_navigation_for_addstocks"
         android:layout_margin="30dp"
+        android:onClick="@{clickListener::openBottomSheetDialog}"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:backgroundTint="@color/colorPrimary"
@@ -140,3 +152,4 @@
 
 
 </RelativeLayout>
+</layout>
