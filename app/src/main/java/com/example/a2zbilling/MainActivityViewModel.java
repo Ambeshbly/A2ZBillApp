@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.a2zbilling.db.Repository;
 import com.example.a2zbilling.db.entities.Customer;
@@ -21,10 +22,9 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     private Repository repository;
 
-    private Sales sales;
+    private Sales sale;
     private LiveData<List<Sales>> allSales;
 
-    private double saleTotal;
 
     private LiveData<List<Customer>> allcustomer;
 
@@ -35,20 +35,11 @@ public class MainActivityViewModel extends AndroidViewModel {
         repository = new Repository(application);
 
         allSales = repository.getAllSales();
-        allcustomer = repository.getAllCustomer();
+        allcustomer = repository.getAllCustomerLiveData();
 
         ArrayList<Stock> newlyAddedStockList = new ArrayList<Stock>();
         this.newlyAddedStocks.setValue(newlyAddedStockList);
 
-    }
-
-
-    public double getSaleTotal() {
-        return saleTotal;
-    }
-
-    public void setSaleTotal(double saleTotal) {
-        this.saleTotal = saleTotal;
     }
 
     public LiveData<ArrayList<Stock>> getNewlyAddedStocks() {
@@ -91,12 +82,12 @@ public class MainActivityViewModel extends AndroidViewModel {
     public void update(Stock stock) {
         repository.update(stock);
     }
-    public Sales getSales() {
-        return sales;
-    }
-    public void setSales(Sales sales) {
-        this.sales = sales;
+
+    public Sales getSale() {
+        return sale;
     }
 
-
+    public void setSale(Sales sale) {
+        this.sale = sale;
+    }
 }

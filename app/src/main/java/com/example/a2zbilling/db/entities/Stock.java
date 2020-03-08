@@ -7,6 +7,7 @@ import androidx.databinding.Bindable;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -39,6 +40,7 @@ public class Stock extends BaseObservable implements Serializable {
     }
 
 
+    @Ignore
     public Stock() {
     }
 

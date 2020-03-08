@@ -3,6 +3,7 @@ package com.example.a2zbilling.db.entities;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(foreignKeys = {@ForeignKey(entity = Sales.class, parentColumns = "saleId", childColumns = "saledetailsaleid", onDelete = ForeignKey.CASCADE)
@@ -25,6 +26,7 @@ public class SaleDeatial {
         this.salingPrice = salingPrice;
     }
 
+    @Ignore
     public SaleDeatial() {
     }
 

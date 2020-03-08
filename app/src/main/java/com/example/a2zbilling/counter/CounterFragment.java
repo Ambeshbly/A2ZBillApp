@@ -22,29 +22,32 @@ import com.example.a2zbilling.R;
 import com.example.a2zbilling.counter.BillList.BillHistoryActivity;
 import com.example.a2zbilling.counter.Selling.SellingStocksActivity;
 import com.example.a2zbilling.counter.SuspendedBills.SuspendedTransactionListActivity;
+import com.example.a2zbilling.db.entities.Customer;
+import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class CounterFragment extends Fragment {
 
     public static final int ADD_NEW_STOCK_REQ_CODE = 1;
-    //Floatin action button declaration which used to change activity from mainActicity to SellingStocksActivity activity
-    FloatingActionButton floatingActionButton;
-    //cardView declarations both waitList and BillHistoryActivity
-    CardView cardView_waitList, cardView_conformList, cardView_Proceed;
-    RecyclerView recyclerView;
+
+
     CounterAdapter adepter;
     Stock updateStock;
     MediaPlayer mediaPlayer;
-    PaymentDialogFragment ialogFragementforunit;
     private TextView textViewTotal;
     private MainActivityViewModel mainActivityViewModel;
+    private List<Customer> customerList;
 
 
     public CounterFragment(MainActivityViewModel mainActivityViewModel) {
         this.mainActivityViewModel = mainActivityViewModel;
+        mainActivityViewModel.setSale(new Sales());
     }
 
     //onCreateView Override method
@@ -58,7 +61,7 @@ public class CounterFragment extends Fragment {
         textViewTotal = view.findViewById(R.id.textView_counter_total);
 
 
-        recyclerView = view.findViewById(R.id.recyclerView_for_counter_fragment);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView_for_counter_fragment);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
@@ -69,6 +72,13 @@ public class CounterFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<Stock> stocks) {
                 adepter.setItems(stocks);
+            }
+        });
+
+        mainActivityViewModel.getAllCustomer().observe(getViewLifecycleOwner(), new Observer<List<Customer>>() {
+            @Override
+            public void onChanged(List<Customer> customers) {
+                customerList = customers;
             }
         });
 
@@ -102,9 +112,14 @@ public class CounterFragment extends Fragment {
                 total = total + value;
 
             }
-            mainActivityViewModel.setSaleTotal(total);
+
             String totalString = Double.toString(total);
             textViewTotal.setText(totalString);
+            Sales sale = mainActivityViewModel.getSale();
+            sale.setTotalBillAmt(totalString);
+            Calendar calendar=Calendar.getInstance();
+            String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
+            sale.setDate(selecteddate);
 
         }
 
@@ -114,10 +129,10 @@ public class CounterFragment extends Fragment {
     @Override
     public void onStart() {
         //finding Cardview waitList in Xml file
-        cardView_waitList = getView().findViewById(R.id.waitlistcardview);
+        CardView cardView_waitList = getView().findViewById(R.id.waitlistcardview);
         //finding Cardview conformList in Xml file
-        cardView_conformList = getView().findViewById(R.id.conformListcardview);
-        cardView_Proceed = getView().findViewById(R.id.cardview_proceed);
+        CardView cardView_conformList = getView().findViewById(R.id.conformListcardview);
+        CardView cardView_Proceed = getView().findViewById(R.id.cardview_proceed);
         cardView_Proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,9 +141,9 @@ public class CounterFragment extends Fragment {
                 if (stockList.isEmpty()) {
                     Toast.makeText(getContext(), "please add the item first", Toast.LENGTH_SHORT).show();
                 } else {
-                    double total = mainActivityViewModel.getSaleTotal();
-                    ialogFragementforunit = new PaymentDialogFragment(total, mainActivityViewModel, adepter);
-                    ialogFragementforunit.show(getActivity().getSupportFragmentManager(), "exampledialog");
+                    //double total = Double.parseDouble(mainActivityViewModel.getSale().getTotalBillAmt());
+                    PaymentDialogFragment dialogFragment = new PaymentDialogFragment(mainActivityViewModel, adepter, customerList);
+                    dialogFragment.show(getActivity().getSupportFragmentManager(), "exampledialog");
                     mainActivityViewModel.update(updateStock);
                 }
             }
@@ -139,7 +154,7 @@ public class CounterFragment extends Fragment {
 
         super.onStart();
 
-        floatingActionButton = getView().findViewById(R.id.bt_float);
+        FloatingActionButton floatingActionButton = getView().findViewById(R.id.bt_float);
         //Floating Button add action listener
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

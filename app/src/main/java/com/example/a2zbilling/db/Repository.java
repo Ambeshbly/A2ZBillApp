@@ -173,8 +173,8 @@ public class Repository {
         new UpdateCustomerAsynckTask(customerDao).execute(customer);
     }
 
-    public LiveData<List<Customer>> getAllCustomer() {
-        return customerDao.getAllCustomer();
+    public LiveData<List<Customer>> getAllCustomerLiveData() {
+        return customerDao.getAllCustomerLiveData();
     }
 
     public LiveData<Customer> getCustomer(int custId) {

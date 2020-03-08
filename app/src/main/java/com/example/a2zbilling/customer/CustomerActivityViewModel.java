@@ -21,7 +21,7 @@ public class CustomerActivityViewModel extends AndroidViewModel {
     public CustomerActivityViewModel(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
-        allCustomer = repository.getAllCustomer();
+        allCustomer = repository.getAllCustomerLiveData();
     }
 
     public LiveData<List<Customer>> getAllCustomer() {

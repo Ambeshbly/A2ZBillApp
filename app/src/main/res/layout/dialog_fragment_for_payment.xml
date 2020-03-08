@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<layout>
+    <data>
+        <variable
+            name="sale"
+            type="com.example.a2zbilling.db.entities.Sales" />
+        <variable
+            name="customer"
+            type="com.example.a2zbilling.db.entities.Customer" />
+    </data>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -65,7 +73,7 @@
                     android:id="@+id/totalPayment_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="123 Rs"
+                    android:text="@{sale.totalBillAmt}"
                     android:padding="8dp"
                     android:layout_below="@+id/cardFaltu"
                     android:layout_toRightOf="@+id/totalPayment_textview"
@@ -90,22 +98,14 @@
                     android:layout_toRightOf="@+id/totalPayment_textview"
                     android:layout_below="@+id/totalPayment_text"
                     android:layout_height="43dp" />
-                <Button
-                    android:id="@+id/ButtomAddCustomer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add Customer"
-                    android:padding="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_below="@+id/paymeny_spinner"
-                    android:layout_alignParentEnd="true"/>
 
                 <AutoCompleteTextView
                     android:id="@+id/edit_custId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/ButtomAddCustomer"
+                    android:layout_below="@+id/paymeny_spinner"
                     android:completionThreshold="1"
+                    android:layout_marginTop="50dp"
                     android:hint="cust Id"
                     android:padding="8dp" />
                 <AutoCompleteTextView
@@ -115,6 +115,7 @@
                     android:layout_below="@+id/edit_custId"
                     android:completionThreshold="1"
                     android:hint="cust name"
+                    android:text="@={customer.customerName}"
                     android:padding="8dp" />
                 <AutoCompleteTextView
                     android:id="@+id/edit_CustPhoneNo"
@@ -122,6 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/edit_custName"
                     android:hint="cust Phone"
+                    android:text="@={customer.customerPhoneNo}"
                     android:completionThreshold="1"
                     android:padding="8dp" />
                 <AutoCompleteTextView
@@ -131,6 +133,7 @@
                     android:completionThreshold="1"
                     android:layout_below="@+id/edit_CustPhoneNo"
                     android:hint="cust Address"
+                    android:text="@={customer.customerAddress}"
                     android:padding="8dp" />
 
                 <androidx.cardview.widget.CardView
@@ -204,3 +207,4 @@
 
 </RelativeLayout>
 
+</layout>
