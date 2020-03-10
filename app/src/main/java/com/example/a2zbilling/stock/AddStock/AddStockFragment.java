@@ -17,10 +17,14 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.databinding.FragmentForAddstocksBinding;
+import com.example.a2zbilling.db.entities.Purchase;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.StockActivity;
 import com.example.a2zbilling.stock.StockActivityViewModel;
+
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class AddStockFragment extends Fragment {
@@ -67,14 +71,30 @@ public class AddStockFragment extends Fragment {
             case R.id.save:
                 Toast.makeText(getContext(), "save", Toast.LENGTH_SHORT).show();
                 ArrayList<Stock> stockList= stockActivityViewModel.getTemproryItemList();
-
+                int totalItems=0;
                 for(int i = 0; i <stockList.size(); i++)
                 {
                     Stock stock=stockList.get(i);
-                    stockActivityViewModel.insert(stock);
+                    totalItems=totalItems+1;
                 }
-                getActivity().finish();
+                Calendar calendar=Calendar.getInstance();
+                String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
+                Purchase purchase=new Purchase(Integer.toString(totalItems),selecteddate);
+                stockActivityViewModel.insert(purchase);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                for(int i = 0; i <stockList.size(); i++)
+                {
+                    Stock stock=stockList.get(i);
+                    stock.setPurchaseId(purchase.getPurchaseId());
+                    stockActivityViewModel.insert(stock);
 
+                }
+
+                getActivity().finish();
                 Intent intent=new Intent(getContext(), StockActivity.class);
                 startActivity(intent);
                 return false;

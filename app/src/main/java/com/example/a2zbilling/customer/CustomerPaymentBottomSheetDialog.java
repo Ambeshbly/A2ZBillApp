@@ -16,8 +16,10 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.ExpensesCategory;
 import com.example.a2zbilling.db.entities.Payment;
+import com.example.a2zbilling.db.entities.Sales;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.text.DateFormat;
@@ -27,13 +29,15 @@ import java.util.List;
 
 public class CustomerPaymentBottomSheetDialog extends BottomSheetDialogFragment {
 
-    private CustomerPaymentHistoryActivityViewModel customerPaymentHistoryActivityViewModel;
+    private ShowCustomerTransactionDetailActivityViewModel showCustomerTransactionDetailActivityViewModel;
     private EditText editTotal,editDescription,editPaymentMode;
     private Spinner spinner;
     private String paymentMode;
+    private Customer customer;
 
-    public CustomerPaymentBottomSheetDialog(CustomerPaymentHistoryActivityViewModel customerPaymentHistoryActivityViewModel) {
-        this.customerPaymentHistoryActivityViewModel = customerPaymentHistoryActivityViewModel;
+    public CustomerPaymentBottomSheetDialog(ShowCustomerTransactionDetailActivityViewModel showCustomerTransactionDetailActivityViewModel,Customer customer) {
+        this.showCustomerTransactionDetailActivityViewModel = showCustomerTransactionDetailActivityViewModel;
+        this.customer=customer;
     }
 
     @Nullable
@@ -87,13 +91,16 @@ public class CustomerPaymentBottomSheetDialog extends BottomSheetDialogFragment 
         cardViewSavePayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String total=editTotal.getText().toString();
-                String description=editDescription.getText().toString();
+
+                Sales sale=new Sales();
                 Calendar calendar=Calendar.getInstance();
                 String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
-                Payment payment=new Payment(total,paymentMode,description,selecteddate);
-                customerPaymentHistoryActivityViewModel.insertPayment(payment);
-                Toast.makeText(getContext(),"sucessful",Toast.LENGTH_SHORT).show();
+                String total=editTotal.getText().toString();
+                sale.setDate(selecteddate);
+                sale.setSalePode(paymentMode);
+                sale.setSalescustId(customer.getCustId());
+                sale.setTotalBillAmt("+"+total);
+                showCustomerTransactionDetailActivityViewModel.insertSales(sale);
                 dismiss();
             }
         });

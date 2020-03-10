@@ -85,8 +85,12 @@ public class Dashboard extends Fragment  {
         profiteAndlossCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(),ProfitAndLossActivity.class);
+//                Intent intent=new Intent(getContext(),ProfitAndLossActivity.class);
+//                startActivity(intent);
+                Intent intent=new Intent(getContext(),Test.class);
                 startActivity(intent);
+
+
             }
         });
 

@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.a2zbilling.db.Repository;
 import com.example.a2zbilling.db.entities.Customer;
+import com.example.a2zbilling.db.entities.Payment;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 
@@ -24,12 +25,14 @@ public class ShowCustomerTransactionDetailActivityViewModel extends AndroidViewM
     private List<SaleDeatial> saleDeatialList;
     private Sales sales;
     private Customer customer;
+    private LiveData<List<Payment>> allPayments;
 
 
     public ShowCustomerTransactionDetailActivityViewModel(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
         allSales = repository.getAllSales();
+        allPayments = repository.getAllPayment();
 
 
     }
@@ -74,5 +77,11 @@ public class ShowCustomerTransactionDetailActivityViewModel extends AndroidViewM
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+    public LiveData<List<Payment>> getAllPayments() {
+        return allPayments;
+    }
+    public void insertPayment(Payment payment) {
+        repository.insertPayment(payment);
     }
 }

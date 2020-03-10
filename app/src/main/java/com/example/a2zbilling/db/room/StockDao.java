@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Stock;
 
 import java.util.List;
@@ -25,4 +26,7 @@ public interface StockDao {
 
     @Query("SELECT * FROM stock_table")
     LiveData<List<Stock>> getAllItems();
+
+    @Query("select * from stock_table where purchaseId==:purchaseId")
+    LiveData<List<Stock>> getAllStocksBaseOnPurchaseId(int purchaseId);
 }

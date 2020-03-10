@@ -9,6 +9,7 @@ import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.Expenses;
 import com.example.a2zbilling.db.entities.ExpensesCategory;
 import com.example.a2zbilling.db.entities.Payment;
+import com.example.a2zbilling.db.entities.Purchase;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
@@ -16,6 +17,7 @@ import com.example.a2zbilling.db.room.CustomerDao;
 import com.example.a2zbilling.db.room.ExpensesCategoryDao;
 import com.example.a2zbilling.db.room.ExpensesDao;
 import com.example.a2zbilling.db.room.PaymentDao;
+import com.example.a2zbilling.db.room.PurchaseDao;
 import com.example.a2zbilling.db.room.SaleDeatailDao;
 import com.example.a2zbilling.db.room.SalesDao;
 import com.example.a2zbilling.db.room.SqlLiteDatabase;
@@ -31,6 +33,7 @@ public class Repository {
     private ExpensesDao expensesDao;
     private ExpensesCategoryDao expensesCategoryDao;
     private PaymentDao paymentDao;
+    private PurchaseDao purchaseDao;
 
 
     public Repository(Application application) {
@@ -42,6 +45,8 @@ public class Repository {
         expensesDao=database.expensesDao();
         expensesCategoryDao=database.expensesCategoryDao();
         paymentDao=database.paymentDao();
+        purchaseDao=database.purchaseDao();
+
     }
 
 
@@ -66,6 +71,10 @@ public class Repository {
     public LiveData<List<ExpensesCategory>> getAllExpenseCategoryBaseOnExpenseId(int expenseId) {
         return expensesCategoryDao.getAllExpensesCategory(expenseId);
     }
+    public LiveData<List<Stock>> getAllStockBaseOnPurchaseId(int purchaseId) {
+        return stockDao.getAllStocksBaseOnPurchaseId(purchaseId);
+    }
+
     public void insertSales(Sales sales) {
         new InsertSalesAsynckTask(salesDao).execute(sales);
     }
@@ -95,6 +104,9 @@ public class Repository {
         new InsertPaymentAsynckTask(paymentDao).execute(payment);
     }
 
+
+
+
     private static class InsertPaymentAsynckTask extends AsyncTask<Payment, Void, Void> {
         private PaymentDao paymentDao;
 
@@ -109,14 +121,33 @@ public class Repository {
         }
     }
 
+
+    public void insertPurchase(Purchase purchase) {
+        new InsertPurchaseAsynckTask(purchaseDao).execute(purchase);
+    }
+
+    private static class InsertPurchaseAsynckTask extends AsyncTask<Purchase, Void, Void> {
+        private PurchaseDao purchaseDao;
+
+        public InsertPurchaseAsynckTask(PurchaseDao purchaseDao) {
+            this.purchaseDao = purchaseDao;
+        }
+
+
+        @Override
+        protected Void doInBackground(Purchase... purchases) {
+
+            purchases[0].setPurchaseId((int) purchaseDao.insert(purchases[0]));
+            return null;
+        }
+    }
+    public LiveData<List<Purchase>> getAllPurchase() {
+        return purchaseDao.getAllPurchase();
+    }
+
     public LiveData<List<Payment>> getAllPayment() {
         return paymentDao.getAllPayment();
     }
-
-
-
-
-
 
     public void insertExpenses(Expenses expenses) {
         new InsertExpensesAsynckTask(expensesDao).execute(expenses);

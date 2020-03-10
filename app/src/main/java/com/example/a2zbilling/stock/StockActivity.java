@@ -58,7 +58,7 @@ public class StockActivity extends AppCompatActivity {
                     break;
                 case R.id.nav_futhurescope:
                     mediaPlayer.start();
-                    selectedFragment = new RFUStockFragment();
+                    selectedFragment = new RFUStockFragment(stockActivityViewModel);
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner_for_addstocks, selectedFragment).commit();

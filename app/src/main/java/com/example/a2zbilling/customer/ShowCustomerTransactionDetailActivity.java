@@ -28,9 +28,11 @@ import com.example.a2zbilling.counter.BillList.ShowBillingHistoryFragments;
 import com.example.a2zbilling.counter.CounterFragment;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.ExpensesCategory;
+import com.example.a2zbilling.db.entities.Payment;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -58,6 +60,7 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view_sale_history);
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         recyclerView.setHasFixedSize(true);
+        FloatingActionButton floatingActionButton=findViewById(R.id.bt_float2);
 
 
         adepter = new ShowCustomerTranscationDetailActivityAdapter();
@@ -81,6 +84,15 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
                 textViewTotal.setText(""+total+" \u20B9");
             }
         });
+
+//        customerPaymentHistoryActivityViewModel.getAllPayments().observe(this, new Observer<List<Payment>>() {
+//            @Override
+//            public void onChanged(List<Payment> payments) {
+//                adepter.setPayments(payments);
+//            }
+//        });
+
+
 
         adepter.setOnItemRecyclerViewlistener(new ShowCustomerTranscationDetailActivityAdapter.OnItemRecyclerViewListener() {
             @Override
@@ -140,6 +152,13 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
                 });
                 popupMenu.show();
 
+            }
+        });
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomerPaymentBottomSheetDialog customerPaymentBottomSheetDialog=new CustomerPaymentBottomSheetDialog(showCustomerTransactionDetailActivityViewModel,selectedCustomer);
+                customerPaymentBottomSheetDialog.show(getSupportFragmentManager(),"customer Payment");
             }
         });
 

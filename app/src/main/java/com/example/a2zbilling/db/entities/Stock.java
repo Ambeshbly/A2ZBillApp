@@ -18,6 +18,7 @@ public class Stock extends BaseObservable implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int itemId;
     private int itemImage;
+    private int purchaseId;
     private String itemName;
     private double itemQuentity;
     private String itemUnit;
@@ -179,5 +180,13 @@ public class Stock extends BaseObservable implements Serializable {
     @Override
     public String toString() {
         return itemId+"    "+itemName;
+    }
+
+    public int getPurchaseId() {
+        return purchaseId;
+    }
+
+    public void setPurchaseId(int purchaseId) {
+        this.purchaseId = purchaseId;
     }
 }

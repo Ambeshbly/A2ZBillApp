@@ -52,8 +52,8 @@ public class CustomerPaymentHistoryActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomerPaymentBottomSheetDialog customerPaymentBottomSheetDialog=new CustomerPaymentBottomSheetDialog(customerPaymentHistoryActivityViewModel);
-                customerPaymentBottomSheetDialog.show(getSupportFragmentManager(),"customer Payment");
+//                CustomerPaymentBottomSheetDialog customerPaymentBottomSheetDialog=new CustomerPaymentBottomSheetDialog(customerPaymentHistoryActivityViewModel);
+//                customerPaymentBottomSheetDialog.show(getSupportFragmentManager(),"customer Payment");
             }
         });
     }
