@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a2zbilling.DateConverter;
 import com.example.a2zbilling.MainActivityViewModel;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.counter.BillList.BillHistoryActivity;
@@ -118,8 +119,9 @@ public class CounterFragment extends Fragment {
             Sales sale = mainActivityViewModel.getSale();
             sale.setTotalBillAmt(totalString);
             Calendar calendar=Calendar.getInstance();
-            String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
-            sale.setDate(selecteddate);
+           // String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
+            Long date= DateConverter.fromDate(calendar.getTime());
+            sale.setDate(date);
 
         }
 

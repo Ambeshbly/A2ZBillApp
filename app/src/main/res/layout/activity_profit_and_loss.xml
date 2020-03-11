@@ -1,155 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:orientation="vertical"
     tools:context=".ProfitAndLossActivity">
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/barChart"
-        android:layout_marginTop="30dp"
-        android:padding="20dp"
-        android:layout_below="@+id/cardview_cheak"
-        android:layout_marginStart="150dp"
-        android:layout_marginBottom="50dp"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profit and Loss"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"/>
-    <TextView
-        android:id="@+id/textview_sale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_marginRight="20dp"
-        android:layout_alignParentEnd="true"
-        android:text="(sale total)"
-        android:layout_below="@+id/cardview_cheak"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"/>
-
-    <TextView
-        android:id="@+id/textview_purchase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_marginRight="20dp"
-        android:layout_toLeftOf="@+id/textview_sale"
-        android:text="(purchase total)"
-        android:layout_below="@+id/cardview_cheak"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"/>
-
-    <TextView
-        android:id="@+id/textview_quentity_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="2dp"
-        android:text="Qnty In  : 0"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/edit_stock_Name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"/>
-
-    <TextView
-        android:id="@+id/textview_quentity_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="2dp"
-        android:text="Qnty out: 0"
-        android:layout_below="@+id/textview_quentity_in"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"/>
-
-    <TextView
-        android:id="@+id/textview_quentity_profit_or_loss"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-
-        android:text="profit "
-        android:layout_below="@+id/exppersion"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"/>
-
-    <ImageView
-        android:id="@+id/exppersion"
-        android:layout_width="100dp"
-        android:layout_marginTop="200dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/textview_quentity_out"/>
-
-    <TextView
-        android:id="@+id/textview_quentity_profit_or_loss1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text=""
-        android:layout_below="@+id/textview_quentity_profit_or_loss"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"/>
-
-    <AutoCompleteTextView
-        android:id="@+id/edit_stock_Name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/paymeny_spinner"
-        android:completionThreshold="1"
-        android:hint="stock name"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:padding="8dp"
-        android:layout_marginTop="30dp" />
-
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_cheak"
-        android:layout_alignParentEnd="true"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/edit_stock_Name"
-        android:layout_marginBottom="30dp"
-        android:backgroundTint="@color/colorPrimary"
-        app:cardElevation="6dp">
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <LinearLayout
+        <AutoCompleteTextView
+            android:id="@+id/edit_stock_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_below="@+id/paymeny_spinner"
+            android:completionThreshold="1"
+            android:hint="stock name"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:padding="8dp"
+            android:layout_marginTop="30dp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_cheak"
+            android:layout_alignParentEnd="true"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/edit_stock_Name"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/colorPrimary"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/save" />
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/save" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cheak"
+                    android:textColor="#ffff"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Result"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        android:layout_margin="10dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_marginTop="30dp"
+            android:padding="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="50dp"
+            android:layout_height="match_parent"
+            android:layout_width="200dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cheak"
-                android:textColor="#ffff"
-                android:textSize="12sp" />
-        </LinearLayout>
+                android:text="Profit and Loss"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/textview_sale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_alignParentEnd="true"
+                android:text="(sale total)"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/textview_purchase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/textview_sale"
+                android:text="(purchase total)"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/barChart"
+                android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textview_quentity_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:layout_centerHorizontal="true"
+                android:text="Qnty In  : 0"
+                android:layout_marginTop="120dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
+                <TextView
+                    android:id="@+id/textview_quentity_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:layout_centerHorizontal="true"
+                    android:text="Qnty out: 0"
+                    android:layout_below="@+id/textview_quentity_in"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"/>
+
+                <ImageView
+                    android:id="@+id/exppersion"
+                    android:layout_width="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/textview_quentity_out"/>
+
+                <TextView
+                    android:id="@+id/textview_quentity_profit_or_loss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="profit "
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/exppersion"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"/>
+
+                <TextView
+                    android:id="@+id/textview_quentity_profit_or_loss1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:text=""
+                    android:layout_below="@+id/textview_quentity_profit_or_loss"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"/>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
-
-
-
-
-</RelativeLayout>
+</LinearLayout>

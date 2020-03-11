@@ -2,12 +2,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/costtom_toolbar_for_you_fragment"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/shopsetting"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/shopImage"
+                android:layout_width="70dp"
+                android:padding="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/youshopimage"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_toRightOf="@+id/shopImage"
+                android:layout_centerVertical="true"
+                android:text="Shop Setting"/>
 
-        android:text="me Fragment"
-        android:textSize="30sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
 
 
 </RelativeLayout>

@@ -52,6 +52,7 @@ public class AddUpdateCustomerFragment extends AppCompatDialogFragment {
             customerActivityViewModel.updateCustomer(dialogFragmentForAddCustomerBinding.getCustomer());
         }else {
 
+            dialogFragmentForAddCustomerBinding.getCustomer().setDebt("0");
             customerActivityViewModel.insertCustomer(dialogFragmentForAddCustomerBinding.getCustomer());
             Toast.makeText(getContext(),  " inserted", Toast.LENGTH_SHORT).show();
         }

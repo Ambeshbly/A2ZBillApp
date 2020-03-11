@@ -22,7 +22,7 @@ public class Customer extends BaseObservable implements Serializable {
     private String customerName;
     private String customerAddress;
     private String customerPhoneNo;
-    private String debt = "0";
+    private String debt ;
 
     public Customer(String customerName, String customerPhoneNo, String customerAddress,String debt) {
         this.customerName = customerName;

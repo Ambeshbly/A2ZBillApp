@@ -128,8 +128,6 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinner.setSelection(position);
-
-
                 String paymentMode = (String) parent.getAdapter().getItem(position);
                 switch (paymentMode) {
                     case PAY_MODE_CASH:
@@ -221,6 +219,7 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                     saleDeatial.setSaledetailsaleid(sales.getSaleId());
                     saleDeatial.setSaleDetailitemId(stock.getItemId());
                     saleDeatial.setQuntity(stock.getItemQuentity());
+                    saleDeatial.setPurchasePrice(stock.getItemPurchasePerUnit());
                     saleDeatial.setSalingPrice(stock.getItemSalePerUnit());
                     saleDeatial.setSaleDetailItemName(stock.getItemName());
                     mainActivityViewModel.insertSaleDetail(saleDeatial);

@@ -8,9 +8,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a2zbilling.DateConverter;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.db.entities.Sales;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class ShowCustomerTranscationDetailActivityAdapter extends RecyclerView.A
         holder.textViewForTotalAmtText.setText("Total Amt:  ");
         holder.textViewForTotal.setText(currentsales.getTotalBillAmt()+" \u20B9");
         holder.textViewpaymentMode.setText(currentsales.getSalePode());
-        holder.textViewdate.setText("Date : "+currentsales.getDate());
+        holder.textViewdate.setText("Date : "+ DateFormat.getDateInstance().format(DateConverter.toDate(currentsales.getDate())));
 
     }
 

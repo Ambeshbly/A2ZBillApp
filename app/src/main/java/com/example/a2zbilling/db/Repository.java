@@ -97,6 +97,9 @@ public class Repository {
         }
     }
 
+    public List<Sales> getAllFromToFrom(long from,long end){
+        return  salesDao.getFromTable(from,end);
+    }
 
 
 
@@ -175,6 +178,10 @@ public class Repository {
 
     public LiveData<List<Sales>> getAllSalesForcustomer(int custId) {
         return salesDao.getSalesOfCustomer(custId);
+    }
+
+    public List<Sales> getTodaySales(long date) {
+        return salesDao.getTodaysale(date);
     }
 
 

@@ -7,17 +7,185 @@
     android:layout_height="match_parent"
     tools:context=".Test">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardElevation="6dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:text="Search your reports"/>
+
+            <Spinner
+                android:id="@+id/select_duration_sppiner"
+                android:layout_width="180dp"
+                android:layout_height="43dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"/>
+            <TextView
+                android:id="@+id/from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="From"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="30dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_below="@+id/select_duration_sppiner"/>
+            <EditText
+                android:id="@+id/fromEdit"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/from"
+                android:layout_marginTop="20dp"
+                android:hint="dd/mm/yy"
+                android:layout_marginStart="10dp"
+                android:layout_below="@+id/select_duration_sppiner"/>
+            <TextView
+                android:id="@+id/to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="to"
+                android:layout_toRightOf="@+id/fromEdit"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_below="@+id/select_duration_sppiner"/>
+            <EditText
+                android:id="@+id/toEdit"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/to"
+                android:layout_marginTop="20dp"
+                android:hint="dd/mm/yy"
+                android:layout_marginStart="10dp"
+                android:layout_below="@+id/select_duration_sppiner"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_cheak"
+                android:layout_alignParentEnd="true"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:layout_alignParentBottom="true"
+                android:backgroundTint="@color/colorPrimary"
+                app:cardElevation="6dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cheak"
+                    android:layout_centerInParent="true"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#ffff"/>
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:text="date"/>
-    <Button
-        android:id="@+id/bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="do this"/>
+        android:text="Result"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        android:layout_margin="10dp"/>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="6dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart"
+                android:padding="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_height="match_parent"
+                android:layout_width="200dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/barChart"
+                android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/profit_and_loss_sale_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="total sales"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="120dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
+            <TextView
+                android:id="@+id/profit_and_loss_purchase_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="purchase sales"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/profit_and_loss_sale_total"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
+            <ImageView
+                android:id="@+id/imageView_face"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/profit_and_loss_purchase_total"
+                android:src="@drawable/smileyface"/>
+
+            <TextView
+                android:id="@+id/profit_and_loss_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="profit"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/imageView_face"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
+            <TextView
+                android:id="@+id/profit_and_loss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123rs"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/profit_and_loss_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
 
 </LinearLayout>

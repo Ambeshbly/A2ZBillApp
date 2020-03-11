@@ -5,7 +5,9 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
+import com.example.a2zbilling.DateConverter;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.Expenses;
 import com.example.a2zbilling.db.entities.ExpensesCategory;
@@ -15,14 +17,15 @@ import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
 
-@Database(entities = {Stock.class, Customer.class, SaleDeatial.class, Sales.class, Expenses.class, ExpensesCategory.class, Payment.class, Purchase.class}, version =60, exportSchema = false)
+@Database(entities = {Stock.class, Customer.class, SaleDeatial.class, Sales.class, Expenses.class, ExpensesCategory.class, Payment.class, Purchase.class}, version =65, exportSchema = false)
+@TypeConverters({DateConverter.class})
 public abstract class SqlLiteDatabase extends RoomDatabase {
 
     private static SqlLiteDatabase instance;
 
     public static synchronized SqlLiteDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(), SqlLiteDatabase.class, "a2zBillDataBase60").fallbackToDestructiveMigration().build();
+            instance = Room.databaseBuilder(context.getApplicationContext(), SqlLiteDatabase.class, "a2zBillDataBase65").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         }
         return instance;
     }

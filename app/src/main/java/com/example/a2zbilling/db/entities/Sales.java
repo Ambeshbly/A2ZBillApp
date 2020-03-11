@@ -11,16 +11,16 @@ public class Sales {
     private String totalBillAmt;
     private int salescustId;
     private String salePode;
-    private String date;
+    private Long date;
 
     // private Date date;
 
 
-    public String getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 

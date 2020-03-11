@@ -42,7 +42,8 @@ public class ExpensesBottomSheetDialog extends BottomSheetDialogFragment {
         expensesBottonSheetDialogBinding = DataBindingUtil.inflate(inflater, R.layout.expenses_botton_sheet_dialog, container, false);
         OnClickListener listener=new OnClickListener();
         expensesBottonSheetDialogBinding.setClickListener(listener);
-        Expenses expenses=new Expenses();
+        expensesBottonSheetDialogBinding.textInput.setVisibility(View.INVISIBLE);
+        final Expenses expenses=new Expenses();
         expensesBottonSheetDialogBinding.setExpenses(expenses);
         List<String> list = new ArrayList<String>();
         list.add("Cash");
@@ -84,8 +85,68 @@ public class ExpensesBottomSheetDialog extends BottomSheetDialogFragment {
             }
         });
 
+        List<String> list1 = new ArrayList<String>();
+        list1.add("             select");
+        list1.add("Salary");
+        list1.add("electricity bill");
+        list1.add("maintenance");
+        list1.add("furniture");
+        list1.add("instrument");
+        list1.add("other");
+        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list1);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        expensesBottonSheetDialogBinding.paymentSpinner3.setAdapter(arrayAdapter1);
+        expensesBottonSheetDialogBinding.paymentSpinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        break;
+                    case 1:
+                        expensesBottonSheetDialogBinding.expensesCategoryText.setVisibility(View.INVISIBLE);
+                        expensesBottonSheetDialogBinding.paymentSpinner3.setVisibility(View.INVISIBLE);
+                        expensesBottonSheetDialogBinding.textInput.setVisibility(View.VISIBLE);
+                        expensesBottonSheetDialogBinding.getExpenses().setExpenseCategory("Salary");
+                        break;
+                    case 2:
+                        expensesBottonSheetDialogBinding.expensesCategoryText.setVisibility(View.INVISIBLE);
+                        expensesBottonSheetDialogBinding.paymentSpinner3.setVisibility(View.INVISIBLE);
+                        expensesBottonSheetDialogBinding.textInput.setVisibility(View.VISIBLE);
+                        expensesBottonSheetDialogBinding.getExpenses().setExpenseCategory("electricity bill");
+                        break;
+                    case 3:
+                        expensesBottonSheetDialogBinding.expensesCategoryText.setVisibility(View.INVISIBLE);
+                        expensesBottonSheetDialogBinding.paymentSpinner3.setVisibility(View.INVISIBLE);
+                        expensesBottonSheetDialogBinding.textInput.setVisibility(View.VISIBLE);
+                        expensesBottonSheetDialogBinding.getExpenses().setExpenseCategory("maintenance");
+                        break;
+                    case 4:
+                        expensesBottonSheetDialogBinding.expensesCategoryText.setVisibility(View.INVISIBLE);
+                        expensesBottonSheetDialogBinding.paymentSpinner3.setVisibility(View.INVISIBLE);
+                        expensesBottonSheetDialogBinding.textInput.setVisibility(View.VISIBLE);
+                        expensesBottonSheetDialogBinding.getExpenses().setExpenseCategory("furniture");
+                        break;
+                    case 5:
+                        expensesBottonSheetDialogBinding.expensesCategoryText.setVisibility(View.INVISIBLE);
+                        expensesBottonSheetDialogBinding.paymentSpinner3.setVisibility(View.INVISIBLE);
+                        expensesBottonSheetDialogBinding.textInput.setVisibility(View.VISIBLE);
+                        expensesBottonSheetDialogBinding.getExpenses().setExpenseCategory("instrument");
+                        break;
+                    case 6:
+                        expensesBottonSheetDialogBinding.expensesCategoryText.setVisibility(View.INVISIBLE);
+                        expensesBottonSheetDialogBinding.paymentSpinner3.setVisibility(View.INVISIBLE);
+                        expensesBottonSheetDialogBinding.textInput.setVisibility(View.VISIBLE);
+                        break;
+
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
         return expensesBottonSheetDialogBinding.getRoot();
     }
+
 
     public class OnClickListener{
         public void insertExpenses(View view){

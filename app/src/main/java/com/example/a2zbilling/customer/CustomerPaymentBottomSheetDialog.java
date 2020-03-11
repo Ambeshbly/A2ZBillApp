@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
+import com.example.a2zbilling.DateConverter;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.ExpensesCategory;
@@ -93,10 +94,10 @@ public class CustomerPaymentBottomSheetDialog extends BottomSheetDialogFragment 
             public void onClick(View v) {
 
                 Sales sale=new Sales();
-                Calendar calendar=Calendar.getInstance();
-                String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
                 String total=editTotal.getText().toString();
-                sale.setDate(selecteddate);
+                Calendar calendar=Calendar.getInstance();
+                Long date= DateConverter.fromDate(calendar.getTime());
+                sale.setDate(date);
                 sale.setSalePode(paymentMode);
                 sale.setSalescustId(customer.getCustId());
                 sale.setTotalBillAmt("+"+total);

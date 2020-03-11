@@ -18,6 +18,15 @@ public class SaleDeatial {
     private String saleDetailItemName;
     private double quntity;
     private String salingPrice;
+    private String purchasePrice;
+
+    public String getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(String purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
 
     public SaleDeatial(int saledetailsaleid, int saleDetailitemId, double quntity, String salingPrice) {
         this.saledetailsaleid = saledetailsaleid;

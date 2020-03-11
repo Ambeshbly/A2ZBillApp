@@ -12,7 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Test"></activity>
+        <activity android:name=".ShopSettingActivity"
+            android:theme="@style/AppTheme.ActionBar" ></activity>
+        <activity
+            android:name=".Test"
+            android:theme="@style/AppTheme.ActionBar" />
         <activity android:name=".customer.CustomerPaymentHistoryActivity" />
         <activity android:name=".customer.ShowCustomerTransactionDetailActivity" />
         <activity
@@ -21,7 +25,9 @@
         <activity
             android:name=".ExpensesActivity"
             android:theme="@style/AppTheme.ActionBar" />
-        <activity android:name=".ProfitAndLossActivity" />
+        <activity
+            android:name=".ProfitAndLossActivity"
+            android:theme="@style/AppTheme.ActionBar" />
         <activity android:name=".support.SupportActivity" />
         <activity
             android:name=".counter.BillList.BillHistoryActivity"

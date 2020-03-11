@@ -24,5 +24,14 @@ public interface SalesDao {
     @Query("SELECT * FROM sales WHERE salescustId==:custId")
     LiveData<List<Sales>> getSalesOfCustomer(int custId);
 
+    @Query("SELECT * FROM sales WHERE date BETWEEN :dayst AND :dayet")
+    List<Sales> getFromTable(long dayst, long dayet);
+
+    @Query("SELECT * FROM sales WHERE date==:date")
+    List<Sales> getTodaysale(long date);
+
+
+
+
 
 }
