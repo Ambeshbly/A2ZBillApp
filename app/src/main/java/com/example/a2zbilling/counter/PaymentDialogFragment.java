@@ -179,11 +179,8 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                 if (customer.getCustId() == 0) {
                     //Check if any new customer needs to be added.
 
-                    if (customer.getCustomerName().isEmpty() && customer.getCustomerPhoneNo().isEmpty()) {
-                        // if customer detail does not have customer name and customer number,
-                        // No need to add any new customer.
-                    } else {
-
+                    if ((customer.getCustomerName() != null && customer.getCustomerName().isEmpty() == false)
+                            && (customer.getCustomerPhoneNo() != null && customer.getCustomerPhoneNo().isEmpty() == false)) {
                         // Update the debt of customer.
                         updateDebt(customer, sale);
                         mainActivityViewModel.insertCustomer(customer);
@@ -195,7 +192,13 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                             e.printStackTrace();
                         }
                     }
+                    // if customer detail does not have customer name and customer number,
+                    // No need to add any new customer.
+                    else {
+
+                    }
                 } else {
+
                     updateDebt(customer, sale);
                     mainActivityViewModel.updateCustomer(customer);
                 }
