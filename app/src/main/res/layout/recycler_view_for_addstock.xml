@@ -2,32 +2,33 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_height="75dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginTop="2dp">
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
         android:padding="8dp">
 
         <ImageView
             android:id="@+id/Iamge_view_item"
-            android:layout_width="100dp"
+            android:layout_width="60dp"
             android:padding="1dp"
-            android:layout_height="98dp"
-            android:src="@drawable/waitlistbutton2" />
+            android:layout_height="60dp"
+            android:src="@drawable/beg" />
 
         <TextView
             android:id="@+id/text_view_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name"
+            android:textColor="@color/liteblack"
+            android:padding="10dp"
             android:layout_toRightOf="@+id/Iamge_view_item"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:maxLines="1"
-
             android:ellipsize="end"/>
 
         <TextView
@@ -36,6 +37,7 @@
             android:layout_height="wrap_content"
             android:text="12"
             android:layout_alignParentEnd="true"
+            android:textColor="@color/liteblack"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
         <TextView
@@ -50,7 +52,8 @@
             android:id="@+id/text_view_quentity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="50 "
+            android:text="50"
+            android:textColor="@color/blue"
             android:layout_alignParentEnd="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_below="@+id/text_view_show_id" />
@@ -59,7 +62,7 @@
             android:id="@+id/text_view_sale_price_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Stock : "
+            android:text="Qnty : "
             android:layout_below="@+id/text_view_show_id"
             android:layout_toLeftOf="@+id/text_view_quentity"
             android:layout_marginTop="3dp"

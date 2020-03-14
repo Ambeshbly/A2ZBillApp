@@ -12,7 +12,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:backgroundTint="@color/colorPrimary"
+    android:backgroundTint="@color/liteblack"
     android:layout_width="match_parent"
     android:layout_height="455dp">
 
@@ -36,7 +36,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/cardview_shadow_start_color">
+                android:backgroundTint="@color/colorPrimary">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                     android:layout_columnWeight="1"
                     android:onClick="@{clickListener::doCancel}"
                     android:layout_margin="8dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/blue"
                     android:layout_weight="1"
                     app:cardElevation="6dp">
                     <LinearLayout
@@ -145,7 +145,7 @@
                     android:onClick="@{clickListener::insertCustomer}"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="@color/blue"
                     android:layout_weight="1"
                     app:cardElevation="6dp">
                     <LinearLayout

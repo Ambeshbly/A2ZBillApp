@@ -17,6 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        app:itemIconTint="@color/blue"
+        app:itemTextColor="@color/blue"
         app:menu="@menu/bottom_navigation_for_addstocks"
         android:background="?android:attr/windowBackground"/>
 
@@ -27,7 +29,7 @@
         android:layout_above="@+id/bottom_navigation_for_addstocks"
         android:layout_margin="30dp"
         android:layout_alignParentEnd="true"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/blue"
         android:src="@drawable/floating_button" />
 
 </RelativeLayout>

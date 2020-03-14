@@ -17,6 +17,7 @@ public class SupportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support);
+        setTitle("Customer Support");
     }
 
     public void setSupport(View view) {
@@ -48,7 +49,7 @@ public class SupportActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(intent3, ""));
                 break;
             case R.id.customer_care_tutorial_link:
-                Intent intent4=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/"));
+                Intent intent4=new Intent(Intent.ACTION_VIEW, Uri.parse("https://a2zbill.blogspot.com/"));
                 startActivity(intent4);
                 break;
         }

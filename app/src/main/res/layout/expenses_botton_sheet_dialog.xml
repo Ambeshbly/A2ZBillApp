@@ -13,6 +13,7 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -30,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:textColor="@color/liteblack"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_centerVertical="true"
             android:text="select category"/>
@@ -49,7 +51,7 @@
             android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_weight="38"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/liteblack"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:errorEnabled="true">
 
@@ -58,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@={expenses.expenseCategory}"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/liteblack"
             android:hint="Expense category"/>
     </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
@@ -86,7 +88,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
             android:layout_weight="38"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/liteblack"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:errorEnabled="true">
 
@@ -96,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:text="@={expenses.expenseTotal}"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/liteblack"
                 android:hint="Total price"/>
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.cardview.widget.CardView>
@@ -135,12 +137,11 @@
             android:id="@+id/text_input_it"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_weight="38"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/liteblack"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:errorEnabled="true">
 
@@ -149,7 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:text="@={expenses.description}"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/liteblack"
                 android:hint="description"/>
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.cardview.widget.CardView>
@@ -165,7 +166,7 @@
         android:layout_marginTop="20dp"
         android:onClick="@{clickListener::insertExpenses}"
         android:layout_gravity="center"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/blue"
         app:cardElevation="6dp">
 
         <LinearLayout
@@ -184,7 +185,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Save"
-                android:textColor="#ffff"
                 android:textSize="12sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

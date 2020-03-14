@@ -40,7 +40,7 @@ public class Expenses2Adapter extends RecyclerView.Adapter<Expenses2Adapter.Item
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         ExpensesCategory currentexpensesCategory = expensesCategories.get(position);
         holder.textViewForTotal.setText(currentexpensesCategory.getExpenseCategoryTotal()+"\u20B9");
-        holder.textViewForPaymentMode.setText("payment Mode: "+ currentexpensesCategory.getExpenseCategoryPaymentMode());
+        holder.textViewForPaymentMode.setText(""+ currentexpensesCategory.getExpenseCategoryPaymentMode());
         holder.textViewDate.setText("Date : "+currentexpensesCategory.getDate());
         expensesActivity2ViewModel.setExpensesCategory(currentexpensesCategory);
         holder.cardViewEye.setOnClickListener(new View.OnClickListener() {

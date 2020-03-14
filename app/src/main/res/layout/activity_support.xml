@@ -6,101 +6,118 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".support.SupportActivity"
-    android:background="@drawable/backbbai">
-    <TextView
-        android:id="@+id/customer_care_call_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="270dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:text="Customer care call           :"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:padding="8dp"/>
-
-    <TextView
-        android:id="@+id/customer_care_call_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="270dp"
-        android:onClick="setSupport"
-        android:layout_alignParentEnd="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:text="click here"
-        android:textStyle="bold"
-        android:textColor="@color/colorAccent"
-        android:padding="8dp"/>
+    android:background="@color/colorPrimary">
 
 
-    <TextView
-        android:id="@+id/customer_care_message_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/customer_care_call_text"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:text="Customer care message :"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:padding="8dp"/>
-    <TextView
-        android:id="@+id/customer_care_message_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/customer_care_call_link"
-        android:layout_alignParentEnd="true"
-        android:onClick="setSupport"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:text="click here"
-        android:textStyle="bold"
-        android:textColor="@color/colorAccent"
-        android:padding="8dp"/>
 
-    <TextView
-        android:id="@+id/customer_care_email_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/customer_care_message_text"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:text="Customer care E-mail      :"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:padding="8dp"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginTop="30dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/customer_care_call_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="Customer care call           :"
+                android:textStyle="bold"
+                android:textColor="@color/liteblack"
+                android:padding="8dp"/>
 
-    <TextView
-        android:id="@+id/customer_care_email_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/customer_care_message_link"
-        android:layout_alignParentEnd="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:text="click here"
-        android:onClick="setSupport"
-        android:textStyle="bold"
-        android:textColor="@color/colorAccent"
-        android:padding="8dp"/>
+            <TextView
+                android:id="@+id/customer_care_call_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="setSupport"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentEnd="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="click here"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:padding="8dp"/>
 
-    <TextView
-        android:id="@+id/customer_care_tutorial_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/customer_care_email_text"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:text="Customer care tutorial    :"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:padding="8dp"/>
-    <TextView
-        android:id="@+id/customer_care_tutorial_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/customer_care_email_link"
-        android:layout_alignParentEnd="true"
-        android:onClick="setSupport"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:text="click here"
-        android:textStyle="bold"
-        android:textColor="@color/colorAccent"
-        android:padding="8dp"/>
+
+            <TextView
+                android:id="@+id/customer_care_message_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/customer_care_call_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="Customer care message :"
+                android:textStyle="bold"
+                android:textColor="@color/liteblack"
+                android:padding="8dp"/>
+            <TextView
+                android:id="@+id/customer_care_message_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/customer_care_call_link"
+                android:layout_alignParentEnd="true"
+                android:onClick="setSupport"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="click here"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:padding="8dp"/>
+
+            <TextView
+                android:id="@+id/customer_care_email_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/customer_care_message_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="Customer care E-mail      :"
+                android:textStyle="bold"
+                android:textColor="@color/liteblack"
+                android:padding="8dp"/>
+
+            <TextView
+                android:id="@+id/customer_care_email_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/customer_care_message_link"
+                android:layout_alignParentEnd="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="click here"
+                android:onClick="setSupport"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:padding="8dp"/>
+
+            <TextView
+                android:id="@+id/customer_care_tutorial_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/customer_care_email_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="Customer care tutorial    :"
+                android:textStyle="bold"
+                android:textColor="@color/liteblack"
+                android:padding="8dp"/>
+            <TextView
+                android:id="@+id/customer_care_tutorial_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/customer_care_email_link"
+                android:layout_alignParentEnd="true"
+                android:onClick="setSupport"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="click here"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:padding="8dp"/>
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
 
     <TextView

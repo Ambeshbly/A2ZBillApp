@@ -25,6 +25,7 @@ import com.example.a2zbilling.counter.Selling.SellingStocksActivity;
 import com.example.a2zbilling.counter.SuspendedBills.SuspendedTransactionListActivity;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.Sales;
+import com.example.a2zbilling.db.entities.ShopDetail;
 import com.example.a2zbilling.db.entities.Stock;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -41,11 +42,9 @@ public class CounterFragment extends Fragment {
     CounterAdapter adepter;
     Stock updateStock;
     MediaPlayer mediaPlayer;
-    private TextView textViewTotal;
+    private TextView textViewTotal,textViewShopName,textViewShopPhoneNo,textViewShopEmail;
     private MainActivityViewModel mainActivityViewModel;
     private List<Customer> customerList;
-
-
     public CounterFragment(MainActivityViewModel mainActivityViewModel) {
         this.mainActivityViewModel = mainActivityViewModel;
         mainActivityViewModel.setSale(new Sales());
@@ -58,8 +57,10 @@ public class CounterFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_counter, container, false);
 
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.simple);
-
         textViewTotal = view.findViewById(R.id.textView_counter_total);
+        textViewShopName=view.findViewById(R.id.TextView_for_shopName);
+        textViewShopPhoneNo=view.findViewById(R.id.Text_VIew_for_phone_no);
+        textViewShopEmail=view.findViewById(R.id.email);
 
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_for_counter_fragment);
@@ -187,5 +188,20 @@ public class CounterFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+
+        mainActivityViewModel.getAllShopDetail().observe(getViewLifecycleOwner(), new Observer<List<ShopDetail>>() {
+            @Override
+            public void onChanged(List<ShopDetail> shopDetails) {
+                for (int i=0;i<shopDetails.size();i++){
+                ShopDetail shopDetail=shopDetails.get(i);
+                textViewShopName.setText(shopDetail.getShopName());
+                textViewShopPhoneNo.setText(shopDetail.getPhoneNo());
+                textViewShopEmail.setText(shopDetail.getEmail());
+              }
+            }
+        });
+
+
     }
 }

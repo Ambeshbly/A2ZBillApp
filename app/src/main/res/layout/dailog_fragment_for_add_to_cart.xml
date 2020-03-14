@@ -3,186 +3,259 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <ImageView
-        android:id="@+id/Dialog_image"
+    android:background="@color/liteblack"
+    android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/colorPrimary"
-        android:src="@drawable/ic_launcher_foreground"/>
-
-    <TextView
-        android:id="@+id/Dialog_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#ffff"
-        android:text="Item No."
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="110dp"
-        android:layout_marginLeft="250dp" />
-
-
-    <TextView
-        android:id="@+id/Dialog_Item_name_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:text="Item Name         : "
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/Dialog_item_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="155dp"
-        android:text="Rice"
-        android:layout_marginStart="200dp"
-        android:textColor="@color/colorPrimary"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/dialog_available_stock_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="196dp"
-        android:text="Available stock : "
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-
-    <TextView
-        android:id="@+id/Dialod_available_stock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="190dp"
-        android:text="132"
-        android:layout_marginStart="200dp"
-        android:textColor="@color/colorPrimary"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/Dialog_sale_price_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="234dp"
-        android:text="Saling Price       : "
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/Dialog_editText_sale_price"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="225dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="200dp"
-        android:textColor="@color/colorPrimary"
-        android:backgroundTint="@color/colorPrimary"/>
-
-
-    <EditText
-        android:id="@+id/Dialog_editext_qunity"
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="307dp"
-        android:hint="Enter Quntity"
-        android:backgroundTint="@color/colorPrimary"
-        android:layout_marginStart="20dp"
-        android:inputType="number" />
-
-    <TextView
-        android:id="@+id/Dialog_select_unit_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="285dp"
-        android:text="Select Unit"
-        android:layout_marginStart="200dp"
-        android:textSize="15sp"
-        android:textStyle="bold" />
-
-    <Spinner
-        android:id="@+id/Add_to_cart_spinner"
-        android:layout_width="100dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="307dp"
-        android:layout_marginStart="200dp" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/Dialog_cardView_add_to_cart"
-        android:layout_marginStart="50dp"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="380dp"
-        android:backgroundTint="@color/colorPrimary"
-        app:cardElevation="6dp">
-
-        <LinearLayout
+        android:backgroundTint="@color/liteblack"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/Dialog_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:background="@color/colorPrimary"
+                    android:src="@drawable/beg"/>
+                <TextView
+                    android:id="@+id/Dialog_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#ffff"
+                    android:text="Item No."
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="110dp"
+                    android:padding="10dp"
+                   android:layout_alignParentEnd="true" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/ic_add_shopping_cart" />
+                <TextView
+                    android:id="@+id/Dialog_Item_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Dialog_image"
+                    android:text="Item Name : "
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add To Cart"
-                android:textColor="#ffff"
-                android:textSize="12sp" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/dialog_available_stock_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Dialog_Item_name_text"
+                    android:text="Available stock : "
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/Dialog_sale_price_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Saling Price  : "
+                    android:padding="10dp"
+                    android:layout_below="@+id/dialog_available_stock_text"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/Dialog_editext_qunity"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Quntity"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_below="@+id/Dialog_sale_price_text"
+                    android:backgroundTint="@color/liteblack"
+                    android:inputType="number" />
 
+                <TextView
+                    android:id="@+id/Dialog_item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rice"
+                    android:padding="10dp"
+                    android:layout_toRightOf="@+id/dialog_available_stock_text"
+                    android:layout_below="@+id/Dialog_image"
+                    android:textColor="@color/liteblack"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/Dialod_available_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="132"
+                    android:padding="10dp"
+                    android:layout_below="@+id/Dialog_item_name"
+                    android:layout_toRightOf="@+id/dialog_available_stock_text"
+                    android:textColor="@color/liteblack"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/Dialog_editText_sale_price"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/dialog_available_stock_text"
+                    android:layout_below="@+id/Dialod_available_stock"
+                    android:hint="sale"
+                    android:backgroundTint="@color/liteblack"/>
+                <TextView
+                    android:id="@+id/Dialog_select_unit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Dialog_editText_sale_price"
+                    android:text="Select Unit"
+                    android:layout_toRightOf="@+id/dialog_available_stock_text"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+                <Spinner
+                    android:id="@+id/Add_to_cart_spinner"
+                    android:layout_width="100dp"
+                    android:layout_height="43dp"
+                    android:layout_toRightOf="@+id/dialog_available_stock_text"
+                    android:layout_below="@+id/Dialog_select_unit_text"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/Dialog_cardView_add_to_cart"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/Dialog_editext_qunity"
+                    android:backgroundTint="@color/blue"
+                    app:cardElevation="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/ic_add_shopping_cart" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Add To Cart"
+                            android:textColor="#ffff"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_save"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="50dp"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_below="@+id/Dialog_editext_qunity"
+                    android:backgroundTint="@color/blue"
+                    app:cardElevation="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/save" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Save"
+                            android:textColor="#ffff"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+
+
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_save"
-        android:layout_marginStart="180dp"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="380dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/colorPrimary"
-        app:cardElevation="6dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/save" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Save"
-                android:textColor="#ffff"
-                android:textSize="12sp" />
-        </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -35,6 +35,7 @@ public class DebtCustomerFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         debtCustomerBinding = DataBindingUtil.inflate(inflater, R.layout.debt_customer, container, false);
+        getActivity().setTitle("Debt Customer");
         debtCustomerBinding.recyclerViewForDebtCustomer.setLayoutManager(new LinearLayoutManager(getContext()));
         debtCustomerBinding.recyclerViewForDebtCustomer.setHasFixedSize(true);
         adepter=new debtCustomerAdapter(getContext(),customerActivityViewModel);

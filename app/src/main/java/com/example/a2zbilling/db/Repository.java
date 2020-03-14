@@ -12,6 +12,7 @@ import com.example.a2zbilling.db.entities.Payment;
 import com.example.a2zbilling.db.entities.Purchase;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
+import com.example.a2zbilling.db.entities.ShopDetail;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.db.room.CustomerDao;
 import com.example.a2zbilling.db.room.ExpensesCategoryDao;
@@ -20,6 +21,7 @@ import com.example.a2zbilling.db.room.PaymentDao;
 import com.example.a2zbilling.db.room.PurchaseDao;
 import com.example.a2zbilling.db.room.SaleDeatailDao;
 import com.example.a2zbilling.db.room.SalesDao;
+import com.example.a2zbilling.db.room.ShopDetailDao;
 import com.example.a2zbilling.db.room.SqlLiteDatabase;
 import com.example.a2zbilling.db.room.StockDao;
 
@@ -34,6 +36,7 @@ public class Repository {
     private ExpensesCategoryDao expensesCategoryDao;
     private PaymentDao paymentDao;
     private PurchaseDao purchaseDao;
+    private ShopDetailDao shopDetailDao;
 
 
     public Repository(Application application) {
@@ -46,6 +49,7 @@ public class Repository {
         expensesCategoryDao=database.expensesCategoryDao();
         paymentDao=database.paymentDao();
         purchaseDao=database.purchaseDao();
+        shopDetailDao=database.shopDetailDao();
 
     }
 
@@ -71,6 +75,34 @@ public class Repository {
     public LiveData<List<ExpensesCategory>> getAllExpenseCategoryBaseOnExpenseId(int expenseId) {
         return expensesCategoryDao.getAllExpensesCategory(expenseId);
     }
+
+
+    public void insertShopDetail(ShopDetail shopDetail) {
+        new InsertShopDetailAsynckTask(shopDetailDao).execute(shopDetail);
+    }
+
+    private static class InsertShopDetailAsynckTask extends AsyncTask<ShopDetail, Void, Void> {
+        private ShopDetailDao shopDetailDao;
+
+        public InsertShopDetailAsynckTask(ShopDetailDao shopDetailDao) {
+            this.shopDetailDao = shopDetailDao;
+        }
+
+        @Override
+        protected Void doInBackground(ShopDetail... shopDetails) {
+            shopDetailDao.insert(shopDetails[0]);
+            return null;
+        }
+    }
+
+
+
+
+    public LiveData<List<ShopDetail>> getAllShopDetail(){
+        return shopDetailDao.getAllShopDetail();
+    }
+
+
     public LiveData<List<Stock>> getAllStockBaseOnPurchaseId(int purchaseId) {
         return stockDao.getAllStocksBaseOnPurchaseId(purchaseId);
     }

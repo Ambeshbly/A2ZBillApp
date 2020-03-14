@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">a2zBilling</string>
+    <string name="shop_Name">Shop Name</string>
+    <string name="Phone_no">Phone No.</string>
+    <string name="email">abc@gmail.com</string>
+    <string name="stock">stock</string>
+    <string name="price">price</string>
+    <string name="qnty">qnty</string>
+    <string name="value">value</string>
+    <string name="total">total</string>
 </resources>

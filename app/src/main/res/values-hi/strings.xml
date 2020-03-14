@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">a2zBilling</string>
+    <string name="shop_Name">दुकान का नाम</string>
+    <string name="Phone_no">फोन नंबर</string>
+    <string name="email">ईमेल पता</string>
+    <string name="stock">भण्डार</string>
+    <string name="price">कीमत</string>
+    <string name="qnty">मात्रा</string>
+    <string name="value">मूल्य</string>
+    <string name="total">कुल</string>
+</resources>

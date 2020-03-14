@@ -12,6 +12,7 @@ import com.example.a2zbilling.db.Repository;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
+import com.example.a2zbilling.db.entities.ShopDetail;
 import com.example.a2zbilling.db.entities.Stock;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     private Sales sale;
     private LiveData<List<Sales>> allSales;
+    private LiveData<List<ShopDetail>> allShopDetail;
 
 
     private LiveData<List<Customer>> allcustomer;
@@ -36,6 +38,8 @@ public class MainActivityViewModel extends AndroidViewModel {
 
         allSales = repository.getAllSales();
         allcustomer = repository.getAllCustomerLiveData();
+        allShopDetail=repository.getAllShopDetail();
+
 
         ArrayList<Stock> newlyAddedStockList = new ArrayList<Stock>();
         this.newlyAddedStocks.setValue(newlyAddedStockList);
@@ -89,5 +93,8 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public void setSale(Sales sale) {
         this.sale = sale;
+    }
+    public LiveData<List<ShopDetail>> getAllShopDetail(){
+        return allShopDetail;
     }
 }

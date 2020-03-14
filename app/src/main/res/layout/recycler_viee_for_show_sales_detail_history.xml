@@ -4,11 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="40dp">
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="40dp">
-
-
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <TextView
             android:id="@+id/text_view_sale_detail_name"
             android:layout_width="wrap_content"
@@ -17,7 +14,7 @@
             android:layout_toRightOf="@+id/text_view_sale_detail_id"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/liteblack"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:maxLines="1"
             android:ellipsize="end"/>
@@ -27,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Id:"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/liteblack"
             android:layout_marginTop="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:maxLines="1"
@@ -40,7 +37,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="130"
-            android:textColor="@color/colorPrimary"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>

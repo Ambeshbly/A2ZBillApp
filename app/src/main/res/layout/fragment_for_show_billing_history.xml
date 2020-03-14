@@ -2,17 +2,14 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_non"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#00FF00">
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_height="40dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -24,7 +21,7 @@
             android:layout_below="@+id/view1"
             android:layout_marginStart="10dp"
             android:layout_centerVertical="true"
-            android:textColor="#ffff"
+            android:textColor="@color/liteblack"
             android:text="stock Id"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="bold" />
@@ -36,7 +33,7 @@
             android:text="Qty"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_centerVertical="true"
-            android:textColor="#ffff"
+            android:textColor="@color/liteblack"
             android:textStyle="bold" />
         <TextView android:id="@+id/Textview_for_price"
             android:layout_width="wrap_content"
@@ -48,13 +45,13 @@
             android:text="Price"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_centerVertical="true"
-            android:textColor="#ffff"
+            android:textColor="@color/liteblack"
             android:textStyle="bold" />
         <TextView android:id="@+id/TextView_values"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:textColor="#ffff"
+            android:textColor="@color/liteblack"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
@@ -68,10 +65,7 @@
         android:id="@+id/recyclerView_for_salesDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
+
         android:layout_below="@+id/cardView_non"/>
 
 
@@ -79,12 +73,8 @@
         android:id="@+id/cardView_nony"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/recyclerView_for_salesDetail"
-        android:backgroundTint="#00FF00">
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_below="@+id/recyclerView_for_salesDetail">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -97,7 +87,7 @@
                android:layout_centerVertical="true"
                 android:text="Total"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="#ffff"
+                android:textColor="@color/colorAccent"
                 android:textStyle="bold" />
             <TextView android:id="@+id/TextView_grandTotal_text"
                 android:layout_width="wrap_content"
@@ -105,7 +95,7 @@
                 android:text="Grand Total : "
                 android:layout_centerVertical="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="#ffff"
+                android:textColor="@color/liteblack"
                 android:textStyle="bold" />
 
         </RelativeLayout>

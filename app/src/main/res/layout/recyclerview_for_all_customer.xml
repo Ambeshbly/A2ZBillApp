@@ -3,11 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="72dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginTop="8dp"
-    android:backgroundTint="@color/colorPrimary">
+    android:layout_marginStart="2dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginTop="2dp">
 
 
     <androidx.cardview.widget.CardView
@@ -23,6 +22,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/mm"
+                android:padding="5dp"
+                android:layout_centerVertical="true"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/per"/>
 
 
             <TextView
@@ -32,7 +38,7 @@
                 android:text="Dept."
                 android:layout_alignParentBottom="true"
                 android:padding="3dp"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/liteblack"
                 android:layout_toLeftOf="@+id/text_view_customer_debt"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             <TextView
@@ -42,6 +48,7 @@
                 android:layout_alignParentBottom="true"
                 android:text="1"
                 android:padding="3dp"
+                android:textColor="@color/colorAccent"
                 android:layout_alignParentEnd="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
@@ -49,13 +56,13 @@
                 android:id="@+id/text_view_customer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/mm"
                 android:text="Customer Name"
                 android:padding="3dp"
                 android:textStyle="bold"
+                android:textColor="@color/liteblack"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:maxLines="1"
-                android:layout_toStartOf="@+id/text_view_customer_debt"
-                android:layout_alignParentStart="true"
                 android:ellipsize="end"/>
 
             <TextView
@@ -64,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/text_view_customer_name"
                 android:text="Customer Id"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/liteblack"
                 android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:layout_toRightOf="@id/text_id"
@@ -75,7 +82,8 @@
                 android:layout_height="wrap_content"
                 android:text="Id: "
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimary"
+                android:layout_toRightOf="@+id/mm"
+                android:textColor="@color/liteblack"
                 android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:layout_below="@+id/text_view_customer_name"/>
@@ -86,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:text="&#8942;"
                 android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/liteblack"
                 android:padding="5dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"

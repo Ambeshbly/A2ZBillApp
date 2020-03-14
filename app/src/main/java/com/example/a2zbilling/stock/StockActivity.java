@@ -81,7 +81,7 @@ public class StockActivity extends AppCompatActivity {
         mediaPlayer= MediaPlayer.create(getBaseContext(),R.raw.simple);
 
         //set tittle in the action bar
-        getSupportActionBar().setTitle("Your Stocks");
+        getSupportActionBar().setTitle("Stocks");
 
         //add action listener in floatin button
         floatingActionButton.setOnClickListener(new View.OnClickListener() {

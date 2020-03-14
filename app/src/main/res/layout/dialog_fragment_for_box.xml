@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Enter the pieces in one box "
         android:layout_marginTop="20dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/liteblack"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
 
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         android:hint="Enter"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/colorPrimary" />
+        android:backgroundTint="@color/liteblack" />
 
 
 
@@ -42,7 +43,7 @@
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
             app:cardCornerRadius="12dp"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/blue"
             android:layout_weight="1"
             app:cardElevation="6dp">
 
@@ -71,7 +72,7 @@
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
             app:cardCornerRadius="12dp"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/blue"
             android:layout_weight="1"
             app:cardElevation="6dp">
 

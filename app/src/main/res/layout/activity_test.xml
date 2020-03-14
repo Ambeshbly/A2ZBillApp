@@ -5,16 +5,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".Test">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         app:cardElevation="6dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginTop="2dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -22,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/liteblack"
                 android:text="Search your reports"/>
 
             <Spinner
@@ -30,14 +31,14 @@
                 android:layout_width="180dp"
                 android:layout_height="43dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="25dp"/>
+                android:layout_marginTop="20dp"/>
             <TextView
                 android:id="@+id/from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="From"
-                android:layout_marginTop="25dp"
-                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:layout_below="@+id/select_duration_sppiner"/>
             <EditText
@@ -45,9 +46,8 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/from"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:hint="dd/mm/yy"
-                android:layout_marginStart="10dp"
                 android:layout_below="@+id/select_duration_sppiner"/>
             <TextView
                 android:id="@+id/to"
@@ -55,8 +55,8 @@
                 android:layout_height="wrap_content"
                 android:text="to"
                 android:layout_toRightOf="@+id/fromEdit"
-                android:layout_marginTop="25dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:layout_below="@+id/select_duration_sppiner"/>
             <EditText
@@ -64,9 +64,8 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/to"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:hint="dd/mm/yy"
-                android:layout_marginStart="10dp"
                 android:layout_below="@+id/select_duration_sppiner"/>
 
             <androidx.cardview.widget.CardView
@@ -76,7 +75,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
                 android:layout_alignParentBottom="true"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/blue"
                 app:cardElevation="6dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -84,13 +83,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cheak"
+                    android:text="cheak"
                     android:layout_centerInParent="true"
                     android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="#ffff"/>
                 </RelativeLayout>
-
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
@@ -109,9 +107,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardElevation="6dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginEnd="10dp">
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginEnd="2dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

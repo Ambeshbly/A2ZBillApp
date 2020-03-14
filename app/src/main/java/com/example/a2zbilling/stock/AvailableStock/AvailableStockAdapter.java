@@ -54,7 +54,7 @@ public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAd
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_viee_for_available_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_for_addstock, parent, false);
         ItemHolder itemHolder = new ItemHolder(itemView);
         return itemHolder;
     }

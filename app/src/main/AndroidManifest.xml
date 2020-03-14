@@ -16,7 +16,8 @@
             android:theme="@style/AppTheme.ActionBar" ></activity>
         <activity
             android:name=".Test"
-            android:theme="@style/AppTheme.ActionBar" />
+            android:theme="@style/AppTheme.ActionBar"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".customer.CustomerPaymentHistoryActivity" />
         <activity android:name=".customer.ShowCustomerTransactionDetailActivity" />
         <activity
@@ -24,11 +25,15 @@
             android:parentActivityName=".ExpensesActivity" />
         <activity
             android:name=".ExpensesActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".ProfitAndLossActivity"
+            android:parentActivityName=".Test"
             android:theme="@style/AppTheme.ActionBar" />
-        <activity android:name=".support.SupportActivity" />
+        <activity android:name=".support.SupportActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".counter.BillList.BillHistoryActivity"
             android:theme="@style/AppTheme.ActionBar" />
@@ -40,7 +45,9 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.ActionBar" />
         <activity android:name=".stock.DefaultItemList.DefaultItemListActivity" />
-        <activity android:name=".stock.addUpdate.AddUpdateStockActivity" />
+        <activity android:name=".stock.addUpdate.AddUpdateStockActivity"
+            android:parentActivityName=".stock.StockActivity"
+            android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".stock.StockActivity"
             android:parentActivityName=".MainActivity"

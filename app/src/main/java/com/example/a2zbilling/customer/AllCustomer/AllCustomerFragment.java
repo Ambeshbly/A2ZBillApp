@@ -33,6 +33,7 @@ public class AllCustomerFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         allCustomerBinding = DataBindingUtil.inflate(inflater, R.layout.all_customer, container, false);
+        getActivity().setTitle("All Customer");
         allCustomerBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         allCustomerBinding.recyclerView.setHasFixedSize(true);
         adepter=new AllCustomerAdapter(getContext(),customerActivityViewModel);

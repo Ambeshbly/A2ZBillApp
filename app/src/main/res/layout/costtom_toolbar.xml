@@ -11,14 +11,20 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-
+        <ImageView
+            android:id="@+id/exp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/expesesicon"/>
     <TextView
         android:id="@+id/title_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tittle"
+        android:layout_toRightOf="@+id/exp"
         android:layout_centerVertical="true"
-        android:textColor="#ffff"
+        android:textColor="@color/blue"
         android:textStyle="bold"
         android:padding="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
@@ -31,7 +37,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:padding="15dp"
-        android:textColor="#ffff"
+        android:textColor="@color/colorAccent"
         android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 

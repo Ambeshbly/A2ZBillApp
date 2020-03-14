@@ -49,7 +49,7 @@ public class ExpensesActivity2 extends AppCompatActivity {
                     ExpensesCategory expensesCategory = expensesCategories.get(i);
                     total=total+Integer.parseInt(expensesCategory.getExpenseCategoryTotal());
                 }
-                activityExpenses2Binding.toolbar.toolbarTotal.setText("Total Expenses : "+Integer.toString(Integer.parseInt(expenses.getExpenseTotal()) + total)+"\u20B9");
+                activityExpenses2Binding.toolbar.toolbarTotal.setText( ""+Integer.toString(Integer.parseInt(expenses.getExpenseTotal()) + total)+"\u20B9");
             }
         });
     }

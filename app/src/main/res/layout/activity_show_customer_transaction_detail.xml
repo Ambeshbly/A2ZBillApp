@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".customer.ShowCustomerTransactionDetailActivity">
 
 
@@ -22,7 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/bt_float2"
         android:layout_width="wrap_content"
@@ -30,6 +30,6 @@
         android:layout_margin="30dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/blue"
         android:src="@drawable/floating_button" />
 </RelativeLayout>
