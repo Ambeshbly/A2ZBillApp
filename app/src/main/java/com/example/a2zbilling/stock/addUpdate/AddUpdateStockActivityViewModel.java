@@ -14,9 +14,6 @@ public class AddUpdateStockActivityViewModel extends AndroidViewModel {
     private Repository repository;
 
 
-
-    String buttonText;
-
     public AddUpdateStockActivityViewModel(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
@@ -35,11 +32,4 @@ public class AddUpdateStockActivityViewModel extends AndroidViewModel {
         repository.update(stock);
     }
 
-    public String getButtonText() {
-        return buttonText;
-    }
-
-    public void setButtonText(String buttonText) {
-        this.buttonText = buttonText;
-    }
 }

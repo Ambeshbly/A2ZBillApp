@@ -1,7 +1,9 @@
 package com.example.a2zbilling.stock.addUpdate;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -217,13 +219,16 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
     //method for validation sale unit and sale toale edit text
     private boolean validateItemUnit(Stock stock) {
-        String itemunit = stock.getItemSalePerUnit();
-        String itemtotalprice = stock.getItemSaleTotal();
-        if (itemunit.isEmpty() && itemtotalprice.isEmpty()) {
-            textinputitemsaleunit.setError("unit and total please fill one in both");
+
+        if (stock.getItemUnit().contentEquals(Unit.UNIT_DEFAULT)) {
+            new AlertDialog.Builder(AddUpdateStockActivity.this)
+                    .setTitle("Unit Selection Failed")
+                    .setMessage("Please select unit.")
+                    .setPositiveButton(android.R.string.ok, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
             return false;
         } else {
-            textinputitemsaleunit.setError(null);
             return true;
         }
     }
@@ -234,21 +239,21 @@ public class AddUpdateStockActivity extends AppCompatActivity {
         //method of save button which use to cheack all the edit text the fill then save the delait in the table
         public void onSaveClick(View view) {
 
+
+
+            Stock stock = activityAddItemFloatingButtonBinding.getStock();
+            if (!validateItemName(stock) | !validateItemPurchasePrice(stock) | !validateItemQuntity(stock) | !validateItemUnit(stock)) {
+                return;
+            }
+
             if (selectedStock != null) {
-
-                Stock stock = activityAddItemFloatingButtonBinding.getStock();
-
+                // request is to update the stock.
                 addUpdateStockActivityViewModel.update(stock);
                 Toast.makeText(getBaseContext(), "data updated", Toast.LENGTH_SHORT).show();
                 finish();
 
             } else {
-
-                Stock stock = activityAddItemFloatingButtonBinding.getStock();
-                if (!validateItemName(stock) | !validateItemPurchasePrice(stock) | !validateItemQuntity(stock) | !validateItemUnit(stock)) {
-                    return;
-                }
-
+                // request is to add new stock.
                 Intent intent = new Intent().putExtra("stock", stock);
                 setResult(RESULT_OK, intent);
 
@@ -267,7 +272,7 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
         public void selectUnit(View view) {
             unit_Button.setBackgroundColor(Color.GREEN);
-            dialogFragementforunit ialogFragementforunit = new dialogFragementforunit(activityAddItemFloatingButtonBinding, addUpdateStockActivityViewModel);
+            UnitDialogFragement ialogFragementforunit = new UnitDialogFragement(activityAddItemFloatingButtonBinding.getStock());
             ialogFragementforunit.show(getSupportFragmentManager(), "exampledialog");
 
 

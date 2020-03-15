@@ -20,6 +20,7 @@ import androidx.cardview.widget.CardView;
 
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.db.entities.Stock;
+import com.example.a2zbilling.stock.addUpdate.Unit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +54,12 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.dailog_fragment_for_add_to_cart, null);
         stock = sellingActivityViewModel.getStock();
         spinner = view.findViewById(R.id.Add_to_cart_spinner);
-        double unit = Double.parseDouble(stock.getItemUnit());
+        //double unit = Double.parseDouble(stock.getItemUnit());
+        String unit = stock.getItemUnit();
 
-        if (unit == 10 || unit == 11 || unit == 12) {
+        if (unit.contentEquals(Unit.UNIT_KG)
+                || unit.contentEquals(Unit.UNIT_GM)
+                || unit.contentEquals(Unit.UNIT_MG) ) {
             list = new ArrayList<String>();
             list.add("  kg  ");
             list.add("  gm  ");
@@ -88,7 +92,9 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
             });
         }
 
-        if (unit == 3 | unit == 4 | unit == 5) {
+        if (unit.contentEquals(Unit.UNIT_MTR)
+                || unit.contentEquals(Unit.UNIT_CM)
+                || unit.contentEquals(Unit.UNIT_MM) ) {
             list = new ArrayList<String>();
             list.add("  Mtr  ");
             list.add("  Cm   ");
@@ -121,7 +127,8 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
             });
         }
 
-        if (unit == 6 | unit == 7) {
+        if (unit.contentEquals(Unit.UNIT_LTR)
+                || unit.contentEquals(Unit.UNIT_ML)) {
             list = new ArrayList<String>();
             list.add("  Ltr  ");
             list.add("  ml  ");
@@ -150,7 +157,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
             });
         }
 
-        if (unit == 8) {
+        if (unit.contentEquals(Unit.UNIT_BOX)) {
             list = new ArrayList<String>();
             list.add("  Box  ");
             list.add("  pc  ");
@@ -180,7 +187,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
             });
         }
 
-        if (unit == 9) {
+        if (unit.contentEquals(Unit.UNIT_PC)) {
             list = new ArrayList<String>();
             list.add("  pc  ");
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list);

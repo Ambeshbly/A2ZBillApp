@@ -110,8 +110,8 @@
                             android:layout_weight="1"
                             android:textColor="#FFFF"
                             android:background="@color/blue"
-                            android:onClick="@{additemclickHandler::selectUnit}"
-                            android:text="Unit" />
+                            android:text="@{stock.itemUnit}"
+                            android:onClick="@{additemclickHandler::selectUnit}" />
                     </LinearLayout>
 
                     <LinearLayout

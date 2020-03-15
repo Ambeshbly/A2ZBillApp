@@ -13,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.a2zbilling.R;
@@ -24,7 +22,6 @@ import com.example.a2zbilling.stock.AddStock.AddStockFragment;
 import com.example.a2zbilling.stock.AvailableStock.AvailableStockFragment;
 import com.example.a2zbilling.stock.RFU.RFUStockFragment;
 import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
-import com.example.a2zbilling.stock.addUpdate.dialogFragementforunit;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

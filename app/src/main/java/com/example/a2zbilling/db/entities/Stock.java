@@ -10,6 +10,9 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.example.a2zbilling.BR;
+import com.example.a2zbilling.stock.addUpdate.Unit;
+
 import java.io.Serializable;
 
 @Entity(tableName = "stock_table")
@@ -21,7 +24,7 @@ public class Stock extends BaseObservable implements Serializable {
     private int purchaseId;
     private String itemName;
     private double itemQuentity;
-    private String itemUnit;
+    private String itemUnit = Unit.UNIT_DEFAULT;
     private String itemPurchasePerUnit;
     private String itemPuchaseTotal;
     private String itemSalePerUnit;
@@ -98,12 +101,14 @@ public class Stock extends BaseObservable implements Serializable {
     }
 
 
+    @Bindable
     public String getItemUnit() {
         return itemUnit;
     }
 
     public void setItemUnit(String itemUnit) {
         this.itemUnit = itemUnit;
+        notifyPropertyChanged(BR.itemUnit);
 
     }
 

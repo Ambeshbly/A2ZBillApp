@@ -20,11 +20,11 @@ import com.example.a2zbilling.db.entities.Stock;
 public class BoxDialogFragment extends AppCompatDialogFragment {
     CardView cardviewCancel, cardViewSave;
     EditText editTextBox;
-    ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding;
+    Stock stock;
 
 
-    public BoxDialogFragment(ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding) {
-        this.activityAddItemFloatingButtonBinding = activityAddItemFloatingButtonBinding;
+    public BoxDialogFragment(Stock stock) {
+        this.stock = stock;
     }
 
 
@@ -48,8 +48,7 @@ public class BoxDialogFragment extends AppCompatDialogFragment {
             public void onClick(View v) {
 
                 Toast.makeText(getContext(), "save", Toast.LENGTH_SHORT).show();
-                activityAddItemFloatingButtonBinding.getStock().setItemUnit("8");
-                Stock stock = activityAddItemFloatingButtonBinding.getStock();
+                stock.setItemUnit(Unit.UNIT_BOX);
                 int pic = Integer.parseInt(editTextBox.getText().toString().trim());
                 stock.setItemQuentity(stock.getItemQuentity() * pic);
                 stock.setPc(editTextBox.getText().toString().trim());
