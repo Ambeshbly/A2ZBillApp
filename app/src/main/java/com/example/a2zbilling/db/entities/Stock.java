@@ -22,13 +22,13 @@ public class Stock extends BaseObservable implements Serializable {
     private int itemId;
     private int itemImage;
     private int purchaseId;
-    private String itemName;
+    private String itemName="";
     private double itemQuentity;
     private String itemUnit = Unit.UNIT_DEFAULT;
-    private String itemPurchasePerUnit;
-    private String itemPuchaseTotal;
-    private String itemSalePerUnit;
-    private String itemSaleTotal;
+    private String itemPurchasePerUnit="";
+    private String itemPuchaseTotal="";
+    private String itemSalePerUnit="";
+    private String itemSaleTotal="";
     private String pc;
 
 
