@@ -67,11 +67,18 @@ public class Stock extends BaseObservable implements Serializable {
     }
 
     @BindingAdapter("android:text")
-    public static void setText(TextView view, double value) {
+    public static void setText(@org.jetbrains.annotations.NotNull TextView view, double value) {
 
+        String quantityStr = view.getText().toString();
         if (view.getText().toString().isEmpty() == false) {
             setTextFlag = false;
-            double tvValue = Double.parseDouble(view.getText().toString());
+            double tvValue = 0;
+            if(quantityStr.contentEquals("-")){
+                tvValue = 0;
+            }else{
+                tvValue = Double.parseDouble(view.getText().toString());
+            }
+
             if (tvValue != value) {
                 view.setText(Double.toString(value));
             }
@@ -86,7 +93,12 @@ public class Stock extends BaseObservable implements Serializable {
 
     @InverseBindingAdapter(attribute = "android:text")
     public static double getText(TextView view) {
-        return Double.parseDouble(view.getText().toString());
+        String valueCharSeq = view.getText().toString();
+        if(valueCharSeq.contentEquals("")
+                ||valueCharSeq.contentEquals("-")){
+            return 0;
+        }
+        return Double.parseDouble(valueCharSeq);
     }
 
     public int getItemId() {
