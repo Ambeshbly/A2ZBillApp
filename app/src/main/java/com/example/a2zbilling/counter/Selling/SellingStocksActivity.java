@@ -64,7 +64,7 @@ public class SellingStocksActivity extends AppCompatActivity {
                 String name = stock.getItemName();
                 Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show();
                 sellingActivityViewModel.setStock(stock);
-                DialogFragmentForAddToCart ialogFragementforunit = new DialogFragmentForAddToCart(sellingActivityViewModel);
+                DialogFragmentForAddToCart ialogFragementforunit = new DialogFragmentForAddToCart(stock);
                 ialogFragementforunit.show(getSupportFragmentManager(), "exampledialog");
 
             }

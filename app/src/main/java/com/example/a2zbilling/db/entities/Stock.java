@@ -31,6 +31,21 @@ public class Stock extends BaseObservable implements Serializable {
     private String itemSaleTotal="";
     private String pc;
 
+    @Ignore
+    public Stock(Stock oldStock){
+        this.itemId = oldStock.itemId;
+        this.itemImage = oldStock.itemImage;
+        this.purchaseId = oldStock.purchaseId;
+        this.itemName = oldStock.itemName;
+        this.itemQuentity = oldStock.itemQuentity;
+        this.itemUnit = oldStock.itemUnit;
+        this.itemPurchasePerUnit = oldStock.itemPurchasePerUnit;
+        this.itemPuchaseTotal = oldStock.itemPuchaseTotal;
+        this.itemSalePerUnit = oldStock.itemSalePerUnit;
+        this.itemSaleTotal = oldStock.itemSaleTotal;
+        this.pc = oldStock.pc;
+    }
+
 
     public Stock(String itemName, double itemQuentity, String itemPurchasePerUnit, String itemPuchaseTotal, String itemSalePerUnit, String itemSaleTotal) {
         this.itemImage = itemImage;
