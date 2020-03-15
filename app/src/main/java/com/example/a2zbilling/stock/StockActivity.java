@@ -102,7 +102,7 @@ public class StockActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == ADD_NEW_STOCK_REQ_CODE) {
+        if (requestCode == ADD_NEW_STOCK_REQ_CODE && resultCode==RESULT_OK) {
             Stock stock = (Stock) data.getSerializableExtra("stock");
             String itemName = stock.getItemName();
             stockActivityViewModel.addNewlyAddedStock(stock);

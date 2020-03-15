@@ -34,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 public class CounterFragment extends Fragment {
 
     public static final int ADD_NEW_STOCK_REQ_CODE = 1;
@@ -94,7 +96,7 @@ public class CounterFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_NEW_STOCK_REQ_CODE) {
+        if (requestCode == ADD_NEW_STOCK_REQ_CODE && resultCode == RESULT_OK) {
 
             //this is first object
             Stock stock = (Stock) data.getSerializableExtra(TAG_SALE_STOCK_OBJ);

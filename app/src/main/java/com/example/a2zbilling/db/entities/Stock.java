@@ -32,6 +32,9 @@ public class Stock extends BaseObservable implements Serializable {
     private String pc;
 
     @Ignore
+    private static boolean setTextFlag = true;
+
+    @Ignore
     public Stock(Stock oldStock){
         this.itemId = oldStock.itemId;
         this.itemImage = oldStock.itemImage;
@@ -67,10 +70,17 @@ public class Stock extends BaseObservable implements Serializable {
     public static void setText(TextView view, double value) {
 
         if (view.getText().toString().isEmpty() == false) {
+            setTextFlag = false;
             double tvValue = Double.parseDouble(view.getText().toString());
             if (tvValue != value) {
                 view.setText(Double.toString(value));
             }
+        }else if(value != 0){
+            if(setTextFlag){
+                setTextFlag = false;
+                view.setText(Double.toString(value));
+            }
+
         }
     }
 
