@@ -19,10 +19,10 @@ public class Customer extends BaseObservable implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int custId;
-    private String customerName;
-    private String customerAddress;
-    private String customerPhoneNo;
-    private String debt ;
+    private String customerName="";
+    private String customerAddress="";
+    private String customerPhoneNo="";
+    private String debt="" ;
 
     public Customer(String customerName, String customerPhoneNo, String customerAddress,String debt) {
         this.customerName = customerName;

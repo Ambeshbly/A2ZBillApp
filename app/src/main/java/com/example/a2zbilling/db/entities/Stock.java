@@ -10,6 +10,9 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.example.a2zbilling.BR;
+import com.example.a2zbilling.stock.addUpdate.Unit;
+
 import java.io.Serializable;
 
 @Entity(tableName = "stock_table")
@@ -19,14 +22,32 @@ public class Stock extends BaseObservable implements Serializable {
     private int itemId;
     private int itemImage;
     private int purchaseId;
-    private String itemName;
+    private String itemName="";
     private double itemQuentity;
-    private String itemUnit;
-    private String itemPurchasePerUnit;
-    private String itemPuchaseTotal;
-    private String itemSalePerUnit;
-    private String itemSaleTotal;
+    private String itemUnit = Unit.UNIT_DEFAULT;
+    private String itemPurchasePerUnit="";
+    private String itemPuchaseTotal="";
+    private String itemSalePerUnit="";
+    private String itemSaleTotal="";
     private String pc;
+
+    @Ignore
+    private static boolean setTextFlag = true;
+
+    @Ignore
+    public Stock(Stock oldStock){
+        this.itemId = oldStock.itemId;
+        this.itemImage = oldStock.itemImage;
+        this.purchaseId = oldStock.purchaseId;
+        this.itemName = oldStock.itemName;
+        this.itemQuentity = oldStock.itemQuentity;
+        this.itemUnit = oldStock.itemUnit;
+        this.itemPurchasePerUnit = oldStock.itemPurchasePerUnit;
+        this.itemPuchaseTotal = oldStock.itemPuchaseTotal;
+        this.itemSalePerUnit = oldStock.itemSalePerUnit;
+        this.itemSaleTotal = oldStock.itemSaleTotal;
+        this.pc = oldStock.pc;
+    }
 
 
     public Stock(String itemName, double itemQuentity, String itemPurchasePerUnit, String itemPuchaseTotal, String itemSalePerUnit, String itemSaleTotal) {
@@ -46,19 +67,38 @@ public class Stock extends BaseObservable implements Serializable {
     }
 
     @BindingAdapter("android:text")
-    public static void setText(TextView view, double value) {
+    public static void setText(@org.jetbrains.annotations.NotNull TextView view, double value) {
 
+        String quantityStr = view.getText().toString();
         if (view.getText().toString().isEmpty() == false) {
-            double tvValue = Double.parseDouble(view.getText().toString());
+            setTextFlag = false;
+            double tvValue = 0;
+            if(quantityStr.contentEquals("-")){
+                tvValue = 0;
+            }else{
+                tvValue = Double.parseDouble(view.getText().toString());
+            }
+
             if (tvValue != value) {
                 view.setText(Double.toString(value));
             }
+        }else if(value != 0){
+            if(setTextFlag){
+                setTextFlag = false;
+                view.setText(Double.toString(value));
+            }
+
         }
     }
 
     @InverseBindingAdapter(attribute = "android:text")
     public static double getText(TextView view) {
-        return Double.parseDouble(view.getText().toString());
+        String valueCharSeq = view.getText().toString();
+        if(valueCharSeq.contentEquals("")
+                ||valueCharSeq.contentEquals("-")){
+            return 0;
+        }
+        return Double.parseDouble(valueCharSeq);
     }
 
     public int getItemId() {
@@ -98,12 +138,14 @@ public class Stock extends BaseObservable implements Serializable {
     }
 
 
+    @Bindable
     public String getItemUnit() {
         return itemUnit;
     }
 
     public void setItemUnit(String itemUnit) {
         this.itemUnit = itemUnit;
+        notifyPropertyChanged(BR.itemUnit);
 
     }
 

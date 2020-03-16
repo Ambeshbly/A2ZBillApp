@@ -46,11 +46,9 @@
             android:theme="@style/AppTheme.ActionBar" />
         <activity android:name=".stock.DefaultItemList.DefaultItemListActivity" />
         <activity android:name=".stock.addUpdate.AddUpdateStockActivity"
-            android:parentActivityName=".stock.StockActivity"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".stock.StockActivity"
-            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".customer.CustomerActivity"

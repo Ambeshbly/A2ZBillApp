@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="saleStock"
+            type="com.example.a2zbilling.db.entities.Stock" />
+        <variable
+            name="availableStock"
+            type="com.example.a2zbilling.db.entities.Stock" />
+    </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
@@ -31,12 +40,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#ffff"
-                    android:text="Item No."
+
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_marginTop="110dp"
                     android:padding="10dp"
-                   android:layout_alignParentEnd="true" />
+                   android:layout_alignParentEnd="true"
+                    />
 
                 <TextView
                     android:id="@+id/Dialog_Item_name_text"
@@ -75,31 +85,33 @@
                     android:layout_marginStart="10dp"
                     android:layout_below="@+id/Dialog_sale_price_text"
                     android:backgroundTint="@color/liteblack"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal"
+                    android:text="@={saleStock.itemQuentity}"/>
 
                 <TextView
                     android:id="@+id/Dialog_item_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rice"
                     android:padding="10dp"
                     android:layout_toRightOf="@+id/dialog_available_stock_text"
                     android:layout_below="@+id/Dialog_image"
                     android:textColor="@color/liteblack"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:text="@{availableStock.itemName}"/>
 
                 <TextView
                     android:id="@+id/Dialod_available_stock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="132"
                     android:padding="10dp"
                     android:layout_below="@+id/Dialog_item_name"
                     android:layout_toRightOf="@+id/dialog_available_stock_text"
                     android:textColor="@color/liteblack"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:text="@{availableStock.itemQuentity}"
+                    />
 
                 <EditText
                     android:id="@+id/Dialog_editText_sale_price"
@@ -107,8 +119,9 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/dialog_available_stock_text"
                     android:layout_below="@+id/Dialod_available_stock"
-                    android:hint="sale"
-                    android:backgroundTint="@color/liteblack"/>
+                    android:inputType="numberDecimal"
+                    android:backgroundTint="@color/liteblack"
+                    android:text="@={saleStock.itemSalePerUnit}"/>
                 <TextView
                     android:id="@+id/Dialog_select_unit_text"
                     android:layout_width="wrap_content"
@@ -199,67 +212,5 @@
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </RelativeLayout>
+</layout>

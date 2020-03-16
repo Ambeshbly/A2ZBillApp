@@ -175,6 +175,16 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                 Customer customer = customerBinding.getCustomer();
 
                 //TODO : Calculate the debt for customer and set to it in case of PAY_MODE_DEBT.
+                if(sale.getSalePode() == PAY_MODE_DEBT
+                && customer.getCustomerName().isEmpty()){
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Customer Info Missing !")
+                            .setMessage("Please Enter Customer Detail.")
+                            .setPositiveButton(android.R.string.ok, null)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                    return;
+                }
 
                 if (customer.getCustId() == 0) {
                     //Check if any new customer needs to be added.
@@ -241,20 +251,18 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
     }
 
     private void updateDebt(Customer customer, Sales sale){
-        if(sale.getSalePode() == PAY_MODE_DEBT) {
-            if(customer.getDebt().isEmpty()) {
-                customer.setDebt(sale.getTotalBillAmt());
-            }else{
-                // Get existing debt of customer.
-                double currentDebt = Double.parseDouble(customer.getDebt());
-                double saleDebt = Double.parseDouble(sale.getTotalBillAmt());
+        if(customer.getDebt().isEmpty()) {
+            customer.setDebt(sale.getTotalBillAmt());
+        }else{
+            // Get existing debt of customer.
+            double currentDebt = Double.parseDouble(customer.getDebt());
+            double saleDebt = Double.parseDouble(sale.getTotalBillAmt());
 
-                // calculate total debt.
-                double updatedDebt = currentDebt + saleDebt;
+            // calculate total debt.
+            double updatedDebt = currentDebt + saleDebt;
 
-                // Set Updated Debt to customer.
-                customer.setDebt(Double.toString(updatedDebt));
-            }
+            // Set Updated Debt to customer.
+            customer.setDebt(Double.toString(updatedDebt));
         }
     }
 }
