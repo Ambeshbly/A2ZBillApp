@@ -27,6 +27,8 @@ public class MainActivityViewModel extends AndroidViewModel {
     private LiveData<List<Sales>> allSales;
     private LiveData<List<ShopDetail>> allShopDetail;
 
+    private String totalString;
+
 
     private LiveData<List<Customer>> allcustomer;
 
@@ -89,6 +91,14 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public Sales getSale() {
         return sale;
+    }
+
+    public String getTotalString() {
+        return totalString;
+    }
+
+    public void setTotalString(String totalString) {
+        this.totalString = totalString;
     }
 
     public void setSale(Sales sale) {

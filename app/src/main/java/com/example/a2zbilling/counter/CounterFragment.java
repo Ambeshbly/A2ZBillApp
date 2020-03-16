@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +44,10 @@ public class CounterFragment extends Fragment {
     CounterAdapter adepter;
     Stock updateStock;
     MediaPlayer mediaPlayer;
+    EditText editTextOtherName,editTextValue;
+    Button otherButton;
+    double total;
+    static  int itemNo=0;
     private TextView textViewTotal,textViewShopName,textViewShopPhoneNo,textViewShopEmail;
     private MainActivityViewModel mainActivityViewModel;
     private List<Customer> customerList;
@@ -61,8 +67,10 @@ public class CounterFragment extends Fragment {
         textViewShopName=view.findViewById(R.id.TextView_for_shopName);
         textViewShopPhoneNo=view.findViewById(R.id.Text_VIew_for_phone_no);
         textViewShopEmail=view.findViewById(R.id.email);
-
-
+        editTextOtherName=view.findViewById(R.id.other_stock);
+        editTextValue=view.findViewById(R.id.other_value);
+        otherButton=view.findViewById(R.id.other_button);
+        total = 0;
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_for_counter_fragment);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
@@ -74,6 +82,18 @@ public class CounterFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<Stock> stocks) {
                 adepter.setItems(stocks);
+
+                ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
+
+                for (int i = 0; i < stockList.size(); i++) {
+                    Stock stock2 = stockList.get(i);
+                    double value = 0;
+                    value = stock2.getItemQuentity() * Integer.parseInt(stock2.getItemSalePerUnit());
+                    total = total + value;
+                }
+
+                String totalString = Double.toString(total);
+                textViewTotal.setText(totalString);
             }
         });
 
@@ -102,17 +122,19 @@ public class CounterFragment extends Fragment {
 
             //   String itemName = stock.getItemName();
             mainActivityViewModel.addNewlyAddedStock(stock);
-
-
             ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
-            double total = 0;
 
             for (int i = 0; i < stockList.size(); i++) {
                 Stock stock2 = stockList.get(i);
                 double value = 0;
                 value = stock2.getItemQuentity() * Integer.parseInt(stock2.getItemSalePerUnit());
                 total = total + value;
-
+                CounterFragment fragment = (CounterFragment)
+                        getFragmentManager().findFragmentById(R.id.fragment_conterner);
+                         getFragmentManager().beginTransaction()
+                        .detach(fragment)
+                        .attach(fragment)
+                        .commit();
             }
 
             String totalString = Double.toString(total);
@@ -201,6 +223,28 @@ public class CounterFragment extends Fragment {
               }
             }
         });
+        otherButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Stock stock=new Stock();
+                itemNo++;
+                stock.setItemName(itemNo+" item");
+                stock.setItemQuentity(1);
+                stock.setItemSalePerUnit(editTextValue.getText().toString().trim());
+                mainActivityViewModel.addNewlyAddedStock(stock);
+                editTextValue.setText("");
+                Toast.makeText(getContext(),"save other ",Toast.LENGTH_SHORT).show();
+                CounterFragment fragment = (CounterFragment)
+                        getFragmentManager().findFragmentById(R.id.fragment_conterner);
+                        getFragmentManager().beginTransaction()
+                        .detach(fragment)
+                        .attach(fragment)
+                        .commit();
+
+            }
+        });
+
+
 
 
     }

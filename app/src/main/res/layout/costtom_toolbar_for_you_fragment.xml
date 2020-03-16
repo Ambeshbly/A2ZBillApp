@@ -16,7 +16,8 @@
          android:layout_height="60dp"
          android:layout_centerVertical="true"
          android:src="@drawable/shopln"
-         android:layout_alignParentStart="true"/>
+         android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true" />
 
     <TextView
         android:id="@+id/customer_name_title_bar"

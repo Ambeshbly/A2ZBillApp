@@ -110,25 +110,12 @@
 
 
 
-    <View android:id="@+id/view1"
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_below="@+id/imageView_for_shop"
-        android:background="@color/colorPrimary" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_below="@+id/view1"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimary" />
-
 
 
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardx"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_above="@+id/view4">
@@ -223,33 +210,6 @@
     </androidx.cardview.widget.CardView>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <View android:id="@+id/view3" android:layout_width="wrap_content"
-        android:layout_height="2dp" android:layout_above="@+id/view4"
-        android:layout_marginBottom="55dp" android:background="@color/colorPrimary" />
-
-
-
-
     <androidx.cardview.widget.CardView
         android:id="@+id/view4"
         android:layout_width="match_parent"
@@ -285,8 +245,81 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_for_counter_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/ja"
-        android:layout_above="@+id/view3"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ja" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Other_cardvew"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/recyclerView_for_counter_fragment"
+        android:layout_marginTop="5dp" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText android:id="@+id/other_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_centerVertical="true"
+                android:layout_column="1"
+                android:layout_row="1"
+                android:background="@drawable/edittextstyle"
+                android:hint="other"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_toLeftOf="@+id/other_value"
+                android:text="...."
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView android:id="@+id/other_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/other_stock"
+                android:gravity="center"
+                android:text="...."
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText android:id="@+id/other_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="5dp"
+                android:layout_centerVertical="true"
+                android:hint="0.0"
+                android:layout_column="1"
+                android:layout_row="1"
+                android:background="@drawable/edittextstyle"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/other_button"
+        android:layout_width="58dp"
+        android:layout_height="30dp"
+        android:text="save"
+        android:layout_below="@+id/Other_cardvew"
+        android:layout_alignParentEnd="true"
+        android:textColor="#ffff"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="5dp"
+        android:background="@color/blue"/>
+
+
+
 
 </RelativeLayout>
