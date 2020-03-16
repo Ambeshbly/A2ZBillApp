@@ -235,6 +235,7 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                     saleDeatial.setPurchasePrice(stock.getItemPurchasePerUnit());
                     saleDeatial.setSalingPrice(stock.getItemSalePerUnit());
                     saleDeatial.setSaleDetailItemName(stock.getItemName());
+                    saleDeatial.setUnit(stock.getItemUnit());
                     mainActivityViewModel.insertSaleDetail(saleDeatial);
                 }
                 Toast.makeText(getContext(), "completed", Toast.LENGTH_SHORT).show();

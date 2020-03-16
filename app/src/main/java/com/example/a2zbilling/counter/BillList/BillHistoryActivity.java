@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 
 import java.util.List;
@@ -33,10 +34,11 @@ public class BillHistoryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         recyclerView.setHasFixedSize(true);
 
-        adepter = new BillHistoryActivityAdapter(this);
+        billHistoryActivityViewModel = ViewModelProviders.of(this).get(BillHistoryActivityViewModel.class);
+
+        adepter = new BillHistoryActivityAdapter(this, BillHistoryActivity.this, billHistoryActivityViewModel);
         recyclerView.setAdapter(adepter);
 
-        billHistoryActivityViewModel = ViewModelProviders.of(this).get(BillHistoryActivityViewModel.class);
 
 
         billHistoryActivityViewModel.getAllSales().observe(this, new Observer<List<Sales>>() {
@@ -52,6 +54,9 @@ public class BillHistoryActivity extends AppCompatActivity {
           @Override
           public void onItemClick(Sales sales) {
               billHistoryActivityViewModel.setSales(sales);
+              List<SaleDeatial> saleDeatials = billHistoryActivityViewModel.getSaleDeatialList(sales.getSaleId());
+              billHistoryActivityViewModel.setSaleDetailList(saleDeatials);
+
 
               String id=Integer.toString(sales.getSaleId());
               Toast.makeText(getBaseContext(), id, Toast.LENGTH_SHORT).show();

@@ -1,5 +1,6 @@
 package com.example.a2zbilling.counter.BillList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import com.example.a2zbilling.customer.AddUpdateCustomerFragment;
 import com.example.a2zbilling.customer.CustomerActivity;
 import com.example.a2zbilling.customer.ShowCustomerDetailDialogFragment;
 import com.example.a2zbilling.db.entities.Sales;
+import com.example.a2zbilling.printer.BTPrinter;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -26,10 +28,14 @@ import java.util.List;
 public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistoryActivityAdapter.ItemHolder>  {
     private List<Sales> sales = new ArrayList<>();
     Context context;
+    Activity activity;
+    private BillHistoryActivityViewModel billHistoryActivityViewModel;
     private BillHistoryActivityAdapter.OnItemRecyclerViewListener listener;
 
-    public BillHistoryActivityAdapter(Context context) {
+    public BillHistoryActivityAdapter(Context context, Activity activity,BillHistoryActivityViewModel billHistoryActivityViewModel) {
         this.context = context;
+        this.activity = activity;
+        this.billHistoryActivityViewModel= billHistoryActivityViewModel;
     }
 
     @NonNull
@@ -42,7 +48,7 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
 
     @Override
     public void onBindViewHolder(@NonNull final ItemHolder holder, int position) {
-        Sales currentsales = sales.get(position);
+        final Sales currentsales = sales.get(position);
         holder.textView_for_saleId.setText(""+currentsales.getSaleId());
         holder.textViewForTotalAmtText.setText("Total Amt:  ");
         holder.textViewForTotal.setText(currentsales.getTotalBillAmt());
@@ -59,6 +65,8 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
                         switch (item.getItemId()){
                             case R.id.printer:
                                 //write the code to connect the printer here
+                                BTPrinter btPrinter = BTPrinter.getInstance(activity);
+                                btPrinter.printTicket(billHistoryActivityViewModel.getSaleDeatialList(currentsales.getSaleId()), currentsales);
 
 
                                 Toast.makeText(context,"printer Connected Sucessfully",Toast.LENGTH_SHORT).show();

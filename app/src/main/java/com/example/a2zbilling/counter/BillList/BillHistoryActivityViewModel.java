@@ -57,4 +57,6 @@ public class BillHistoryActivityViewModel extends AndroidViewModel {
     }
 
 
+    public void setSaleDetailList(List<SaleDeatial> saleDeatials) {
+    }
 }
