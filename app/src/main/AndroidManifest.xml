@@ -12,12 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ShopSettingActivity"
-            android:theme="@style/AppTheme.ActionBar" ></activity>
+        <activity android:name=".ScannerActivity"></activity>
+        <activity
+            android:name=".ShopSettingActivity"
+            android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".Test"
-            android:theme="@style/AppTheme.ActionBar"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.ActionBar" />
         <activity android:name=".customer.CustomerPaymentHistoryActivity" />
         <activity android:name=".customer.ShowCustomerTransactionDetailActivity" />
         <activity
@@ -31,7 +33,8 @@
             android:name=".ProfitAndLossActivity"
             android:parentActivityName=".Test"
             android:theme="@style/AppTheme.ActionBar" />
-        <activity android:name=".support.SupportActivity"
+        <activity
+            android:name=".support.SupportActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
@@ -45,7 +48,8 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.ActionBar" />
         <activity android:name=".stock.DefaultItemList.DefaultItemListActivity" />
-        <activity android:name=".stock.addUpdate.AddUpdateStockActivity"
+        <activity
+            android:name=".stock.addUpdate.AddUpdateStockActivity"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".stock.StockActivity"

@@ -8,10 +8,7 @@
     android:layout_marginEnd="2dp"
     android:layout_marginTop="2dp">
 
-
-
-
-        <RelativeLayout
+    <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp">
@@ -63,7 +60,8 @@
                 android:layout_height="wrap_content"
                 android:text="Date"
                 android:layout_marginRight="10dp"
-                android:layout_toLeftOf="@+id/carvIew_print"
+
+                android:layout_toLeftOf="@+id/text_view_Total_amt_text"
                 android:layout_alignParentBottom="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:maxLines="1"
@@ -74,6 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="130"
+                android:layout_alignParentBottom="true"
                 android:textSize="20sp"
                 android:textColor="@color/liteblack"
                 android:layout_alignParentEnd="true"
@@ -84,19 +83,22 @@
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/text_view_total"
                 android:text="Total Amt: "
+                android:layout_alignParentBottom="true"
                 android:textSize="20sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-            <androidx.cardview.widget.CardView
-                android:id="@+id/carvIew_print"
+
+            <TextView
+                android:id="@+id/menu_in_recyclerview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/text_view_total">
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/print"/>
-            </androidx.cardview.widget.CardView>
+                android:text="&#8942;"
+                android:textStyle="bold"
+                android:textColor="@color/liteblack"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
         </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

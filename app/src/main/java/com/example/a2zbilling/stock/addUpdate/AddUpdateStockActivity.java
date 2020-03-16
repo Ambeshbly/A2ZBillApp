@@ -270,6 +270,14 @@ public class AddUpdateStockActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        //method for barCode Click Listener
+        public void onBarCodeClick(View view){
+
+        }
+
+
+
+
         public void selectUnit(View view) {
             unit_Button.setBackgroundColor(Color.GREEN);
             UnitDialogFragement ialogFragementforunit = new UnitDialogFragement(activityAddItemFloatingButtonBinding.getStock());

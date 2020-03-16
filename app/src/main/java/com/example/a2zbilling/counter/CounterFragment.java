@@ -166,6 +166,13 @@ public class CounterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mediaPlayer.start();
+                Sales sale = mainActivityViewModel.getSale();
+                String totalString = Double.toString(total);
+                sale.setTotalBillAmt(totalString);
+                Calendar calendar=Calendar.getInstance();
+                // String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
+                Long date= DateConverter.fromDate(calendar.getTime());
+                sale.setDate(date);
                 ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
                 if (stockList.isEmpty()) {
                     Toast.makeText(getContext(), "please add the item first", Toast.LENGTH_SHORT).show();
@@ -173,7 +180,10 @@ public class CounterFragment extends Fragment {
                     //double total = Double.parseDouble(mainActivityViewModel.getSale().getTotalBillAmt());
                     PaymentDialogFragment dialogFragment = new PaymentDialogFragment(mainActivityViewModel, adepter, customerList);
                     dialogFragment.show(getActivity().getSupportFragmentManager(), "exampledialog");
-                    mainActivityViewModel.update(updateStock);
+                    if(updateStock!=null){
+                        mainActivityViewModel.update(updateStock);
+                    }
+
                 }
             }
         });
@@ -238,6 +248,8 @@ public class CounterFragment extends Fragment {
                 mainActivityViewModel.addNewlyAddedStock(stock);
                 editTextValue.setText("");
                 Toast.makeText(getContext(),"save other ",Toast.LENGTH_SHORT).show();
+
+
                 CounterFragment fragment = (CounterFragment)
                         getFragmentManager().findFragmentById(R.id.fragment_conterner);
                         getFragmentManager().beginTransaction()

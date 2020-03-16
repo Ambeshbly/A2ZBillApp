@@ -33,7 +33,7 @@ public class BillHistoryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         recyclerView.setHasFixedSize(true);
 
-        adepter = new BillHistoryActivityAdapter();
+        adepter = new BillHistoryActivityAdapter(this);
         recyclerView.setAdapter(adepter);
 
         billHistoryActivityViewModel = ViewModelProviders.of(this).get(BillHistoryActivityViewModel.class);

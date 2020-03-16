@@ -1,15 +1,22 @@
 package com.example.a2zbilling.counter.BillList;
 
+import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.DateConverter;
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.customer.AddUpdateCustomerFragment;
+import com.example.a2zbilling.customer.CustomerActivity;
+import com.example.a2zbilling.customer.ShowCustomerDetailDialogFragment;
 import com.example.a2zbilling.db.entities.Sales;
 
 import java.text.DateFormat;
@@ -18,8 +25,12 @@ import java.util.List;
 
 public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistoryActivityAdapter.ItemHolder>  {
     private List<Sales> sales = new ArrayList<>();
-
+    Context context;
     private BillHistoryActivityAdapter.OnItemRecyclerViewListener listener;
+
+    public BillHistoryActivityAdapter(Context context) {
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -30,13 +41,37 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ItemHolder holder, int position) {
         Sales currentsales = sales.get(position);
         holder.textView_for_saleId.setText(""+currentsales.getSaleId());
         holder.textViewForTotalAmtText.setText("Total Amt:  ");
         holder.textViewForTotal.setText(currentsales.getTotalBillAmt());
         holder.textViewpaymentMode.setText(currentsales.getSalePode());
         holder.textViewdate.setText("Date : "+ DateFormat.getDateInstance().format(DateConverter.toDate(currentsales.getDate())));
+        holder.textViewMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu=new PopupMenu(context,holder.textViewMenu);
+                popupMenu.inflate(R.menu.menu_for_printer);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.printer:
+                                //write the code to connect the printer here
+
+
+                                Toast.makeText(context,"printer Connected Sucessfully",Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                        return false;
+                    }
+
+                });
+                popupMenu.show();
+            }
+        });
+
 
     }
 
@@ -66,6 +101,7 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
         private TextView textViewForTotal;
         private TextView textViewpaymentMode;
         private TextView textViewdate;
+        private TextView textViewMenu;
 
 
 
@@ -77,6 +113,7 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
             textViewForTotal = itemView.findViewById(R.id.text_view_total);
             textViewpaymentMode = itemView.findViewById(R.id.paymenttext);
             textViewdate=itemView.findViewById(R.id.paymentdate);
+            textViewMenu=itemView.findViewById(R.id.menu_in_recyclerview);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
