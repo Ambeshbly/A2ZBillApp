@@ -1,18 +1,27 @@
 package com.example.a2zbilling.stock.AvailableStock;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.customer.AddUpdateCustomerFragment;
+import com.example.a2zbilling.customer.CustomerActivity;
+import com.example.a2zbilling.customer.ShowCustomerDetailDialogFragment;
 import com.example.a2zbilling.db.entities.Stock;
+import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +30,11 @@ public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAd
     private List<Stock> items = new ArrayList<>();
     private List<Stock> stockList;
     private OnItemRecyclerViewListener listener;
+    Context context;
+
+    public AvailableStockAdapter(Context context) {
+        this.context = context;
+    }
 
     private Filter exampleFilter = new Filter() {
         @Override
@@ -31,7 +45,7 @@ public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAd
             } else {
                 String filterPatten = constraint.toString().toLowerCase().trim();
                 for (Stock item : stockList) {
-                    if (item.getItemName().toLowerCase().contains(filterPatten)) {
+                    if (item.getItemName().toLowerCase().contains(filterPatten)||item.getBarCode().toLowerCase().contains(filterPatten)) {
 
                         filteredlist.add(item);
                     }
@@ -60,11 +74,39 @@ public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
-        Stock currentItem = items.get(position);
+    public void onBindViewHolder(@NonNull final ItemHolder holder, int position) {
+        final Stock currentItem = items.get(position);
         holder.textViewForItemName.setText(currentItem.getItemName());
         holder.textViewForItemId.setText("" + currentItem.getItemId());
         holder.textViewForQuentity.setText("" + currentItem.getItemQuentity());
+        holder.textViewForShowSaleText.setText(currentItem.getItemUnit());
+        holder.Menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu=new PopupMenu(context,holder.Menu);
+                popupMenu.inflate(R.menu.menu_for_update_stock);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.update:
+                                Toast.makeText(context,"update",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(context, AddUpdateStockActivity.class);
+                                intent.putExtra("stock_object", currentItem);
+                                context.startActivity(intent);
+                                break;
+                            case R.id.report:
+                                Toast.makeText(context,"Cooming Soon",Toast.LENGTH_SHORT).show();
+                                break;
+
+                        }
+                        return false;
+                    }
+
+                });
+                popupMenu.show();
+            }
+        });
 
     }
 
@@ -105,6 +147,7 @@ public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAd
         private TextView textViewForShowSaleText;
         private TextView textViewForQuentity;
         private ImageView imageViewForItemImage;
+        private TextView Menu;
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
@@ -115,6 +158,7 @@ public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAd
             textViewForShowSaleText = itemView.findViewById(R.id.text_view_sale_price_text);
             textViewForQuentity = itemView.findViewById(R.id.text_view_quentity);
             imageViewForItemImage = itemView.findViewById(R.id.imageview_for_item);
+            Menu=itemView.findViewById(R.id.menu_in_recyclerview);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

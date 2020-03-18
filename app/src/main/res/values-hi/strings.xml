@@ -2,11 +2,71 @@
 <resources>
     <string name="app_name">a2zBilling</string>
     <string name="shop_Name">दुकान का नाम</string>
-    <string name="Phone_no">फोन नंबर</string>
-    <string name="email">ईमेल पता</string>
+    <string name="Phone_no">फोन नंबर.</string>
+    <string name="email">ईमेल</string>
     <string name="stock">भण्डार</string>
     <string name="price">कीमत</string>
     <string name="qnty">मात्रा</string>
-    <string name="value">मूल्य</string>
-    <string name="total">कुल</string>
+    <string name="value">value</string>
+    <string name="grand_total">कुल योग</string>
+    <string name="save">सहेजें</string>
+    <string name="other">अन्य</string>
+
+    <string name="customer">ग्राहक</string>
+    <string name="Stock">भण्डार</string>
+    <string name="reports">रिपोर्ट</string>
+    <string name="support">सहयोग</string>
+    <string name="expenses">व्यय</string>
+    <string name="proftandLoss">फायदा/हानि</string>
+
+    <string name="shopDerail">दुकान का विवरण</string>
+    <string name="shopSetting"> दुकान की स्थापना</string>
+    <string name="selectLanguage">भाषा का चयन करें</string>
+    <string name="Printer">मुद्रक</string>
+    <string name="change_password">पासवर्ड बदलें</string>
+    <string name="helpandsupport">सहायता और समर्थन</string>
+    <string name="about_us">हमारे बारे में</string>
+
+
+    <string name="itemName">वस्तु का नाम</string>
+    <string name="itemQuntity">वस्तु की मात्रा</string>
+    <string name="unit">इकाई</string>
+    <string name="purchaseUnit">खरीद फरोख्त/इकाई</string>
+    <string name="puchaseTotal">कुल खरीद</string>
+    <string name="saleUnit">बिक्री/इकाई</string>
+    <string name="saleTotal">बिक्री कुल</string>
+    <string name="cancel">रद्द करना</string>
+
+    <string name="addCustomer">ग्राहक जोड़ें</string>
+    <string name="Name">नाम</string>
+    <string name="phoneNo">फोन नंबर।</string>
+    <string name="address">पता</string>
+    <string name="customer_detail">ग्राहक विस्तार</string>
+    <string name="updateCustomer">ग्राहक को अपडेट करें</string>
+    <string name="Payment_history">भुगतान इतिहास</string>
+    <string name="payment">भुगतान</string>
+    <string name="totalprice">कुल कीमत</string>
+    <string name="description">विवरण</string>
+
+    <string name="customerCareCall">ग्राहक सेवा कॉल</string>
+    <string name="customerCareMessage">ग्राहक सेवा संदेश</string>
+    <string name="CustomerCareTutorial">ग्राहक सेवा संदेश</string>
+    <string name="customerCareEmail">ग्राहक सेवा ईमेल</string>
+    <string name="ClickHere">यहाँ क्लिक करें</string>
+
+    <string name="AddExpenses">व्यय जोड़ें</string>
+    <string name="expensesCategory">व्यय श्रेणी</string>
+    <string name="total_price">कुल कीमत</string>
+
+    <string name="search_your_report">अपनी रिपोर्ट खोजें</string>
+    <string name="from">से</string>
+    <string name="To">सेवा</string>
+    <string name="dd_mm_yy">dd/mm/yy</string>
+    <string name="cheak">cheak</string>
+    <string name="result">परिणाम</string>
+    <string name="total_sales">कुल बिक्री</string>
+    <string name="total_purhase">कुल खरीद</string>
+    <string name="by_item">आइटम द्वारा</string>
+    <string name="stockName">स्टॉक का नाम</string>
+
 </resources>

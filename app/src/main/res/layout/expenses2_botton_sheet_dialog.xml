@@ -68,7 +68,7 @@
                 android:inputType="number"
                 android:text="@={expensesCategory.expenseCategoryTotal}"
                 android:backgroundTint="@color/liteblack"
-                android:hint="Total price"/>
+                android:hint="@string/total_price"/>
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.cardview.widget.CardView>
 
@@ -120,7 +120,7 @@
                 android:layout_height="100dp"
                 android:text="@={expensesCategory.expenseCategoryDescription}"
                 android:backgroundTint="@color/liteblack"
-                android:hint="description"/>
+                android:hint="@string/description"/>
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.cardview.widget.CardView>
 

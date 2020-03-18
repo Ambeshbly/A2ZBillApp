@@ -23,6 +23,7 @@ import com.example.a2zbilling.counter.BillList.ShowBillingHistoryFragments;
 import com.example.a2zbilling.databinding.FragmentForFutherscopeBinding;
 import com.example.a2zbilling.db.entities.Expenses;
 import com.example.a2zbilling.db.entities.Purchase;
+import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.StockActivityViewModel;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class RFUStockFragment extends Fragment {
     private FragmentForFutherscopeBinding fragmentForFutherscopeBinding;
     FurtherScopeAdapter adepter;
     private StockActivityViewModel stockActivityViewModel;
+    double total=0;
 
     public RFUStockFragment(StockActivityViewModel stockActivityViewModel) {
         this.stockActivityViewModel = stockActivityViewModel;
@@ -53,20 +55,11 @@ public class RFUStockFragment extends Fragment {
               }
          });
 
-//        adepter.setOnItemRecyclerViewlistener(new FurtherScopeAdapter().OnItemRecyclerViewListener() {
-//            @Override
-//            public void onItemClick(Expenses expenses) {
-//                Intent intent = new Intent(getBaseContext(), ExpensesActivity2.class);
-//                intent.putExtra("expenses",  expenses);
-//                startActivity(intent);
-//            }
-//        });
-
+//
         adepter.setOnItemRecyclerViewlistener(new FurtherScopeAdapter.OnItemRecyclerViewListener() {
             @Override
             public void onItemClick(Purchase purchase) {
                 stockActivityViewModel.setPurchase(purchase);
-
                 fragmentForFutherscopeBinding.recyclerView.setVisibility(View.GONE);
                 FragmentManager fm=getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();

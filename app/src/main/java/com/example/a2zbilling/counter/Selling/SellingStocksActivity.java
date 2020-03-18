@@ -1,10 +1,14 @@
 package com.example.a2zbilling.counter.Selling;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
@@ -13,9 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.ScannerActivity;
 import com.example.a2zbilling.databinding.ActivityAddToCardBinding;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.AvailableStock.AvailableStockAdapter;
+import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
 
 import java.util.List;
 
@@ -71,11 +77,35 @@ public class SellingStocksActivity extends AppCompatActivity {
         });
     }
 
-    //override method for cart icon
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1 && resultCode==RESULT_OK){
+            String barCode=data.getExtras().getString("satva");
+            adepter.getFilter().filter(barCode);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.cart, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.cart, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.scan:
+                Intent intent=new Intent(SellingStocksActivity.this, ScannerActivity.class);
+                startActivityForResult(intent,1);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

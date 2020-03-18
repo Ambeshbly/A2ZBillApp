@@ -21,16 +21,23 @@ import com.example.a2zbilling.db.entities.Purchase;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.StockActivity;
 import com.example.a2zbilling.stock.StockActivityViewModel;
+import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class AddStockFragment extends Fragment {
 
     AddStockAdapter adepter;
     private FragmentForAddstocksBinding fragmentForAddstocksBinding;
+    //declration of floating button for add item
+    FloatingActionButton floatingActionButton;
+    public static final int ADD_NEW_STOCK_REQ_CODE = 1;
 
     private StockActivityViewModel stockActivityViewModel;
     public AddStockFragment(StockActivityViewModel stockActivityViewModel) {
@@ -45,15 +52,39 @@ public class AddStockFragment extends Fragment {
         fragmentForAddstocksBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_for_addstocks, container, false);
         fragmentForAddstocksBinding.recyclerViewForAddStock.setLayoutManager(new LinearLayoutManager(getContext()));
         fragmentForAddstocksBinding.recyclerViewForAddStock.setHasFixedSize(true);
+        fragmentForAddstocksBinding.btFloat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "floating click", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), AddUpdateStockActivity.class);
+                startActivityForResult(intent, ADD_NEW_STOCK_REQ_CODE);
+            }
+        });
         adepter = new AddStockAdapter();
         fragmentForAddstocksBinding.recyclerViewForAddStock.setAdapter(adepter);
+
         stockActivityViewModel.getNewlyAddedStocks().observe(getViewLifecycleOwner(), new Observer<ArrayList<Stock>>() {
             @Override
             public void onChanged(ArrayList<Stock> stocks) {
+                if(stocks.isEmpty()){
+                }else {
+                    fragmentForAddstocksBinding.defaulticon.setVisibility(View.INVISIBLE);
+                    fragmentForAddstocksBinding.textdefault.setVisibility(View.INVISIBLE);
+                }
                 adepter.setItems(stocks);
             }
         });
         return fragmentForAddstocksBinding.getRoot();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_NEW_STOCK_REQ_CODE && resultCode==RESULT_OK) {
+            Stock stock = (Stock) data.getSerializableExtra("stock");
+            String itemName = stock.getItemName();
+            stockActivityViewModel.addNewlyAddedStock(stock);
+        }
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -72,14 +103,16 @@ public class AddStockFragment extends Fragment {
                 Toast.makeText(getContext(), "save", Toast.LENGTH_SHORT).show();
                 ArrayList<Stock> stockList= stockActivityViewModel.getTemproryItemList();
                 int totalItems=0;
+                double total=0;
                 for(int i = 0; i <stockList.size(); i++)
                 {
                     Stock stock=stockList.get(i);
+                    total=total+Double.parseDouble(stock.getItemPuchaseTotal());
                     totalItems=totalItems+1;
                 }
                 Calendar calendar=Calendar.getInstance();
                 String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
-                Purchase purchase=new Purchase(Integer.toString(totalItems),selecteddate);
+                Purchase purchase=new Purchase(Integer.toString(totalItems),selecteddate,Double.toString(total));
                 stockActivityViewModel.insert(purchase);
                 try {
                     Thread.sleep(100);
@@ -103,7 +136,4 @@ public class AddStockFragment extends Fragment {
         }
         return false;
     }
-
-
-
 }

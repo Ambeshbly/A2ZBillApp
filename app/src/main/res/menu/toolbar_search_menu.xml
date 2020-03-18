@@ -2,11 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-
         android:id="@+id/search_view_By"
         android:title="search"
         android:icon="@drawable/ic_search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView"/>
+
+    <item
+        android:id="@+id/search_scan"
+        android:title="scan"
+        android:icon="@drawable/scan"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView"/>
+
 
 </menu>

@@ -4,5 +4,5 @@
     <item
         android:id="@+id/byItem"
         android:icon="@drawable/addtocartimage"
-        android:title="by item" />
+        android:title="@string/by_item" />
 </menu>

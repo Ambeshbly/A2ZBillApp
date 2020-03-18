@@ -5,15 +5,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class ScannerActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
-
 
     ZXingScannerView zXingScannerView;
     int MY_PERMISSIONS_REQUEST_CAMERA=0;
@@ -28,6 +29,18 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     @Override
     public void handleResult(Result rawResult) {
         //MainActivity.textView.setText(rawResult.getText());
+//        AddUpdateStockActivity.textViewScanner.setText(rawResult.getText());
+//        onBackPressed();
+
+      Intent intent=new Intent();
+        intent.putExtra("satva",rawResult.getText());
+        setResult(RESULT_OK,intent);
+
+      //  AddUpdateStockActivity.textViewScanner.setText(rawResult.getText());
+      //  AddUpdateStockActivity.activityAddItemFloatingButtonBinding.textviewForScanner.setText(rawResult.getText());
+        onBackPressed();
+
+
     }
 
     @Override
@@ -53,7 +66,6 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
         }
         zXingScannerView.setResultHandler(this);
         zXingScannerView.startCamera();
-
     }
 
 }

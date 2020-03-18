@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/cart"
-        android:icon="@drawable/addtocartimage"
-        android:title="Counter"
+        android:id="@+id/scan"
+        android:icon="@drawable/scan"
+        android:title="scanner"
         app:showAsAction="always"/>
 
 </menu>

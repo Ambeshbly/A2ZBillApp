@@ -29,13 +29,8 @@ import java.util.ArrayList;
 
 public class StockActivity extends AppCompatActivity {
 
-    public static final int ADD_NEW_STOCK_REQ_CODE = 1;
+
     MediaPlayer mediaPlayer;
-
-
-
-    //declration of floating button for add item
-    FloatingActionButton floatingActionButton;
     StockActivityViewModel stockActivityViewModel;
     //declartion of Bottom navigation
     private BottomNavigationView bottomNavigationView;
@@ -72,7 +67,7 @@ public class StockActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation_for_addstocks);
 
         //finding floating button in Xml file
-        floatingActionButton = findViewById(R.id.bt_float);
+
 
         stockActivityViewModel = ViewModelProviders.of(this).get(StockActivityViewModel.class);
         mediaPlayer= MediaPlayer.create(getBaseContext(),R.raw.simple);
@@ -80,34 +75,11 @@ public class StockActivity extends AppCompatActivity {
         //set tittle in the action bar
         getSupportActionBar().setTitle("Stocks");
 
-        //add action listener in floatin button
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mediaPlayer.start();
-                Toast.makeText(getBaseContext(), "floating click", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getBaseContext(), AddUpdateStockActivity.class);
-                startActivityForResult(intent, ADD_NEW_STOCK_REQ_CODE);
-            }
-        });
-
         //set selection navigation items
         bottomNavigationView.setOnNavigationItemSelectedListener(nav_listener);
 
         //set which fragment is show whenever user com in additem activity
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner_for_addstocks, new AddStockFragment(stockActivityViewModel)).commit();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == ADD_NEW_STOCK_REQ_CODE && resultCode==RESULT_OK) {
-            Stock stock = (Stock) data.getSerializableExtra("stock");
-            String itemName = stock.getItemName();
-            stockActivityViewModel.addNewlyAddedStock(stock);
-        }
-
     }
 
     @Override
@@ -134,7 +106,4 @@ public class StockActivity extends AppCompatActivity {
             finish();
         }
     }
-
-
-
 }

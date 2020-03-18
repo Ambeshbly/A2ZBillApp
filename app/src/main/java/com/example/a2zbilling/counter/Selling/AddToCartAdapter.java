@@ -32,7 +32,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Item
             } else {
                 String filterPatten = constraint.toString().toLowerCase().trim();
                 for (Stock item : stockList) {
-                    if (item.getItemName().toLowerCase().contains(filterPatten)) {
+                    if (item.getItemName().toLowerCase().contains(filterPatten)||item.getBarCode().toLowerCase().contains(filterPatten)) {
                         filteredlist.add(item);
                     }
                 }
@@ -50,6 +50,8 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Item
             notifyDataSetChanged();
         }
     };
+
+
 
     @NonNull
     @Override

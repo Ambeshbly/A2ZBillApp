@@ -51,7 +51,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:textStyle="bold"
-                   android:text="customer"
+                   android:text="@string/customer"
                    android:textSize="18sp"/>
            </LinearLayout>
        </androidx.cardview.widget.CardView>
@@ -80,7 +80,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:textStyle="bold"
-                   android:text="stocks"
+                   android:text="@string/stock"
                    android:textSize="18sp"/>
            </LinearLayout>
        </androidx.cardview.widget.CardView>
@@ -109,7 +109,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:textStyle="bold"
-                   android:text="reports"
+                   android:text="@string/reports"
                    android:textSize="18sp"/>
            </LinearLayout>
        </androidx.cardview.widget.CardView>
@@ -137,7 +137,7 @@
                    android:layout_marginTop="12dp"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="support"
+                   android:text="@string/support"
                    android:textStyle="bold"
                    android:textSize="18sp"/>
            </LinearLayout>
@@ -167,7 +167,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:textStyle="bold"
-                   android:text="expenses"
+                   android:text="@string/expenses"
                    android:textSize="18sp"/>
            </LinearLayout>
        </androidx.cardview.widget.CardView>
@@ -195,7 +195,7 @@
                    android:layout_marginTop="12dp"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="profit/loss"
+                   android:text="@string/proftandLoss"
                    android:textStyle="bold"
                    android:textSize="18sp"/>
            </LinearLayout>

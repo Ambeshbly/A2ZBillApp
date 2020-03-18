@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/detail"
-        android:title="detail customer"/>
+        android:title="@string/customer_detail"/>
 
     <item
         android:id="@+id/update"
-        android:title="update customer"/>
+        android:title="@string/updateCustomer"/>
 
     <item
         android:id="@+id/payment_history"
-        android:title="payment history"/>
+        android:title="@string/Payment_history"/>
 </menu>

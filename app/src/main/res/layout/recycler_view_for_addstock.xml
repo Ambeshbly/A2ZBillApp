@@ -24,19 +24,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name"
-            android:textColor="@color/liteblack"
-            android:padding="10dp"
+            android:padding="5dp"
             android:layout_toRightOf="@+id/Iamge_view_item"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:maxLines="1"
             android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/menu_in_recyclerview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:text="&#8942;"
+            android:textStyle="bold"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/liteblack"
+            android:textSize="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true" />
 
         <TextView
             android:id="@+id/text_view_show_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="12"
-            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/text_view_item_name"
+            android:layout_toRightOf="@+id/text_view_show_id_text"
             android:textColor="@color/liteblack"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
@@ -45,7 +58,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Id: "
-            android:layout_toLeftOf="@+id/text_view_show_id"
+            android:layout_marginStart="5dp"
+            android:layout_below="@+id/text_view_item_name"
+            android:layout_toRightOf="@+id/Iamge_view_item"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
         <TextView
@@ -53,19 +68,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="50"
-            android:textColor="@color/blue"
-            android:layout_alignParentEnd="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:layout_below="@+id/text_view_show_id" />
+            android:layout_marginEnd="5dp"
+            android:textColor="@color/liteblack"
+            android:layout_below="@+id/text_view_item_name"
+            android:layout_toLeftOf="@+id/text_view_sale_price_text"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <TextView
             android:id="@+id/text_view_sale_price_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Qnty : "
-            android:layout_below="@+id/text_view_show_id"
-            android:layout_toLeftOf="@+id/text_view_quentity"
-            android:layout_marginTop="3dp"
+            android:text="unit"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@+id/text_view_item_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
 

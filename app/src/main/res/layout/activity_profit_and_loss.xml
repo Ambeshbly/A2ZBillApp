@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/paymeny_spinner"
             android:completionThreshold="1"
-            android:hint="stock name"
+            android:hint="@string/stockName"
             android:backgroundTint="@color/colorPrimaryDark"
             android:padding="8dp"
             android:layout_marginTop="30dp" />
@@ -59,7 +59,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cheak"
+                    android:text="@string/cheak"
                     android:textColor="#ffff"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -70,7 +70,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Result"
+        android:text="@string/result"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold"
         android:layout_margin="10dp"/>

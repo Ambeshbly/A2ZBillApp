@@ -32,9 +32,9 @@ public class FurtherScopeAdapter extends RecyclerView.Adapter<FurtherScopeAdapte
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         Purchase currentPurchase = purchases.get(position);
         holder.textViewForExpensesCategory.setText("Purchase Id : "+currentPurchase.getPurchaseId());
-        holder.textViewForTotal.setText("Total Items : "+currentPurchase.getItemNumber());
-        holder.textViewForPaymentMode.setText("");
-        holder.textDate.setText("Date : "+currentPurchase.getDate());
+        holder.textViewForTotal.setText("Items : "+currentPurchase.getItemNumber());
+        holder.textViewForPaymentMode.setText("Total :"+currentPurchase.getTotal() +"\u20B9");
+        holder.textDate.setText(""+currentPurchase.getDate());
     }
 
     @Override

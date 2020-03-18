@@ -30,6 +30,7 @@ public class Stock extends BaseObservable implements Serializable {
     private String itemSalePerUnit="";
     private String itemSaleTotal="";
     private String pc;
+    private String barCode="0";
 
     @Ignore
     private static boolean setTextFlag = true;
@@ -230,5 +231,13 @@ public class Stock extends BaseObservable implements Serializable {
 
     public void setPurchaseId(int purchaseId) {
         this.purchaseId = purchaseId;
+    }
+
+    public String getBarCode() {
+        return barCode;
+    }
+
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
     }
 }

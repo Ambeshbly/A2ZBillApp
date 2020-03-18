@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textColor="@color/liteblack"
-                android:text="Search your reports"/>
+                android:text="@string/search_your_report"/>
 
             <Spinner
                 android:id="@+id/select_duration_sppiner"
@@ -36,7 +36,7 @@
                 android:id="@+id/from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="From"
+                android:text="@string/from"
                 android:layout_marginTop="10dp"
                 android:padding="5dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/from"
                 android:layout_marginTop="10dp"
-                android:hint="dd/mm/yy"
+                android:hint="@string/dd_mm_yy"
                 android:layout_below="@+id/select_duration_sppiner"/>
             <TextView
                 android:id="@+id/to"
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/to"
                 android:layout_marginTop="10dp"
-                android:hint="dd/mm/yy"
+                android:hint="@string/dd_mm_yy"
                 android:layout_below="@+id/select_duration_sppiner"/>
 
             <androidx.cardview.widget.CardView
@@ -83,7 +83,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="cheak"
+                    android:text="@string/cheak"
                     android:layout_centerInParent="true"
                     android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -96,7 +96,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Result"
+        android:text="@string/result"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold"
         android:layout_margin="10dp"/>
@@ -128,7 +128,7 @@
                 android:id="@+id/profit_and_loss_sale_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="total sales"
+                android:text="@string/total_sales"
                 android:textStyle="bold"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="120dp"
@@ -138,7 +138,7 @@
                 android:id="@+id/profit_and_loss_purchase_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="purchase sales"
+                android:text="@string/total_purhase"
                 android:textStyle="bold"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"

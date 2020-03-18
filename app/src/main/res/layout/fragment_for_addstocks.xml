@@ -10,6 +10,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bt_float"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/blue"
+        android:src="@drawable/floating_button" />
+
+    <ImageView
+        android:id="@+id/defaulticon"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="60dp"
+        android:src="@drawable/defaulticon"/>
+
+    <TextView
+        android:id="@+id/textdefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/blue"
+        android:text="click + Button to Add Stock"
+        android:layout_below="@+id/defaulticon"/>
+
   
 </RelativeLayout>
 </layout>

@@ -23,7 +23,7 @@
         android:id="@+id/customer_name_title_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Shop Detail"
+        android:text="@string/shopDerail"
         android:layout_toRightOf="@+id/customer_icon"
         android:layout_centerVertical="true"
         android:textColor="@color/blue"

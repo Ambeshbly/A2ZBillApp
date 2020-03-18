@@ -4,16 +4,16 @@
     <item
         android:id="@+id/nav_addstocks"
         android:icon="@drawable/addstocks"
-        android:title="add stocks"/>
+        android:title="Add Stocks"/>
 
     <item
         android:id="@+id/nav_availablestocks"
         android:icon="@drawable/availablestocks"
-        android:title="available stocks"/>
+        android:title="Available Stocks"/>
 
     <item
         android:id="@+id/nav_futhurescope"
         android:icon="@drawable/futuretask"
-        android:title="futherscope"/>
+        android:title="Purchase History"/>
 
 </menu>

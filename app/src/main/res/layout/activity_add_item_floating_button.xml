@@ -98,7 +98,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/colorPrimary"
-                        android:hint="Item Name"
+                        android:hint="@string/itemName"
                         android:inputType="text"
                         android:text="@={stock.itemName}" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -142,7 +142,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="18"
                                 android:backgroundTint="@color/colorPrimary"
-                                android:hint="Item Quantity"
+                                android:hint="@string/itemQuntity"
                                 android:inputType="numberDecimal"
                                 android:text="@={stock.itemQuentity}" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -178,7 +178,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/colorPrimary"
-                                android:hint="Purchase/Unit"
+                                android:hint="@string/purchaseUnit"
                                 android:inputType="number"
                                 android:text="@={stock.itemPurchasePerUnit}" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -195,7 +195,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/colorPrimary"
-                                android:hint="Purchase Total"
+                                android:hint="@string/puchaseTotal"
                                 android:inputType="number"
                                 android:text="@={stock.itemPuchaseTotal}" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -219,7 +219,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/colorPrimary"
-                                android:hint="Sale/Unit"
+                                android:hint="@string/saleUnit"
                                 android:inputType="number"
                                 android:text="@={stock.itemSalePerUnit}" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -236,7 +236,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/colorPrimary"
-                                android:hint="Sale Total"
+                                android:hint="@string/saleTotal"
                                 android:inputType="number"
                                 android:text="@={stock.itemSaleTotal}" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -260,7 +260,7 @@
                 android:layout_weight="1"
                 android:background="@color/blue"
                 android:onClick="@{additemclickHandler::onCancelClick}"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:textColor="#ffff" />
             <Button
                 android:id="@+id/buttonSave"
@@ -270,7 +270,7 @@
                 android:layout_weight="1"
                 android:background="@color/blue"
                 android:onClick="@{additemclickHandler::onSaveClick}"
-                android:text="save"
+                android:text="@string/save"
                 android:textColor="#ffff" />
         </LinearLayout>
     </RelativeLayout>

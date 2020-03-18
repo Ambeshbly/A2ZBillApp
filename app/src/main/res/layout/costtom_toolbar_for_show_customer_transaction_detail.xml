@@ -7,8 +7,8 @@
     android:id="@+id/myToolbarCustomer"
     android:background="@color/colorPrimary">
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ImageView
          android:id="@+id/customer_icon"
@@ -24,13 +24,37 @@
         android:layout_height="wrap_content"
         android:text="Customer Name"
         android:layout_toRightOf="@+id/customer_icon"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
         android:textColor="@color/blue"
         android:textStyle="bold"
-        android:padding="15dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+        android:padding="2dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
-    <TextView
+        <TextView
+            android:id="@+id/customer_phone_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone No"
+            android:layout_toRightOf="@+id/customer_icon"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/blue"
+            android:layout_below="@+id/customer_name_title_bar"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
+        <TextView
+            android:id="@+id/customer_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:layout_toRightOf="@+id/customer_icon"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/blue"
+            android:layout_below="@+id/customer_phone_no"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
+
+        <TextView
         android:id="@+id/toolbar_debt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,7 +78,6 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
-
 
     </RelativeLayout>
 

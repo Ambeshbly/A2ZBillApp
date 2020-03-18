@@ -22,14 +22,6 @@
         app:menu="@menu/bottom_navigation_for_addstocks"
         android:background="?android:attr/windowBackground"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/bt_float"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_navigation_for_addstocks"
-        android:layout_margin="30dp"
-        android:layout_alignParentEnd="true"
-        android:backgroundTint="@color/blue"
-        android:src="@drawable/floating_button" />
+
 
 </RelativeLayout>

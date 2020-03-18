@@ -11,12 +11,19 @@
      <include
         android:id="@+id/toolbar"
         layout="@layout/costtom_toolbar_for_show_customer_transaction_detail"/>
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/liteblack"
+        android:layout_below="@+id/toolbar"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_sale_history"
         android:layout_width="match_parent"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/view"
         android:layout_height="match_parent" />
+
 
     <FrameLayout
         android:id="@+id/fragment_conterner2"

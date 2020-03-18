@@ -1,11 +1,72 @@
 <resources>
+
     <string name="app_name">a2zBilling</string>
     <string name="shop_Name">Shop Name</string>
     <string name="Phone_no">Phone No.</string>
     <string name="email">abc@gmail.com</string>
     <string name="stock">stock</string>
-    <string name="price">price</string>
-    <string name="qnty">qnty</string>
-    <string name="value">value</string>
-    <string name="total">total</string>
+    <string name="price">Price</string>
+    <string name="qnty" >Qnty</string>
+    <string name="value">Value</string>
+    <string name="grand_total">Grand Total</string>
+    <string name="save">save</string>
+    <string name="other">Other</string>
+
+    <string name="customer">Customer</string>
+    <string name="Stock">Stock</string>
+    <string name="reports">Reports</string>
+    <string name="support">Support</string>
+    <string name="expenses">Expenses</string>
+    <string name="proftandLoss">Profit/Loss</string>
+
+    <string name="shopDerail">ShopDetail</string>
+    <string name="shopSetting">Shop Setting</string>
+    <string name="selectLanguage">Select Language</string>
+    <string name="Printer">Printer</string>
+    <string name="change_password">Change Password</string>
+    <string name="helpandsupport">Help and Support</string>
+    <string name="about_us">About Us</string>
+
+
+    <string name="itemName">Item Name</string>
+    <string name="itemQuntity">Item Quntity</string>
+    <string name="unit">Unit</string>
+    <string name="purchaseUnit">Purchase/Unit</string>
+    <string name="puchaseTotal">Purchase Total</string>
+    <string name="saleUnit">Sale/Unit</string>
+    <string name="saleTotal">Sale Total</string>
+    <string name="cancel">cancel</string>
+
+    <string name="addCustomer">Add Customer</string>
+    <string name="Name">Name</string>
+    <string name="phoneNo">Phone No.</string>
+    <string name="address">Address</string>
+    <string name="customer_detail">Customer Detail</string>
+    <string name="updateCustomer">Update Customer</string>
+    <string name="Payment_history">Payment Hestory</string>
+    <string name="payment">Payment</string>
+    <string name="totalprice">total Price</string>
+    <string name="description">Description</string>
+
+    <string name="customerCareCall">Customer Care Call</string>
+    <string name="customerCareMessage">Customer Care Message</string>
+    <string name="CustomerCareTutorial">Customer Care Tutorial</string>
+    <string name="customerCareEmail">Customer Care Email</string>
+    <string name="ClickHere">click here</string>
+
+    <string name="AddExpenses">Add Expenses</string>
+    <string name="expensesCategory">Expenses Category</string>
+    <string name="total_price">Total Price</string>
+
+    <string name="search_your_report">Search Your reports</string>
+    <string name="from">From</string>
+    <string name="To">to</string>
+    <string name="dd_mm_yy">dd/mm/yy</string>
+    <string name="cheak">cheak</string>
+    <string name="result">result</string>
+    <string name="total_sales">Total Sales</string>
+    <string name="total_purhase">Total Purchase</string>
+    <string name="by_item">by Item</string>
+    <string name="stockName">Stock Name</string>
+
 </resources>

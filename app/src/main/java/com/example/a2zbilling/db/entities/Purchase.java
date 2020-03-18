@@ -10,11 +10,24 @@ public class Purchase {
     private int purchaseId;
     private String itemNumber;
     private String date;
+    private String Total;
 
 
-    public Purchase(String itemNumber, String date) {
+    public Purchase(String itemNumber, String date,String total) {
         this.itemNumber = itemNumber;
         this.date = date;
+        this.Total=total;
+    }
+
+    public Purchase() {
+    }
+
+    public String getTotal() {
+        return Total;
+    }
+
+    public void setTotal(String total) {
+        Total = total;
     }
 
     public int getPurchaseId() {

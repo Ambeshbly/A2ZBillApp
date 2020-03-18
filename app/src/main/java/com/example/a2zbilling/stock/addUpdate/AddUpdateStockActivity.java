@@ -23,13 +23,22 @@ import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.a2zbilling.DateConverter;
 import com.example.a2zbilling.R;
+import com.example.a2zbilling.ScannerActivity;
+import com.example.a2zbilling.counter.CounterFragment;
 import com.example.a2zbilling.databinding.ActivityAddItemFloatingButtonBinding;
+import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.DefaultItemList.DefaultItemListActivity;
 import com.example.a2zbilling.stock.StockActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import javax.xml.transform.Result;
 
 public class AddUpdateStockActivity extends AppCompatActivity {
 
@@ -51,7 +60,8 @@ public class AddUpdateStockActivity extends AppCompatActivity {
     private Button unit_Button, saveButton;
     //declation of cardview which is used to send the default items activity
     private CardView defualtitemListCardView;
-    private ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding;
+   private ActivityAddItemFloatingButtonBinding activityAddItemFloatingButtonBinding;
+   // public static TextView textViewScanner;
 
 
     private String itemName;
@@ -75,6 +85,8 @@ public class AddUpdateStockActivity extends AppCompatActivity {
         //finding the item name edit text in the Xml file
 
         textinputitemname = findViewById(R.id.text_input_itemname);
+
+     //   textViewScanner=findViewById(R.id.textview_for_scanner);
 
         //finding the item quentity edit text in the Xml file
         textinputitemquantiity = findViewById(R.id.text_input_itemQuantity);
@@ -135,6 +147,9 @@ public class AddUpdateStockActivity extends AppCompatActivity {
         }
     }
 
+
+
+
     //open carmra function
     private void openCamra() {
         ContentValues values = new ContentValues();
@@ -169,13 +184,20 @@ public class AddUpdateStockActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-
         //call image was capture from camra
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-
+        if (requestCode==IMAGE_CAPTURE_CODE &&
+                resultCode == RESULT_OK) {
             //set the image capture to the our imageview
             imageViewForItem.setImageURI(image_uri);
+        }
+
+        if (requestCode==1 &&
+                resultCode == RESULT_OK) {
+            String barCode=data.getExtras().getString("satva");
+            activityAddItemFloatingButtonBinding.textviewForScanner.setText(barCode);
+            activityAddItemFloatingButtonBinding.getStock().setBarCode(barCode);
+
         }
     }
 
@@ -272,10 +294,9 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
         //method for barCode Click Listener
         public void onBarCodeClick(View view){
-
+            Intent intent=new Intent(AddUpdateStockActivity.this, ScannerActivity.class);
+            startActivityForResult(intent,1);
         }
-
-
 
 
         public void selectUnit(View view) {
@@ -313,6 +334,7 @@ public class AddUpdateStockActivity extends AppCompatActivity {
         }
 
     }
+
 
 
 }

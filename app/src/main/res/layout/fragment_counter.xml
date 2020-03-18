@@ -20,7 +20,7 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/imageView_for_shop"
         android:gravity="center"
-        android:text="Shop Name"
+        android:text="@string/shop_Name"
         android:textSize="12sp" />
 
     <TextView android:id="@+id/Text_VIew_for_phone_no"
@@ -31,7 +31,7 @@
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/imageView_for_shop"
         android:gravity="center"
-        android:text="Phone No"
+        android:text="@string/phoneNo"
         android:textSize="12sp" />
 
     <TextView
@@ -42,7 +42,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/imageView_for_shop"
-        android:gravity="center" android:text="Email@gmail.com"
+        android:gravity="center" android:text="@string/email"
         android:textSize="13sp" />
 
 
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_centerVertical="true"
-            android:text="stock"
+            android:text="@string/stock"
                 android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="30dp"
             android:layout_toLeftOf="@+id/TextView_values"
-            android:text="Qty"
+            android:text="@string/qnty"
             android:layout_centerVertical="true"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -86,7 +86,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/TextView_stock"
             android:gravity="center"
-            android:text="Price"
+            android:text="@string/price"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -96,7 +96,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="5dp"
             android:layout_centerVertical="true"
-            android:text="Values"
+            android:text="@string/value"
             android:textSize="15sp"
             android:textStyle="bold" />
         </RelativeLayout>
@@ -223,7 +223,7 @@
 
         <TextView android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Grand Total : "
+            android:text="@string/grand_total"
             android:layout_centerVertical="true"
             android:textSize="18sp"
             android:padding="10dp"
@@ -266,7 +266,7 @@
                 android:layout_column="1"
                 android:layout_row="1"
                 android:background="@drawable/edittextstyle"
-                android:hint="other"
+                android:hint="@string/other"
                 android:textSize="15sp" />
 
 
@@ -311,7 +311,7 @@
         android:id="@+id/other_button"
         android:layout_width="58dp"
         android:layout_height="30dp"
-        android:text="save"
+        android:text="@string/save"
         android:layout_below="@+id/Other_cardvew"
         android:layout_alignParentEnd="true"
         android:textColor="#ffff"
