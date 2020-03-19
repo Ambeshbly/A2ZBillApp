@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,54 +46,55 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
     private double total;
     private TextView textViewTotal,textViewMenu;
     private View view;
+    private Button bt;
+    private TextView textViewNoTranscation;
+    private ImageView imageViewNoTranscation;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_customer_transaction_detail);
-
         view=findViewById(R.id.toolbar);
+        bt=findViewById(R.id.bt_Button);
 
         TextView textViewTitle=findViewById(R.id.customer_name_title_bar);
+        TextView textViewPhoneNo=findViewById(R.id.customer_phone_no);
+        TextView textViewAdd=findViewById(R.id.customer_add);
         textViewTotal=findViewById(R.id.toolbar_debt);
         textViewMenu=findViewById(R.id.menu_in_customerDetail);
+
+        textViewNoTranscation=findViewById(R.id.textView_no_transaxtion);
+        imageViewNoTranscation=findViewById(R.id.imageView_no_transcation);
 
         recyclerView = findViewById(R.id.recycler_view_sale_history);
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         recyclerView.setHasFixedSize(true);
-        FloatingActionButton floatingActionButton=findViewById(R.id.bt_float2);
-
-
         adepter = new ShowCustomerTranscationDetailActivityAdapter();
         recyclerView.setAdapter(adepter);
         Intent intent = getIntent();
          final Customer selectedCustomer = (Customer) intent.getSerializableExtra("customer_transaction");
         textViewTitle.setText(selectedCustomer.getCustomerName());
+        textViewPhoneNo.setText(selectedCustomer.getCustomerPhoneNo());
+        textViewAdd.setText(selectedCustomer.getCustomerAddress());
 
         showCustomerTransactionDetailActivityViewModel = ViewModelProviders.of(this).get(ShowCustomerTransactionDetailActivityViewModel.class);
 
         showCustomerTransactionDetailActivityViewModel.getAllsaleForcustomer(selectedCustomer.getCustId()).observe(this, new Observer<List<Sales>>() {
-
             @Override
             public void onChanged(List<Sales> sales) {
-                Toast.makeText(getBaseContext(), "Sales ", Toast.LENGTH_SHORT).show();
-                adepter.setItems(sales);
-                for (int i = 0; i < sales.size(); i++) {
-                    Sales sales1 = sales.get(i);
+
+                if(sales.isEmpty()){
+                }else {
+                    textViewNoTranscation.setVisibility(View.INVISIBLE);
+                    imageViewNoTranscation.setVisibility(View.INVISIBLE);
+                    Sales sales1 = sales.get(sales.size()-1);
                     total=total+Double.parseDouble(sales1.getTotalBillAmt());
                 }
                 textViewTotal.setText(""+total+" \u20B9");
+                adepter.setItems(sales);
             }
         });
-
-//        customerPaymentHistoryActivityViewModel.getAllPayments().observe(this, new Observer<List<Payment>>() {
-//            @Override
-//            public void onChanged(List<Payment> payments) {
-//                adepter.setPayments(payments);
-//            }
-//        });
-
 
 
         adepter.setOnItemRecyclerViewlistener(new ShowCustomerTranscationDetailActivityAdapter.OnItemRecyclerViewListener() {
@@ -115,11 +118,6 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
-
-
-
                 PopupMenu popupMenu = new PopupMenu(ShowCustomerTransactionDetailActivity.this, textViewMenu);
                 popupMenu.inflate(R.menu.menu_for_customer);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -139,12 +137,6 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
 //                                ialogFragementforunit.show(((CustomerActivity)context).getSupportFragmentManager(),"exampledialog");
                                  break;
 
-
-                            case R.id.payment_history:
-                                Intent intent1=new Intent(getBaseContext(),CustomerPaymentHistoryActivity.class);
-                                startActivity(intent1);
-                                break;
-
                         }
                         return false;
                     }
@@ -154,7 +146,7 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
 
             }
         });
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CustomerPaymentBottomSheetDialog customerPaymentBottomSheetDialog=new CustomerPaymentBottomSheetDialog(showCustomerTransactionDetailActivityViewModel,selectedCustomer);
@@ -163,7 +155,4 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
         });
 
     }
-
-
-
 }

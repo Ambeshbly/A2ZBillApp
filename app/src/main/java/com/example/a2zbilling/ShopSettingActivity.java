@@ -18,6 +18,7 @@ public class ShopSettingActivity extends AppCompatActivity {
     private EditText shopName,ownerName,phoneNo,email,address;
     private ShopSettingActivityViewModel shopSettingActivityViewModel;
     private CardView cardViewSave;
+    int update=0;
     private int shopId;
     private ShopDetail shopDetail;
 
@@ -32,22 +33,33 @@ public class ShopSettingActivity extends AppCompatActivity {
         email=findViewById(R.id.edit_email);
         address=findViewById(R.id.edit_address);
         shopSettingActivityViewModel = ViewModelProviders.of(this).get(ShopSettingActivityViewModel.class);
-        shopSettingActivityViewModel.getAllShopDetail().observe(this, new Observer<List<ShopDetail>>() {
-            @Override
-            public void onChanged(List<ShopDetail> shopDetails) {
-                shopDetail=shopDetails.get(0);
-                shopId=shopDetails.get(0).getShopId();
-            }
-        });
 
 
+        List<ShopDetail> list=shopSettingActivityViewModel.getAllShopDetail();
+               if(list.isEmpty()){
+                 }else {
+                   shopDetail=list.get(0);
+                   update=1;
+               }
 
-
-        cardViewSave=findViewById(R.id.cardview_cheak);
+               cardViewSave=findViewById(R.id.cardview_cheak);
         cardViewSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShopDetail shopDetail=new ShopDetail();
+                if (update == 1) {
+                    ShopDetail shopDetail = new ShopDetail();
+                    shopDetail.setShopName(shopName.getText().toString().trim());
+                    shopDetail.setOwnerName(ownerName.getText().toString().trim());
+                    shopDetail.setPhoneNo(phoneNo.getText().toString().trim());
+                    shopDetail.setEmail(email.getText().toString().trim());
+                    shopDetail.setAddress(address.getText().toString().trim());
+                    shopDetail.setShopId(1);
+                    shopSettingActivityViewModel.updateShopdetail(shopDetail);
+                    Toast.makeText(getBaseContext(),"shop Detail Update Sussesfully",Toast.LENGTH_SHORT).show();
+                    finish();
+
+                }else {
+                    ShopDetail shopDetail = new ShopDetail();
                     shopDetail.setShopName(shopName.getText().toString().trim());
                     shopDetail.setOwnerName(ownerName.getText().toString().trim());
                     shopDetail.setPhoneNo(phoneNo.getText().toString().trim());
@@ -56,7 +68,16 @@ public class ShopSettingActivity extends AppCompatActivity {
                     shopSettingActivityViewModel.insertShopetail(shopDetail);
                     Toast.makeText(getBaseContext(),"shop Detail Add Sussesfully",Toast.LENGTH_SHORT).show();
                     finish();
+                }
             }
         });
+
+        if(update==1){
+            shopName.setText(shopDetail.getShopName());
+            ownerName.setText(shopDetail.getOwnerName());
+            phoneNo.setText(shopDetail.getPhoneNo());
+            email.setText(shopDetail.getEmail());
+            address.setText(shopDetail.getAddress());
+        }
     }
 }

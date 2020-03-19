@@ -49,18 +49,7 @@ public class SellingStocksActivity extends AppCompatActivity {
                 adepter.setItems(stocks);
             }
         });
-        activityAddToCardBinding.searchViewOfAddtocart.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adepter.getFilter().filter(newText);
-                return false;
-            }
-        });
 
         //set tittle bar for add to card activity
         getSupportActionBar().setTitle("Billing Counter");
@@ -103,7 +92,22 @@ public class SellingStocksActivity extends AppCompatActivity {
                 startActivityForResult(intent,1);
                 return true;
 
-            default:
+            case R.id.search_view_By:
+                SearchView searchView=(SearchView)item.getActionView();
+                searchView.setQueryHint("search Item");
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        adepter.getFilter().filter(newText);
+                        return false;
+                    }
+                });
+                default:
                 return super.onOptionsItemSelected(item);
         }
     }

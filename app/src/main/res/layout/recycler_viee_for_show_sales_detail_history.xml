@@ -13,23 +13,11 @@
             android:text="Name:"
             android:layout_toRightOf="@+id/text_view_sale_detail_id"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
+            android:layout_centerVertical="true"
             android:textColor="@color/liteblack"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:maxLines="1"
             android:ellipsize="end"/>
-
-        <TextView
-            android:id="@+id/text_view_sale_detail_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Id:"
-            android:textColor="@color/liteblack"
-            android:layout_marginTop="10dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:maxLines="1"
-            android:ellipsize="end"/>
-
 
 
         <TextView
@@ -37,30 +25,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="130"
+            android:layout_marginRight="22dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="8dp"
+            android:layout_centerVertical="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
         <TextView
             android:id="@+id/text_view_sale_detail_qty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-          android:layout_alignParentEnd="true"
+            android:layout_marginRight="22dp"
+            android:layout_toLeftOf="@+id/text_view_sale_detail_value"
             android:text="Qty:"
-            android:layout_marginRight="90dp"
-            android:layout_marginTop="8dp"
+            android:layout_centerVertical="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
         <TextView
             android:id="@+id/text_view_sale_detail_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="215dp"
-            android:text="Price:"
-            android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-
-
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/text_view_sale_detail_name"
+            android:gravity="center"
+            android:text="Price"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_centerVertical="true"
+            android:textColor="@color/liteblack" />
 
 
 

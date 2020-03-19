@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.DateConverter;
@@ -18,6 +20,7 @@ import com.example.a2zbilling.R;
 import com.example.a2zbilling.customer.AddUpdateCustomerFragment;
 import com.example.a2zbilling.customer.CustomerActivity;
 import com.example.a2zbilling.customer.ShowCustomerDetailDialogFragment;
+import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.printer.BTPrinter;
 
@@ -53,7 +56,7 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
         holder.textViewForTotalAmtText.setText("Total Amt:  ");
         holder.textViewForTotal.setText(currentsales.getTotalBillAmt());
         holder.textViewpaymentMode.setText(currentsales.getSalePode());
-        holder.textViewdate.setText("Date : "+ DateFormat.getDateInstance().format(DateConverter.toDate(currentsales.getDate())));
+        holder.textViewdate.setText(""+ DateFormat.getDateInstance().format(DateConverter.toDate(currentsales.getDate())));
         holder.textViewMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,10 +70,10 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
                                 //write the code to connect the printer here
                                 BTPrinter btPrinter = BTPrinter.getInstance(activity);
                                 btPrinter.printTicket(billHistoryActivityViewModel.getSaleDeatialList(currentsales.getSaleId()), currentsales);
-
-
                                 Toast.makeText(context,"printer Connected Sucessfully",Toast.LENGTH_SHORT).show();
                                 break;
+
+
                         }
                         return false;
                     }

@@ -204,7 +204,7 @@
         android:id="@+id/scrollviewhai"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/blue"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         app:behavior_peekHeight="55dp">
         <LinearLayout
@@ -215,27 +215,44 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="55dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="6dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginStart="20dp"
-                    android:textColor="@color/blue"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:text="short Cut"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginStart="20dp"
+                        android:textColor="@color/blue"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:text="Short Cut"/>
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:src="@drawable/arrowup"
+                        android:layout_marginEnd="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_height="55dp"/>
+                </RelativeLayout>
+
+
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:gravity="center"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
                 android:layout_height="match_parent">
                 <androidx.cardview.widget.CardView
                 android:id="@+id/allCustomerCard"
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="7dp"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="6dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginTop="15dp"
                 android:layout_width="70dp"
@@ -267,11 +284,13 @@
             </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card2"
+                    android:id="@+id/dueCust"
                     android:layout_marginStart="7dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginTop="15dp"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="6dp"
                     android:layout_width="70dp"
                     android:layout_height="70dp">
 
@@ -281,6 +300,7 @@
                         android:gravity="center"
                         android:layout_height="match_parent">
                         <TextView
+                            android:id="@+id/dueCustomer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
@@ -294,16 +314,18 @@
                             android:textStyle="bold"
                             android:textSize="15sp"
                             android:textColor="@color/liteblack"
-                            android:text="Due cost."/>
+                            android:text="Due cust."/>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card3"
+                    android:id="@+id/allStoc"
                     android:layout_marginStart="7dp"
                     android:layout_marginLeft="7dp"
                     android:layout_marginEnd="15dp"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="6dp"
                     android:layout_marginTop="15dp"
                     android:layout_width="70dp"
                     android:layout_height="70dp">
@@ -313,6 +335,7 @@
                         android:gravity="center"
                         android:layout_height="match_parent">
                         <TextView
+                            android:id="@+id/allStock"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
@@ -333,10 +356,12 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card4"
+                    android:id="@+id/lessIte"
                     android:layout_marginStart="7dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginEnd="15dp"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="6dp"
                     android:layout_marginTop="15dp"
                     android:layout_width="70dp"
                     android:layout_height="70dp">
@@ -346,6 +371,7 @@
                         android:gravity="center"
                         android:layout_height="match_parent">
                         <TextView
+                            android:id="@+id/lessItem"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
@@ -371,15 +397,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:gravity="center"
+                android:padding="10dp"
+                android:gravity="center_horizontal"
                 android:layout_height="match_parent">
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card5"
+                    android:id="@+id/cardTodaysale"
                     android:layout_marginStart="15dp"
                     android:layout_marginLeft="7dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_width="70dp"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="6dp"
                     android:layout_height="70dp">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -387,6 +416,7 @@
                         android:gravity="center"
                         android:layout_height="match_parent">
                         <TextView
+                            android:id="@+id/toDaySale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
@@ -406,10 +436,12 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card6"
+                    android:id="@+id/cardProfit"
                     android:layout_marginStart="7dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginEnd="15dp"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="6dp"
                     android:layout_marginTop="15dp"
                     android:layout_width="70dp"
                     android:layout_height="70dp">
@@ -419,6 +451,7 @@
                         android:gravity="center"
                         android:layout_height="match_parent">
                         <TextView
+                            android:id="@+id/profit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
@@ -438,10 +471,12 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card7"
+                    android:id="@+id/cardAllExpenses"
                     android:layout_marginStart="7dp"
                     android:layout_marginLeft="7dp"
                     android:layout_marginEnd="15dp"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="6dp"
                     android:layout_marginTop="15dp"
                     android:layout_width="70dp"
                     android:layout_height="70dp">
@@ -451,6 +486,7 @@
                         android:gravity="center"
                         android:layout_height="match_parent">
                         <TextView
+                            android:id="@+id/allExpenses"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
@@ -470,12 +506,14 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card8"
+                    android:id="@+id/cardAllExpensesRs"
                     android:layout_marginStart="7dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_width="70dp"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="6dp"
                     android:layout_height="70dp">
 
                     <LinearLayout
@@ -484,6 +522,7 @@
                         android:gravity="center"
                         android:layout_height="match_parent">
                         <TextView
+                            android:id="@+id/allExpensesRs"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"

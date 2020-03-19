@@ -22,13 +22,13 @@
             android:layout_marginStart="10dp"
             android:layout_centerVertical="true"
             android:textColor="@color/liteblack"
-            android:text="stock Id"
+            android:text="stock Name"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="20dp"
             android:layout_toLeftOf="@+id/TextView_values"
             android:text="Qty"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"

@@ -47,11 +47,10 @@ public class DebtCustomerFragment extends Fragment {
                 List<Customer> customerList=new ArrayList<Customer>();
                 for (int i = 0; i < customers.size(); i++) {
                     Customer customer = customers.get(i);
-                    if(customer.getDebt().equals("no debt")) {
+                    if(customer.getDebt().equals("0")) {
                     }else{
                         customerList.add(customer);
                     }
-
                 }
                 adepter.setCustomers(customerList);
             }

@@ -33,11 +33,13 @@ public class ShowCustomerTranscationDetailActivityAdapter extends RecyclerView.A
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         Sales currentsales = sales.get(position);
         holder.textView_for_saleId.setText(""+currentsales.getSaleId());
-        holder.textViewForTotalAmtText.setText("Total Amt:  ");
-        holder.textViewForTotal.setText(currentsales.getTotalBillAmt()+" \u20B9");
+        holder.textViewForTotalAmtText.setText("");
+        holder.textViewForTotal.setText("Bal."+currentsales.getTotalBillAmt()+" \u20B9");
         holder.textViewpaymentMode.setText(currentsales.getSalePode());
-        holder.textViewdate.setText("Date : "+ DateFormat.getDateInstance().format(DateConverter.toDate(currentsales.getDate())));
-
+        holder.textViewdate.setText(""+ DateFormat.getDateInstance().format(DateConverter.toDate(currentsales.getDate())));
+        if(currentsales.getTotalBillAmt().charAt(0)=='+'){
+            holder.textView_sale_text.setText("Payment :");
+        }
     }
 
     @Override
@@ -62,21 +64,22 @@ public class ShowCustomerTranscationDetailActivityAdapter extends RecyclerView.A
     class ItemHolder extends RecyclerView.ViewHolder {
 
         private TextView textView_for_saleId;
+        private TextView textView_sale_text;
         private TextView textViewForTotalAmtText;
         private TextView textViewForTotal;
         private TextView textViewpaymentMode;
         private TextView textViewdate;
-
-
+        private TextView textViewMenu;
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
-
             textView_for_saleId = itemView.findViewById(R.id.text_view_sale_id);
             textViewForTotalAmtText = itemView.findViewById(R.id.text_view_Total_amt_text);
             textViewForTotal = itemView.findViewById(R.id.text_view_total);
             textViewpaymentMode = itemView.findViewById(R.id.paymenttext);
             textViewdate=itemView.findViewById(R.id.paymentdate);
+            textViewMenu=itemView.findViewById(R.id.menu_in_recyclerview);
+            textView_sale_text=itemView.findViewById(R.id.text_view_sale_id_text);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

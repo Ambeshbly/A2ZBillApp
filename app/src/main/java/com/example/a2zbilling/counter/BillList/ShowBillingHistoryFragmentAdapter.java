@@ -31,7 +31,7 @@ public class ShowBillingHistoryFragmentAdapter extends RecyclerView.Adapter<Show
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         SaleDeatial currentsalesDetail = saleDeatials.get(position);
         int i = 1;
-        holder.textView_for_saleDetail_id.setText("" + currentsalesDetail.getSaleDetailId());
+      //  holder.textView_for_saleDetail_id.setText("" + currentsalesDetail.getSaleDetailId());
         holder.textView_for_saleDetail_name.setText(currentsalesDetail.getSaleDetailItemName());
         holder.textView_for_saleDetail_price.setText(currentsalesDetail.getSalingPrice());
         holder.textView_for_saleDetail_qty.setText(Double.toString(currentsalesDetail.getQuntity()));
@@ -65,7 +65,7 @@ public class ShowBillingHistoryFragmentAdapter extends RecyclerView.Adapter<Show
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
 
-            textView_for_saleDetail_id = itemView.findViewById(R.id.text_view_sale_detail_id);
+         //   textView_for_saleDetail_id = itemView.findViewById(R.id.text_view_sale_detail_id);
             textView_for_saleDetail_name = itemView.findViewById(R.id.text_view_sale_detail_name);
             textView_for_saleDetail_price = itemView.findViewById(R.id.text_view_sale_detail_price);
             textView_for_saleDetail_qty = itemView.findViewById(R.id.text_view_sale_detail_qty);

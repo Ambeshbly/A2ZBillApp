@@ -33,8 +33,8 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ItemHo
         Expenses currentExpenses = expenses.get(position);
         holder.textViewForExpensesCategory.setText(currentExpenses.getExpenseCategory());
         holder.textViewForTotal.setText(currentExpenses.getExpenseTotal()+"\u20B9");
-        holder.textViewForPaymentMode.setText("payment Mode: "+ currentExpenses.getPaymentMode());
-        holder.textDate.setText("Date : "+currentExpenses.getDate());
+        holder.textViewForPaymentMode.setText(""+ currentExpenses.getPaymentMode());
+        holder.textDate.setText(""+currentExpenses.getDate());
     }
 
     @Override

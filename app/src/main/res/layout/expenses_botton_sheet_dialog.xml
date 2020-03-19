@@ -30,7 +30,6 @@
             android:id="@+id/expenses_category_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:textColor="@color/liteblack"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_centerVertical="true"

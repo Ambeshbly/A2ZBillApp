@@ -16,19 +16,23 @@ import java.util.List;
 
 public class ShopSettingActivityViewModel extends AndroidViewModel {
     private Repository repository;
-    private LiveData<List<ShopDetail>> allShopDetail;
+    private List<ShopDetail> allShopDetail;
 
     public ShopSettingActivityViewModel(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
-        allShopDetail=repository.getAllShopDetail();
+        allShopDetail=repository.getAllShopDetail1();
 
     }
     public void insertShopetail(ShopDetail shopDetail) {
         repository.insertShopDetail(shopDetail);
     }
 
-    public LiveData<List<ShopDetail>> getAllShopDetail(){
+    public void  updateShopdetail(ShopDetail shopDetail){
+        repository.updateShopSetting(shopDetail);
+    }
+
+    public List<ShopDetail> getAllShopDetail(){
         return allShopDetail;
     }
 }

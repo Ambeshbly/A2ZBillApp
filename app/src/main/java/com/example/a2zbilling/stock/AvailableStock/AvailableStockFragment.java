@@ -113,7 +113,6 @@ public class AvailableStockFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.search_view_By:
-
                 SearchView searchView=(SearchView)item.getActionView();
                 searchView.setQueryHint("search Item");
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -128,7 +127,6 @@ public class AvailableStockFragment extends Fragment {
                         return false;
                     }
                 });
-
                 break;
 
             case R.id.search_scan:

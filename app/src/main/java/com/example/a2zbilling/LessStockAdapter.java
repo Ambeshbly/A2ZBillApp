@@ -1,27 +1,36 @@
-package com.example.a2zbilling.counter.Selling;
+package com.example.a2zbilling;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a2zbilling.R;
 import com.example.a2zbilling.db.entities.Stock;
-import com.example.a2zbilling.stock.AvailableStock.AvailableStockAdapter;
+import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.ItemHolder> implements Filterable {
+public class LessStockAdapter extends RecyclerView.Adapter<LessStockAdapter.ItemHolder> implements Filterable {
     private List<Stock> items = new ArrayList<>();
     private List<Stock> stockList;
-    private AvailableStockAdapter.OnItemRecyclerViewListener listener;
+    private OnItemRecyclerViewListener listener;
+    Context context;
+
+    public LessStockAdapter(Context context) {
+        this.context = context;
+    }
 
     private Filter exampleFilter = new Filter() {
         @Override
@@ -33,6 +42,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Item
                 String filterPatten = constraint.toString().toLowerCase().trim();
                 for (Stock item : stockList) {
                     if (item.getItemName().toLowerCase().contains(filterPatten)||item.getBarCode().toLowerCase().contains(filterPatten)) {
+
                         filteredlist.add(item);
                     }
                 }
@@ -51,8 +61,6 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Item
         }
     };
 
-
-
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -62,13 +70,39 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Item
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
-        Stock currentItem = items.get(position);
+    public void onBindViewHolder(@NonNull final ItemHolder holder, int position) {
+        final Stock currentItem = items.get(position);
         holder.textViewForItemName.setText(currentItem.getItemName());
         holder.textViewForItemId.setText("" + currentItem.getItemId());
         holder.textViewForQuentity.setText("" + currentItem.getItemQuentity());
-        holder.menu_in_recyclerview1.setVisibility(View.INVISIBLE);
-       holder.text_view_sale_price_text1.setText(""+currentItem.getItemUnit());
+        holder.textViewForShowSaleText.setText(currentItem.getItemUnit());
+        holder.Menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu=new PopupMenu(context,holder.Menu);
+                popupMenu.inflate(R.menu.menu_for_update_stock);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.update:
+                                Toast.makeText(context,"update",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(context, AddUpdateStockActivity.class);
+                                intent.putExtra("stock_object", currentItem);
+                                context.startActivity(intent);
+                                break;
+                            case R.id.report:
+                                Toast.makeText(context,"Cooming Soon",Toast.LENGTH_SHORT).show();
+                                break;
+
+                        }
+                        return false;
+                    }
+
+                });
+                popupMenu.show();
+            }
+        });
 
     }
 
@@ -79,7 +113,9 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Item
 
     public void setItems(List<Stock> items) {
         this.items = items;
+
         stockList = new ArrayList<>(items);
+
         notifyDataSetChanged();
     }
 
@@ -88,11 +124,11 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Item
         return exampleFilter;
     }
 
-
-    public void setOnItemRecyclerViewlistener(AvailableStockAdapter.OnItemRecyclerViewListener listener) {
+    public void setOnItemRecyclerViewlistener(OnItemRecyclerViewListener listener) {
         this.listener = listener;
 
     }
+
 
     public interface OnItemRecyclerViewListener {
         public void onItemClick(Stock stock);
@@ -104,9 +140,10 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Item
         private TextView textViewForItemId;
         private TextView textViewForSalePrice;
         private TextView textViewForShowIdText;
-        private TextView text_view_sale_price_text1;
+        private TextView textViewForShowSaleText;
         private TextView textViewForQuentity;
-        private TextView menu_in_recyclerview1;
+        private ImageView imageViewForItemImage;
+        private TextView Menu;
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
@@ -114,9 +151,10 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Item
             textViewForItemName = itemView.findViewById(R.id.text_view_item_name);
             textViewForItemId = itemView.findViewById(R.id.text_view_show_id);
             textViewForShowIdText = itemView.findViewById(R.id.text_view_show_id_text);
-            text_view_sale_price_text1 = itemView.findViewById(R.id.text_view_sale_price_text);
+            textViewForShowSaleText = itemView.findViewById(R.id.text_view_sale_price_text);
             textViewForQuentity = itemView.findViewById(R.id.text_view_quentity);
-            menu_in_recyclerview1 = itemView.findViewById(R.id.menu_in_recyclerview);
+            imageViewForItemImage = itemView.findViewById(R.id.imageview_for_item);
+            Menu=itemView.findViewById(R.id.menu_in_recyclerview);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -127,8 +165,6 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Item
                     }
                 }
             });
-
-
         }
     }
 }

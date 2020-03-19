@@ -6,7 +6,7 @@
     <string name="email">abc@gmail.com</string>
     <string name="stock">stock</string>
     <string name="price">Price</string>
-    <string name="qnty" >Qnty</string>
+    <string name="qnty">Qnty</string>
     <string name="value">Value</string>
     <string name="grand_total">Grand Total</string>
     <string name="save">save</string>

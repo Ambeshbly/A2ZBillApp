@@ -63,7 +63,6 @@
                 android:layout_height="wrap_content"
                 android:text="Total amount :"
                 android:padding="10dp"
-                android:textStyle="bold"
                 android:layout_below="@+id/cardFaltu"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/liteblack"/>

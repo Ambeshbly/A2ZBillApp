@@ -9,96 +9,92 @@
     android:layout_marginTop="2dp">
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/text_view_sale_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp">
-            <TextView
-                android:id="@+id/text_view_sale_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sale Id"
-                android:layout_toRightOf="@+id/text_view_sale_id_text"
-                android:textColor="@color/liteblack"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:maxLines="1"
-                android:ellipsize="end"/>
+            android:layout_toRightOf="@+id/text_view_sale_id_text"
+            android:ellipsize="end"
+            android:layout_marginTop="8dp"
+            android:maxLines="1"
+            android:text="Sale Id"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/liteblack" />
 
-            <TextView
-                android:id="@+id/text_view_sale_id_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sale Id :  "
-                android:textColor="@color/liteblack"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:maxLines="1"
-                android:ellipsize="end"/>
-            <TextView
-                android:id="@+id/paymentMode_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="pay Mode :  "
-                android:layout_below="@+id/text_view_sale_id_text"
-                android:textColor="@color/liteblack"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:maxLines="1"
-                android:ellipsize="end"/>
-            <TextView
-                android:id="@+id/paymenttext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Case"
-                android:layout_toRightOf="@+id/text_view_sale_id_text"
-                android:layout_below="@+id/text_view_sale_id"
-                android:textColor="@color/liteblack"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:maxLines="1"
-                android:ellipsize="end"/>
+        <TextView
+            android:id="@+id/text_view_sale_id_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginTop="8dp"
+            android:text="Sale Id :  "
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/liteblack" />
 
-            <TextView
-                android:id="@+id/paymentdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date"
-                android:layout_marginRight="10dp"
+        <TextView
+            android:id="@+id/paymenttext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_view_sale_id"
+            android:ellipsize="end"
+            android:layout_marginTop="10dp"
+            android:maxLines="1"
+            android:text="Case"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/liteblack" />
 
-                android:layout_toLeftOf="@+id/text_view_Total_amt_text"
-                android:layout_alignParentBottom="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:maxLines="1"
-                android:ellipsize="end"/>
+        <TextView
+            android:id="@+id/paymentdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:layout_marginTop="2dp"
+            android:layout_toLeftOf="@+id/menu_in_recyclerview"
+            android:maxLines="1"
+            android:text="Date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <TextView
-                android:id="@+id/text_view_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="130"
-                android:layout_alignParentBottom="true"
-                android:textSize="20sp"
-                android:textColor="@color/liteblack"
-                android:layout_alignParentEnd="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-            <TextView
-                android:id="@+id/text_view_Total_amt_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/text_view_total"
-                android:text="Total Amt: "
-                android:layout_alignParentBottom="true"
-                android:textSize="20sp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <TextView
+            android:id="@+id/text_view_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:text="130"
+            android:layout_marginEnd="35dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/liteblack"
+            android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/menu_in_recyclerview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="&#8942;"
-                android:textStyle="bold"
-                android:textColor="@color/liteblack"
-                android:padding="5dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+        <TextView
+            android:id="@+id/text_view_Total_amt_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/text_view_total"
+            android:text="Total Amt: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="20sp" />
 
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/menu_in_recyclerview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:text="&#8942;"
+            android:textStyle="bold"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/liteblack"
+            android:textSize="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true" />
+
+
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

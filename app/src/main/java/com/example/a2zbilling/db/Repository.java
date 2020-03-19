@@ -66,6 +66,24 @@ public class Repository {
         new UpdateItemsAsynckTask(stockDao).execute(stock);
     }
 
+    public void updateShopSetting(ShopDetail shopDetail) {
+        new UpdateShopSettingAsynckTask(shopDetailDao).execute(shopDetail);
+    }
+
+    private static class UpdateShopSettingAsynckTask extends AsyncTask<ShopDetail, Void, Void> {
+        private ShopDetailDao shopDetailDao;
+
+        public UpdateShopSettingAsynckTask(ShopDetailDao shopDetailDao) {
+            this.shopDetailDao = shopDetailDao;
+        }
+
+        @Override
+        protected Void doInBackground(ShopDetail... shopDetails) {
+            shopDetailDao.update(shopDetails[0]);
+            return null;
+        }
+    }
+
     public LiveData<List<Stock>> getAllItems() {
         return stockDao.getAllItems();
     }
@@ -100,6 +118,10 @@ public class Repository {
 
     public LiveData<List<ShopDetail>> getAllShopDetail(){
         return shopDetailDao.getAllShopDetail();
+    }
+
+   public List<ShopDetail> getAllShopDetail1(){
+        return shopDetailDao.getAllShopDetail1();
     }
 
 

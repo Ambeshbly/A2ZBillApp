@@ -30,13 +30,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/bt_float2"
+
+
+    <ImageView
+        android:id="@+id/imageView_no_transcation"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/notransaction"/>
+
+    <TextView
+        android:id="@+id/textView_no_transaxtion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/blue"
-        android:src="@drawable/floating_button" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        android:text="No Transaction"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imageView_no_transcation"/>
+
 </RelativeLayout>

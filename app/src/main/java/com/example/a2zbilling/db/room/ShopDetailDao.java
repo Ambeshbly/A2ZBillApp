@@ -28,4 +28,8 @@ public interface ShopDetailDao {
     LiveData<List<ShopDetail>> getAllShopDetail();
 
 
+    @Query("SELECT * FROM shopDetail")
+    List<ShopDetail> getAllShopDetail1();
+
+
 }

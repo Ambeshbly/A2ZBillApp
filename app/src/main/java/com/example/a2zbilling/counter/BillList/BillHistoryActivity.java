@@ -40,7 +40,6 @@ public class BillHistoryActivity extends AppCompatActivity {
         recyclerView.setAdapter(adepter);
 
 
-
         billHistoryActivityViewModel.getAllSales().observe(this, new Observer<List<Sales>>() {
 
             @Override
@@ -57,10 +56,8 @@ public class BillHistoryActivity extends AppCompatActivity {
               List<SaleDeatial> saleDeatials = billHistoryActivityViewModel.getSaleDeatialList(sales.getSaleId());
               billHistoryActivityViewModel.setSaleDetailList(saleDeatials);
 
-
               String id=Integer.toString(sales.getSaleId());
               Toast.makeText(getBaseContext(), id, Toast.LENGTH_SHORT).show();
-
 
               recyclerView.setVisibility(View.GONE);
               FragmentManager fm=getSupportFragmentManager();

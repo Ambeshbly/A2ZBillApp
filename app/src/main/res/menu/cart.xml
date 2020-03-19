@@ -3,9 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/search_view_By"
+        android:title="search"
+        android:icon="@drawable/ic_search"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView"/>
+
+    <item
         android:id="@+id/scan"
         android:icon="@drawable/scan"
         android:title="scanner"
         app:showAsAction="always"/>
+
+
+
 
 </menu>
