@@ -252,18 +252,21 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
     }
 
     private void updateDebt(Customer customer, Sales sale){
-        if(customer.getDebt().isEmpty()) {
-            customer.setDebt(sale.getTotalBillAmt());
-        }else{
-            // Get existing debt of customer.
-            double currentDebt = Double.parseDouble(customer.getDebt());
-            double saleDebt = Double.parseDouble(sale.getTotalBillAmt());
+        if(sale.getSalePode() == PAY_MODE_DEBT) {
+            if (customer.getDebt().isEmpty()) {
+                customer.setDebt(sale.getTotalBillAmt());
+            } else {
 
-            // calculate total debt.
-            double updatedDebt = currentDebt + saleDebt;
+                // Get existing debt of customer.
+                double currentDebt = Double.parseDouble(customer.getDebt());
+                double saleDebt = Double.parseDouble(sale.getTotalBillAmt());
 
-            // Set Updated Debt to customer.
-            customer.setDebt(Double.toString(updatedDebt));
+                // calculate total debt.
+                double updatedDebt = currentDebt + saleDebt;
+
+                // Set Updated Debt to customer.
+                customer.setDebt(Double.toString(updatedDebt));
+            }
         }
     }
 }

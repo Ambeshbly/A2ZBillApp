@@ -55,7 +55,6 @@ public class AddStockFragment extends Fragment {
         fragmentForAddstocksBinding.btFloat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "floating click", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getContext(), AddUpdateStockActivity.class);
                 startActivityForResult(intent, ADD_NEW_STOCK_REQ_CODE);
             }

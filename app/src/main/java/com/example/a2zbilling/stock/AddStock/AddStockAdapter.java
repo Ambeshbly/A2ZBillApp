@@ -65,6 +65,7 @@ public class AddStockAdapter extends RecyclerView.Adapter<AddStockAdapter.ItemHo
         holder.textViewForItemName.setText(currentItem.getItemName());
         holder.textViewForItemId.setText("" + currentItem.getItemId());
         holder.textViewForQuentity.setText("" + currentItem.getItemQuentity());
+        holder.textViewForShowSaleText.setText(currentItem.getItemUnit());
 
     }
 

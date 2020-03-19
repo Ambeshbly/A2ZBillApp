@@ -68,8 +68,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Item
         holder.textViewForItemId.setText("" + currentItem.getItemId());
         holder.textViewForQuentity.setText("" + currentItem.getItemQuentity());
         holder.menu_in_recyclerview1.setVisibility(View.INVISIBLE);
-       holder.text_view_sale_price_text1.setText(""+currentItem.getItemUnit());
-
+        holder.text_view_sale_price_text1.setText(""+currentItem.getItemUnit());
     }
 
     @Override

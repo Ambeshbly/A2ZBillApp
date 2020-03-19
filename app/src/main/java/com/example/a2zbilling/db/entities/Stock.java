@@ -1,5 +1,6 @@
 package com.example.a2zbilling.db.entities;
 
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.databinding.BaseObservable;
@@ -34,6 +35,7 @@ public class Stock extends BaseObservable implements Serializable {
 
     @Ignore
     private static boolean setTextFlag = true;
+    private static View lastView ;
 
     @Ignore
     public Stock(Stock oldStock){
@@ -69,6 +71,10 @@ public class Stock extends BaseObservable implements Serializable {
 
     @BindingAdapter("android:text")
     public static void setText(@org.jetbrains.annotations.NotNull TextView view, double value) {
+        if(lastView != view){
+            setTextFlag = true;
+        }
+        lastView = view;
 
         String quantityStr = view.getText().toString();
         if (view.getText().toString().isEmpty() == false) {

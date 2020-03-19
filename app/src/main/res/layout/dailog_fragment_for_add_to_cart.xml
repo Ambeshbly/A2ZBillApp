@@ -112,6 +112,18 @@
                     android:textStyle="bold"
                     android:text="@{availableStock.itemQuentity}"
                     />
+                <TextView
+                    android:id="@+id/Dialod_available_stock_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_below="@+id/Dialog_item_name"
+                    android:layout_toRightOf="@+id/Dialod_available_stock"
+                    android:textColor="@color/liteblack"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:text="@{availableStock.itemUnit}"
+                    />
 
                 <EditText
                     android:id="@+id/Dialog_editText_sale_price"
