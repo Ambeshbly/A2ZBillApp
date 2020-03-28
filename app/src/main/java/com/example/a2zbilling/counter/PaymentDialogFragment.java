@@ -210,6 +210,12 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                     mainActivityViewModel.updateCustomer(customer);
                 }
 
+                // update the stocks.
+                ArrayList<Stock> soldStockList = mainActivityViewModel.getSoldStocksList();
+                for( Stock stock : soldStockList){
+                    mainActivityViewModel.update(stock);
+                }
+
 
                 Sales sales = mainActivityViewModel.getSale();
                 if (customer.getCustId() != 0) {

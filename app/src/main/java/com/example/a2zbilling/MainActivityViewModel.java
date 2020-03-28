@@ -33,6 +33,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     private LiveData<List<Customer>> allcustomer;
 
     private MutableLiveData<ArrayList<Stock>> newlyAddedStocks = new MutableLiveData<ArrayList<Stock>>();
+    private ArrayList<Stock> soldStocksList = new ArrayList<Stock>();
 
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
@@ -106,5 +107,9 @@ public class MainActivityViewModel extends AndroidViewModel {
     }
     public LiveData<List<ShopDetail>> getAllShopDetail(){
         return allShopDetail;
+    }
+
+    public ArrayList<Stock> getSoldStocksList() {
+        return soldStocksList;
     }
 }

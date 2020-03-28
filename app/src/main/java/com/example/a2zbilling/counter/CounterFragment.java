@@ -46,7 +46,6 @@ public class CounterFragment extends Fragment {
     public static final String TAG_AVAILABLE_STOCK_OBJ = "Available_Stock_Obj";
 
     CounterAdapter adepter;
-    Stock updateStock;
     MediaPlayer mediaPlayer;
     EditText editTextOtherName,editTextValue;
     Button otherButton;
@@ -122,7 +121,9 @@ public class CounterFragment extends Fragment {
             Stock stock = (Stock) data.getSerializableExtra(TAG_SALE_STOCK_OBJ);
 
             //this id second object which is need to update when proceed button is click
-            updateStock = (Stock) data.getSerializableExtra(TAG_AVAILABLE_STOCK_OBJ);
+            Stock soldStock = (Stock) data.getSerializableExtra(TAG_AVAILABLE_STOCK_OBJ);
+
+            mainActivityViewModel.getSoldStocksList().add(soldStock);
 
             //   String itemName = stock.getItemName();
             mainActivityViewModel.addNewlyAddedStock(stock);
@@ -180,10 +181,6 @@ public class CounterFragment extends Fragment {
                     //double total = Double.parseDouble(mainActivityViewModel.getSale().getTotalBillAmt());
                     PaymentDialogFragment dialogFragment = new PaymentDialogFragment(mainActivityViewModel, adepter, customerList);
                     dialogFragment.show(getActivity().getSupportFragmentManager(), "exampledialog");
-                    if(updateStock!=null){
-                        mainActivityViewModel.update(updateStock);
-                    }
-
                 }
             }
         });
