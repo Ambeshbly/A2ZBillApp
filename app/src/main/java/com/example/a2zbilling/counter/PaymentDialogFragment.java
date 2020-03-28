@@ -169,9 +169,6 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
 
                 Toast.makeText(getContext(), "proceed", Toast.LENGTH_SHORT).show();
 
-
-                //double paymentTotal = Double.parseDouble(editTotalPayment.getText().toString());
-
                 Customer customer = customerBinding.getCustomer();
 
                 //TODO : Calculate the debt for customer and set to it in case of PAY_MODE_DEBT.
@@ -239,6 +236,7 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                     mainActivityViewModel.insertSaleDetail(saleDeatial);
                 }
                 Toast.makeText(getContext(), "completed", Toast.LENGTH_SHORT).show();
+                sales.setSaleId(0);
                 stockList.clear();
                 adepter.setItems(stockList);
                 dismiss();
