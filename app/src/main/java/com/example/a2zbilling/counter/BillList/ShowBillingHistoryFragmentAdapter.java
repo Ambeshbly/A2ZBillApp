@@ -35,7 +35,7 @@ public class ShowBillingHistoryFragmentAdapter extends RecyclerView.Adapter<Show
         holder.textView_for_saleDetail_name.setText(currentsalesDetail.getSaleDetailItemName());
         holder.textView_for_saleDetail_price.setText(currentsalesDetail.getSalingPrice());
         holder.textView_for_saleDetail_qty.setText(Double.toString(currentsalesDetail.getQuntity()));
-        String values = Double.toString(Integer.parseInt(currentsalesDetail.getSalingPrice()) * currentsalesDetail.getQuntity());
+        String values = Double.toString(Double.parseDouble(currentsalesDetail.getSalingPrice()) * currentsalesDetail.getQuntity());
         holder.textView_for_saleDetail_value.setText(values);
 
 
