@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.cardview.widget.CardView;
 
 import com.example.a2zbilling.R;
-import com.example.a2zbilling.databinding.ActivityAddItemFloatingButtonBinding;
 import com.example.a2zbilling.db.entities.Stock;
 
 import java.util.ArrayList;
@@ -55,10 +54,10 @@ public class BoxDialogFragment extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "save", Toast.LENGTH_SHORT).show();
-                stock.setItemUnit(Unit.UNIT_BOX);
+                stock.setPriamryUnit(Unit.UNIT_BOX);
                 int pic = Integer.parseInt(editTextBox.getText().toString().trim());
-                stock.setItemQuentity(stock.getItemQuentity() * pic);
-                stock.setPc(editTextBox.getText().toString().trim());
+                stock.setPrimaryQuant(stock.getPrimaryQuant() * pic);
+                stock.setSecondUnit(editTextBox.getText().toString().trim());
                 dismiss();
             }
         });

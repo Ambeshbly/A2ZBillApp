@@ -1,18 +1,15 @@
 package com.example.a2zbilling;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,9 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.a2zbilling.customer.AllCustomer.AllCustomerFragment;
 import com.example.a2zbilling.customer.CustomerActivity;
-import com.example.a2zbilling.customer.CustomerActivityViewModel;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.Expenses;
 import com.example.a2zbilling.db.entities.SaleDeatial;
@@ -32,9 +27,6 @@ import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.StockActivity;
 import com.example.a2zbilling.support.SupportActivity;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.Calendar;
@@ -101,7 +93,7 @@ public class YouFragment extends Fragment {
                 allStock=stocks.size();
                 for (int i = 0; i < stocks.size(); i++) {
                     Stock stock= stocks.get(i);
-                    if(stock.getItemQuentity()<10){
+                    if(stock.getPrimaryQuant()<10){
                         lessItem++;
                     }
                 }

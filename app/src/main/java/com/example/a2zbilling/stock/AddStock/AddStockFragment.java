@@ -81,7 +81,7 @@ public class AddStockFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_NEW_STOCK_REQ_CODE && resultCode==RESULT_OK) {
             Stock stock = (Stock) data.getSerializableExtra("stock");
-            String itemName = stock.getItemName();
+            String itemName = stock.getName();
             stockActivityViewModel.addNewlyAddedStock(stock);
         }
     }
@@ -106,7 +106,7 @@ public class AddStockFragment extends Fragment {
                 for(int i = 0; i <stockList.size(); i++)
                 {
                     Stock stock=stockList.get(i);
-                    total=total+Double.parseDouble(stock.getItemPuchaseTotal());
+                    total=total+Double.parseDouble(stock.getPurchaseTotal());
                     totalItems=totalItems+1;
                 }
                 Calendar calendar=Calendar.getInstance();

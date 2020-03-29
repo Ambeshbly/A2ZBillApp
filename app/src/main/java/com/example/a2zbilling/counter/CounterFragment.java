@@ -31,7 +31,6 @@ import com.example.a2zbilling.db.entities.ShopDetail;
 import com.example.a2zbilling.db.entities.Stock;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -91,7 +90,7 @@ public class CounterFragment extends Fragment {
                 for (int i = 0; i < stockList.size(); i++) {
                     Stock stock2 = stockList.get(i);
                     double value = 0;
-                    value = stock2.getItemQuentity() * Integer.parseInt(stock2.getItemSalePerUnit());
+                    value = stock2.getPrimaryQuant() * Integer.parseInt(stock2.getSalePerUnit());
                     total = total + value;
                 }
 
@@ -132,7 +131,7 @@ public class CounterFragment extends Fragment {
             for (int i = 0; i < stockList.size(); i++) {
                 Stock stock2 = stockList.get(i);
                 double value = 0;
-                value = stock2.getItemQuentity() * Integer.parseInt(stock2.getItemSalePerUnit());
+                value = stock2.getPrimaryQuant() * Integer.parseInt(stock2.getSalePerUnit());
                 total = total + value;
                 CounterFragment fragment = (CounterFragment)
                         getFragmentManager().findFragmentById(R.id.fragment_conterner);
@@ -239,9 +238,9 @@ public class CounterFragment extends Fragment {
             public void onClick(View v) {
                 Stock stock=new Stock();
                 itemNo++;
-                stock.setItemName(itemNo+" item");
-                stock.setItemQuentity(1);
-                stock.setItemSalePerUnit(editTextValue.getText().toString().trim());
+                stock.setName(itemNo+" item");
+                stock.setPrimaryQuant(1);
+                stock.setSalePerUnit(editTextValue.getText().toString().trim());
                 mainActivityViewModel.addNewlyAddedStock(stock);
                 editTextValue.setText("");
                 Toast.makeText(getContext(),"save other ",Toast.LENGTH_SHORT).show();

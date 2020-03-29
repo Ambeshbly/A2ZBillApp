@@ -41,7 +41,7 @@ public class LessStockAdapter extends RecyclerView.Adapter<LessStockAdapter.Item
             } else {
                 String filterPatten = constraint.toString().toLowerCase().trim();
                 for (Stock item : stockList) {
-                    if (item.getItemName().toLowerCase().contains(filterPatten)||item.getBarCode().toLowerCase().contains(filterPatten)) {
+                    if (item.getName().toLowerCase().contains(filterPatten)||item.getBarCode().toLowerCase().contains(filterPatten)) {
 
                         filteredlist.add(item);
                     }
@@ -72,10 +72,10 @@ public class LessStockAdapter extends RecyclerView.Adapter<LessStockAdapter.Item
     @Override
     public void onBindViewHolder(@NonNull final ItemHolder holder, int position) {
         final Stock currentItem = items.get(position);
-        holder.textViewForItemName.setText(currentItem.getItemName());
-        holder.textViewForItemId.setText("" + currentItem.getItemId());
-        holder.textViewForQuentity.setText("" + currentItem.getItemQuentity());
-        holder.textViewForShowSaleText.setText(currentItem.getItemUnit());
+        holder.textViewForItemName.setText(currentItem.getName());
+        holder.textViewForItemId.setText("" + currentItem.getId());
+        holder.textViewForQuentity.setText("" + currentItem.getPrimaryQuant());
+        holder.textViewForShowSaleText.setText(currentItem.getPriamryUnit());
         holder.Menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

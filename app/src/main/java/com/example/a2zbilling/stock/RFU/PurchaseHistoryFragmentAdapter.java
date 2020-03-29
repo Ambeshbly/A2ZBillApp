@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
-import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Stock;
 
 import java.util.ArrayList;
@@ -32,11 +31,11 @@ public class PurchaseHistoryFragmentAdapter extends RecyclerView.Adapter<Purchas
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         Stock currentStock = stocks.get(position);
         int i = 1;
-        holder.textView_for_saleDetail_id.setText("" + currentStock.getItemId());
-        holder.textView_for_saleDetail_name.setText(currentStock.getItemName());
-        holder.textView_for_saleDetail_price.setText(currentStock.getItemPurchasePerUnit());
-        holder.textView_for_saleDetail_qty.setText(currentStock.getItemSalePerUnit());
-        holder.textView_for_saleDetail_value.setText(Double.toString(currentStock.getItemQuentity()));
+        holder.textView_for_saleDetail_id.setText("" + currentStock.getId());
+        holder.textView_for_saleDetail_name.setText(currentStock.getName());
+        holder.textView_for_saleDetail_price.setText(currentStock.getPurchasePerUnit());
+        holder.textView_for_saleDetail_qty.setText(currentStock.getSalePerUnit());
+        holder.textView_for_saleDetail_value.setText(Double.toString(currentStock.getPrimaryQuant()));
 
 
     }

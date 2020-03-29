@@ -100,7 +100,7 @@
                         android:backgroundTint="@color/colorPrimary"
                         android:hint="@string/itemName"
                         android:inputType="text"
-                        android:text="@={stock.itemName}" />
+                        android:text="@={stock.name}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.cardview.widget.CardView
@@ -145,7 +145,7 @@
                                 android:backgroundTint="@color/colorPrimary"
                                 android:hint="@string/itemQuntity"
                                 android:inputType="numberDecimal"
-                                android:text="@={stock.itemQuentity}" />
+                                android:text="@={stock.primaryQuant}" />
                         </com.google.android.material.textfield.TextInputLayout>
                         <Button
                             android:id="@+id/unit_button"
@@ -155,7 +155,7 @@
                             android:layout_weight="1"
                             android:textColor="#FFFF"
                             android:background="@color/blue"
-                            android:text="@{stock.itemUnit}"
+                            android:text="@{stock.priamryUnit}"
                             android:onClick="@{additemclickHandler::selectUnit}" />
                     </LinearLayout>
 
@@ -181,7 +181,7 @@
                                 android:backgroundTint="@color/colorPrimary"
                                 android:hint="@string/purchaseUnit"
                                 android:inputType="number"
-                                android:text="@={stock.itemPurchasePerUnit}" />
+                                android:text="@={stock.purchasePerUnit}" />
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/text_input_itempurchasetotal"
@@ -198,7 +198,7 @@
                                 android:backgroundTint="@color/colorPrimary"
                                 android:hint="@string/puchaseTotal"
                                 android:inputType="number"
-                                android:text="@={stock.itemPuchaseTotal}" />
+                                android:text="@={stock.purchaseTotal}" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -222,7 +222,7 @@
                                 android:backgroundTint="@color/colorPrimary"
                                 android:hint="@string/saleUnit"
                                 android:inputType="number"
-                                android:text="@={stock.itemSalePerUnit}" />
+                                android:text="@={stock.salePerUnit}" />
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/text_input_itemsaletotal"
@@ -239,7 +239,7 @@
                                 android:backgroundTint="@color/colorPrimary"
                                 android:hint="@string/saleTotal"
                                 android:inputType="number"
-                                android:text="@={stock.itemSaleTotal}" />
+                                android:text="@={stock.saleTotal}" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
 

@@ -3,7 +3,6 @@ package com.example.a2zbilling.stock.addUpdate;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -23,22 +22,14 @@ import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.a2zbilling.DateConverter;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.ScannerActivity;
-import com.example.a2zbilling.counter.CounterFragment;
 import com.example.a2zbilling.databinding.ActivityAddItemFloatingButtonBinding;
-import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.DefaultItemList.DefaultItemListActivity;
 import com.example.a2zbilling.stock.StockActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-
-import javax.xml.transform.Result;
 
 public class AddUpdateStockActivity extends AppCompatActivity {
 
@@ -204,7 +195,7 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
     //method for validation on name edit text
     private boolean validateItemName(Stock stock) {
-        String itemname = stock.getItemName();
+        String itemname = stock.getName();
         if (itemname.isEmpty()) {
             textinputitemname.setError("Item Name can't be empty");
             return false;
@@ -216,7 +207,7 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
     //method for validation quentity edit text
     private boolean validateItemQuntity(Stock stock) {
-        double itemQuantity = stock.getItemQuentity();
+        double itemQuantity = stock.getPrimaryQuant();
         if (itemQuantity == 0) {
             textinputitemquantiity.setError("Item Quantity can't be empty");
             return false;
@@ -228,8 +219,8 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
     //method for validation for puchase unit and purchase total edit text
     private boolean validateItemPurchasePrice(Stock item) {
-        String itempurchaseparunit = item.getItemPurchasePerUnit();
-        String itempuchasetotal = item.getItemPuchaseTotal();
+        String itempurchaseparunit = item.getPurchasePerUnit();
+        String itempuchasetotal = item.getPurchaseTotal();
         if (itempurchaseparunit.isEmpty() && itempuchasetotal.isEmpty()) {
             textinputitempurchaseperunit.setError("Item purchase or purchase total can't be empty");
             return false;
@@ -242,7 +233,7 @@ public class AddUpdateStockActivity extends AppCompatActivity {
     //method for validation sale unit and sale toale edit text
     private boolean validateItemUnit(Stock stock) {
 
-        if (stock.getItemUnit().contentEquals(Unit.UNIT_DEFAULT)) {
+        if (stock.getPriamryUnit().contentEquals(Unit.UNIT_DEFAULT)) {
             new AlertDialog.Builder(AddUpdateStockActivity.this)
                     .setTitle("Unit Selection Failed")
                     .setMessage("Please select unit.")

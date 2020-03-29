@@ -15,7 +15,6 @@ import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.a2zbilling.R;
-import com.example.a2zbilling.databinding.ActivityAddItemFloatingButtonBinding;
 import com.example.a2zbilling.databinding.MyCustomDialogfragmentsBinding;
 import com.example.a2zbilling.db.entities.Stock;
 
@@ -83,10 +82,11 @@ public class UnitDialogFragement extends AppCompatDialogFragment {
 
                 }
                 Toast.makeText(getContext(), selectedUnit + " clicked", Toast.LENGTH_SHORT).show();
-                stock.setItemUnit(selectedUnit);
-                stock.setPc("1");
+                stock.setPriamryUnit(selectedUnit);
+                stock.setSecondUnit("1");
                 dismiss();
             }
+
             ((CardView)view).setCardBackgroundColor(Color.GREEN);
         }
     }

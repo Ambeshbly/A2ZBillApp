@@ -17,9 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
-import com.example.a2zbilling.customer.AddUpdateCustomerFragment;
-import com.example.a2zbilling.customer.CustomerActivity;
-import com.example.a2zbilling.customer.ShowCustomerDetailDialogFragment;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
 
@@ -45,7 +42,7 @@ public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAd
             } else {
                 String filterPatten = constraint.toString().toLowerCase().trim();
                 for (Stock item : stockList) {
-                    if (item.getItemName().toLowerCase().contains(filterPatten)||item.getBarCode().toLowerCase().contains(filterPatten)) {
+                    if (item.getName().toLowerCase().contains(filterPatten)||item.getBarCode().toLowerCase().contains(filterPatten)) {
 
                         filteredlist.add(item);
                     }
@@ -76,10 +73,10 @@ public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAd
     @Override
     public void onBindViewHolder(@NonNull final ItemHolder holder, int position) {
         final Stock currentItem = items.get(position);
-        holder.textViewForItemName.setText(currentItem.getItemName());
-        holder.textViewForItemId.setText("" + currentItem.getItemId());
-        holder.textViewForQuentity.setText("" + currentItem.getItemQuentity());
-        holder.textViewForShowSaleText.setText(currentItem.getItemUnit());
+        holder.textViewForItemName.setText(currentItem.getName());
+        holder.textViewForItemId.setText("" + currentItem.getId());
+        holder.textViewForQuentity.setText("" + currentItem.getPrimaryQuant());
+        holder.textViewForShowSaleText.setText(currentItem.getPriamryUnit());
         holder.Menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

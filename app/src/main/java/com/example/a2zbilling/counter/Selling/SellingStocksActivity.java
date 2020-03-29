@@ -14,14 +14,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.ScannerActivity;
 import com.example.a2zbilling.databinding.ActivityAddToCardBinding;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.AvailableStock.AvailableStockAdapter;
-import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
 
 import java.util.List;
 
@@ -56,7 +54,7 @@ public class SellingStocksActivity extends AppCompatActivity {
         adepter.setOnItemRecyclerViewlistener(new AvailableStockAdapter.OnItemRecyclerViewListener() {
             @Override
             public void onItemClick(Stock stock) {
-                String name = stock.getItemName();
+                String name = stock.getName();
                 Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show();
                 sellingActivityViewModel.setStock(stock);
                 DialogFragmentForAddToCart ialogFragementforunit = new DialogFragmentForAddToCart(stock);
