@@ -11,21 +11,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Enter the pieces in one box "
+        android:text="Please Enter "
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="20dp"
         android:textColor="@color/liteblack"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
-
-    <EditText
-        android:id="@+id/edit_box"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/liteblack" />
+        android:gravity="center"
+        android:layout_height="wrap_content">
 
 
+        <TextView
+            android:id="@+id/boxTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="1 Box = "
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/liteblack"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+
+        <EditText
+            android:id="@+id/edit_box"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="Quentity"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@+id/boxTextView"
+            android:backgroundTint="@color/liteblack" />
+        <Spinner
+            android:id="@+id/box_sppiner"
+            android:layout_width="100dp"
+            android:layout_height="43dp"
+            android:layout_toRightOf="@+id/edit_box"/>
+
+
+    </RelativeLayout>
 
 
     <LinearLayout
