@@ -43,7 +43,6 @@ public class DebtCustomerFragment extends Fragment {
         customerActivityViewModel.getAllCustomer().observe(getViewLifecycleOwner(), new Observer<List<Customer>>() {
             @Override
             public void onChanged(List<Customer> customers) {
-                Toast.makeText(getContext(), " debt customers", Toast.LENGTH_SHORT).show();
                 List<Customer> customerList=new ArrayList<Customer>();
                 for (int i = 0; i < customers.size(); i++) {
                     Customer customer = customers.get(i);

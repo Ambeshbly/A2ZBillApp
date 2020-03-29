@@ -47,19 +47,6 @@ public class PurchaseHistoryFragments extends Fragment {
         recyclerView.setAdapter(adepter);
 
 
-       /* Sales sales=showCustomerTransactionDetailActivityViewModel.getSales();
-        int salesId=sales.getSaleId();
-        showCustomerTransactionDetailActivityViewModel.getAllSaleDetail(salesId).observe(getViewLifecycleOwner(), new Observer<List<SaleDeatial>>() {
-            @Override
-            public void onChanged(List<SaleDeatial> saleDeatials) {
-                adepter.setSaleDeatials(saleDeatials);
-                for (int i = 0; i < saleDeatials.size(); i++) {
-                    SaleDeatial saleDeatial = saleDeatials.get(i);
-                    grandTotal=grandTotal+Double.parseDouble(saleDeatial.getSalingPrice());
-                    textViewTotal.setText(""+grandTotal+" \u20B9");
-                }
-            }
-        });*/
 
         stockActivityViewModel.getAllStockBaseOnPurchaseId(stockActivityViewModel.getPurchase().getPurchaseId()).observe(getViewLifecycleOwner(), new Observer<List<Stock>>() {
             @Override

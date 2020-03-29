@@ -263,15 +263,12 @@ public class AddUpdateStockActivity extends AppCompatActivity {
             if (selectedStock != null) {
                 // request is to update the stock.
                 addUpdateStockActivityViewModel.update(stock);
-                Toast.makeText(getBaseContext(), "data updated", Toast.LENGTH_SHORT).show();
                 finish();
 
             } else {
                 // request is to add new stock.
                 Intent intent = new Intent().putExtra("stock", stock);
                 setResult(RESULT_OK, intent);
-
-                Toast.makeText(getBaseContext(), "data save", Toast.LENGTH_SHORT).show();
                 finish();
 
             }

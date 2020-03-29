@@ -43,7 +43,6 @@ public class SellingStocksActivity extends AppCompatActivity {
         sellingActivityViewModel.getAllItems().observe(this, new Observer<List<Stock>>() {
             @Override
             public void onChanged(List<Stock> stocks) {
-                Toast.makeText(getBaseContext(), "ovaerver", Toast.LENGTH_SHORT).show();
                 adepter.setItems(stocks);
             }
         });

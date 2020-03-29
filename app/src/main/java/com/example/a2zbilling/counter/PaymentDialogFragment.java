@@ -2,6 +2,7 @@ package com.example.a2zbilling.counter;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,12 +34,14 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
     private Spinner spinner;
     private CardView cardViewproceed;
     private ArrayList<Stock> stockList;
-    private CounterAdapter adepter;
+    private CounterAdapterForStock adepter;
+    private CounterAdapterForPriceQntyValue counterAdapterForPriceQntyValue;
     private EditText editTotalPayment, editPhone;
     private AutoCompleteTextView autoCompleteTextViewId, autoCompleteTextViewName, autoCompleteTextViewPhoneNo, autoCompleteTextViewAdd;
     private MainActivityViewModel mainActivityViewModel;
     private List<Customer> customerList;
     private int marker;
+    private ProgressDialog regProgress;
     ArrayList<String> paymentModeList;
 
     public static final String PAY_MODE_CASH = "Cash";
@@ -50,9 +53,10 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
 
     DialogFragmentForPaymentBinding customerBinding;
 
-    public PaymentDialogFragment(MainActivityViewModel mainActivityViewModel, CounterAdapter adepter, List<Customer> customerList) {
+    public PaymentDialogFragment(MainActivityViewModel mainActivityViewModel, CounterAdapterForStock adepter,CounterAdapterForPriceQntyValue counterAdapterForPriceQntyValue, List<Customer> customerList) {
         this.mainActivityViewModel = mainActivityViewModel;
         this.adepter = adepter;
+        this.counterAdapterForPriceQntyValue=counterAdapterForPriceQntyValue;
         this.customerList = customerList;
 
 
@@ -82,6 +86,7 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
         autoCompleteTextViewPhoneNo = view.findViewById(R.id.edit_CustPhoneNo);
         autoCompleteTextViewAdd = view.findViewById(R.id.edit_custAdd);
         spinner = view.findViewById(R.id.paymeny_spinner);
+        regProgress=new ProgressDialog(getContext());
         cardViewproceed = view.findViewById(R.id.cardview_prodeed_payment);
 
         ArrayAdapter<Customer> arrayAdapterForCustomerList = new ArrayAdapter<Customer>(getContext(), android.R.layout.simple_list_item_1, customerList);
@@ -103,9 +108,6 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
         customerBinding.setCustomer(new Customer());
         final Sales sale = mainActivityViewModel.getSale();
         customerBinding.setSale(sale);
-
-        Toast.makeText(getContext(), "customers bbbb", Toast.LENGTH_SHORT).show();
-
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, paymentModeList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -153,11 +155,12 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
         cardViewproceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                regProgress.setTitle("Processing");
+                regProgress.setMessage("please Wait...");
+                regProgress.setCanceledOnTouchOutside(false);
+                regProgress.show();
 
-                Toast.makeText(getContext(), "proceed", Toast.LENGTH_SHORT).show();
-
-                Customer customer = customerBinding.getCustomer();
-
+                 Customer customer = customerBinding.getCustomer();
                 //TODO : Calculate the debt for customer and set to it in case of PAY_MODE_DEBT.
                 if(sale.getSalePode() == PAY_MODE_DEBT
                 && customer.getCustomerName().isEmpty()){
@@ -228,10 +231,11 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                     saleDeatial.setUnit(stock.getPriamryUnit());
                     mainActivityViewModel.insertSaleDetail(saleDeatial);
                 }
-                Toast.makeText(getContext(), "completed", Toast.LENGTH_SHORT).show();
                 sales.setSaleId(0);
                 stockList.clear();
                 adepter.setItems(stockList);
+                counterAdapterForPriceQntyValue.setItems(stockList);
+                regProgress.dismiss();
                 dismiss();
 
             }

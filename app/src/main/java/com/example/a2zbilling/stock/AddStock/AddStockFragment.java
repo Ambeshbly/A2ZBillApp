@@ -99,7 +99,6 @@ public class AddStockFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
        switch (item.getItemId()) {
             case R.id.save:
-                Toast.makeText(getContext(), "save", Toast.LENGTH_SHORT).show();
                 ArrayList<Stock> stockList= stockActivityViewModel.getTemproryItemList();
                 int totalItems=0;
                 double total=0;

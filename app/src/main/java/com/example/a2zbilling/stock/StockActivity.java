@@ -89,8 +89,6 @@ public class StockActivity extends AppCompatActivity {
             new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Save Stock").setMessage("Are you want to save stock?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getBaseContext(), "save", Toast.LENGTH_SHORT).show();
-
                     ArrayList<Stock> stockList = stockActivityViewModel.getTemproryItemList();
 
                     for (int i = 0; i < stockList.size(); i++) {

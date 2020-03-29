@@ -81,7 +81,6 @@ public class UnitDialogFragement extends AppCompatDialogFragment {
                         // Log an problem.
 
                 }
-                Toast.makeText(getContext(), selectedUnit + " clicked", Toast.LENGTH_SHORT).show();
                 stock.setPriamryUnit(selectedUnit);
                 stock.setSecondUnit("1");
                 dismiss();

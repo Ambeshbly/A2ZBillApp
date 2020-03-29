@@ -47,7 +47,8 @@ public class CounterFragment extends Fragment {
     public static final String TAG_SALE_STOCK_OBJ = "Sale_Stock_Obj";
     public static final String TAG_AVAILABLE_STOCK_OBJ = "Available_Stock_Obj";
 
-    CounterAdapter adepter;
+    CounterAdapterForStock adepter;
+    CounterAdapterForPriceQntyValue counterAdapterForPriceQntyValue;
     MediaPlayer mediaPlayer;
     EditText editTextOtherName,editTextValue;
     FloatingActionButton otherButton;
@@ -76,17 +77,26 @@ public class CounterFragment extends Fragment {
         editTextValue=view.findViewById(R.id.other_value);
         otherButton=view.findViewById(R.id.other_button);
         total = 0;
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView_for_counter_fragment);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
+        RecyclerView recyclerViewForStockName = view.findViewById(R.id.recyclerView_for_counter_fragment);
+        recyclerViewForStockName.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewForStockName.setHasFixedSize(true);
 
-        adepter = new CounterAdapter();
-        recyclerView.setAdapter(adepter);
+        RecyclerView recyclerViewForPriceQntyValue = view.findViewById(R.id.recyclerView_for_Price_qunty_value);
+        recyclerViewForPriceQntyValue.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewForPriceQntyValue.setHasFixedSize(true);
+
+
+        adepter = new CounterAdapterForStock();
+        recyclerViewForStockName.setAdapter(adepter);
+
+        counterAdapterForPriceQntyValue=new CounterAdapterForPriceQntyValue();
+        recyclerViewForPriceQntyValue.setAdapter(counterAdapterForPriceQntyValue);
 
         mainActivityViewModel.getNewlyAddedStocks().observe(getViewLifecycleOwner(), new Observer<ArrayList<Stock>>() {
             @Override
             public void onChanged(ArrayList<Stock> stocks) {
                 adepter.setItems(stocks);
+                counterAdapterForPriceQntyValue.setItems(stocks);
 
                 ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
 
@@ -181,7 +191,7 @@ public class CounterFragment extends Fragment {
                     Toast.makeText(getContext(), "please add the item first", Toast.LENGTH_SHORT).show();
                 } else {
                     //double total = Double.parseDouble(mainActivityViewModel.getSale().getTotalBillAmt());
-                    PaymentDialogFragment dialogFragment = new PaymentDialogFragment(mainActivityViewModel, adepter, customerList);
+                    PaymentDialogFragment dialogFragment = new PaymentDialogFragment(mainActivityViewModel, adepter,counterAdapterForPriceQntyValue, customerList);
                     dialogFragment.show(getActivity().getSupportFragmentManager(), "exampledialog");
                 }
             }
@@ -249,9 +259,6 @@ public class CounterFragment extends Fragment {
                 stock.setSalePerUnit(editTextValue.getText().toString().trim());
                 mainActivityViewModel.addNewlyAddedStock(stock);
                 editTextValue.setText("");
-                Toast.makeText(getContext(),"save other ",Toast.LENGTH_SHORT).show();
-
-
                 CounterFragment fragment = (CounterFragment)
                         getFragmentManager().findFragmentById(R.id.fragment_conterner);
                         getFragmentManager().beginTransaction()

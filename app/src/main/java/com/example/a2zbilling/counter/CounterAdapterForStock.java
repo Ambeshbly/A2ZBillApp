@@ -14,14 +14,14 @@ import com.example.a2zbilling.db.entities.Stock;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CounterAdapter extends RecyclerView.Adapter<CounterAdapter.ItemHolder> {
+public class CounterAdapterForStock extends RecyclerView.Adapter<CounterAdapterForStock.ItemHolder> {
     private List<Stock> items = new ArrayList<>();
 
 
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_for_counter_fragmnet, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_for_counter_stock, parent, false);
         ItemHolder itemHolder = new ItemHolder(itemView);
         return itemHolder;
     }
@@ -30,12 +30,6 @@ public class CounterAdapter extends RecyclerView.Adapter<CounterAdapter.ItemHold
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         Stock currentItem = items.get(position);
         holder.textViewForItemName.setText(currentItem.getName());
-        holder.textViewForSalePrice.setText("" + currentItem.getSalePerUnit());
-        holder.textViewForQnty.setText("" + currentItem.getPrimaryQuant());
-
-        String values = Double.toString(Integer.parseInt(currentItem.getSalePerUnit()) * currentItem.getPrimaryQuant());
-        holder.textViewForValues.setText(values);
-
     }
 
     @Override
@@ -51,15 +45,12 @@ public class CounterAdapter extends RecyclerView.Adapter<CounterAdapter.ItemHold
 
     class ItemHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewForItemName, textViewForSalePrice, textViewForQnty, textViewForValues;
+        private TextView textViewForItemName;
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewForItemName = itemView.findViewById(R.id.textView_for_counter_itemName);
-            textViewForSalePrice = itemView.findViewById(R.id.textView_for_counter_price);
-            textViewForQnty = itemView.findViewById(R.id.textView_counter_qnty);
-            textViewForValues = itemView.findViewById(R.id.TextView_values);
 
         }
     }

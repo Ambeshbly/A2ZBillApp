@@ -45,74 +45,77 @@
         android:gravity="center" android:text="@string/email"
         android:textSize="13sp" />
 
-
-
-
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:id="@+id/ja"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:orientation="horizontal"
         android:layout_below="@+id/imageView_for_shop"
-        android:layout_marginTop="5dp" >
-        <RelativeLayout
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:layout_height="30dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView android:id="@+id/TextView_stock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_centerVertical="true"
-            android:text="@string/stock"
-                android:textSize="15sp"
-            android:textStyle="bold" />
+                <TextView android:id="@+id/TextView_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_centerVertical="true"
+                    android:text="@string/stock"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
-            android:layout_toLeftOf="@+id/TextView_values"
-            android:text="@string/qnty"
-            android:layout_centerVertical="true"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:layout_height="30dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView android:id="@+id/Textview_for_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/TextView_stock"
-            android:gravity="center"
-            android:text="@string/price"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:text="@string/qnty"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
-        <TextView android:id="@+id/TextView_values"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="5dp"
-            android:layout_centerVertical="true"
-            android:text="@string/value"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-        </RelativeLayout>
+                <TextView android:id="@+id/Textview_for_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/price"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
-    </androidx.cardview.widget.CardView>
+                <TextView android:id="@+id/TextView_values"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_centerVertical="true"
+                    android:text="@string/value"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
+            </RelativeLayout>
 
+        </androidx.cardview.widget.CardView>
 
-
-
-
-
-
-
-
-
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardx"
@@ -259,17 +262,33 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_for_counter_fragment"
+    <LinearLayout
+        android:id="@+id/linerId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ja" />
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/ja"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_for_counter_fragment"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_for_Price_qunty_value"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/Other_cardvew"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@+id/recyclerView_for_counter_fragment"
+        android:layout_below="@+id/linerId"
         android:layout_marginTop="5dp" >
         <RelativeLayout
             android:layout_width="match_parent"

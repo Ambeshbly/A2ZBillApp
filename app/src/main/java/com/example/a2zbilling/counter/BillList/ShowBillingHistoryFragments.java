@@ -27,7 +27,9 @@ import java.util.List;
 public class ShowBillingHistoryFragments extends Fragment {
 
     RecyclerView recyclerView;
-    ShowBillingHistoryFragmentAdapter adepter;
+    RecyclerView recyclerViewPriceQntyValue;
+    ShowBillingHistoryFragmentAdapterForStock adepter;
+    ShowBillingHistoryFragmentAdapterForPriceQntyValue showBillingHistoryFragmentAdapterForPriceQntyValue;
     private BillHistoryActivityViewModel billHistoryActivityViewModel;
     TextView textViewTotal;
     private int cheak;
@@ -56,8 +58,15 @@ public class ShowBillingHistoryFragments extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
-        adepter = new ShowBillingHistoryFragmentAdapter();
+        recyclerViewPriceQntyValue = view.findViewById(R.id.recyclerView_for_Price_qunty_value1);
+        recyclerViewPriceQntyValue.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewPriceQntyValue.setHasFixedSize(true);
+
+        adepter = new ShowBillingHistoryFragmentAdapterForStock();
         recyclerView.setAdapter(adepter);
+
+        showBillingHistoryFragmentAdapterForPriceQntyValue=new ShowBillingHistoryFragmentAdapterForPriceQntyValue();
+        recyclerViewPriceQntyValue.setAdapter(showBillingHistoryFragmentAdapterForPriceQntyValue);
         if (cheak==1){
 
             Sales sales=showCustomerTransactionDetailActivityViewModel.getSales();
@@ -66,10 +75,11 @@ public class ShowBillingHistoryFragments extends Fragment {
                 @Override
                 public void onChanged(List<SaleDeatial> saleDeatials) {
                     adepter.setSaleDeatials(saleDeatials);
+                    showBillingHistoryFragmentAdapterForPriceQntyValue.setSaleDeatials(saleDeatials);
                     for (int i = 0; i < saleDeatials.size(); i++) {
                         SaleDeatial saleDeatial = saleDeatials.get(i);
                         grandTotal=grandTotal+Double.parseDouble(saleDeatial.getSalingPrice());
-                        textViewTotal.setText(""+grandTotal+" \u20B9");
+                        textViewTotal.setText(" \u20B9 "+grandTotal);
                     }
                 }
             });
@@ -81,10 +91,11 @@ public class ShowBillingHistoryFragments extends Fragment {
                 @Override
                 public void onChanged(List<SaleDeatial> saleDeatials) {
                     adepter.setSaleDeatials(saleDeatials);
+                    showBillingHistoryFragmentAdapterForPriceQntyValue.setSaleDeatials(saleDeatials);
                     for (int i = 0; i < saleDeatials.size(); i++) {
                         SaleDeatial saleDeatial = saleDeatials.get(i);
-                        grandTotal=grandTotal+Double.parseDouble(saleDeatial.getSalingPrice());
-                        textViewTotal.setText(""+grandTotal+" \u20B9");
+                        grandTotal=grandTotal+(Double.parseDouble(saleDeatial.getSalingPrice())*saleDeatial.getQuntity());
+                        textViewTotal.setText(" \u20B9 "+grandTotal);
                     }
                 }
             });

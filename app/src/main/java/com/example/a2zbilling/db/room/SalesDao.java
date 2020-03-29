@@ -15,7 +15,7 @@ public interface SalesDao {
     @Insert
     long insert(Sales sales);
 
-    @Query("SELECT * From Sales")
+    @Query("SELECT * From Sales ORDER BY saleId DESC")
     LiveData<List<Sales>> getAllSales();
 
     @Query("SELECT * FROM sales WHERE saleId==:saleId")

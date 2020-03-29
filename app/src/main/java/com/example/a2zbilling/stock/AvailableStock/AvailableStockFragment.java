@@ -56,7 +56,6 @@ public class AvailableStockFragment extends Fragment {
 
             @Override
             public void onChanged(List<Stock> items) {
-                Toast.makeText(getContext(), "items", Toast.LENGTH_SHORT).show();
                 adepter.setItems(items);
             }
         });
@@ -70,28 +69,6 @@ public class AvailableStockFragment extends Fragment {
         });
         return fragmentForAvailablestocksBinding.getRoot();
     }
-   /* @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.toolbar_search_menu, menu);
-        MenuItem menuItem=menu.findItem(R.id.search_view_By);
-        MenuItem menuItem1=menu.findItem(R.id.search_scan);
-        SearchView searchView=(SearchView)menuItem.getActionView();
-        searchView.setQueryHint("search Item");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adepter.getFilter().filter(newText);
-                return false;
-            }
-        });
-        super.onCreateOptionsMenu(menu, inflater);
-    }*/
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

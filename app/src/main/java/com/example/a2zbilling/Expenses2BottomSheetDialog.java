@@ -91,7 +91,6 @@ public class Expenses2BottomSheetDialog extends BottomSheetDialogFragment {
             expenses2BottonSheetDialogBinding.getExpensesCategory().setExpenseCategoryPaymentMode(paymentMode);
             expenses2BottonSheetDialogBinding.getExpensesCategory().setExpenseId(expenseId);
             expensesActivity2ViewModel.insertExpensesCategory(expenses2BottonSheetDialogBinding.getExpensesCategory());
-            Toast.makeText(getContext(),"sucessful",Toast.LENGTH_SHORT).show();
             dismiss();
         }
     }

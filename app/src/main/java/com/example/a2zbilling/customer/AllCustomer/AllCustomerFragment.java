@@ -41,7 +41,6 @@ public class AllCustomerFragment extends Fragment {
         customerActivityViewModel.getAllCustomer().observe(getViewLifecycleOwner(), new Observer<List<Customer>>() {
             @Override
             public void onChanged(List<Customer> customers) {
-                Toast.makeText(getContext(), "customers", Toast.LENGTH_SHORT).show();
                 adepter.setCustomers(customers);
             }
         });

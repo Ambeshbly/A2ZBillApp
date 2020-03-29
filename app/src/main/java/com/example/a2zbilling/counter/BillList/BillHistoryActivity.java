@@ -44,7 +44,6 @@ public class BillHistoryActivity extends AppCompatActivity {
 
             @Override
             public void onChanged(List<Sales> sales) {
-                Toast.makeText(getBaseContext(), "Sales ", Toast.LENGTH_SHORT).show();
                 adepter.setItems(sales);
             }
         });

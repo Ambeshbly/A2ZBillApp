@@ -125,7 +125,6 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()){
                             case R.id.detail:
-                                Toast.makeText(getBaseContext(),"detail",Toast.LENGTH_SHORT).show();
                                 showCustomerTransactionDetailActivityViewModel.setCustomer(selectedCustomer);
                                 ShowCustomerDetailDialogFragment dialogFragementforunit=new ShowCustomerDetailDialogFragment(showCustomerTransactionDetailActivityViewModel,1);
                                 dialogFragementforunit.show(getSupportFragmentManager(),"exampledialog");
