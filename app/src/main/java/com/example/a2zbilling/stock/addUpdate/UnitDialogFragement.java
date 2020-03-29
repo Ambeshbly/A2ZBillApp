@@ -44,7 +44,7 @@ public class UnitDialogFragement extends AppCompatDialogFragment {
         public void onUnitSelect(View view){
             if(view.getId() == R.id.cardview_Box){
                     Toast.makeText(getContext(), "Box clicked", Toast.LENGTH_SHORT).show();
-                    BoxDialogFragment ialogFragement = new BoxDialogFragment(stock);
+                    BoxDialogFragment ialogFragement = new BoxDialogFragment(stock, view);
                     ialogFragement.show(getChildFragmentManager(), "exampledialog");
             }else {
                 String selectedUnit = "";

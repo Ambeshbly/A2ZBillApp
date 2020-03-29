@@ -29,6 +29,7 @@ public class Stock extends BaseObservable implements Serializable {
     private double secondQuant;
     private String priamryUnit = Unit.UNIT_DEFAULT;
     private String secondUnit = Unit.UNIT_DEFAULT;
+    private int pcPerBox = 1;
     private String purchasePerUnit ="";
     private String purchaseTotal ="";
     private String salePerUnit ="";
@@ -51,10 +52,12 @@ public class Stock extends BaseObservable implements Serializable {
         this.secondQuant = oldStock.secondQuant;
         this.priamryUnit = oldStock.priamryUnit;
         this.secondUnit = oldStock.secondUnit;
+        this.pcPerBox = oldStock.pcPerBox;
         this.purchasePerUnit = oldStock.purchasePerUnit;
         this.purchaseTotal = oldStock.purchaseTotal;
         this.salePerUnit = oldStock.salePerUnit;
         this.saleTotal = oldStock.saleTotal;
+        barCode=oldStock.barCode;
 
     }
 
@@ -136,6 +139,12 @@ public class Stock extends BaseObservable implements Serializable {
         notifyPropertyChanged(BR.primaryQuant);
     }
 
+    public void updatePrimaryQuant(double primaryQuant){
+        this.primaryQuant = primaryQuant;
+        this.secondQuant = primaryQuant * pcPerBox;
+        notifyPropertyChanged(BR.primaryQuant);
+    }
+
 
     @Bindable
     public String getPriamryUnit() {
@@ -154,6 +163,13 @@ public class Stock extends BaseObservable implements Serializable {
 
     public void setSecondQuant(double secondQuant) {
         this.secondQuant = secondQuant;
+
+
+    }
+    public void updateSecondQuant(double secondQuant){
+        this.secondQuant = secondQuant;
+        this.primaryQuant = secondQuant / pcPerBox;
+        notifyPropertyChanged(BR.primaryQuant);
     }
 
     public String getSecondUnit() {
@@ -245,5 +261,14 @@ public class Stock extends BaseObservable implements Serializable {
 
     public void setBarCode(String barCode) {
         this.barCode = barCode;
+    }
+
+    public int getPcPerBox() {
+        return pcPerBox;
+    }
+
+    public void setPcPerBox(int pcPerBox) {
+        this.pcPerBox = pcPerBox;
+
     }
 }
