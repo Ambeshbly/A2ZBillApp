@@ -2,7 +2,6 @@ package com.example.a2zbilling.counter.BillList;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -56,7 +55,6 @@ public class BillHistoryActivity extends AppCompatActivity {
               billHistoryActivityViewModel.setSaleDetailList(saleDeatials);
 
               String id=Integer.toString(sales.getSaleId());
-              Toast.makeText(getBaseContext(), id, Toast.LENGTH_SHORT).show();
 
               recyclerView.setVisibility(View.GONE);
               FragmentManager fm=getSupportFragmentManager();

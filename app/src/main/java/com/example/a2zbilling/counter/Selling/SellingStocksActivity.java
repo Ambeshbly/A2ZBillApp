@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,7 +53,6 @@ public class SellingStocksActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Stock stock) {
                 String name = stock.getName();
-                Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show();
                 sellingActivityViewModel.setStock(stock);
                 DialogFragmentForAddToCart ialogFragementforunit = new DialogFragmentForAddToCart(stock);
                 ialogFragementforunit.show(getSupportFragmentManager(), "exampledialog");

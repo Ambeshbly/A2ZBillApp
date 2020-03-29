@@ -53,7 +53,7 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
     public void onBindViewHolder(@NonNull final ItemHolder holder, int position) {
         final Sales currentsales = sales.get(position);
         holder.textView_for_saleId.setText(""+currentsales.getSaleId());
-        holder.textViewForTotalAmtText.setText("Total Amt:  ");
+        //holder.textViewForTotalAmtText.setText("Total Amt:  ");
         holder.textViewForTotal.setText(currentsales.getTotalBillAmt());
         holder.textViewpaymentMode.setText(currentsales.getSalePode());
         holder.textViewdate.setText(""+ DateFormat.getDateInstance().format(DateConverter.toDate(currentsales.getDate())));

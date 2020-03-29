@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -66,13 +65,12 @@ public class AllCustomerAdapter extends RecyclerView.Adapter<AllCustomerAdapter.
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()){
                             case R.id.delete:
-                                Toast.makeText(context,"detail",Toast.LENGTH_SHORT).show();
                                 customerActivityViewModel.setCustomer(currentcustomer);
                                 ShowCustomerDetailDialogFragment dialogFragementforunit=new ShowCustomerDetailDialogFragment(customerActivityViewModel);
                                 dialogFragementforunit.show(((CustomerActivity)context).getSupportFragmentManager(),"exampledialog");
                                 break;
                             case R.id.update:
-                                Toast.makeText(context,"update",Toast.LENGTH_SHORT).show();
+
                                 customerActivityViewModel.setCustomer(currentcustomer);
                                 AddUpdateCustomerFragment ialogFragementforunit=new AddUpdateCustomerFragment(customerActivityViewModel,currentcustomer.getCustId());
                                 ialogFragementforunit.show(((CustomerActivity)context).getSupportFragmentManager(),"exampledialog");

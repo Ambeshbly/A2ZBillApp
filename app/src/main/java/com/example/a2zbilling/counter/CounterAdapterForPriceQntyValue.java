@@ -31,8 +31,8 @@ public class CounterAdapterForPriceQntyValue extends RecyclerView.Adapter<Counte
         Stock currentItem = items.get(position);
         holder.textViewForSalePrice.setText("" + currentItem.getSalePerUnit());
         holder.textViewForQnty.setText("" + currentItem.getPrimaryQuant());
-        String values = Double.toString(Integer.parseInt(currentItem.getSalePerUnit()) * currentItem.getPrimaryQuant());
-        holder.textViewForValues.setText(values);
+
+        holder.textViewForValues.setText(""+currentItem.getSaleTotal());
 
     }
 

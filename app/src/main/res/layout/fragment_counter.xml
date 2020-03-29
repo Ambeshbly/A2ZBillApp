@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="sale"
+            type="com.example.a2zbilling.db.entities.Sales" />
+    </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -255,10 +261,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:text="0.00"
+            android:text="@{sale.totalBillAmt}"
             android:padding="10dp"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -364,3 +371,4 @@
 
 
 </RelativeLayout>
+</layout>

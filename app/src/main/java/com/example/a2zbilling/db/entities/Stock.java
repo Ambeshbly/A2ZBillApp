@@ -190,10 +190,13 @@ public class Stock extends BaseObservable implements Serializable {
         if (purchasePerUnit.isEmpty() || primaryQuant == 0) {
             purchaseTotal = Integer.toString(0);
         } else {
-            purchaseTotal = Double.toString(Integer.parseInt(purchasePerUnit) * primaryQuant);
+            purchaseTotal = Double.toString(Double.parseDouble(purchasePerUnit) * primaryQuant);
         }
         notifyPropertyChanged(BR.purchasePerUnit);
         notifyPropertyChanged(BR.purchaseTotal);
+    }
+    public void updatePurchasePerUnit(String purchasePerUnit){
+        this.purchasePerUnit = purchasePerUnit;
     }
 
 
@@ -227,10 +230,14 @@ public class Stock extends BaseObservable implements Serializable {
         if (salePerUnit.isEmpty() || primaryQuant == 0) {
             saleTotal = Integer.toString(0);
         } else {
-            saleTotal = Double.toString(Integer.parseInt(salePerUnit) * primaryQuant);
+            saleTotal = Double.toString(Double.parseDouble(salePerUnit) * primaryQuant);
         }
         notifyPropertyChanged(BR.saleTotal);
         notifyPropertyChanged(BR.salePerUnit);
+    }
+
+    public void updateSalePerUnit(String salePerUnit){
+        this.salePerUnit = salePerUnit;
     }
 
     @Bindable

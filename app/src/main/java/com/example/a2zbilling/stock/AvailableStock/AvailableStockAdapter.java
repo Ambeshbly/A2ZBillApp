@@ -87,7 +87,6 @@ public class AvailableStockAdapter extends RecyclerView.Adapter<AvailableStockAd
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()){
                             case R.id.update:
-                                Toast.makeText(context,"update",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(context, AddUpdateStockActivity.class);
                                 intent.putExtra("stock_object", currentItem);
                                 context.startActivity(intent);

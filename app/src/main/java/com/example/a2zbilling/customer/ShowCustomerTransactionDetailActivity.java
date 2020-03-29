@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a2zbilling.Dashboard;
 import com.example.a2zbilling.R;
@@ -102,7 +101,6 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
             public void onItemClick(Sales sales) {
                 showCustomerTransactionDetailActivityViewModel.setSales(sales);
                 String id=Integer.toString(sales.getSaleId());
-                Toast.makeText(getBaseContext(), id, Toast.LENGTH_SHORT).show();
                 recyclerView.setVisibility(View.GONE);
                 view.setVisibility(View.GONE);
                 FragmentManager fm=getSupportFragmentManager();
