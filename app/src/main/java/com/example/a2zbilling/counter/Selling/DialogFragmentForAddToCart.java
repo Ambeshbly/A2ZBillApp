@@ -165,7 +165,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
 
             case Unit.UNIT_BOX:
                 list.add(Unit.UNIT_BOX);
-                list.add(Unit.UNIT_PC);
+                list.add(saleStock.getSecondUnit());
                 arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list);
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(arrayAdapter);
@@ -179,7 +179,10 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                                 saleStock.setPriamryUnit(Unit.UNIT_BOX);
                                 break;
                             case Unit.UNIT_PC:
-                                saleStock.setPriamryUnit(Unit.UNIT_PC);
+                            case Unit.UNIT_KG:
+                            case Unit.UNIT_MTR:
+                            case Unit.UNIT_LTR:
+                                saleStock.setPriamryUnit(selectedUnit);
                                 break;
                             default:
                                 // Handle error case.
@@ -265,40 +268,56 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
         switch (saleStock.getPriamryUnit()) {
             case Unit.UNIT_KG:
                 availableQuantity = availableQuantity - saleQuantity;
+                availableStock.updatePrimaryQuant(availableQuantity);
                 break;
             case Unit.UNIT_GM:
                 availableQuantity = availableQuantity * 1000 - saleQuantity;
+                availableStock.updatePrimaryQuant(availableQuantity);
                 break;
             case Unit.UNIT_MG:
                 availableQuantity = availableQuantity * 1000* 1000 - saleQuantity;
+                availableStock.updatePrimaryQuant(availableQuantity);
                 break;
             case Unit.UNIT_MTR:
                 availableQuantity = availableQuantity - saleQuantity;
+                availableStock.updatePrimaryQuant(availableQuantity);
                 break;
             case Unit.UNIT_CM:
                 availableQuantity = availableQuantity * 100 - saleQuantity;
+                availableStock.updatePrimaryQuant(availableQuantity);
                 break;
             case Unit.UNIT_MM:
                 availableQuantity = availableQuantity * 1000 - saleQuantity;
+                availableStock.updatePrimaryQuant(availableQuantity);
                 break;
             case Unit.UNIT_LTR:
                 availableQuantity = availableQuantity - saleQuantity;
+                availableStock.updatePrimaryQuant(availableQuantity);
                 break;
             case Unit.UNIT_ML:
                 availableQuantity = availableQuantity * 1000 - saleQuantity;
+                availableStock.updatePrimaryQuant(availableQuantity);
                 break;
             case Unit.UNIT_BOX:
-                double pcPerBox = Double.parseDouble(availableStock.getSecondUnit());
-                availableQuantity = availableQuantity - saleQuantity* pcPerBox;
+                availableQuantity = availableQuantity - saleQuantity;
+                availableStock.updatePrimaryQuant(availableQuantity);
                 break;
             case Unit.UNIT_PC:
-                availableQuantity = availableQuantity - saleQuantity;
+                if(availableStock.getPriamryUnit().contentEquals(Unit.UNIT_BOX)){
+                    int pcPerBox = availableStock.getPcPerBox();
+                    availableStock.updateSecondQuant(availableStock.getSecondQuant() - saleStock.getPrimaryQuant());
+                }else{
+                    availableQuantity = availableQuantity - saleQuantity;
+                    availableStock.updatePrimaryQuant(availableQuantity);
+                }
+
+
                 break;
             default:
                 // handle error case.
 
         }
-        availableStock.setPrimaryQuant(availableQuantity);
+
     }
 
 

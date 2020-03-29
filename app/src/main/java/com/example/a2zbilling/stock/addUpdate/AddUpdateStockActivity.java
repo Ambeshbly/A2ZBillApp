@@ -258,6 +258,7 @@ public class AddUpdateStockActivity extends AppCompatActivity {
             if (!validateItemName(stock) | !validateItemPurchasePrice(stock) | !validateItemQuntity(stock) | !validateItemUnit(stock)) {
                 return;
             }
+            stock.updateSecondQuant(stock.getPrimaryQuant()*stock.getPcPerBox());
 
             if (selectedStock != null) {
                 // request is to update the stock.

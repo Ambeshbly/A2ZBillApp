@@ -27,10 +27,12 @@ public class BoxDialogFragment extends AppCompatDialogFragment {
     EditText editTextBox;
     Stock stock;
     private Spinner spinner;
+    View unitView;
 
 
-    public BoxDialogFragment(Stock stock) {
+    public BoxDialogFragment(Stock stock, View view) {
         this.stock = stock;
+        this.unitView = view;
     }
 
 
@@ -39,7 +41,7 @@ public class BoxDialogFragment extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_fragment_for_box, null);
+        final View view = inflater.inflate(R.layout.dialog_fragment_for_box, null);
         cardviewCancel = view.findViewById(R.id.cardview_cancel);
         cardViewSave = view.findViewById(R.id.cardview_save);
         spinner = view.findViewById(R.id.box_sppiner);
@@ -53,20 +55,19 @@ public class BoxDialogFragment extends AppCompatDialogFragment {
         cardViewSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "save", Toast.LENGTH_SHORT).show();
                 stock.setPriamryUnit(Unit.UNIT_BOX);
-                int pic = Integer.parseInt(editTextBox.getText().toString().trim());
-                stock.setPrimaryQuant(stock.getPrimaryQuant() * pic);
-                stock.setSecondUnit(editTextBox.getText().toString().trim());
+                int pPB = Integer.parseInt(editTextBox.getText().toString().trim());
+                stock.setPcPerBox(pPB);
+                stock.updateSecondQuant(pPB * stock.getPrimaryQuant());
                 dismiss();
             }
         });
 
         List<String> list = new ArrayList<String>();
-        list.add("Pc");
-        list.add("Kg");
-        list.add("Ltr");
-        list.add("Mtr");
+        list.add(Unit.UNIT_PC);
+        list.add(Unit.UNIT_KG);
+        list.add(Unit.UNIT_LTR);
+        list.add(Unit.UNIT_MTR);
         ArrayAdapter<String> arrayAdapter = null;
         arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -76,32 +77,31 @@ public class BoxDialogFragment extends AppCompatDialogFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinner.setSelection(position);
-                switch (position){
-                    case 0:
+                String secondUnit = (String) parent.getAdapter().getItem(position);
+
+                stock.setSecondUnit(secondUnit);
+                /*switch (secondUnit){
+                    case Unit.UNIT_PC:
                       //handle pc
                         break;
-                    case 1:
+                    case Unit.UNIT_KG:
                         //handle Kg
                         break;
-                    case 2:
+                    case Unit.UNIT_LTR:
                         //handle Ltr
                         break;
-                    case 3:
+                    case Unit.UNIT_MTR:
                         //handle Mtr
                         break;
                     default:
                         //handle default
                        break;
-                }
+                }*/
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-
-
-
 
         builder.setView(view);
         return builder.create();
