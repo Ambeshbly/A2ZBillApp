@@ -30,7 +30,7 @@ public class AddStockAdapter extends RecyclerView.Adapter<AddStockAdapter.ItemHo
             } else {
                 String filterPatten = constraint.toString().toLowerCase().trim();
                 for (Stock item : stockList) {
-                    if (item.getItemName().toLowerCase().contains(filterPatten)) {
+                    if (item.getName().toLowerCase().contains(filterPatten)) {
 
                         filteredlist.add(item);
                     }
@@ -62,10 +62,10 @@ public class AddStockAdapter extends RecyclerView.Adapter<AddStockAdapter.ItemHo
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         Stock currentItem = items.get(position);
-        holder.textViewForItemName.setText(currentItem.getItemName());
-        holder.textViewForItemId.setText("" + currentItem.getItemId());
-        holder.textViewForQuentity.setText("" + currentItem.getItemQuentity());
-        holder.textViewForShowSaleText.setText(currentItem.getItemUnit());
+        holder.textViewForItemName.setText(currentItem.getName());
+        holder.textViewForItemId.setText("" + currentItem.getId());
+        holder.textViewForQuentity.setText("" + currentItem.getPrimaryQuant());
+        holder.textViewForShowSaleText.setText(currentItem.getPriamryUnit());
 
     }
 

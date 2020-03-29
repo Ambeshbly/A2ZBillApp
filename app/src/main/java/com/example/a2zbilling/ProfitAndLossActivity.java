@@ -76,14 +76,14 @@ public class ProfitAndLossActivity extends AppCompatActivity  {
                 Stock selectedStock=(Stock) parent.getAdapter().getItem(position);
                for (int i = 0; i < saleDeatialList.size(); i++) {
                     SaleDeatial saleDeatial = saleDeatialList.get(i);
-                    if(saleDeatial.getSaleDetailitemId()==selectedStock.getItemId()){
-                        Toast.makeText(getBaseContext(),"stock"+selectedStock.getItemName(),Toast.LENGTH_SHORT).show();
+                    if(saleDeatial.getSaleDetailitemId()==selectedStock.getId()){
+                        Toast.makeText(getBaseContext(),"stock"+selectedStock.getName(),Toast.LENGTH_SHORT).show();
                         quntityOut=quntityOut+saleDeatial.getQuntity();
                     }
                 }
-               quntityIn=quntityOut+selectedStock.getItemQuentity();
-               itempurchasePriceTotal=quntityOut*Double.parseDouble(selectedStock.getItemPurchasePerUnit());
-               itemSalePriceTotal=quntityOut*Double.parseDouble(selectedStock.getItemSalePerUnit());
+               quntityIn=quntityOut+selectedStock.getPrimaryQuant();
+               itempurchasePriceTotal=quntityOut*Double.parseDouble(selectedStock.getPurchasePerUnit());
+               itemSalePriceTotal=quntityOut*Double.parseDouble(selectedStock.getSalePerUnit());
                textViewQuntityIn.setText("Qnty In :"+quntityIn);
                textViewQuntityOut.setText("Qnty Out :"+quntityOut);
             }

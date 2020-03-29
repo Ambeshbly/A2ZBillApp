@@ -1,7 +1,6 @@
 package com.example.a2zbilling;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,7 +34,7 @@ public class LessStock extends AppCompatActivity {
                 List<Stock> stockArrayList = new ArrayList<Stock>();
                 for (int i = 0; i < stocks.size(); i++) {
                     Stock stock= stocks.get(i);
-                    if(stock.getItemQuentity()<10){
+                    if(stock.getPrimaryQuant()<10){
                         stockArrayList.add(stock);
                     }
                 }

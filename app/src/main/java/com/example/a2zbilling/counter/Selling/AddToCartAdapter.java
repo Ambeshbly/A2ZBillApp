@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,7 +31,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Item
             } else {
                 String filterPatten = constraint.toString().toLowerCase().trim();
                 for (Stock item : stockList) {
-                    if (item.getItemName().toLowerCase().contains(filterPatten)||item.getBarCode().toLowerCase().contains(filterPatten)) {
+                    if (item.getName().toLowerCase().contains(filterPatten)||item.getBarCode().toLowerCase().contains(filterPatten)) {
                         filteredlist.add(item);
                     }
                 }
@@ -64,11 +63,11 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Item
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         Stock currentItem = items.get(position);
-        holder.textViewForItemName.setText(currentItem.getItemName());
-        holder.textViewForItemId.setText("" + currentItem.getItemId());
-        holder.textViewForQuentity.setText("" + currentItem.getItemQuentity());
+        holder.textViewForItemName.setText(currentItem.getName());
+        holder.textViewForItemId.setText("" + currentItem.getId());
+        holder.textViewForQuentity.setText("" + currentItem.getPrimaryQuant());
         holder.menu_in_recyclerview1.setVisibility(View.INVISIBLE);
-        holder.text_view_sale_price_text1.setText(""+currentItem.getItemUnit());
+        holder.text_view_sale_price_text1.setText(""+currentItem.getPriamryUnit());
     }
 
     @Override

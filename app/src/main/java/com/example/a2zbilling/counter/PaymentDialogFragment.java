@@ -5,14 +5,11 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,27 +17,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.example.a2zbilling.MainActivity;
 import com.example.a2zbilling.MainActivityViewModel;
 import com.example.a2zbilling.R;
-import com.example.a2zbilling.databinding.DialogFragmentForAddCustomerBinding;
 import com.example.a2zbilling.databinding.DialogFragmentForPaymentBinding;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
 
-import java.io.IOException;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class PaymentDialogFragment extends AppCompatDialogFragment {
     private Spinner spinner;
@@ -233,12 +220,12 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
 
                     SaleDeatial saleDeatial = new SaleDeatial();
                     saleDeatial.setSaledetailsaleid(sales.getSaleId());
-                    saleDeatial.setSaleDetailitemId(stock.getItemId());
-                    saleDeatial.setQuntity(stock.getItemQuentity());
-                    saleDeatial.setPurchasePrice(stock.getItemPurchasePerUnit());
-                    saleDeatial.setSalingPrice(stock.getItemSalePerUnit());
-                    saleDeatial.setSaleDetailItemName(stock.getItemName());
-                    saleDeatial.setUnit(stock.getItemUnit());
+                    saleDeatial.setSaleDetailitemId(stock.getId());
+                    saleDeatial.setQuntity(stock.getPrimaryQuant());
+                    saleDeatial.setPurchasePrice(stock.getPurchasePerUnit());
+                    saleDeatial.setSalingPrice(stock.getSalePerUnit());
+                    saleDeatial.setSaleDetailItemName(stock.getName());
+                    saleDeatial.setUnit(stock.getPriamryUnit());
                     mainActivityViewModel.insertSaleDetail(saleDeatial);
                 }
                 Toast.makeText(getContext(), "completed", Toast.LENGTH_SHORT).show();

@@ -2,16 +2,13 @@ package com.example.a2zbilling.counter.Selling;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.bluetooth.le.ScanSettings;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -53,7 +50,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
         final Stock saleStock = new Stock(availableStock);
 
         // re-initialize the quantity for sale stock object.
-        saleStock.setItemQuentity(0);
+        saleStock.setPrimaryQuant(0);
 
         // Bind the both objects.
         addToCartBinding.setSaleStock(saleStock);
@@ -61,7 +58,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
 
         spinner = view.findViewById(R.id.Add_to_cart_spinner);
         //double unit = Double.parseDouble(stock.getItemUnit());
-        String unit = availableStock.getItemUnit();
+        String unit = availableStock.getPriamryUnit();
 
         List<String> list = new ArrayList<String>();
         ArrayAdapter<String> arrayAdapter = null;
@@ -84,13 +81,13 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                         String selectedUnit = (String) parent.getAdapter().getItem(position);
                         switch (selectedUnit){
                             case Unit.UNIT_KG:
-                                saleStock.setItemUnit(Unit.UNIT_KG);
+                                saleStock.setPriamryUnit(Unit.UNIT_KG);
                                 break;
                             case Unit.UNIT_GM:
-                                saleStock.setItemUnit(Unit.UNIT_GM);
+                                saleStock.setPriamryUnit(Unit.UNIT_GM);
                                 break;
                             case Unit.UNIT_MG:
-                                saleStock.setItemUnit(Unit.UNIT_MG);
+                                saleStock.setPriamryUnit(Unit.UNIT_MG);
                                 break;
                             default:
                                 // Handle error case.
@@ -118,13 +115,13 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                         String selectedUnit = (String) parent.getAdapter().getItem(position);
                         switch (selectedUnit){
                             case Unit.UNIT_MTR:
-                                saleStock.setItemUnit(Unit.UNIT_MTR);
+                                saleStock.setPriamryUnit(Unit.UNIT_MTR);
                                 break;
                             case Unit.UNIT_CM:
-                                saleStock.setItemUnit(Unit.UNIT_CM);
+                                saleStock.setPriamryUnit(Unit.UNIT_CM);
                                 break;
                             case Unit.UNIT_MM:
-                                saleStock.setItemUnit(Unit.UNIT_MM);
+                                saleStock.setPriamryUnit(Unit.UNIT_MM);
                                 break;
                             default:
                                 // Handle error case.
@@ -151,10 +148,10 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                         String selectedUnit = (String) parent.getAdapter().getItem(position);
                         switch (selectedUnit){
                             case Unit.UNIT_LTR:
-                                saleStock.setItemUnit(Unit.UNIT_LTR);
+                                saleStock.setPriamryUnit(Unit.UNIT_LTR);
                                 break;
                             case Unit.UNIT_ML:
-                                saleStock.setItemUnit(Unit.UNIT_ML);
+                                saleStock.setPriamryUnit(Unit.UNIT_ML);
                                 break;
                             default:
                                 // Handle error case.
@@ -179,10 +176,10 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                         String selectedUnit = (String) parent.getAdapter().getItem(position);
                         switch (selectedUnit){
                             case Unit.UNIT_BOX:
-                                saleStock.setItemUnit(Unit.UNIT_BOX);
+                                saleStock.setPriamryUnit(Unit.UNIT_BOX);
                                 break;
                             case Unit.UNIT_PC:
-                                saleStock.setItemUnit(Unit.UNIT_PC);
+                                saleStock.setPriamryUnit(Unit.UNIT_PC);
                                 break;
                             default:
                                 // Handle error case.
@@ -205,7 +202,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                         spinner.setSelection(position);
                         String selectedUnit = (String) parent.getAdapter().getItem(position);
                         if (selectedUnit == Unit.UNIT_PC) {
-                            saleStock.setItemUnit(Unit.UNIT_PC);
+                            saleStock.setPriamryUnit(Unit.UNIT_PC);
                         }
                         // Handle error case.
                     }
@@ -262,10 +259,10 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
     }
     private void updateAvailableStock(Stock availableStock, Stock saleStock){
 
-        double availableQuantity = availableStock.getItemQuentity();
-        double saleQuantity = saleStock.getItemQuentity();
+        double availableQuantity = availableStock.getPrimaryQuant();
+        double saleQuantity = saleStock.getPrimaryQuant();
 
-        switch (saleStock.getItemUnit()) {
+        switch (saleStock.getPriamryUnit()) {
             case Unit.UNIT_KG:
                 availableQuantity = availableQuantity - saleQuantity;
                 break;
@@ -291,7 +288,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                 availableQuantity = availableQuantity * 1000 - saleQuantity;
                 break;
             case Unit.UNIT_BOX:
-                double pcPerBox = Double.parseDouble(availableStock.getPc());
+                double pcPerBox = Double.parseDouble(availableStock.getSecondUnit());
                 availableQuantity = availableQuantity - saleQuantity* pcPerBox;
                 break;
             case Unit.UNIT_PC:
@@ -301,7 +298,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                 // handle error case.
 
         }
-        availableStock.setItemQuentity(availableQuantity);
+        availableStock.setPrimaryQuant(availableQuantity);
     }
 
 

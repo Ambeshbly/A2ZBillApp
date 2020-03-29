@@ -29,11 +29,11 @@ public class CounterAdapter extends RecyclerView.Adapter<CounterAdapter.ItemHold
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         Stock currentItem = items.get(position);
-        holder.textViewForItemName.setText(currentItem.getItemName());
-        holder.textViewForSalePrice.setText("" + currentItem.getItemSalePerUnit());
-        holder.textViewForQnty.setText("" + currentItem.getItemQuentity());
+        holder.textViewForItemName.setText(currentItem.getName());
+        holder.textViewForSalePrice.setText("" + currentItem.getSalePerUnit());
+        holder.textViewForQnty.setText("" + currentItem.getPrimaryQuant());
 
-        String values = Double.toString(Integer.parseInt(currentItem.getItemSalePerUnit()) * currentItem.getItemQuentity());
+        String values = Double.toString(Integer.parseInt(currentItem.getSalePerUnit()) * currentItem.getPrimaryQuant());
         holder.textViewForValues.setText(values);
 
     }
