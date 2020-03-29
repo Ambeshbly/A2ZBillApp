@@ -138,8 +138,12 @@
                     android:orientation="vertical">
 
                     <ImageView android:layout_width="62dp"
-                        android:layout_height="43dp"
+                        android:layout_height="35dp"
                         android:src="@drawable/images5" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Su. List"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -160,8 +164,11 @@
                     android:orientation="vertical">
 
                     <ImageView android:layout_width="62dp"
-                        android:layout_height="43dp"
-                        android:src="@drawable/leftbt" />
+                        android:layout_height="35dp"
+                        android:src="@drawable/leftbt" /> <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Suspend"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -185,8 +192,13 @@
                 <LinearLayout android:layout_width="65dp" android:layout_height="match_parent"
                     android:gravity="center" android:orientation="vertical">
 
-                    <ImageView android:layout_width="62dp" android:layout_height="43dp"
+                    <ImageView android:layout_width="62dp" android:layout_height="35dp"
                         android:src="@drawable/rightbt" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Process"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -199,8 +211,13 @@
                 <LinearLayout android:layout_width="65dp" android:layout_height="match_parent"
                     android:gravity="center" android:orientation="vertical">
 
-                    <ImageView android:layout_width="62dp" android:layout_height="43dp"
+                    <ImageView android:layout_width="62dp" android:layout_height="35dp"
                         android:src="@drawable/conforml" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bill List"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -307,17 +324,22 @@
 
     </androidx.cardview.widget.CardView>
 
-    <Button
+
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/other_button"
-        android:layout_width="58dp"
-        android:layout_height="30dp"
-        android:text="@string/save"
+        android:layout_width="40dp"
+        android:src="@drawable/addfloat"
+        android:layout_height="40dp"
+        app:fabCustomSize="40dp"
         android:layout_below="@+id/Other_cardvew"
         android:layout_alignParentEnd="true"
-        android:textColor="#ffff"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="5dp"
-        android:background="@color/blue"/>
+        android:backgroundTint="@color/blue" />
+
 
 
 

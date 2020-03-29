@@ -49,7 +49,7 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dailog_fragment_for_add_to_cart, null);
 
-        DailogFragmentForAddToCartBinding addToCartBinding = DataBindingUtil.bind(view);
+        final DailogFragmentForAddToCartBinding addToCartBinding = DataBindingUtil.bind(view);
         final Stock saleStock = new Stock(availableStock);
 
         // re-initialize the quantity for sale stock object.
@@ -225,6 +225,10 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
         cardViewAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (addToCartBinding.DialogEditextQunity.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(getContext(),"Please enter the Quentity",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 updateStockObjAndSend(availableStock, saleStock);
                 dismissAllowingStateLoss();
             }
@@ -233,6 +237,10 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
         cardViewSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (addToCartBinding.DialogEditextQunity.getText().toString().trim().isEmpty()) {
+                        Toast.makeText(getContext(),"Please enter the Quentity",Toast.LENGTH_SHORT).show();
+                        return ;
+                }
                 updateStockObjAndSend(availableStock, saleStock);
                 getActivity().finish();
 
@@ -295,6 +303,8 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
         }
         availableStock.setItemQuentity(availableQuantity);
     }
+
+
 
 
 }

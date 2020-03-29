@@ -1,5 +1,6 @@
 package com.example.a2zbilling.counter;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.ShopDetail;
 import com.example.a2zbilling.db.entities.Stock;
+import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
+import com.example.a2zbilling.stock.addUpdate.Unit;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.DateFormat;
@@ -48,7 +51,7 @@ public class CounterFragment extends Fragment {
     CounterAdapter adepter;
     MediaPlayer mediaPlayer;
     EditText editTextOtherName,editTextValue;
-    Button otherButton;
+    FloatingActionButton otherButton;
     double total;
     static  int itemNo=0;
     private TextView textViewTotal,textViewShopName,textViewShopPhoneNo,textViewShopEmail;
@@ -237,6 +240,9 @@ public class CounterFragment extends Fragment {
         otherButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!validationOtherItem()) {
+                    return;
+                }
                 Stock stock=new Stock();
                 itemNo++;
                 stock.setItemName(itemNo+" item");
@@ -261,4 +267,14 @@ public class CounterFragment extends Fragment {
 
 
     }
+
+    private boolean validationOtherItem() {
+        if (editTextValue.getText().toString().trim().isEmpty()) {
+            Toast.makeText(getContext(),"Please enter the value",Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }
