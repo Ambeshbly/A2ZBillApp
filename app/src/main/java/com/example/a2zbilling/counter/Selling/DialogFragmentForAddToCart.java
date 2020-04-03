@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,6 +35,9 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
     private Stock availableStock;
     private CardView cardViewAddToCart, cardViewSave;
     private Spinner spinner;
+    EditText etSellPrice;
+    TextView tvAvailableQuant;
+    TextView tvAvailableQuantUnit;
 
     public DialogFragmentForAddToCart(Stock availableStock) {
         this.availableStock = availableStock;
@@ -47,6 +52,15 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.dailog_fragment_for_add_to_cart, null);
 
         final DailogFragmentForAddToCartBinding addToCartBinding = DataBindingUtil.bind(view);
+
+        etSellPrice = view.findViewById(R.id.Dialog_editText_sale_price);
+        tvAvailableQuant = view.findViewById(R.id.Dialod_available_stock);
+        tvAvailableQuantUnit = view.findViewById(R.id.Dialod_available_stock_unit);
+
+        // TODO: Optimise the code
+        etSellPrice.setText(availableStock.getSalePerUnit());
+        tvAvailableQuant.setText(Double.toString(availableStock.getPrimaryQuant()));
+        tvAvailableQuantUnit.setText(availableStock.getPriamryUnit());
         final Stock saleStock = new Stock(availableStock);
 
         // re-initialize the quantity for sale stock object.
@@ -177,12 +191,20 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
                         switch (selectedUnit){
                             case Unit.UNIT_BOX:
                                 saleStock.setPriamryUnit(Unit.UNIT_BOX);
+                                etSellPrice.setText(availableStock.getSalePerUnit());
+                                tvAvailableQuant.setText(Double.toString(availableStock.getPrimaryQuant()));
+                                tvAvailableQuantUnit.setText(availableStock.getPriamryUnit());
                                 break;
                             case Unit.UNIT_PC:
                             case Unit.UNIT_KG:
                             case Unit.UNIT_MTR:
                             case Unit.UNIT_LTR:
                                 saleStock.setPriamryUnit(selectedUnit);
+                                tvAvailableQuant.setText(Double.toString(availableStock.getSecondQuant()));
+                                tvAvailableQuantUnit.setText(availableStock.getSecondUnit());
+
+                                etSellPrice.setText(Double.toString(Double.parseDouble(saleStock.getSalePerUnit()) / availableStock.getPcPerBox()));
+
                                 break;
                             default:
                                 // Handle error case.
@@ -251,8 +273,6 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
         return builder.create();
     }
     private void updateStockObjAndSend(Stock availableStock, Stock saleStock){
-        Toast.makeText(getContext(), "malo", Toast.LENGTH_SHORT).show();
-
         updateAvailableStock(availableStock, saleStock);
 
         Intent intent = new Intent();
@@ -269,46 +289,62 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
             case Unit.UNIT_KG:
                 availableQuantity = availableQuantity - saleQuantity;
                 availableStock.updatePrimaryQuant(availableQuantity);
+                saleStock.setSaleTotal(Double.toString(saleQuantity * Double.parseDouble(saleStock.getSalePerUnit())));
                 break;
             case Unit.UNIT_GM:
                 availableQuantity = availableQuantity * 1000 - saleQuantity;
                 availableStock.updatePrimaryQuant(availableQuantity);
+                saleStock.setSaleTotal(Double.toString(saleQuantity * Double.parseDouble(saleStock.getSalePerUnit())));
                 break;
             case Unit.UNIT_MG:
                 availableQuantity = availableQuantity * 1000* 1000 - saleQuantity;
                 availableStock.updatePrimaryQuant(availableQuantity);
+                saleStock.setSaleTotal(Double.toString(saleQuantity * Double.parseDouble(saleStock.getSalePerUnit())));
                 break;
             case Unit.UNIT_MTR:
                 availableQuantity = availableQuantity - saleQuantity;
                 availableStock.updatePrimaryQuant(availableQuantity);
+                saleStock.setSaleTotal(Double.toString(saleQuantity * Double.parseDouble(saleStock.getSalePerUnit())));
                 break;
             case Unit.UNIT_CM:
                 availableQuantity = availableQuantity * 100 - saleQuantity;
                 availableStock.updatePrimaryQuant(availableQuantity);
+                saleStock.setSaleTotal(Double.toString(saleQuantity * Double.parseDouble(saleStock.getSalePerUnit())));
                 break;
             case Unit.UNIT_MM:
                 availableQuantity = availableQuantity * 1000 - saleQuantity;
                 availableStock.updatePrimaryQuant(availableQuantity);
+                saleStock.setSaleTotal(Double.toString(saleQuantity * Double.parseDouble(saleStock.getSalePerUnit())));
                 break;
             case Unit.UNIT_LTR:
                 availableQuantity = availableQuantity - saleQuantity;
                 availableStock.updatePrimaryQuant(availableQuantity);
+                saleStock.setSaleTotal(Double.toString(saleQuantity * Double.parseDouble(saleStock.getSalePerUnit())));
                 break;
             case Unit.UNIT_ML:
                 availableQuantity = availableQuantity * 1000 - saleQuantity;
                 availableStock.updatePrimaryQuant(availableQuantity);
+                saleStock.setSaleTotal(Double.toString(saleQuantity * Double.parseDouble(saleStock.getSalePerUnit())));
                 break;
             case Unit.UNIT_BOX:
                 availableQuantity = availableQuantity - saleQuantity;
                 availableStock.updatePrimaryQuant(availableQuantity);
+                saleStock.setSaleTotal(Double.toString(saleQuantity * Double.parseDouble(saleStock.getSalePerUnit())));
                 break;
             case Unit.UNIT_PC:
                 if(availableStock.getPriamryUnit().contentEquals(Unit.UNIT_BOX)){
                     int pcPerBox = availableStock.getPcPerBox();
                     availableStock.updateSecondQuant(availableStock.getSecondQuant() - saleStock.getPrimaryQuant());
+
+
+                    saleStock.updatePurchasePerUnit(Double.toString(Double.parseDouble(saleStock.getPurchasePerUnit()) / pcPerBox));
+                    saleStock.updateSalePerUnit(Double.toString(Double.parseDouble(saleStock.getSalePerUnit()) / pcPerBox));
+                    saleStock.setSaleTotal(Double.toString(saleStock.getPrimaryQuant() * Double.parseDouble(saleStock.getSalePerUnit())));
+
                 }else{
                     availableQuantity = availableQuantity - saleQuantity;
                     availableStock.updatePrimaryQuant(availableQuantity);
+                    saleStock.setSaleTotal(Double.toString(saleQuantity * Double.parseDouble(saleStock.getSalePerUnit())));
                 }
 
 

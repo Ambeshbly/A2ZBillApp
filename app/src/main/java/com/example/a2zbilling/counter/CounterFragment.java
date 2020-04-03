@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +27,7 @@ import com.example.a2zbilling.R;
 import com.example.a2zbilling.counter.BillList.BillHistoryActivity;
 import com.example.a2zbilling.counter.Selling.SellingStocksActivity;
 import com.example.a2zbilling.counter.SuspendedBills.SuspendedTransactionListActivity;
+import com.example.a2zbilling.databinding.FragmentCounterBinding;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.ShopDetail;
@@ -52,9 +54,8 @@ public class CounterFragment extends Fragment {
     MediaPlayer mediaPlayer;
     EditText editTextOtherName,editTextValue;
     FloatingActionButton otherButton;
-    double total;
     static  int itemNo=0;
-    private TextView textViewTotal,textViewShopName,textViewShopPhoneNo,textViewShopEmail;
+    private TextView textViewShopName,textViewShopPhoneNo,textViewShopEmail;
     private MainActivityViewModel mainActivityViewModel;
     private List<Customer> customerList;
     public CounterFragment(MainActivityViewModel mainActivityViewModel) {
@@ -68,15 +69,17 @@ public class CounterFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_counter, container, false);
 
+        FragmentCounterBinding counterBinding = DataBindingUtil.bind(view);
+        counterBinding.setSale(mainActivityViewModel.getSale());
+
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.simple);
-        textViewTotal = view.findViewById(R.id.textView_counter_total);
+        //textViewTotal = view.findViewById(R.id.textView_counter_total);
         textViewShopName=view.findViewById(R.id.TextView_for_shopName);
         textViewShopPhoneNo=view.findViewById(R.id.Text_VIew_for_phone_no);
         textViewShopEmail=view.findViewById(R.id.email);
         editTextOtherName=view.findViewById(R.id.other_stock);
         editTextValue=view.findViewById(R.id.other_value);
         otherButton=view.findViewById(R.id.other_button);
-        total = 0;
         RecyclerView recyclerViewForStockName = view.findViewById(R.id.recyclerView_for_counter_fragment);
         recyclerViewForStockName.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewForStockName.setHasFixedSize(true);
@@ -98,17 +101,18 @@ public class CounterFragment extends Fragment {
                 adepter.setItems(stocks);
                 counterAdapterForPriceQntyValue.setItems(stocks);
 
-                ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
+                /*ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
 
                 for (int i = 0; i < stockList.size(); i++) {
                     Stock stock2 = stockList.get(i);
                     double value = 0;
-                    value = stock2.getPrimaryQuant() * Integer.parseInt(stock2.getSalePerUnit());
+                    value = stock2.getPrimaryQuant() * Double.parseDouble(stock2.getSalePerUnit());
                     total = total + value;
                 }
 
                 String totalString = Double.toString(total);
-                textViewTotal.setText(totalString);
+                textViewTotal.setText(totalString);*/
+                //textViewTotal.setText(mainActivityViewModel.getSale().getTotalBillAmt());
             }
         });
 
@@ -141,11 +145,10 @@ public class CounterFragment extends Fragment {
             mainActivityViewModel.addNewlyAddedStock(stock);
             ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
 
+            Sales sale = mainActivityViewModel.getSale();
+
             for (int i = 0; i < stockList.size(); i++) {
-                Stock stock2 = stockList.get(i);
-                double value = 0;
-                value = stock2.getPrimaryQuant() * Integer.parseInt(stock2.getSalePerUnit());
-                total = total + value;
+
                 CounterFragment fragment = (CounterFragment)
                         getFragmentManager().findFragmentById(R.id.fragment_conterner);
                          getFragmentManager().beginTransaction()
@@ -154,12 +157,9 @@ public class CounterFragment extends Fragment {
                         .commit();
             }
 
-            String totalString = Double.toString(total);
-            textViewTotal.setText(totalString);
-            Sales sale = mainActivityViewModel.getSale();
-            sale.setTotalBillAmt(totalString);
+            sale.setTotalBillAmt(Double.toString(Double.parseDouble(sale.getTotalBillAmt()) + Double.parseDouble(stock.getSaleTotal())));
+
             Calendar calendar=Calendar.getInstance();
-           // String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
             Long date= DateConverter.fromDate(calendar.getTime());
             sale.setDate(date);
 
@@ -180,8 +180,6 @@ public class CounterFragment extends Fragment {
             public void onClick(View v) {
                 mediaPlayer.start();
                 Sales sale = mainActivityViewModel.getSale();
-                String totalString = Double.toString(total);
-                sale.setTotalBillAmt(totalString);
                 Calendar calendar=Calendar.getInstance();
                 // String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
                 Long date= DateConverter.fromDate(calendar.getTime());
@@ -193,6 +191,7 @@ public class CounterFragment extends Fragment {
                     //double total = Double.parseDouble(mainActivityViewModel.getSale().getTotalBillAmt());
                     PaymentDialogFragment dialogFragment = new PaymentDialogFragment(mainActivityViewModel, adepter,counterAdapterForPriceQntyValue, customerList);
                     dialogFragment.show(getActivity().getSupportFragmentManager(), "exampledialog");
+                    //textViewTotal.setText("0.00");
                 }
             }
         });
@@ -257,6 +256,13 @@ public class CounterFragment extends Fragment {
                 stock.setName(itemNo+" item");
                 stock.setPrimaryQuant(1);
                 stock.setSalePerUnit(editTextValue.getText().toString().trim());
+
+                // Update the totale bill amount for this sale.
+                Sales sale = mainActivityViewModel.getSale();
+                double totalBillAmt = Double.parseDouble(sale.getTotalBillAmt()) + Double.parseDouble(stock.getSalePerUnit());
+                sale.setTotalBillAmt(Double.toString(totalBillAmt));
+
+                // add the other stock in stock list.
                 mainActivityViewModel.addNewlyAddedStock(stock);
                 editTextValue.setText("");
                 CounterFragment fragment = (CounterFragment)

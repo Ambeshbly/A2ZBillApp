@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Stock;
 import com.github.mikephil.charting.charts.BarChart;
@@ -77,7 +76,6 @@ public class ProfitAndLossActivity extends AppCompatActivity  {
                for (int i = 0; i < saleDeatialList.size(); i++) {
                     SaleDeatial saleDeatial = saleDeatialList.get(i);
                     if(saleDeatial.getSaleDetailitemId()==selectedStock.getId()){
-                        Toast.makeText(getBaseContext(),"stock"+selectedStock.getName(),Toast.LENGTH_SHORT).show();
                         quntityOut=quntityOut+saleDeatial.getQuntity();
                     }
                 }

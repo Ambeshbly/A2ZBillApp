@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -207,11 +206,11 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                 }
 
 
-                Sales sales = mainActivityViewModel.getSale();
+
                 if (customer.getCustId() != 0) {
-                    sales.setSalescustId(customer.getCustId());
+                    sale.setSalescustId(customer.getCustId());
                 }
-                mainActivityViewModel.insertsales(sales);
+                mainActivityViewModel.insertsales(sale);
                 // TODO: Use scheduler to schedule insert of SaleDetail only after insert of Sale.
                 try {
                     Thread.sleep(100);
@@ -222,7 +221,7 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                     Stock stock = stockList.get(i);
 
                     SaleDeatial saleDeatial = new SaleDeatial();
-                    saleDeatial.setSaledetailsaleid(sales.getSaleId());
+                    saleDeatial.setSaledetailsaleid(sale.getSaleId());
                     saleDeatial.setSaleDetailitemId(stock.getId());
                     saleDeatial.setQuntity(stock.getPrimaryQuant());
                     saleDeatial.setPurchasePrice(stock.getPurchasePerUnit());
@@ -231,7 +230,9 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                     saleDeatial.setUnit(stock.getPriamryUnit());
                     mainActivityViewModel.insertSaleDetail(saleDeatial);
                 }
-                sales.setSaleId(0);
+                sale.setSaleId(0);
+                sale.setTotalBillAmt("0");
+                sale.setSalescustId(0);
                 stockList.clear();
                 adepter.setItems(stockList);
                 counterAdapterForPriceQntyValue.setItems(stockList);

@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.a2zbilling.db.entities.ShopDetail;
 
@@ -55,7 +54,6 @@ public class ShopSettingActivity extends AppCompatActivity {
                     shopDetail.setAddress(address.getText().toString().trim());
                     shopDetail.setShopId(1);
                     shopSettingActivityViewModel.updateShopdetail(shopDetail);
-                    Toast.makeText(getBaseContext(),"shop Detail Update Sussesfully",Toast.LENGTH_SHORT).show();
                     finish();
 
                 }else {
@@ -66,7 +64,6 @@ public class ShopSettingActivity extends AppCompatActivity {
                     shopDetail.setEmail(email.getText().toString().trim());
                     shopDetail.setAddress(address.getText().toString().trim());
                     shopSettingActivityViewModel.insertShopetail(shopDetail);
-                    Toast.makeText(getBaseContext(),"shop Detail Add Sussesfully",Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }

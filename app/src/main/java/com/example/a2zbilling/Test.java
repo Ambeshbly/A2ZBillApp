@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
@@ -148,7 +147,6 @@ public class Test extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         f = new Date(year-1900, month, dayOfMonth);
-                        Toast.makeText(getBaseContext(),"date inserted",Toast.LENGTH_SHORT).show();
                         from.setText(year+"/"+(month+1)+"/"+dayOfMonth);
                     }},year,month,dayOfMonth);
                 datePickerDialog.show();
@@ -166,7 +164,6 @@ public class Test extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         t = new Date(year-1900, month, dayOfMonth);
-                        Toast.makeText(getBaseContext(),"date inserted",Toast.LENGTH_SHORT).show();
                         to.setText(year+"/"+(month+1)+"/"+dayOfMonth);
                     }},year,month,dayOfMonth);
                 datePickerDialog.show();

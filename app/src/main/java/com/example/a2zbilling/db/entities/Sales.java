@@ -1,14 +1,18 @@
 package com.example.a2zbilling.db.entities;
 
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.a2zbilling.BR;
+
 @Entity
-public class Sales {
+public class Sales extends BaseObservable {
 
     @PrimaryKey(autoGenerate = true)
     private int saleId;
-    private String totalBillAmt;
+    private String totalBillAmt="0";
     private int salescustId;
     private String salePode;
     private Long date;
@@ -40,12 +44,14 @@ public class Sales {
         this.saleId = saleId;
     }
 
+    @Bindable
     public String getTotalBillAmt() {
         return totalBillAmt;
     }
 
     public void setTotalBillAmt(String totalBillAmt) {
         this.totalBillAmt = totalBillAmt;
+        notifyPropertyChanged(BR.totalBillAmt);
     }
 
     public int getSalescustId() {

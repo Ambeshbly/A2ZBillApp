@@ -88,7 +88,7 @@
                     android:inputType="numberDecimal"
                     android:text="@={saleStock.primaryQuant}"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/Dialog_item_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                     android:textColor="@color/liteblack"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:text="@{availableStock.name}"/>
+                    android:text="@={availableStock.name}"/>
 
                 <TextView
                     android:id="@+id/Dialod_available_stock"
@@ -111,7 +111,6 @@
                     android:textColor="@color/liteblack"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:text="@{availableStock.primaryQuant}"
                     />
                 <TextView
                     android:id="@+id/Dialod_available_stock_unit"
@@ -123,7 +122,6 @@
                     android:textColor="@color/liteblack"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:text="@{availableStock.priamryUnit}"
                     />
 
                 <EditText
@@ -134,7 +132,7 @@
                     android:layout_below="@+id/Dialod_available_stock"
                     android:inputType="numberDecimal"
                     android:backgroundTint="@color/liteblack"
-                    android:text="@={saleStock.salePerUnit}"/>
+                    />
                 <TextView
                     android:id="@+id/Dialog_select_unit_text"
                     android:layout_width="wrap_content"
