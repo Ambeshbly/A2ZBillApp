@@ -40,7 +40,6 @@
             android:text="&#8942;"
             android:textStyle="bold"
             android:textColor="@color/blue"
-            android:layout_above="@+id/toolbar_debt"
             android:padding="10dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"

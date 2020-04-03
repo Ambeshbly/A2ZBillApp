@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,7 +73,15 @@ public class BillHistoryActivityAdapter extends RecyclerView.Adapter<BillHistory
                                 btPrinter.printTicket(billHistoryActivityViewModel.getSaleDeatialList(currentsales.getSaleId()), currentsales);
                                 Toast.makeText(context,"printer Connected Sucessfully",Toast.LENGTH_SHORT).show();
                                 break;
-
+                            case R.id.saleDetail:
+                                billHistoryActivityViewModel.setSales(currentsales);
+                                List<SaleDeatial> saleDeatials = billHistoryActivityViewModel.getSaleDeatialList(currentsales.getSaleId());
+                                FragmentManager fm=((FragmentActivity)context).getSupportFragmentManager();
+                                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                                ShowBillingHistoryFragments showBillingHistoryFragments=new ShowBillingHistoryFragments(billHistoryActivityViewModel);
+                                fragmentTransaction.replace(R.id.fragment_conterner1,showBillingHistoryFragments);
+                                fragmentTransaction.commit();
+                                break;
 
                         }
                         return false;

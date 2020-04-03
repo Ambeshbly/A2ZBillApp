@@ -278,7 +278,4 @@ public class YouFragment extends Fragment {
         String language=sharedPreferences.getString("my_lang","");
         setLocale(language);
     }
-
-
-
 }

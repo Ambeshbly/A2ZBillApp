@@ -11,7 +11,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name:"
-            android:layout_toRightOf="@+id/text_view_sale_detail_id"
             android:layout_marginStart="10dp"
             android:layout_centerVertical="true"
             android:textColor="@color/liteblack"
@@ -52,10 +51,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:layout_centerVertical="true"
             android:textColor="@color/liteblack" />
-
-
-
-
 
     </RelativeLayout>
 

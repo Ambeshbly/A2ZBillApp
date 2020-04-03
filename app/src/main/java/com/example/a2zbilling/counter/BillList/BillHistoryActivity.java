@@ -51,21 +51,7 @@ public class BillHistoryActivity extends AppCompatActivity {
       adepter.setOnItemRecyclerViewlistener(new BillHistoryActivityAdapter.OnItemRecyclerViewListener() {
           @Override
           public void onItemClick(Sales sales) {
-              billHistoryActivityViewModel.setSales(sales);
-              List<SaleDeatial> saleDeatials = billHistoryActivityViewModel.getSaleDeatialList(sales.getSaleId());
-              billHistoryActivityViewModel.setSaleDetailList(saleDeatials);
-
-              String id=Integer.toString(sales.getSaleId());
-              Toast.makeText(getBaseContext(), id, Toast.LENGTH_SHORT).show();
-
-              recyclerView.setVisibility(View.GONE);
-              FragmentManager fm=getSupportFragmentManager();
-              FragmentTransaction fragmentTransaction = fm.beginTransaction();
-              ShowBillingHistoryFragments showBillingHistoryFragments=new ShowBillingHistoryFragments(billHistoryActivityViewModel);
-              fragmentTransaction.replace(R.id.fragment_conterner1,showBillingHistoryFragments);
-              fragmentTransaction.commit();
-
-
+         //click listener code
           }
       });
 

@@ -6,5 +6,12 @@
         android:title="printer"
         android:icon="@drawable/print"
         app:showAsAction="never"/>
+
+
+    <item
+        android:id="@+id/saleDetail"
+        android:title="Sale Detail"
+        android:icon="@drawable/print"
+        app:showAsAction="never"/>
     
 </menu>

@@ -24,7 +24,6 @@
             android:id="@+id/edit_stock_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/paymeny_spinner"
             android:completionThreshold="1"
             android:hint="@string/stockName"
             android:backgroundTint="@color/colorPrimaryDark"
