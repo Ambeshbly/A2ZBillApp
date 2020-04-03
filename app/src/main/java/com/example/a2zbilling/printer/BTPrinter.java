@@ -73,7 +73,7 @@ public class BTPrinter {
                 String sp = " ";
 
                 // 5 char
-                String price = getFixedLenString(stock.getPurchasePrice(), 5);
+                String price = getFixedLenString(stock.getSalingPrice(), 5);
 
                 // 1 char
 
@@ -85,7 +85,9 @@ public class BTPrinter {
 
                 // 1 char
                 // 6 char
-                String amount = getFixedLenString(stock.getSalingPrice(), 6);
+                double amountDouble = Double.parseDouble(stock.getSalingPrice()) * stock.getQuntity();
+                String amount = getFixedLenString( Double.toString(amountDouble), 6);
+
                 builder.menuLine(name+sp,price+sp+qaunt+unit+sp+amount);
 
                 totalItems ++;
