@@ -28,7 +28,7 @@ public class ShowBillingHistoryFragments extends Fragment {
 
     RecyclerView recyclerView;
     RecyclerView recyclerViewPriceQntyValue;
-    ShowBillingHistoryFragmentAdapterForStock adepter;
+    //ShowBillingHistoryFragmentAdapterForStock adepter;
     ShowBillingHistoryFragmentAdapterForPriceQntyValue showBillingHistoryFragmentAdapterForPriceQntyValue;
     private BillHistoryActivityViewModel billHistoryActivityViewModel;
     TextView textViewTotal;
@@ -54,16 +54,16 @@ public class ShowBillingHistoryFragments extends Fragment {
 
         textViewTotal=view.findViewById(R.id.TextView_grandTotal);
 
-        recyclerView = view.findViewById(R.id.recyclerView_for_salesDetail);
+      /*  recyclerView = view.findViewById(R.id.recyclerView_for_salesDetail);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);*/
 
         recyclerViewPriceQntyValue = view.findViewById(R.id.recyclerView_for_Price_qunty_value1);
         recyclerViewPriceQntyValue.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewPriceQntyValue.setHasFixedSize(true);
 
-        adepter = new ShowBillingHistoryFragmentAdapterForStock();
-        recyclerView.setAdapter(adepter);
+       /* adepter = new ShowBillingHistoryFragmentAdapterForStock();
+        recyclerView.setAdapter(adepter);*/
 
         showBillingHistoryFragmentAdapterForPriceQntyValue=new ShowBillingHistoryFragmentAdapterForPriceQntyValue();
         recyclerViewPriceQntyValue.setAdapter(showBillingHistoryFragmentAdapterForPriceQntyValue);
@@ -74,7 +74,7 @@ public class ShowBillingHistoryFragments extends Fragment {
             showCustomerTransactionDetailActivityViewModel.getAllSaleDetail(salesId).observe(getViewLifecycleOwner(), new Observer<List<SaleDeatial>>() {
                 @Override
                 public void onChanged(List<SaleDeatial> saleDeatials) {
-                    adepter.setSaleDeatials(saleDeatials);
+                   // adepter.setSaleDeatials(saleDeatials);
                     showBillingHistoryFragmentAdapterForPriceQntyValue.setSaleDeatials(saleDeatials);
                     for (int i = 0; i < saleDeatials.size(); i++) {
                         SaleDeatial saleDeatial = saleDeatials.get(i);
@@ -90,7 +90,7 @@ public class ShowBillingHistoryFragments extends Fragment {
             billHistoryActivityViewModel.getAllSaleDetail(salesId).observe(getViewLifecycleOwner(), new Observer<List<SaleDeatial>>() {
                 @Override
                 public void onChanged(List<SaleDeatial> saleDeatials) {
-                    adepter.setSaleDeatials(saleDeatials);
+                  //  adepter.setSaleDeatials(saleDeatials);
                     showBillingHistoryFragmentAdapterForPriceQntyValue.setSaleDeatials(saleDeatials);
                     for (int i = 0; i < saleDeatials.size(); i++) {
                         SaleDeatial saleDeatial = saleDeatials.get(i);

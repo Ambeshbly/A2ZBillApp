@@ -3,9 +3,10 @@
     <color name="colorPrimary">#ecf0f1</color>
     <color name="colorPrimaryDark">#2f7dd7</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="limeGreen"> #00FF00</color>
+    <color name="limeGreen">#58C35D</color>
     <color name="blue">#357EC7</color>
     <color name="liteblack">#696969</color>
+    <color name="red">#F41C0C</color>
 
 
 

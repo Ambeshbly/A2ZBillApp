@@ -22,11 +22,10 @@ public class MainActivityViewModel extends AndroidViewModel {
 
 
     private Repository repository;
-
     private Sales sale;
+    private Stock stock;
     private LiveData<List<Sales>> allSales;
     private LiveData<List<ShopDetail>> allShopDetail;
-
     private String totalString;
 
 
@@ -111,5 +110,13 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public ArrayList<Stock> getSoldStocksList() {
         return soldStocksList;
+    }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 }

@@ -13,7 +13,5 @@ public class SuspendedTransactionListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wait_list);
         getSupportActionBar().setTitle("Suspended Transactional List");
-
-
     }
 }

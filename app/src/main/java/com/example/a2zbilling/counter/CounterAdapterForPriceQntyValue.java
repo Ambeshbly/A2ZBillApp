@@ -29,9 +29,9 @@ public class CounterAdapterForPriceQntyValue extends RecyclerView.Adapter<Counte
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         Stock currentItem = items.get(position);
+        holder.textViewForItemName.setText(currentItem.getName());
         holder.textViewForSalePrice.setText("" + currentItem.getSalePerUnit());
         holder.textViewForQnty.setText("" + currentItem.getPrimaryQuant());
-
         holder.textViewForValues.setText(""+currentItem.getSaleTotal());
 
     }
@@ -46,16 +46,23 @@ public class CounterAdapterForPriceQntyValue extends RecyclerView.Adapter<Counte
         notifyDataSetChanged();
     }
 
+    public Stock getStockAtPosition(int postion){
+        return items.get(postion);
+    }
+
 
     class ItemHolder extends RecyclerView.ViewHolder {
 
         private TextView  textViewForSalePrice, textViewForQnty, textViewForValues;
+        private TextView textViewForItemName;
 
         public ItemHolder(@NonNull View itemView) {
+
             super(itemView);
             textViewForSalePrice = itemView.findViewById(R.id.textView_for_counter_price);
             textViewForQnty = itemView.findViewById(R.id.textView_counter_qnty);
             textViewForValues = itemView.findViewById(R.id.TextView_values);
+            textViewForItemName = itemView.findViewById(R.id.textView_for_counter_itemName);
 
         }
     }

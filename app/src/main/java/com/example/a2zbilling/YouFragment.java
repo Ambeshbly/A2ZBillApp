@@ -268,7 +268,6 @@ public class YouFragment extends Fragment {
         configuration.locale=locale;
         getContext().getResources().updateConfiguration(configuration,getContext().getResources().getDisplayMetrics());
         SharedPreferences.Editor editor=getActivity().getSharedPreferences("setting",MODE_PRIVATE).edit();
-        //editor.putString("my_lang",lang);
         editor.putString("my_lang",lang);
         editor.apply();
     }

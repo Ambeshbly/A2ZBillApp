@@ -33,6 +33,7 @@ public class ShowBillingHistoryFragmentAdapterForPriceQntyValue extends Recycler
         int i = 1;
 
         holder.textView_for_saleDetail_price.setText(currentsalesDetail.getSalingPrice());
+        holder.textView_for_saleDetail_name.setText(currentsalesDetail.getSaleDetailItemName());
         holder.textView_for_saleDetail_qty.setText(Double.toString(currentsalesDetail.getQuntity()));
         String values = Double.toString(Double.parseDouble(currentsalesDetail.getSalingPrice()) * currentsalesDetail.getQuntity());
         holder.textView_for_saleDetail_value.setText(values);
@@ -58,6 +59,7 @@ public class ShowBillingHistoryFragmentAdapterForPriceQntyValue extends Recycler
         private TextView textView_for_saleDetail_price;
         private TextView textView_for_saleDetail_qty;
         private TextView textView_for_saleDetail_value;
+        private TextView textView_for_saleDetail_name;
 
 
         public ItemHolder(@NonNull View itemView) {
@@ -67,6 +69,8 @@ public class ShowBillingHistoryFragmentAdapterForPriceQntyValue extends Recycler
             textView_for_saleDetail_price = itemView.findViewById(R.id.textView_for_counter_price);
             textView_for_saleDetail_qty = itemView.findViewById(R.id.textView_counter_qnty);
             textView_for_saleDetail_value = itemView.findViewById(R.id.TextView_values);
+            textView_for_saleDetail_name = itemView.findViewById(R.id.textView_for_counter_itemName);
+
 
 
         }

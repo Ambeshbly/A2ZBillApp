@@ -33,7 +33,7 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
     private Spinner spinner;
     private CardView cardViewproceed;
     private ArrayList<Stock> stockList;
-    private CounterAdapterForStock adepter;
+   // private CounterAdapterForStock adepter;
     private CounterAdapterForPriceQntyValue counterAdapterForPriceQntyValue;
     private EditText editTotalPayment, editPhone;
     private AutoCompleteTextView autoCompleteTextViewId, autoCompleteTextViewName, autoCompleteTextViewPhoneNo, autoCompleteTextViewAdd;
@@ -52,9 +52,9 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
 
     DialogFragmentForPaymentBinding customerBinding;
 
-    public PaymentDialogFragment(MainActivityViewModel mainActivityViewModel, CounterAdapterForStock adepter,CounterAdapterForPriceQntyValue counterAdapterForPriceQntyValue, List<Customer> customerList) {
+    public PaymentDialogFragment(MainActivityViewModel mainActivityViewModel,CounterAdapterForPriceQntyValue counterAdapterForPriceQntyValue, List<Customer> customerList) {
         this.mainActivityViewModel = mainActivityViewModel;
-        this.adepter = adepter;
+       // this.adepter = adepter;
         this.counterAdapterForPriceQntyValue=counterAdapterForPriceQntyValue;
         this.customerList = customerList;
 
@@ -234,7 +234,7 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                 sale.setTotalBillAmt("0");
                 sale.setSalescustId(0);
                 stockList.clear();
-                adepter.setItems(stockList);
+             //   adepter.setItems(stockList);
                 counterAdapterForPriceQntyValue.setItems(stockList);
                 regProgress.dismiss();
                 dismiss();

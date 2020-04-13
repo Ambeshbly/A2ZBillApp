@@ -2,6 +2,8 @@ package com.example.a2zbilling.counter;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,13 +17,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2zbilling.DateConverter;
+import com.example.a2zbilling.MainActivity;
 import com.example.a2zbilling.MainActivityViewModel;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.counter.BillList.BillHistoryActivity;
@@ -34,11 +39,14 @@ import com.example.a2zbilling.db.entities.ShopDetail;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
 import com.example.a2zbilling.stock.addUpdate.Unit;
+import com.example.a2zbilling.stock.addUpdate.UnitDialogFragement;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -49,7 +57,6 @@ public class CounterFragment extends Fragment {
     public static final String TAG_SALE_STOCK_OBJ = "Sale_Stock_Obj";
     public static final String TAG_AVAILABLE_STOCK_OBJ = "Available_Stock_Obj";
 
-    CounterAdapterForStock adepter;
     CounterAdapterForPriceQntyValue counterAdapterForPriceQntyValue;
     MediaPlayer mediaPlayer;
     EditText editTextOtherName,editTextValue;
@@ -67,7 +74,7 @@ public class CounterFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_counter, container, false);
+        final View view = inflater.inflate(R.layout.fragment_counter, container, false);
 
         FragmentCounterBinding counterBinding = DataBindingUtil.bind(view);
         counterBinding.setSale(mainActivityViewModel.getSale());
@@ -80,17 +87,10 @@ public class CounterFragment extends Fragment {
         editTextOtherName=view.findViewById(R.id.other_stock);
         editTextValue=view.findViewById(R.id.other_value);
         otherButton=view.findViewById(R.id.other_button);
-        RecyclerView recyclerViewForStockName = view.findViewById(R.id.recyclerView_for_counter_fragment);
-        recyclerViewForStockName.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerViewForStockName.setHasFixedSize(true);
 
         RecyclerView recyclerViewForPriceQntyValue = view.findViewById(R.id.recyclerView_for_Price_qunty_value);
         recyclerViewForPriceQntyValue.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewForPriceQntyValue.setHasFixedSize(true);
-
-
-        adepter = new CounterAdapterForStock();
-        recyclerViewForStockName.setAdapter(adepter);
 
         counterAdapterForPriceQntyValue=new CounterAdapterForPriceQntyValue();
         recyclerViewForPriceQntyValue.setAdapter(counterAdapterForPriceQntyValue);
@@ -98,23 +98,67 @@ public class CounterFragment extends Fragment {
         mainActivityViewModel.getNewlyAddedStocks().observe(getViewLifecycleOwner(), new Observer<ArrayList<Stock>>() {
             @Override
             public void onChanged(ArrayList<Stock> stocks) {
-                adepter.setItems(stocks);
+                //adepter.setItems(stocks);
                 counterAdapterForPriceQntyValue.setItems(stocks);
-
-                /*ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
-
-                for (int i = 0; i < stockList.size(); i++) {
-                    Stock stock2 = stockList.get(i);
-                    double value = 0;
-                    value = stock2.getPrimaryQuant() * Double.parseDouble(stock2.getSalePerUnit());
-                    total = total + value;
-                }
-
-                String totalString = Double.toString(total);
-                textViewTotal.setText(totalString);*/
-                //textViewTotal.setText(mainActivityViewModel.getSale().getTotalBillAmt());
             }
         });
+
+
+        //---------------------------delete the item from the counter by swiped---------------------------
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
+
+                if(direction==ItemTouchHelper.LEFT)//swiped to left
+                {
+                    Stock item=counterAdapterForPriceQntyValue.getStockAtPosition(viewHolder.getAdapterPosition());
+                    stockList.remove(item);
+                    counterAdapterForPriceQntyValue.setItems(stockList);
+                    Toast.makeText(getContext(),"remove",Toast.LENGTH_SHORT).show();
+                }
+                if(direction==ItemTouchHelper.RIGHT)//swiped to right
+                { Stock item=counterAdapterForPriceQntyValue.getStockAtPosition(viewHolder.getAdapterPosition());
+                    mainActivityViewModel.setStock(item);
+                    DialogFragmentForUpdateCounterStock dialogFragmentForUpdateCounterStock = new DialogFragmentForUpdateCounterStock(mainActivityViewModel,counterAdapterForPriceQntyValue,viewHolder.getAdapterPosition());
+                    dialogFragmentForUpdateCounterStock.show(getActivity().getSupportFragmentManager(), "UpdateStock");
+                    counterAdapterForPriceQntyValue.setItems(stockList);
+                }
+
+            }
+
+            @Override
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+
+                if(dX>0)//swiped to right
+                {
+                    new RecyclerViewSwipeDecorator.Builder(getContext(), c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                            .addBackgroundColor(ContextCompat.getColor(getContext(), R.color.limeGreen))
+                            .addActionIcon(R.drawable.ic_update)
+                            .addSwipeRightLabel("update")
+                            .create()
+                            .decorate();
+                }
+                if(dX<0)//swiped to left
+                {
+                    new RecyclerViewSwipeDecorator.Builder(getContext(), c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                            .addBackgroundColor(ContextCompat.getColor(getContext(), R.color.red))
+                            .addActionIcon(R.drawable.ic_delete)
+                            .addSwipeLeftLabel("remove")
+                            .create()
+                            .decorate();
+
+                }
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+        }).attachToRecyclerView(recyclerViewForPriceQntyValue);
+
+
 
         mainActivityViewModel.getAllCustomer().observe(getViewLifecycleOwner(), new Observer<List<Customer>>() {
             @Override
@@ -122,8 +166,6 @@ public class CounterFragment extends Fragment {
                 customerList = customers;
             }
         });
-
-
         return view;
 
     }
@@ -185,11 +227,13 @@ public class CounterFragment extends Fragment {
                 Long date= DateConverter.fromDate(calendar.getTime());
                 sale.setDate(date);
                 ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
+
+
                 if (stockList.isEmpty()) {
                     Toast.makeText(getContext(), "please add the item first", Toast.LENGTH_SHORT).show();
                 } else {
                     //double total = Double.parseDouble(mainActivityViewModel.getSale().getTotalBillAmt());
-                    PaymentDialogFragment dialogFragment = new PaymentDialogFragment(mainActivityViewModel, adepter,counterAdapterForPriceQntyValue, customerList);
+                    PaymentDialogFragment dialogFragment = new PaymentDialogFragment(mainActivityViewModel,counterAdapterForPriceQntyValue, customerList);
                     dialogFragment.show(getActivity().getSupportFragmentManager(), "exampledialog");
                     //textViewTotal.setText("0.00");
                 }
