@@ -198,6 +198,38 @@
                     android:text="@string/about_us"/>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/sign_out"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginTop="2dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/printer"
+                    android:layout_width="70dp"
+                    android:padding="5dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_settings_power"
+                    tools:ignore="DuplicateIds" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:padding="5dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_toRightOf="@+id/printer"
+                    android:layout_centerVertical="true"
+                    android:text="Log Out"/>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView

@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.a2zbilling.CloudRepository;
 import com.example.a2zbilling.db.Repository;
 import com.example.a2zbilling.db.entities.Purchase;
 import com.example.a2zbilling.db.entities.Stock;
@@ -26,8 +27,18 @@ public class StockActivityViewModel extends AndroidViewModel {
     private LiveData<List<Stock>> allPurchaseBaseOnPurchaseId;
 
 
+    //just for test
+    private CloudRepository cloudRepository;
+
+
     public StockActivityViewModel(@NonNull Application application) {
         super(application);
+
+
+        //just for test
+        cloudRepository=new CloudRepository(application);
+
+
         repository = new Repository(application);
         allItems = repository.getAllItems();
         allPurchase = repository.getAllPurchase();
@@ -82,5 +93,12 @@ public class StockActivityViewModel extends AndroidViewModel {
 
     public void setPurchase(Purchase purchase) {
         this.purchase = purchase;
+    }
+
+
+
+    //just for test
+    public void insertStock(Stock stock) {
+        cloudRepository.insertStock(stock);
     }
 }

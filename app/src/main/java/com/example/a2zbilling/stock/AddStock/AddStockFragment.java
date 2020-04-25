@@ -22,7 +22,13 @@ import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.StockActivity;
 import com.example.a2zbilling.stock.StockActivityViewModel;
 import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -121,7 +127,11 @@ public class AddStockFragment extends Fragment {
                 {
                     Stock stock=stockList.get(i);
                     stock.setPurchaseId(purchase.getPurchaseId());
-                    stockActivityViewModel.insert(stock);
+
+                    //stockActivityViewModel.insert(stock);
+
+                    //just for test
+                    stockActivityViewModel.insertStock(stock);
 
                 }
 

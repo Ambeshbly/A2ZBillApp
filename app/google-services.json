@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "826529131178",
+    "firebase_url": "https://a2zbilling-d6da2.firebaseio.com",
+    "project_id": "a2zbilling-d6da2",
+    "storage_bucket": "a2zbilling-d6da2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826529131178:android:bf6761ded2efb5d6e53ed3",
+        "android_client_info": {
+          "package_name": "com.example.a2zbilling"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826529131178-pbih82sgi9fr8t9v7fjeedunqlovighm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO8feEWmwY3phHoXCiGA_rIEMyH8LirTA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826529131178-pbih82sgi9fr8t9v7fjeedunqlovighm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

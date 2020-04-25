@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="sale"
             type="com.example.a2zbilling.db.entities.Sales" />
     </data>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
@@ -277,7 +277,7 @@
             android:padding="10dp"
             android:textSize="18sp"
             android:textStyle="bold"
-            />
+            android:layout_alignParentRight="true" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -315,7 +315,8 @@
                 android:layout_row="1"
                 android:background="@drawable/edittextstyle"
                 android:hint="@string/other"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp" />
 
 
             <TextView
@@ -369,11 +370,9 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="5dp"
-        android:backgroundTint="@color/blue" />
-
-
-
-
+        android:backgroundTint="@color/blue"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
 </layout>

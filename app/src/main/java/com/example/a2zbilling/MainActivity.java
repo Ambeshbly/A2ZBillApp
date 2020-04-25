@@ -2,6 +2,7 @@ package com.example.a2zbilling;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -13,8 +14,16 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.a2zbilling.counter.CounterFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
+
+
+
+    //create authotication of fireStore
+    private FirebaseAuth mAuth;
+
     MediaPlayer mediaPlayer;
     //bottom navigation declaration
     private BottomNavigationView bottomNavigationView;
@@ -50,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAuth = FirebaseAuth.getInstance();
+
         //bottom navigation finding in XML file
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         mediaPlayer = MediaPlayer.create(getBaseContext(), R.raw.simple);
@@ -69,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("A2ZBill").setMessage("Are you want to exit?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(this).setIcon(android.R.drawable.alert_dark_frame).setTitle("A2ZBill").setMessage("Are you want to exit?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
@@ -78,4 +89,17 @@ public class MainActivity extends AppCompatActivity {
         }).setNegativeButton("No", null).show();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser==null){
+            Intent intent=new Intent(MainActivity.this,StartActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+    }
 }

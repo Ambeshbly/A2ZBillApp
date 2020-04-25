@@ -28,6 +28,7 @@ import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.StockActivity;
 import com.example.a2zbilling.support.SupportActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -39,9 +40,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class YouFragment extends Fragment {
 
     private BottomSheetBehavior bottomSheetBehavior;
-    private CardView cardView,cardViewDueCust,cardViewAllstock,cardViewLessItem,cardViewTodatSale,cardProfit,cardAllExpenese,CardAllExpnesRs;
+    private CardView cardView,cardViewDueCust,cardViewAllstock,cardViewLessItem,cardViewTodatSale,cardProfit,cardAllExpenese,CardAllExpnesRs,logOut;
     private YouViewModel youViewModel;
     private int noOfCustomer,dueCustomer=0,allStock,lessItem=0;
+    private FirebaseAuth mAuth;
     private TextView allCustomer,dueCustom,textViewAllStock,textViewLessItem,textViewTodaySale,textViewProfit,textViewAllExpense,textViewAllExpneseRs;
 
     //override method onCreateView
@@ -50,6 +52,7 @@ public class YouFragment extends Fragment {
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_me, container, false);
         loadLoacal();
+        mAuth = FirebaseAuth.getInstance();
         View scrol=view.findViewById(R.id.scrollviewhai);
         bottomSheetBehavior=BottomSheetBehavior.from(scrol);
         cardView=view.findViewById(R.id.allCustomerCard);
@@ -60,6 +63,7 @@ public class YouFragment extends Fragment {
         cardViewTodatSale=view.findViewById(R.id.cardTodaysale);
         cardAllExpenese=view.findViewById(R.id.cardAllExpenses);
         CardAllExpnesRs=view.findViewById(R.id.cardAllExpensesRs);
+        logOut=view.findViewById(R.id.sign_out);
 
         allCustomer=view.findViewById(R.id.allCustomer);
         dueCustom=view.findViewById(R.id.dueCustomer);
@@ -130,6 +134,17 @@ public class YouFragment extends Fragment {
             public void onClick(View v) {
                Intent intent=new Intent(getContext(), StockActivity.class);
                startActivity(intent);
+
+            }
+        });
+
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent=new Intent(getContext(),StartActivity.class);
+                startActivity(intent);
+                getActivity().finish();
 
             }
         });
