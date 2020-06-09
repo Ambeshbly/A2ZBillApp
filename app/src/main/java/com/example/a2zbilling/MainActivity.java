@@ -19,15 +19,17 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
     //create authotication of fireStore
     private FirebaseAuth mAuth;
 
     MediaPlayer mediaPlayer;
+
     //bottom navigation declaration
     private BottomNavigationView bottomNavigationView;
+
     private MainActivityViewModel addToCartActivityViewModel;
+
+
     //bottom navigation action by switch
     private BottomNavigationView.OnNavigationItemSelectedListener nav_listener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -54,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,13 +75,13 @@ public class MainActivity extends AppCompatActivity {
 
         addToCartActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
-
-
         //which fragment is show whenever app is open
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner, new CounterFragment(addToCartActivityViewModel)).commit();
 
     }
 
+
+   //when user want to exit the app
     @Override
     public void onBackPressed() {
 
@@ -92,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser==null){

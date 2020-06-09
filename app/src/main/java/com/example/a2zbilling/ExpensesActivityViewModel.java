@@ -23,10 +23,16 @@ public class ExpensesActivityViewModel extends AndroidViewModel {
     private Repository repository;
     private LiveData<List<Expenses>> allExpenses;
 
+    //just for test
+    private CloudRepository cloudRepository;
+
     public ExpensesActivityViewModel(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
         allExpenses=repository.getAllExpenses();
+
+        //just for test
+        cloudRepository=new CloudRepository(application);
     }
     public LiveData<List<Expenses>> getAllExpenses() {
         return allExpenses;
@@ -34,6 +40,11 @@ public class ExpensesActivityViewModel extends AndroidViewModel {
     public void insertExpenses(Expenses expenses) {
         repository.insertExpenses(expenses);
     }
+
+    public  void cloudInsertExpenes(Expenses expenses){
+        cloudRepository.cloudInsertExpenses(expenses);
+    }
+
 
 
  }

@@ -27,8 +27,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -45,9 +49,29 @@ public class AddStockFragment extends Fragment {
     FloatingActionButton floatingActionButton;
     public static final int ADD_NEW_STOCK_REQ_CODE = 1;
 
+    CollectionReference puchaseRef;
+
+    //get database refrence of fireStore Database
+    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+
+    //get userCurrent id
+    FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
+    String userId=currentUser.getUid();
+
+    private int maxId=0;
+
     private StockActivityViewModel stockActivityViewModel;
     public AddStockFragment(StockActivityViewModel stockActivityViewModel) {
         this.stockActivityViewModel = stockActivityViewModel;
+
+        //just for test
+        puchaseRef= db.collection("users").document(userId).collection("purchase");
+        puchaseRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                maxId = queryDocumentSnapshots.getDocuments().size();
+            }
+        });
     }
 
     //override method onCreateView
@@ -117,7 +141,10 @@ public class AddStockFragment extends Fragment {
                 Calendar calendar=Calendar.getInstance();
                 String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
                 Purchase purchase=new Purchase(Integer.toString(totalItems),selecteddate,Double.toString(total));
-                stockActivityViewModel.insert(purchase);
+
+                purchase.setPurchaseId(maxId+1);
+                //just for test
+                stockActivityViewModel.insertPurchase(purchase);
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -126,7 +153,7 @@ public class AddStockFragment extends Fragment {
                 for(int i = 0; i <stockList.size(); i++)
                 {
                     Stock stock=stockList.get(i);
-                    stock.setPurchaseId(purchase.getPurchaseId());
+                    stock.setPurchaseId(maxId+1);
 
                     //stockActivityViewModel.insert(stock);
 
@@ -143,5 +170,11 @@ public class AddStockFragment extends Fragment {
                 break;
         }
         return false;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
     }
 }

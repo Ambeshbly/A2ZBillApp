@@ -71,8 +71,6 @@ public class ShowBillingHistoryFragmentAdapterForPriceQntyValue extends Recycler
             textView_for_saleDetail_value = itemView.findViewById(R.id.TextView_values);
             textView_for_saleDetail_name = itemView.findViewById(R.id.textView_for_counter_itemName);
 
-
-
         }
     }
 }

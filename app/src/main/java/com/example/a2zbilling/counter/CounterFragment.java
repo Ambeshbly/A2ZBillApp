@@ -34,13 +34,23 @@ import com.example.a2zbilling.counter.Selling.SellingStocksActivity;
 import com.example.a2zbilling.counter.SuspendedBills.SuspendedTransactionListActivity;
 import com.example.a2zbilling.databinding.FragmentCounterBinding;
 import com.example.a2zbilling.db.entities.Customer;
+import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.ShopDetail;
 import com.example.a2zbilling.db.entities.Stock;
+import com.example.a2zbilling.db.entities.Suspend;
+import com.example.a2zbilling.db.entities.SuspendDetail;
 import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
 import com.example.a2zbilling.stock.addUpdate.Unit;
 import com.example.a2zbilling.stock.addUpdate.UnitDialogFragement;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,9 +63,17 @@ import static android.app.Activity.RESULT_OK;
 public class CounterFragment extends Fragment {
 
     public static final int ADD_NEW_STOCK_REQ_CODE = 1;
-
     public static final String TAG_SALE_STOCK_OBJ = "Sale_Stock_Obj";
     public static final String TAG_AVAILABLE_STOCK_OBJ = "Available_Stock_Obj";
+    private ArrayList<Stock> stockList;
+    private int maxId=0,maxSuspendDetailId=0;
+
+    CollectionReference saleRef,suspendDetailRef;
+    //get database refrence of fireStore Database
+    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+    //get userCurrent id
+    FirebaseUser  currentUser =FirebaseAuth.getInstance().getCurrentUser();
+    String  userId = currentUser.getUid();
 
     CounterAdapterForPriceQntyValue counterAdapterForPriceQntyValue;
     MediaPlayer mediaPlayer;
@@ -65,9 +83,33 @@ public class CounterFragment extends Fragment {
     private TextView textViewShopName,textViewShopPhoneNo,textViewShopEmail;
     private MainActivityViewModel mainActivityViewModel;
     private List<Customer> customerList;
+
+
+    //custrouctor
     public CounterFragment(MainActivityViewModel mainActivityViewModel) {
         this.mainActivityViewModel = mainActivityViewModel;
         mainActivityViewModel.setSale(new Sales());
+
+
+          //count the number of suspend list
+            saleRef = db.collection("users").document(userId).collection("suspend");
+            saleRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                    maxId = queryDocumentSnapshots.getDocuments().size();
+                }
+            });
+
+            //count the number of suspent detail list
+            suspendDetailRef = db.collection("users").document(userId).collection("suspend detail");
+            saleRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                    maxSuspendDetailId = queryDocumentSnapshots.getDocuments().size();
+                }
+            });
+
+
     }
 
     //onCreateView Override method
@@ -75,11 +117,11 @@ public class CounterFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_counter, container, false);
-
         FragmentCounterBinding counterBinding = DataBindingUtil.bind(view);
         counterBinding.setSale(mainActivityViewModel.getSale());
 
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.simple);
+
         //textViewTotal = view.findViewById(R.id.textView_counter_total);
         textViewShopName=view.findViewById(R.id.TextView_for_shopName);
         textViewShopPhoneNo=view.findViewById(R.id.Text_VIew_for_phone_no);
@@ -98,7 +140,6 @@ public class CounterFragment extends Fragment {
         mainActivityViewModel.getNewlyAddedStocks().observe(getViewLifecycleOwner(), new Observer<ArrayList<Stock>>() {
             @Override
             public void onChanged(ArrayList<Stock> stocks) {
-                //adepter.setItems(stocks);
                 counterAdapterForPriceQntyValue.setItems(stocks);
             }
         });
@@ -170,6 +211,8 @@ public class CounterFragment extends Fragment {
 
     }
 
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -209,13 +252,20 @@ public class CounterFragment extends Fragment {
 
     }
 
-    //onStart override method which is used to add action listener in flotating button or both CardView
     @Override
     public void onStart() {
-        //finding Cardview waitList in Xml file
         CardView cardView_waitList = getView().findViewById(R.id.waitlistcardview);
-        //finding Cardview conformList in Xml file
         CardView cardView_conformList = getView().findViewById(R.id.conformListcardview);
+        CardView cardView_suspend = getView().findViewById(R.id.cardview_defaultList);
+        cardView_suspend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: suspend work here
+
+
+            }
+        });
+
         CardView cardView_Proceed = getView().findViewById(R.id.cardview_proceed);
         cardView_Proceed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,11 +273,9 @@ public class CounterFragment extends Fragment {
                 mediaPlayer.start();
                 Sales sale = mainActivityViewModel.getSale();
                 Calendar calendar=Calendar.getInstance();
-                // String selecteddate= DateFormat.getDateInstance().format(calendar.getTime());
                 Long date= DateConverter.fromDate(calendar.getTime());
                 sale.setDate(date);
                 ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
-
 
                 if (stockList.isEmpty()) {
                     Toast.makeText(getContext(), "please add the item first", Toast.LENGTH_SHORT).show();
@@ -240,24 +288,19 @@ public class CounterFragment extends Fragment {
             }
         });
 
-
-        //finding Floating button  in Xml file
-
         super.onStart();
 
         FloatingActionButton floatingActionButton = getView().findViewById(R.id.bt_float);
-        //Floating Button add action listener
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mediaPlayer.start();
                 Intent intent = new Intent(getContext(), SellingStocksActivity.class);
                 startActivityForResult(intent, ADD_NEW_STOCK_REQ_CODE);
-                // startActivity(intent);
             }
         });
 
-        //Cardview waitList add action Listener
+
         cardView_waitList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -267,7 +310,7 @@ public class CounterFragment extends Fragment {
             }
         });
 
-        //cardView conformList Add action listener
+
         cardView_conformList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -301,12 +344,10 @@ public class CounterFragment extends Fragment {
                 stock.setPrimaryQuant(1);
                 stock.setSalePerUnit(editTextValue.getText().toString().trim());
 
-                // Update the totale bill amount for this sale.
                 Sales sale = mainActivityViewModel.getSale();
                 double totalBillAmt = Double.parseDouble(sale.getTotalBillAmt()) + Double.parseDouble(stock.getSalePerUnit());
                 sale.setTotalBillAmt(Double.toString(totalBillAmt));
 
-                // add the other stock in stock list.
                 mainActivityViewModel.addNewlyAddedStock(stock);
                 editTextValue.setText("");
                 CounterFragment fragment = (CounterFragment)
@@ -318,10 +359,6 @@ public class CounterFragment extends Fragment {
 
             }
         });
-
-
-
-
     }
 
     private boolean validationOtherItem() {

@@ -25,6 +25,13 @@ import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +47,9 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
     private MainActivityViewModel mainActivityViewModel;
     private List<Customer> customerList;
     private int marker;
+    private int maxId=0,max=0,maxCustomer=0;
     private ProgressDialog regProgress;
     ArrayList<String> paymentModeList;
-
     public static final String PAY_MODE_CASH = "Cash";
     public static final String PAY_MODE_CHEQUE = "Cheque";
     public static final String PAY_MODE_PAYTM = "Paytm";
@@ -51,6 +58,19 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
     public static final String PAY_MODE_OTHER = "Other";
 
     DialogFragmentForPaymentBinding customerBinding;
+
+
+
+    //just for test
+    CollectionReference saleRef,saleDetailRef,customerRef;
+    //get database refrence of fireStore Database
+    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+    //get userCurrent id
+    FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
+    String userId=currentUser.getUid();
+
+
+
 
     public PaymentDialogFragment(MainActivityViewModel mainActivityViewModel,CounterAdapterForPriceQntyValue counterAdapterForPriceQntyValue, List<Customer> customerList) {
         this.mainActivityViewModel = mainActivityViewModel;
@@ -66,6 +86,33 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
         paymentModeList.add(PAY_MODE_GOOGLEPAY);
         paymentModeList.add(PAY_MODE_DEBT);
         paymentModeList.add(PAY_MODE_OTHER);
+
+
+        //just for test
+        saleRef= db.collection("users").document(userId).collection("sales");
+        saleRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                maxId = queryDocumentSnapshots.getDocuments().size();
+            }
+        });
+
+        saleDetailRef= db.collection("users").document(userId).collection("sale Detail");
+        saleDetailRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                max = queryDocumentSnapshots.getDocuments().size();
+            }
+        });
+
+        customerRef= db.collection("users").document(userId).collection("customers");
+        customerRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                maxCustomer = queryDocumentSnapshots.getDocuments().size();
+            }
+        });
+
 
 
     }
@@ -179,7 +226,11 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                             && (customer.getCustomerPhoneNo() != null && customer.getCustomerPhoneNo().isEmpty() == false)) {
                         // Update the debt of customer.
                         updateDebt(customer, sale);
-                        mainActivityViewModel.insertCustomer(customer);
+                       // mainActivityViewModel.insertCustomer(customer);
+
+                        //just for test
+                        customer.setCustId(maxCustomer+1);
+                        mainActivityViewModel.cloudInsertCustomer(customer);
 
                         // TODO: Use scheduler to schedule insert of Sale only after insert of Customer.
                         try {
@@ -202,15 +253,23 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                 // update the stocks.
                 ArrayList<Stock> soldStockList = mainActivityViewModel.getSoldStocksList();
                 for( Stock stock : soldStockList){
-                    mainActivityViewModel.update(stock);
+                  //  mainActivityViewModel.update(stock);
+                    mainActivityViewModel.updatetStock(stock,Integer.toString(stock.getId()));
                 }
 
 
 
                 if (customer.getCustId() != 0) {
-                    sale.setSalescustId(customer.getCustId());
+                    sale.setSalescustId(maxCustomer+1);
                 }
-                mainActivityViewModel.insertsales(sale);
+
+
+                //mainActivityViewModel.insertsales(sale);
+
+                //just for test
+                sale.setSaleId(maxId+1);
+                mainActivityViewModel.cloudInsertSales(sale);
+
                 // TODO: Use scheduler to schedule insert of SaleDetail only after insert of Sale.
                 try {
                     Thread.sleep(100);
@@ -221,14 +280,18 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                     Stock stock = stockList.get(i);
 
                     SaleDeatial saleDeatial = new SaleDeatial();
-                    saleDeatial.setSaledetailsaleid(sale.getSaleId());
+                    saleDeatial.setSaleDetailId(max+1);
+                    saleDeatial.setSaledetailsaleid(maxId+1);
                     saleDeatial.setSaleDetailitemId(stock.getId());
                     saleDeatial.setQuntity(stock.getPrimaryQuant());
                     saleDeatial.setPurchasePrice(stock.getPurchasePerUnit());
                     saleDeatial.setSalingPrice(stock.getSalePerUnit());
                     saleDeatial.setSaleDetailItemName(stock.getName());
                     saleDeatial.setUnit(stock.getPriamryUnit());
-                    mainActivityViewModel.insertSaleDetail(saleDeatial);
+                  //  mainActivityViewModel.insertSaleDetail(saleDeatial);
+
+                    //just for test
+                    mainActivityViewModel.cloudInsertSalDetail(saleDeatial);
                 }
                 sale.setSaleId(0);
                 sale.setTotalBillAmt("0");

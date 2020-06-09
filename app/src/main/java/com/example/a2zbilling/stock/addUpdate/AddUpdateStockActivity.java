@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -28,8 +30,30 @@ import com.example.a2zbilling.databinding.ActivityAddItemFloatingButtonBinding;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.DefaultItemList.DefaultItemListActivity;
 import com.example.a2zbilling.stock.StockActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+
+import id.zelory.compressor.Compressor;
 
 public class AddUpdateStockActivity extends AppCompatActivity {
 
@@ -39,6 +63,22 @@ public class AddUpdateStockActivity extends AppCompatActivity {
     private static final int IMAGE_CAPTURE_CODE = 1001;
     //image path uri
     Uri image_uri;
+
+    //get database refrence of fireStore Database
+    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+
+    private byte[] thumb_byte;
+
+    private static final int Gellery_Pik=2;
+
+    private FirebaseUser mCurrentUser;
+
+    private StorageReference mPofile;
+
+    private int maxId=0;
+
+    CollectionReference stockRef;
+
     AddUpdateStockActivityViewModel addUpdateStockActivityViewModel;
     //EditText declaration
     private TextInputLayout textinputitemname, textinputitemquantiity, textinputitempurchaseperunit, textinputitempurchasetotal, textinputitemsaleunit, textinputitemsaletotal;
@@ -61,10 +101,25 @@ public class AddUpdateStockActivity extends AppCompatActivity {
     private String ItenPurchasetotal;
     private String ItemsalePrice;
     private String ItemSaleTotal;
+    private String document;
     private Stock selectedStock;
 
     //    FragmentTransaction t;
 
+
+    public AddUpdateStockActivity() {
+
+        FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
+        String   userId = currentUser.getUid();
+
+        stockRef = db.collection("users").document(userId).collection("stocks");
+        stockRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                maxId = queryDocumentSnapshots.getDocuments().size();
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +152,13 @@ public class AddUpdateStockActivity extends AppCompatActivity {
         //finding the imageView for add item image in the Xml file
         imageViewForItem = findViewById(R.id.imageview_for_item);
 
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String userId = mCurrentUser.getUid();
+
+        mPofile= FirebaseStorage.getInstance().getReference();
+
+     //   DocumentReference stockRef= db.collection("users").document(userId).collection("stocks").document(docement);
+
         //finding the textview for item id in the xml file
         textViewforid = findViewById(R.id.textview_for_id);
 
@@ -127,6 +189,7 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         selectedStock = (Stock) intent.getSerializableExtra("stock_object");
+        document=intent.getStringExtra("documentName");
 
         if (selectedStock != null) {
             activityAddItemFloatingButtonBinding.setStock(selectedStock);
@@ -190,6 +253,98 @@ public class AddUpdateStockActivity extends AppCompatActivity {
             activityAddItemFloatingButtonBinding.getStock().setBarCode(barCode);
 
         }
+
+        //call when image is sellected from the gellery
+        if(requestCode==Gellery_Pik &&resultCode==RESULT_OK){
+            Uri imageURI=data.getData();
+            // start cropping activity for pre-acquired image saved on the device
+            CropImage.activity(imageURI)
+                    .setAspectRatio(1,1)
+                    .start(AddUpdateStockActivity.this);
+        }
+
+
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                final Uri resultUri = result.getUri();
+                final File thumb_file_path=new File(resultUri.getPath());
+                String current_user_id=mCurrentUser.getUid();
+                try {
+                    Bitmap thumb_bitmap=new Compressor(this)
+                            .setMaxWidth(200)
+                            .setMaxHeight(200)
+                            .setQuality(75)
+                            .compressToBitmap(thumb_file_path);
+                    ByteArrayOutputStream bos=new ByteArrayOutputStream();
+                    thumb_bitmap.compress(Bitmap.CompressFormat.JPEG,100,bos);
+                    thumb_byte=bos.toByteArray();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                StorageReference filePath=mPofile.child("Profile").child( current_user_id+".jpg");
+                final StorageReference thumb_path=mPofile.child("Profile").child("thumbs").child( current_user_id+".jpg");
+
+                filePath.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Task<Uri> result=taskSnapshot.getStorage().getDownloadUrl();
+                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                final String downloadUri=uri.toString();
+                                final UploadTask uploadTask=thumb_path.putBytes(thumb_byte);
+
+                                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        Task<Uri> result=taskSnapshot.getStorage().getDownloadUrl();
+                                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                String thumb_downloadUrl=uri.toString();
+                                              /*  DocumentReference stockDoc = stockRef.document(Integer.toString(maxId+1));
+                                                stockDoc.update("image",downloadUri).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Toast.makeText(getBaseContext(),"sucessful uploaded",Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+
+                                                stockDoc.update("thumb_image",thumb_downloadUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Toast.makeText(getBaseContext(),"sucessful uploaded",Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });*/
+
+                                                activityAddItemFloatingButtonBinding.getStock().setImage(downloadUri);
+                                                activityAddItemFloatingButtonBinding.getStock().setThumb_image(thumb_downloadUrl);
+                                                imageViewForItem.setImageURI(resultUri);
+                                                Toast.makeText(getBaseContext(),"sucessful uploaded",Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                                    }
+                                });
+
+                            }
+                        });
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                       Toast.makeText(getBaseContext(),""+e,Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+        }
+
     }
 
 
@@ -262,12 +417,15 @@ public class AddUpdateStockActivity extends AppCompatActivity {
 
             if (selectedStock != null) {
                 // request is to update the stock.
-                addUpdateStockActivityViewModel.update(stock);
+
+                //addUpdateStockActivityViewModel.update(stock);
+                addUpdateStockActivityViewModel.updatetStock(stock,Integer.toString(stock.getId()));
                 finish();
 
             } else {
                 // request is to add new stock.
                 Intent intent = new Intent().putExtra("stock", stock);
+
                 setResult(RESULT_OK, intent);
                 finish();
 
@@ -297,7 +455,7 @@ public class AddUpdateStockActivity extends AppCompatActivity {
         }
 
         public void setImage(View view) {
-            //if system os is >=marshmallow,request runtime permission
+           /* //if system os is >=marshmallow,request runtime permission
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                     //permission not enable request it
@@ -311,7 +469,15 @@ public class AddUpdateStockActivity extends AppCompatActivity {
             } else {
                 //system os<marsmellow>
                 openCamra();
-            }
+            }*/
+
+
+           //after the default button click it go to the gellery to chosse the image of item
+            Intent gellery_ntent=new Intent();
+            gellery_ntent.setType("image/*");
+            gellery_ntent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(gellery_ntent,"SELECT IMAGE"),Gellery_Pik);
+
         }
 
 

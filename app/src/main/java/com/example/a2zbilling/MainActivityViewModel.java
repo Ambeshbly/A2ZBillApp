@@ -8,26 +8,28 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import com.example.a2zbilling.counter.SuspendedBills.SuspendedTransactionListActivity;
 import com.example.a2zbilling.db.Repository;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.ShopDetail;
 import com.example.a2zbilling.db.entities.Stock;
+import com.example.a2zbilling.db.entities.Suspend;
+import com.example.a2zbilling.db.entities.SuspendDetail;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivityViewModel extends AndroidViewModel {
 
-
     private Repository repository;
+    private CloudRepository cloudRepository;
     private Sales sale;
     private Stock stock;
     private LiveData<List<Sales>> allSales;
     private LiveData<List<ShopDetail>> allShopDetail;
     private String totalString;
-
 
     private LiveData<List<Customer>> allcustomer;
 
@@ -38,10 +40,12 @@ public class MainActivityViewModel extends AndroidViewModel {
         super(application);
         repository = new Repository(application);
 
+        //just for test
+        cloudRepository=new CloudRepository(application);
+
         allSales = repository.getAllSales();
         allcustomer = repository.getAllCustomerLiveData();
         allShopDetail=repository.getAllShopDetail();
-
 
         ArrayList<Stock> newlyAddedStockList = new ArrayList<Stock>();
         this.newlyAddedStocks.setValue(newlyAddedStockList);
@@ -66,14 +70,12 @@ public class MainActivityViewModel extends AndroidViewModel {
         repository.updateCustomer(customer);
     }
 
-
     public LiveData<List<Sales>> getAllSales() {
         return allSales;
     }
     public LiveData<List<Customer>> getAllCustomer() {
         return allcustomer;
     }
-
 
     public void insertSaleDetail(SaleDeatial saleDeatial) {
         repository.insertSaleDeatail(saleDeatial);
@@ -118,5 +120,34 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public void setStock(Stock stock) {
         this.stock = stock;
+    }
+
+    //just for test
+    public void cloudInsertCustomer(Customer customer){
+        cloudRepository.cloudInsertCustomer(customer);
+    }
+    //just for test
+    public void cloudInsertSales(Sales sales){
+        cloudRepository.cloudInsertSale(sales);
+    }
+
+    //just for test
+    public void cloudInsertSalDetail(SaleDeatial saleDeatial){
+        cloudRepository.cloudInsertSaleDetail(saleDeatial);
+
+    }
+    public void updatetStock(Stock stock,String document) {
+        cloudRepository.updateStock(stock,document);
+    }
+
+    public void addCloudSuspend(Suspend suspend){
+        cloudRepository.addSuspendStock(suspend);
+    }
+
+    public CloudRepository getCloudRepository() {
+        return cloudRepository;
+    }
+    public void addSuspendDetail(Stock stock){
+        cloudRepository.addSuspendDetail(stock);
     }
 }

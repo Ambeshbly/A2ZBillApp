@@ -31,7 +31,7 @@ public class PurchaseHistoryFragmentAdapter extends RecyclerView.Adapter<Purchas
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         Stock currentStock = stocks.get(position);
         int i = 1;
-        holder.textView_for_saleDetail_id.setText("" + currentStock.getId());
+
         holder.textView_for_saleDetail_name.setText(currentStock.getName());
         holder.textView_for_saleDetail_price.setText(currentStock.getPurchasePerUnit());
         holder.textView_for_saleDetail_qty.setText(currentStock.getSalePerUnit());
@@ -64,7 +64,7 @@ public class PurchaseHistoryFragmentAdapter extends RecyclerView.Adapter<Purchas
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
 
-            textView_for_saleDetail_id = itemView.findViewById(R.id.text_view_sale_detail_id);
+
             textView_for_saleDetail_name = itemView.findViewById(R.id.text_view_sale_detail_name);
             textView_for_saleDetail_price = itemView.findViewById(R.id.text_view_sale_detail_price);
             textView_for_saleDetail_qty = itemView.findViewById(R.id.text_view_sale_detail_qty);

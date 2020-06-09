@@ -23,6 +23,12 @@ import com.example.a2zbilling.databinding.FragmentForAvailablestocksBinding;
 import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.StockActivityViewModel;
 import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 
 import java.util.List;
@@ -37,36 +43,62 @@ public class AvailableStockFragment extends Fragment {
     public AvailableStockFragment(StockActivityViewModel stockActivityViewModel) {
         this.stockActivityViewModel = stockActivityViewModel;
     }
-
     public AvailableStockFragment() {
     }
+
+
+
+    //just for test
+    private CloudAvailableStockAdapter cloudAvailableStockAdapter;
+    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+    //get userCurrent id
+    FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
+    String userId=currentUser.getUid();
+    private CollectionReference usersRef=db.collection("users").document(userId).collection("stocks");
+
 
     //override method onCreateView
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         fragmentForAvailablestocksBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_for_availablestocks, container, false);
-        fragmentForAvailablestocksBinding.recyclerView1.setLayoutManager(new LinearLayoutManager(getContext()));
+     /*   fragmentForAvailablestocksBinding.recyclerView1.setLayoutManager(new LinearLayoutManager(getContext()));
         fragmentForAvailablestocksBinding.recyclerView1.setHasFixedSize(true);
         adepter = new AvailableStockAdapter(getContext());
         fragmentForAvailablestocksBinding.recyclerView1.setAdapter(adepter);
-        setHasOptionsMenu(true);
-        stockActivityViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<Stock>>() {
+        setHasOptionsMenu(true);*/
 
-            @Override
-            public void onChanged(List<Stock> items) {
-                adepter.setItems(items);
-            }
-        });
-        adepter.setOnItemRecyclerViewlistener(new AvailableStockAdapter.OnItemRecyclerViewListener() {
+        //just for test
+        setHasOptionsMenu(true);
+        Query query=usersRef.orderBy("name",Query.Direction.DESCENDING);
+        FirestoreRecyclerOptions<Stock> options=new FirestoreRecyclerOptions.Builder<Stock>().setQuery(query,Stock.class).build();
+        fragmentForAvailablestocksBinding.recyclerView1.setLayoutManager(new LinearLayoutManager(getContext()));
+        fragmentForAvailablestocksBinding.recyclerView1.setHasFixedSize(true);
+        cloudAvailableStockAdapter=new CloudAvailableStockAdapter(options,getContext());
+        fragmentForAvailablestocksBinding.recyclerView1.setAdapter(cloudAvailableStockAdapter);
+
+
+
+
+
+
+
+
+//        stockActivityViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<Stock>>() {
+//
+//            @Override
+//            public void onChanged(List<Stock> items) {
+//                adepter.setItems(items);
+//            }
+//        });
+       /* adepter.setOnItemRecyclerViewlistener(new AvailableStockAdapter.OnItemRecyclerViewListener() {
             @Override
             public void onItemClick(Stock stock) {
 //                Intent intent = new Intent(getContext(), AddUpdateStockActivity.class);
 //                intent.putExtra("stock_object", stock);
 //                startActivity(intent);
             }
-        });
+        });*/
         return fragmentForAvailablestocksBinding.getRoot();
     }
 
@@ -75,7 +107,8 @@ public class AvailableStockFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1 && resultCode==RESULT_OK){
             String barCode=data.getExtras().getString("satva");
-            adepter.getFilter().filter(barCode);
+           // adepter.getFilter().filter(barCode);
+            cloudAvailableStockAdapter.getFilter().filter(barCode);
         }
     }
 
@@ -100,7 +133,7 @@ public class AvailableStockFragment extends Fragment {
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
-                        adepter.getFilter().filter(newText);
+                        cloudAvailableStockAdapter.getFilter().filter(newText);
                         return false;
                     }
                 });
@@ -113,5 +146,17 @@ public class AvailableStockFragment extends Fragment {
         }
         return true;
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        cloudAvailableStockAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        cloudAvailableStockAdapter.stopListening();
     }
 }

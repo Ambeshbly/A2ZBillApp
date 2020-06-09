@@ -17,6 +17,13 @@ import androidx.databinding.DataBindingUtil;
 import com.example.a2zbilling.databinding.ExpensesBottonSheetDialogBinding;
 import com.example.a2zbilling.db.entities.Expenses;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -28,9 +35,26 @@ public class ExpensesBottomSheetDialog extends BottomSheetDialogFragment {
     private ExpensesActivityViewModel expensesActivityViewModel;
     private String paymentMode;
     private ExpensesBottonSheetDialogBinding expensesBottonSheetDialogBinding;
+    private int maxExpenses;
+
+    //just for test
+    CollectionReference expensesRef;
+    //get database refrence of fireStore Database
+    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+    //get userCurrent id
+    FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
+    String userId=currentUser.getUid();
 
     public ExpensesBottomSheetDialog(ExpensesActivityViewModel expensesActivityViewModel) {
         this.expensesActivityViewModel = expensesActivityViewModel;
+
+        expensesRef= db.collection("users").document(userId).collection("expeses");
+        expensesRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                maxExpenses = queryDocumentSnapshots.getDocuments().size();
+            }
+        });
     }
     public ExpensesBottomSheetDialog() {
     }
@@ -154,7 +178,9 @@ public class ExpensesBottomSheetDialog extends BottomSheetDialogFragment {
             expensesBottonSheetDialogBinding.getExpenses().setPaymentMode(paymentMode);
             expensesBottonSheetDialogBinding.getExpenses().setDate(selecteddate);
             Expenses expenses1=expensesBottonSheetDialogBinding.getExpenses();
-            expensesActivityViewModel.insertExpenses(expenses1);
+            expenses1.setExpenseId(maxExpenses+1);
+           // expensesActivityViewModel.insertExpenses(expenses1);
+            expensesActivityViewModel.cloudInsertExpenes(expenses1);
             dismiss();
         }
     }

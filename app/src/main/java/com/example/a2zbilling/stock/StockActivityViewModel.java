@@ -101,4 +101,7 @@ public class StockActivityViewModel extends AndroidViewModel {
     public void insertStock(Stock stock) {
         cloudRepository.insertStock(stock);
     }
+    public void insertPurchase(Purchase purchase) {
+        cloudRepository.insertPurchase(purchase);
+    }
 }

@@ -12,6 +12,14 @@ import androidx.databinding.DataBindingUtil;
 import com.example.a2zbilling.databinding.Expenses2BottonSheetDialogBinding;
 import com.example.a2zbilling.db.entities.ExpensesCategory;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,13 +29,30 @@ public class Expenses2BottomSheetDialog extends BottomSheetDialogFragment {
 
     private String paymentMode,expensescategory;
     private int expenseId;
+    private int maxExpesesCategory=0;
     private ExpensesActivity2ViewModel expensesActivity2ViewModel;
     private Expenses2BottonSheetDialogBinding expenses2BottonSheetDialogBinding;
+
+    //just for test
+    CollectionReference expensesCategoryRef;
+    //get database refrence of fireStore Database
+    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+    //get userCurrent id
+    FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
+    String userId=currentUser.getUid();
 
     public Expenses2BottomSheetDialog(String expensescategory ,int expenseId, ExpensesActivity2ViewModel expensesActivity2ViewModel) {
         this.expensescategory = expensescategory;
         this.expenseId=expenseId;
         this.expensesActivity2ViewModel=expensesActivity2ViewModel;
+
+        expensesCategoryRef= db.collection("users").document(userId).collection("expeses category");
+        expensesCategoryRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                maxExpesesCategory = queryDocumentSnapshots.getDocuments().size();
+            }
+        });
     }
 
     @Nullable
@@ -89,7 +114,9 @@ public class Expenses2BottomSheetDialog extends BottomSheetDialogFragment {
             expenses2BottonSheetDialogBinding.getExpensesCategory().setDate(selecteddate);
             expenses2BottonSheetDialogBinding.getExpensesCategory().setExpenseCategoryPaymentMode(paymentMode);
             expenses2BottonSheetDialogBinding.getExpensesCategory().setExpenseId(expenseId);
-            expensesActivity2ViewModel.insertExpensesCategory(expenses2BottonSheetDialogBinding.getExpensesCategory());
+          //  expensesActivity2ViewModel.insertExpensesCategory(expenses2BottonSheetDialogBinding.getExpensesCategory());
+            expenses2BottonSheetDialogBinding.getExpensesCategory().setExpenseCategoryid(maxExpesesCategory+1);
+            expensesActivity2ViewModel.cloudInsertExpenseCategory(expenses2BottonSheetDialogBinding.getExpensesCategory());
             dismiss();
         }
     }

@@ -22,7 +22,8 @@ public class Stock extends BaseObservable implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private int image;
+    private String image;
+    private String thumb_image;
     private int purchaseId;
     private String name ="";
     private double primaryQuant;
@@ -34,7 +35,6 @@ public class Stock extends BaseObservable implements Serializable {
     private String purchaseTotal ="";
     private String salePerUnit ="";
     private String saleTotal ="";
-
     private String barCode="0";
 
     @Ignore
@@ -42,10 +42,13 @@ public class Stock extends BaseObservable implements Serializable {
     @Ignore
     private static View lastView ;
 
+
+
     @Ignore
     public Stock(Stock oldStock){
         this.id = oldStock.id;
         this.image = oldStock.image;
+        this.thumb_image=oldStock.thumb_image;
         this.purchaseId = oldStock.purchaseId;
         this.name = oldStock.name;
         this.primaryQuant = oldStock.primaryQuant;
@@ -93,6 +96,14 @@ public class Stock extends BaseObservable implements Serializable {
         }
     }
 
+    public String getThumb_image() {
+        return thumb_image;
+    }
+
+    public void setThumb_image(String thumb_image) {
+        this.thumb_image = thumb_image;
+    }
+
     @InverseBindingAdapter(attribute = "android:text")
     public static double getText(TextView view) {
         String valueCharSeq = view.getText().toString();
@@ -111,11 +122,11 @@ public class Stock extends BaseObservable implements Serializable {
         this.id = id;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

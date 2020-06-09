@@ -19,10 +19,15 @@ public class ExpensesActivity2ViewModel extends AndroidViewModel {
     private Repository repository;
     private LiveData<List<ExpensesCategory>> allExpensesCategory;
     private ExpensesCategory expensesCategory;
+    //just for test
+    private CloudRepository cloudRepository;
 
     public ExpensesActivity2ViewModel(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
+
+        //just for test
+        cloudRepository=new CloudRepository(application);
     }
 
     public void insertExpensesCategory(ExpensesCategory expensesCategory) {
@@ -40,5 +45,9 @@ public class ExpensesActivity2ViewModel extends AndroidViewModel {
 
     public void setExpensesCategory(ExpensesCategory expensesCategory) {
         this.expensesCategory = expensesCategory;
+    }
+
+    public void cloudInsertExpenseCategory(ExpensesCategory expensesCategory){
+        cloudRepository.cloudExpesesCategory(expensesCategory);
     }
 }

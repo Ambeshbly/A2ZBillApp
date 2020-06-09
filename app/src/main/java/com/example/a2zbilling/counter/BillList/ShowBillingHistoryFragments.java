@@ -20,6 +20,19 @@ import com.example.a2zbilling.customer.ShowCustomerTransactionDetailActivityView
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.SaleDeatial;
 import com.example.a2zbilling.db.entities.Sales;
+import com.example.a2zbilling.db.entities.Stock;
+import com.example.a2zbilling.stock.AvailableStock.CloudAvailableStockAdapter;
+import com.example.a2zbilling.stock.RFU.CloudPurchaseHistoryFragmentAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
@@ -34,6 +47,18 @@ public class ShowBillingHistoryFragments extends Fragment {
     TextView textViewTotal;
     private int cheak;
     private double grandTotal;
+
+
+
+    //just for test
+    private CloudShowBillHistoryAdapter cloudShowBillHistoryAdapter;
+    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+    //get userCurrent id
+    FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
+    String userId=currentUser.getUid();
+    private CollectionReference usersRef=db.collection("users").document(userId).collection("sale Detail");
+
+
 
     private ShowCustomerTransactionDetailActivityViewModel showCustomerTransactionDetailActivityViewModel;
 
@@ -59,14 +84,20 @@ public class ShowBillingHistoryFragments extends Fragment {
         recyclerView.setHasFixedSize(true);*/
 
         recyclerViewPriceQntyValue = view.findViewById(R.id.recyclerView_for_Price_qunty_value1);
-        recyclerViewPriceQntyValue.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerViewPriceQntyValue.setHasFixedSize(true);
+       /* recyclerViewPriceQntyValue.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewPriceQntyValue.setHasFixedSize(true);*/
 
        /* adepter = new ShowBillingHistoryFragmentAdapterForStock();
         recyclerView.setAdapter(adepter);*/
 
-        showBillingHistoryFragmentAdapterForPriceQntyValue=new ShowBillingHistoryFragmentAdapterForPriceQntyValue();
-        recyclerViewPriceQntyValue.setAdapter(showBillingHistoryFragmentAdapterForPriceQntyValue);
+       /* showBillingHistoryFragmentAdapterForPriceQntyValue=new ShowBillingHistoryFragmentAdapterForPriceQntyValue();
+        recyclerViewPriceQntyValue.setAdapter(showBillingHistoryFragmentAdapterForPriceQntyValue);*/
+
+
+
+
+
+
         if (cheak==1){
 
             Sales sales=showCustomerTransactionDetailActivityViewModel.getSales();
@@ -85,7 +116,7 @@ public class ShowBillingHistoryFragments extends Fragment {
             });
         }else{
 
-            Sales sales=billHistoryActivityViewModel.getSales();
+          /*  Sales sales=billHistoryActivityViewModel.getSales();
             int salesId=sales.getSaleId();
             billHistoryActivityViewModel.getAllSaleDetail(salesId).observe(getViewLifecycleOwner(), new Observer<List<SaleDeatial>>() {
                 @Override
@@ -98,13 +129,56 @@ public class ShowBillingHistoryFragments extends Fragment {
                         textViewTotal.setText(" \u20B9 "+grandTotal);
                     }
                 }
-            });
+            }); */
+
+
+
+            //just for test
+            Sales sales=billHistoryActivityViewModel.getSales();
+            int salesId=sales.getSaleId();
+            Query query=usersRef.whereEqualTo("saledetailsaleid",salesId);
+            //Query query=usersRef.orderBy("quntity", Query.Direction.DESCENDING);
+            FirestoreRecyclerOptions<SaleDeatial> options=new FirestoreRecyclerOptions.Builder<SaleDeatial>().setQuery(query,SaleDeatial.class).build();
+            recyclerViewPriceQntyValue.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerViewPriceQntyValue.setHasFixedSize(true);
+            cloudShowBillHistoryAdapter=new CloudShowBillHistoryAdapter(options,getContext());
+            recyclerViewPriceQntyValue.setAdapter(cloudShowBillHistoryAdapter);
+
+
         }
 
         return view;
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
 
 
+     /*  usersRef.addSnapshotListener(getActivity(), new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+               if(queryDocumentSnapshots.isEmpty()){
+               }else {
+                   List<DocumentSnapshot>  documentSnapshots=queryDocumentSnapshots.getDocuments();
+                   for (int i = 0; i < queryDocumentSnapshots.getDocuments().size(); i++) {
+                       DocumentSnapshot documentSnapshot=documentSnapshots.get(i);
+                       SaleDeatial saleDeatial=documentSnapshot.toObject(SaleDeatial.class);
+                       grandTotal=grandTotal+(Double.parseDouble(saleDeatial.getSalingPrice())*saleDeatial.getQuntity());
+                       //textViewTotal.setText(" \u20B9 "+grandTotal);
+                   }
+               }
+            }
+        });*/
+
+        cloudShowBillHistoryAdapter.startListening();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        cloudShowBillHistoryAdapter.stopListening();
+    }
 }

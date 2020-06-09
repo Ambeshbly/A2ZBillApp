@@ -105,7 +105,7 @@ public class AddStockAdapter extends RecyclerView.Adapter<AddStockAdapter.ItemHo
         private TextView textViewForShowIdText;
         private TextView textViewForShowSaleText;
         private TextView textViewForQuentity;
-        private ImageView imageViewForItemImage;
+
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
@@ -115,7 +115,7 @@ public class AddStockAdapter extends RecyclerView.Adapter<AddStockAdapter.ItemHo
             textViewForShowIdText = itemView.findViewById(R.id.text_view_show_id_text);
             textViewForShowSaleText = itemView.findViewById(R.id.text_view_sale_price_text);
             textViewForQuentity = itemView.findViewById(R.id.text_view_quentity);
-            imageViewForItemImage = itemView.findViewById(R.id.imageview_for_item);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

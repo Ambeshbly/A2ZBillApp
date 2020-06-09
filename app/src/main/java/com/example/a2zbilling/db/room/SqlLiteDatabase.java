@@ -18,7 +18,7 @@ import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.ShopDetail;
 import com.example.a2zbilling.db.entities.Stock;
 
-@Database(entities = {Stock.class, Customer.class, SaleDeatial.class, Sales.class, Expenses.class, ExpensesCategory.class, Payment.class, Purchase.class, ShopDetail.class}, version =83, exportSchema = false)
+@Database(entities = {Stock.class, Customer.class, SaleDeatial.class, Sales.class, Expenses.class, ExpensesCategory.class, Payment.class, Purchase.class, ShopDetail.class}, version =85, exportSchema = false)
 @TypeConverters({DateConverter.class})
 public abstract class SqlLiteDatabase extends RoomDatabase {
 
@@ -26,7 +26,7 @@ public abstract class SqlLiteDatabase extends RoomDatabase {
 
     public static synchronized SqlLiteDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(), SqlLiteDatabase.class, "a2zBillDataBase83").allowMainThreadQueries().fallbackToDestructiveMigration().build();
+            instance = Room.databaseBuilder(context.getApplicationContext(), SqlLiteDatabase.class, "a2zBillDataBase85").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         }
         return instance;
     }

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "826529131178-3mkv6n8m8it9h565l5n71bf2annpmvhg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.a2zbilling",
+            "certificate_hash": "ebc00b55198cad33f2e296e824c89b3ef13d4b66"
+          }
+        },
+        {
           "client_id": "826529131178-pbih82sgi9fr8t9v7fjeedunqlovighm.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -49,6 +49,7 @@ public class AllCustomerAdapter extends RecyclerView.Adapter<AllCustomerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final DeptHolder holder, int position) {
+
         final Customer currentcustomer = customers.get(position);
         holder.textViewForCustomerName.setText(currentcustomer.getCustomerName());
         holder.textViewForCoustomerId.setText(""+currentcustomer.getCustId());

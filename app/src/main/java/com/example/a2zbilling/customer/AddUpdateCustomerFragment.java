@@ -12,6 +12,13 @@ import androidx.databinding.DataBindingUtil;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.databinding.DialogFragmentForAddCustomerBinding;
 import com.example.a2zbilling.db.entities.Customer;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 
 public class AddUpdateCustomerFragment extends AppCompatDialogFragment {
@@ -19,11 +26,29 @@ public class AddUpdateCustomerFragment extends AppCompatDialogFragment {
     private CustomerActivityViewModel customerActivityViewModel;
     private int custId;
     private  Customer customer;
+    private int maxCustomer=0;
     private DialogFragmentForAddCustomerBinding dialogFragmentForAddCustomerBinding;
+
+    //just for test
+    CollectionReference customerRef;
+    //get database refrence of fireStore Database
+    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+    //get userCurrent id
+    FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
+    String userId=currentUser.getUid();
 
     public AddUpdateCustomerFragment(CustomerActivityViewModel customerActivityViewModel,int custId) {
         this.customerActivityViewModel = customerActivityViewModel;
         this.custId=custId;
+
+        customerRef= db.collection("users").document(userId).collection("customers");
+        customerRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                maxCustomer = queryDocumentSnapshots.getDocuments().size();
+            }
+        });
+
     }
 
     @NonNull
@@ -49,11 +74,14 @@ public class AddUpdateCustomerFragment extends AppCompatDialogFragment {
     }
     public void addCustomer(){
         if(custId!=0){
-            customerActivityViewModel.updateCustomer(dialogFragmentForAddCustomerBinding.getCustomer());
+            customerActivityViewModel.cloudUpdateCustomer(dialogFragmentForAddCustomerBinding.getCustomer());
         }else {
 
             dialogFragmentForAddCustomerBinding.getCustomer().setDebt("0");
-            customerActivityViewModel.insertCustomer(dialogFragmentForAddCustomerBinding.getCustomer());
+            dialogFragmentForAddCustomerBinding.getCustomer().setCustId(maxCustomer+1);
+           // customerActivityViewModel.insertCustomer(dialogFragmentForAddCustomerBinding.getCustomer());
+            customerActivityViewModel.cloudInsertCustomer(dialogFragmentForAddCustomerBinding.getCustomer());
+
         }
         dismiss();
     }
