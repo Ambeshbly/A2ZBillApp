@@ -31,6 +31,7 @@ import com.example.a2zbilling.MainActivityViewModel;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.counter.BillList.BillHistoryActivity;
 import com.example.a2zbilling.counter.Selling.SellingStocksActivity;
+import com.example.a2zbilling.counter.SuspendedBills.DialogFragmentForSespendList;
 import com.example.a2zbilling.counter.SuspendedBills.SuspendedTransactionListActivity;
 import com.example.a2zbilling.databinding.FragmentCounterBinding;
 import com.example.a2zbilling.db.entities.Customer;
@@ -52,6 +53,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -60,7 +62,7 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 import static android.app.Activity.RESULT_OK;
 
-public class CounterFragment extends Fragment {
+public class CounterFragment extends Fragment  {
 
     public static final int ADD_NEW_STOCK_REQ_CODE = 1;
     public static final String TAG_SALE_STOCK_OBJ = "Sale_Stock_Obj";
@@ -121,6 +123,9 @@ public class CounterFragment extends Fragment {
         counterBinding.setSale(mainActivityViewModel.getSale());
 
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.simple);
+
+
+
 
         //textViewTotal = view.findViewById(R.id.textView_counter_total);
         textViewShopName=view.findViewById(R.id.TextView_for_shopName);
@@ -257,11 +262,28 @@ public class CounterFragment extends Fragment {
         CardView cardView_waitList = getView().findViewById(R.id.waitlistcardview);
         CardView cardView_conformList = getView().findViewById(R.id.conformListcardview);
         CardView cardView_suspend = getView().findViewById(R.id.cardview_defaultList);
+
+
+        //if sale totalBillAmount is 0 its means its come from the suspend list
+        String tot=mainActivityViewModel.getSale().getTotalBillAmt();
+        if(tot=="0"){
+            double totalBillAmount=0;
+            for (int i = 0; i <mainActivityViewModel.getNewlyAddedStocks().getValue().size() ; i++) {
+                Stock stock=mainActivityViewModel.getNewlyAddedStocks().getValue().get(i);
+                double t=Double.parseDouble(stock.getSaleTotal());
+                totalBillAmount=totalBillAmount+t;
+            }
+            mainActivityViewModel.getSale().setTotalBillAmt(Double.toString(totalBillAmount));
+        }
+
+
         cardView_suspend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO: suspend work here
-
+                mainActivityViewModel.getSoldStocksList().clear();
+                DialogFragmentForSespendList dialogFragmentForSespendList = new DialogFragmentForSespendList(   mainActivityViewModel.getNewlyAddedStocks().getValue(),mainActivityViewModel,counterAdapterForPriceQntyValue);
+                dialogFragmentForSespendList.show(getChildFragmentManager(), "exampledialog");
 
             }
         });

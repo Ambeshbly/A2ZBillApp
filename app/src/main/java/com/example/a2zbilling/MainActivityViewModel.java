@@ -147,7 +147,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     public CloudRepository getCloudRepository() {
         return cloudRepository;
     }
-    public void addSuspendDetail(Stock stock){
-        cloudRepository.addSuspendDetail(stock);
+    public void addSuspendDetail(SuspendDetail suspendDetail){
+        cloudRepository.addSuspendDetail(suspendDetail);
     }
 }

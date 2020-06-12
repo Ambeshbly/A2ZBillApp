@@ -275,6 +275,9 @@ public class DialogFragmentForAddToCart extends AppCompatDialogFragment {
     private void updateStockObjAndSend(Stock availableStock, Stock saleStock){
         updateAvailableStock(availableStock, saleStock);
 
+        String editSellPrice=etSellPrice.getText().toString().trim();
+        saleStock.setSalePerUnit(editSellPrice);
+
         Intent intent = new Intent();
         intent.putExtra(CounterFragment.TAG_SALE_STOCK_OBJ, saleStock);
         intent.putExtra(CounterFragment.TAG_AVAILABLE_STOCK_OBJ, availableStock);

@@ -256,10 +256,10 @@ public class CloudRepository {
     }
 
 
-    public void addSuspendDetail(Stock stock){
+    public void addSuspendDetail(SuspendDetail suspendDetail){
         //get user Referance from fireStore database
         DocumentReference saleDetailRef= db.collection("users").document(userId).collection("suspend detail").document();
-        saleDetailRef.set(stock).addOnSuccessListener(new OnSuccessListener<Void>() {
+        saleDetailRef.set(suspendDetail).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(context,"suspend insert sucessfull",Toast.LENGTH_SHORT).show();

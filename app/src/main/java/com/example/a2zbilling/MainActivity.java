@@ -13,9 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.a2zbilling.counter.CounterFragment;
+import com.example.a2zbilling.db.entities.Stock;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,6 +69,13 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+
+        //transfer fron the suspend list
+        Intent i =getIntent();
+        List<Stock> stocklist = (List<Stock>) i.getSerializableExtra("LIST");
+        List<Stock> soldstockList = (List<Stock>) i.getSerializableExtra("OLDLIST");
+
+
         //bottom navigation finding in XML file
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         mediaPlayer = MediaPlayer.create(getBaseContext(), R.raw.simple);
@@ -77,6 +87,18 @@ public class MainActivity extends AppCompatActivity {
 
         //which fragment is show whenever app is open
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_conterner, new CounterFragment(addToCartActivityViewModel)).commit();
+
+
+        if(stocklist!=null){
+
+            for (int j = 0; j <stocklist.size() ; j++) {
+                addToCartActivityViewModel.addNewlyAddedStock(stocklist.get(j));
+            }
+
+            for (int k = 0; k <soldstockList.size() ; k++) {
+                addToCartActivityViewModel.getSoldStocksList().add(soldstockList.get(k));
+            }
+        }
 
     }
 
