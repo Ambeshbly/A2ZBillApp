@@ -10,103 +10,102 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="200dp"
         app:cardElevation="6dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginEnd="2dp"
-        android:layout_marginTop="2dp">
+        android:layout_marginTop="10dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
+                android:id="@+id/textView_today"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/liteblack"
-                android:text="@string/search_your_report"/>
-
-            <Spinner
-                android:id="@+id/select_duration_sppiner"
-                android:layout_width="180dp"
-                android:layout_height="43dp"
+                android:text="Today"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"/>
-            <TextView
-                android:id="@+id/from"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/from"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:layout_below="@+id/select_duration_sppiner"/>
-            <EditText
-                android:id="@+id/fromEdit"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/from"
-                android:layout_marginTop="10dp"
-                android:hint="@string/dd_mm_yy"
-                android:layout_below="@+id/select_duration_sppiner"/>
-            <TextView
-                android:id="@+id/to"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="to"
-                android:layout_toRightOf="@+id/fromEdit"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:layout_below="@+id/select_duration_sppiner"/>
-            <EditText
-                android:id="@+id/toEdit"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/to"
-                android:layout_marginTop="10dp"
-                android:hint="@string/dd_mm_yy"
-                android:layout_below="@+id/select_duration_sppiner"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/liteblack"
+                android:textStyle="bold"/>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardview_cheak"
-                android:layout_alignParentEnd="true"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-                android:layout_alignParentBottom="true"
-                android:backgroundTint="@color/blue"
-                app:cardElevation="6dp">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cheak"
-                    android:layout_centerInParent="true"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="#ffff"/>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/text_total_sell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Sell               : "
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="80dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_below="@+id/textView_today"/>
+
+            <TextView
+                android:id="@+id/text_total_sell_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0 "
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@+id/text_total_sell"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_below="@+id/textView_today"/>
+
+            <TextView
+                android:id="@+id/text_total_purchase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Purchase     : "
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="80dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_below="@+id/text_total_sell"/>
+
+
+            <TextView
+                android:id="@+id/text_total_purchase_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0 "
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/text_total_purchase"
+                android:layout_marginStart="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_below="@+id/text_total_sell"/>
+
+            <TextView
+                android:id="@+id/text_net_profit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Net Profit or Loss : "
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="80dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_below="@+id/text_total_purchase"/>
+
+            <TextView
+                android:id="@+id/text_net_profit_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0 "
+                android:layout_toRightOf="@+id/text_net_profit"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_below="@+id/text_total_purchase"/>
+
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/result"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textStyle="bold"
-        android:layout_margin="10dp"/>
-
 
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         app:cardElevation="6dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginEnd="2dp">
@@ -114,69 +113,81 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/barChart"
-                android:padding="20dp"
-                android:layout_alignParentEnd="true"
-                android:layout_height="match_parent"
-                android:layout_width="200dp"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_toLeftOf="@+id/barChart"
-                android:layout_height="match_parent">
             <TextView
-                android:id="@+id/profit_and_loss_sale_total"
+                android:id="@+id/textView_Tomorrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/total_sales"
-                android:textStyle="bold"
+                android:text="Yesterday"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="120dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/liteblack"
+                android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/profit_and_loss_purchase_total"
+                android:id="@+id/text_Tommorrow_total_sell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/total_purhase"
-                android:textStyle="bold"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:layout_below="@+id/profit_and_loss_sale_total"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+                android:text="Total Sell               : "
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="80dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_below="@+id/textView_Tomorrow"/>
 
-            <ImageView
-                android:id="@+id/imageView_face"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/profit_and_loss_purchase_total"
-                android:src="@drawable/smileyface"/>
 
             <TextView
-                android:id="@+id/profit_and_loss_text"
+                android:id="@+id/text_Tommorrow_total_sell_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="profit"
-                android:textStyle="bold"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:layout_below="@+id/imageView_face"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+                android:layout_toRightOf="@+id/text_Tommorrow_total_sell"
+                android:layout_marginTop="30dp"
+                android:text="0.0 "
+                android:layout_marginStart="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_below="@+id/textView_Tomorrow"/>
 
             <TextView
-                android:id="@+id/profit_and_loss"
+                android:id="@+id/text_tommorroe_total_purchase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="123rs"
-                android:layout_centerHorizontal="true"
-                android:textStyle="bold"
+                android:text="Total Purchase     : "
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/profit_and_loss_text"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+                android:layout_marginStart="80dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_below="@+id/text_Tommorrow_total_sell"/>
 
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/text_tommorroe_total_purchase_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0 "
+                android:layout_toRightOf="@+id/text_tommorroe_total_purchase"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_below="@+id/text_Tommorrow_total_sell"/>
+
+            <TextView
+                android:id="@+id/text_tommorrow_net_profit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Net Profit or Loss : "
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="80dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_below="@+id/text_tommorroe_total_purchase"/>
+
+            <TextView
+                android:id="@+id/text_tommorrow_net_profit_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0 "
+                android:layout_toRightOf="@+id/text_tommorrow_net_profit"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_below="@+id/text_tommorroe_total_purchase"/>
+
+
 
 
 
