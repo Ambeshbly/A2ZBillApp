@@ -272,4 +272,16 @@ public class CloudRepository {
         });
     }
 
+    public void updateCustomerDebt(String debt,Customer customer){
+        //get user Referance from fireStore database
+        DocumentReference customerRef= db.collection("users").document(userId).collection("customers").document(Integer.toString(customer.getCustId()));
+        customerRef.update("debt",debt).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(context,"customer debt update sussesfully",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
 }

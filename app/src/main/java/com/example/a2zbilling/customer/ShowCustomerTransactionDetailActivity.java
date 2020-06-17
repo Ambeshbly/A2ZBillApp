@@ -19,12 +19,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a2zbilling.Dashboard;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.YouFragment;
+import com.example.a2zbilling.counter.BillList.BillHistoryActivity;
 import com.example.a2zbilling.counter.BillList.BillHistoryActivityAdapter;
 import com.example.a2zbilling.counter.BillList.BillHistoryActivityViewModel;
+import com.example.a2zbilling.counter.BillList.CloudBillHistoryAdapter;
 import com.example.a2zbilling.counter.BillList.ShowBillingHistoryFragments;
 import com.example.a2zbilling.counter.CounterFragment;
 import com.example.a2zbilling.db.entities.Customer;
@@ -32,8 +35,14 @@ import com.example.a2zbilling.db.entities.ExpensesCategory;
 import com.example.a2zbilling.db.entities.Payment;
 import com.example.a2zbilling.db.entities.Sales;
 import com.example.a2zbilling.db.entities.Stock;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.List;
 
@@ -46,8 +55,15 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
     private TextView textViewTotal,textViewMenu;
     private View view;
     private Button bt;
-    private TextView textViewNoTranscation;
-    private ImageView imageViewNoTranscation;
+
+
+    private CloudShowCustomerSaleActivityAdepter cloudShowCustomerSaleActivityAdepter;
+    private FirebaseFirestore db= FirebaseFirestore.getInstance();
+    //get userCurrent id
+    FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
+    String userId=currentUser.getUid();
+    private CollectionReference usersRef=db.collection("users").document(userId).collection("sales");
+
 
 
     @Override
@@ -63,23 +79,35 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
         textViewTotal=findViewById(R.id.toolbar_debt);
         textViewMenu=findViewById(R.id.menu_in_customerDetail);
 
-        textViewNoTranscation=findViewById(R.id.textView_no_transaxtion);
-        imageViewNoTranscation=findViewById(R.id.imageView_no_transcation);
 
         recyclerView = findViewById(R.id.recycler_view_sale_history);
+        /*
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         recyclerView.setHasFixedSize(true);
         adepter = new ShowCustomerTranscationDetailActivityAdapter();
-        recyclerView.setAdapter(adepter);
+        recyclerView.setAdapter(adepter);*/
         Intent intent = getIntent();
          final Customer selectedCustomer = (Customer) intent.getSerializableExtra("customer_transaction");
         textViewTitle.setText(selectedCustomer.getCustomerName());
         textViewPhoneNo.setText(selectedCustomer.getCustomerPhoneNo());
         textViewAdd.setText(selectedCustomer.getCustomerAddress());
+        textViewTotal.setText(selectedCustomer.getDebt()+" \u20B9");
 
         showCustomerTransactionDetailActivityViewModel = ViewModelProviders.of(this).get(ShowCustomerTransactionDetailActivityViewModel.class);
 
-        showCustomerTransactionDetailActivityViewModel.getAllsaleForcustomer(selectedCustomer.getCustId()).observe(this, new Observer<List<Sales>>() {
+
+        //just for test
+        Query query=usersRef.whereEqualTo("salescustId",selectedCustomer.getCustId()).orderBy("saleId", Query.Direction.ASCENDING);
+        FirestoreRecyclerOptions<Sales> options=new FirestoreRecyclerOptions.Builder<Sales>().setQuery(query,Sales.class).build();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+        recyclerView.setHasFixedSize(true);
+        cloudShowCustomerSaleActivityAdepter=new CloudShowCustomerSaleActivityAdepter(options,this);
+        recyclerView.setAdapter(cloudShowCustomerSaleActivityAdepter);
+
+
+
+
+        /*showCustomerTransactionDetailActivityViewModel.getAllsaleForcustomer(selectedCustomer.getCustId()).observe(this, new Observer<List<Sales>>() {
             @Override
             public void onChanged(List<Sales> sales) {
 
@@ -93,10 +121,10 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
                 textViewTotal.setText(""+total+" \u20B9");
                 adepter.setItems(sales);
             }
-        });
+        });*/
 
 
-        adepter.setOnItemRecyclerViewlistener(new ShowCustomerTranscationDetailActivityAdapter.OnItemRecyclerViewListener() {
+       /* adepter.setOnItemRecyclerViewlistener(new ShowCustomerTranscationDetailActivityAdapter.OnItemRecyclerViewListener() {
             @Override
             public void onItemClick(Sales sales) {
                 showCustomerTransactionDetailActivityViewModel.setSales(sales);
@@ -111,7 +139,7 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
 
 
             }
-        });
+        });*/
         textViewMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,4 +180,18 @@ public class ShowCustomerTransactionDetailActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        cloudShowCustomerSaleActivityAdepter.startListening();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        cloudShowCustomerSaleActivityAdepter.stopListening();
+    }
+
 }

@@ -13,6 +13,16 @@ public class Sales extends BaseObservable {
     @PrimaryKey(autoGenerate = true)
     private int saleId;
     private String totalBillAmt="0";
+    private String pymentAmount="0";
+
+    public String getPymentAmount() {
+        return pymentAmount;
+    }
+
+    public void setPymentAmount(String pymentAmount) {
+        this.pymentAmount = pymentAmount;
+    }
+
     private int salescustId;
     private String salePode;
     private Long date;

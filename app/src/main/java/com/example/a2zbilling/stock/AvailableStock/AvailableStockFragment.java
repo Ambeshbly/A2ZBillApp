@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.a2zbilling.R;
 import com.example.a2zbilling.ScannerActivity;
@@ -24,6 +25,7 @@ import com.example.a2zbilling.db.entities.Stock;
 import com.example.a2zbilling.stock.StockActivityViewModel;
 import com.example.a2zbilling.stock.addUpdate.AddUpdateStockActivity;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -70,8 +72,11 @@ public class AvailableStockFragment extends Fragment {
 
         //just for test
         setHasOptionsMenu(true);
+
+        PagedList.Config config=new PagedList.Config.Builder().setInitialLoadSizeHint(10).setPageSize(5).build();
+
         Query query=usersRef.orderBy("name",Query.Direction.DESCENDING);
-        FirestoreRecyclerOptions<Stock> options=new FirestoreRecyclerOptions.Builder<Stock>().setQuery(query,Stock.class).build();
+        FirestorePagingOptions<Stock> options=new FirestorePagingOptions.Builder<Stock>().setQuery(query,config,Stock.class).build();
         fragmentForAvailablestocksBinding.recyclerView1.setLayoutManager(new LinearLayoutManager(getContext()));
         fragmentForAvailablestocksBinding.recyclerView1.setHasFixedSize(true);
         cloudAvailableStockAdapter=new CloudAvailableStockAdapter(options,getContext());

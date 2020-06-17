@@ -84,7 +84,7 @@ public class DebtCustomerFragment extends Fragment {
         });*/
 
 
-        Query query=usersRef.whereGreaterThan("debt",0);
+        Query query=usersRef.whereGreaterThan("debt","0.0");
         FirestoreRecyclerOptions<Customer> options=new FirestoreRecyclerOptions.Builder<Customer>().setQuery(query,Customer.class).build();
         debtCustomerBinding.recyclerViewForDebtCustomer.setLayoutManager(new LinearLayoutManager(getContext()));
         debtCustomerBinding.recyclerViewForDebtCustomer.setHasFixedSize(true);

@@ -32,22 +32,7 @@
         />
 
 
-    <ImageView
-        android:id="@+id/imageView_no_transcation"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/notransaction"/>
 
-    <TextView
-        android:id="@+id/textView_no_transaxtion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        android:text="No Transaction"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/imageView_no_transcation"/>
+
 
 </RelativeLayout>

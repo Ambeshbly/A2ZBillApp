@@ -282,8 +282,15 @@ public class CounterFragment extends Fragment  {
             public void onClick(View v) {
                 // TODO: suspend work here
                 mainActivityViewModel.getSoldStocksList().clear();
-                DialogFragmentForSespendList dialogFragmentForSespendList = new DialogFragmentForSespendList(   mainActivityViewModel.getNewlyAddedStocks().getValue(),mainActivityViewModel,counterAdapterForPriceQntyValue);
-                dialogFragmentForSespendList.show(getChildFragmentManager(), "exampledialog");
+                ArrayList<Stock> stockList = mainActivityViewModel.getNewlyAddedStocks().getValue();
+
+                if (stockList.isEmpty()) {
+                    Toast.makeText(getContext(), "please add the item first", Toast.LENGTH_SHORT).show();
+                } else {
+                    DialogFragmentForSespendList dialogFragmentForSespendList = new DialogFragmentForSespendList(   mainActivityViewModel.getNewlyAddedStocks().getValue(),mainActivityViewModel,counterAdapterForPriceQntyValue);
+                    dialogFragmentForSespendList.show(getChildFragmentManager(), "exampledialog");
+                }
+
 
             }
         });

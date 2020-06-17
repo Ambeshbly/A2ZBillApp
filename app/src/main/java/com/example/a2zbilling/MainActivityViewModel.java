@@ -60,6 +60,11 @@ public class MainActivityViewModel extends AndroidViewModel {
         this.newlyAddedStocks.getValue().add(newlyAddedStock);
 
     }
+
+    public void updateCustomerDebt(String debt,Customer customer){
+        cloudRepository.updateCustomerDebt(debt,customer);
+    }
+
     public void insertsales(Sales sales) {
         repository.insertSales(sales);
     }

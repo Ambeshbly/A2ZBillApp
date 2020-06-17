@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.a2zbilling.CloudRepository;
 import com.example.a2zbilling.db.Repository;
 import com.example.a2zbilling.db.entities.Customer;
 import com.example.a2zbilling.db.entities.Payment;
@@ -21,6 +22,8 @@ public class ShowCustomerTransactionDetailActivityViewModel extends AndroidViewM
     private LiveData<List<Sales>> allSales;
     private LiveData<List<Sales>> allSalesForcustomer;
 
+    private CloudRepository cloudRepository;
+
     private LiveData<List<SaleDeatial>> allSaleDetail;
     private List<SaleDeatial> saleDeatialList;
     private Sales sales;
@@ -33,6 +36,9 @@ public class ShowCustomerTransactionDetailActivityViewModel extends AndroidViewM
         repository = new Repository(application);
         allSales = repository.getAllSales();
         allPayments = repository.getAllPayment();
+
+        //just for test
+        cloudRepository=new CloudRepository(application);
 
 
     }
@@ -48,6 +54,16 @@ public class ShowCustomerTransactionDetailActivityViewModel extends AndroidViewM
     public void insertSales(Sales sales) {
         repository.insertSales(sales);
     }
+
+    //just for test
+    public void cloudInsertSales(Sales sales){
+        cloudRepository.cloudInsertSale(sales);
+    }
+
+    public void updateCustomerDebt(String debt,Customer customer){
+        cloudRepository.updateCustomerDebt(debt,customer);
+    }
+
     public LiveData<List<Sales>> getAllSales() {
         return allSales;
     }

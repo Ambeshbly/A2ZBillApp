@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.service.autofill.ImageTransformation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,10 +29,13 @@ import com.example.a2zbilling.db.entities.Stock;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.w3c.dom.Document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +49,9 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
     private EditText editTotalPayment, editPhone;
     private AutoCompleteTextView autoCompleteTextViewId, autoCompleteTextViewName, autoCompleteTextViewPhoneNo, autoCompleteTextViewAdd;
     private MainActivityViewModel mainActivityViewModel;
-    private List<Customer> customerList;
+    private List<Customer> customers = new ArrayList<>();
     private int marker;
+    private String paymentRs;
     private int maxId=0,max=0,maxCustomer=0;
     private ProgressDialog regProgress;
     ArrayList<String> paymentModeList;
@@ -72,11 +77,11 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
 
 
 
-    public PaymentDialogFragment(MainActivityViewModel mainActivityViewModel,CounterAdapterForPriceQntyValue counterAdapterForPriceQntyValue, List<Customer> customerList) {
+    public PaymentDialogFragment(MainActivityViewModel mainActivityViewModel, CounterAdapterForPriceQntyValue counterAdapterForPriceQntyValue, final List<Customer> customerList) {
         this.mainActivityViewModel = mainActivityViewModel;
        // this.adepter = adepter;
         this.counterAdapterForPriceQntyValue=counterAdapterForPriceQntyValue;
-        this.customerList = customerList;
+
 
 
         paymentModeList = new ArrayList<String>();
@@ -110,6 +115,12 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 maxCustomer = queryDocumentSnapshots.getDocuments().size();
+
+                for (int i = 0; i <queryDocumentSnapshots.getDocuments().size() ; i++) {
+                    DocumentSnapshot document=queryDocumentSnapshots.getDocuments().get(i);
+                    Customer customer=document.toObject(Customer.class);
+                    customers.add(customer);
+                }
             }
         });
 
@@ -135,7 +146,7 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
         regProgress=new ProgressDialog(getContext());
         cardViewproceed = view.findViewById(R.id.cardview_prodeed_payment);
 
-        ArrayAdapter<Customer> arrayAdapterForCustomerList = new ArrayAdapter<Customer>(getContext(), android.R.layout.simple_list_item_1, customerList);
+        ArrayAdapter<Customer> arrayAdapterForCustomerList = new ArrayAdapter<Customer>(getContext(), android.R.layout.simple_list_item_1, customers);
         autoCompleteTextViewId.setAdapter(arrayAdapterForCustomerList);
         autoCompleteTextViewId.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -145,7 +156,19 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
             }
         });
 
-        // TODO: Set Auto complete on Customer Name, Customer Mobile Number.
+
+        ArrayAdapter<Customer> arrayAdapterForCustomerList1 = new ArrayAdapter<Customer>(getContext(), android.R.layout.simple_list_item_1, customers);
+        autoCompleteTextViewName.setAdapter(arrayAdapterForCustomerList1);
+        autoCompleteTextViewName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Customer selectedCustomer = (Customer) parent.getAdapter().getItem(position);
+                autoCompleteTextViewId.setText(""+selectedCustomer.getCustId());
+                customerBinding.setCustomer(selectedCustomer);
+            }
+        });
+
+        // TODO: Set Auto complete on Customer Name.
 
 
         marker = 1;
@@ -224,12 +247,25 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
 
                     if ((customer.getCustomerName() != null && customer.getCustomerName().isEmpty() == false)
                             && (customer.getCustomerPhoneNo() != null && customer.getCustomerPhoneNo().isEmpty() == false)) {
+
+                        String pyment;
+                        if(editTotalPayment.getText().toString().trim().isEmpty()){
+                            paymentRs=sale.getTotalBillAmt();
+                        }else {
+                            pyment=editTotalPayment.getText().toString().trim();
+                            paymentRs= Double.toString(Double.parseDouble(sale.getTotalBillAmt())-Double.parseDouble(pyment));
+                            sale.setPymentAmount(pyment);
+                        }
+
+
                         // Update the debt of customer.
-                        updateDebt(customer, sale);
+                        updateDebt(customer, sale,paymentRs);
                        // mainActivityViewModel.insertCustomer(customer);
 
-                        //just for test
                         customer.setCustId(maxCustomer+1);
+
+                        sale.setSalescustId(maxCustomer+1);
+
                         mainActivityViewModel.cloudInsertCustomer(customer);
 
                         // TODO: Use scheduler to schedule insert of Sale only after insert of Customer.
@@ -246,8 +282,18 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                     }
                 } else {
 
-                    updateDebt(customer, sale);
-                    mainActivityViewModel.updateCustomer(customer);
+                    String pyment;
+                    if(editTotalPayment.getText().toString().trim().isEmpty()){
+                        paymentRs=sale.getTotalBillAmt();
+                    }else {
+                        pyment=editTotalPayment.getText().toString().trim();
+                        paymentRs= Double.toString(Double.parseDouble(sale.getTotalBillAmt())-Double.parseDouble(pyment));
+                        sale.setPymentAmount(pyment);
+                    }
+
+                    updateDebt(customer, sale,paymentRs);
+                    sale.setSalescustId(customer.getCustId());
+                    mainActivityViewModel.updateCustomerDebt(customer.getDebt(),customer);
                 }
 
                 // update the stocks.
@@ -259,9 +305,9 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
 
 
 
-                if (customer.getCustId() != 0) {
+               /* if (customer.getCustId() != 0) {
                     sale.setSalescustId(maxCustomer+1);
-                }
+                }*/
 
 
                 //mainActivityViewModel.insertsales(sale);
@@ -295,6 +341,7 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
                 }
                 sale.setSaleId(0);
                 sale.setTotalBillAmt("0");
+                sale.setPymentAmount("0");
                 sale.setSalescustId(0);
                 stockList.clear();
              //   adepter.setItems(stockList);
@@ -310,15 +357,15 @@ public class PaymentDialogFragment extends AppCompatDialogFragment {
         return builder.create();
     }
 
-    private void updateDebt(Customer customer, Sales sale){
+    private void updateDebt(Customer customer, Sales sale,String debt){
         if(sale.getSalePode() == PAY_MODE_DEBT) {
             if (customer.getDebt().isEmpty()) {
-                customer.setDebt(sale.getTotalBillAmt());
+                customer.setDebt(debt);
             } else {
 
                 // Get existing debt of customer.
                 double currentDebt = Double.parseDouble(customer.getDebt());
-                double saleDebt = Double.parseDouble(sale.getTotalBillAmt());
+                double saleDebt = Double.parseDouble(debt);
 
                 // calculate total debt.
                 double updatedDebt = currentDebt + saleDebt;
